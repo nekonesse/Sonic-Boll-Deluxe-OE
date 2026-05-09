@@ -362,10 +362,7 @@ if (what="more" || what="all") {
             global.spritelistpadding[slot,i]=global.spritelistpadding[slot,i-1]
             if (global.spritelistsplits[slot]>k)
                 if i>global.spritelistsplitpoints[slot,k]{
-                    boxh=global.animdat[slot,16+128*(i-1)+12]
-                    if !boxh boxh=global.boxheight[slot,0]
-                    global.animationstartY[slot,i]=-boxh
-                    
+                    global.animationstartY[slot,i]=-1
                     global.spritelistpadding[slot,i]=global.splitsize[slot,k]-8
                     global.totalpadding[slot]+=global.spritelistpadding[slot,i]
                     k+=1
@@ -374,18 +371,11 @@ if (what="more" || what="all") {
                 
             
             if funnytruefalse(playerskindat(slot,name+" connect"+" "+string(global.animdat[slot,16+128*i]))){
-                //This basically gets the maximum frame amount from most pos
-                frameamount= max(1,global.animdat[slot,16+128*(i-1)+1],global.animdat[slot,16+128*(i-1)+2],global.animdat[slot,16+128*(i-1)+3],global.animdat[slot,16+128*(i-1)+4],global.animdat[slot,16+128*(i-1)+5])
-                boxw=global.animdat[slot,16+128*(i-1)+11]
-                if !boxw boxw=global.boxwidth[slot,0]
-                global.animationstartX[slot,i]+=frameamount*boxw
+                global.animationstartX[slot,i]+=max(1,global.animdat[slot,16+128*(i-1)+1],global.animdat[slot,16+128*(i-1)+2],global.animdat[slot,16+128*(i-1)+3],global.animdat[slot,16+128*(i-1)+4],global.animdat[slot,16+128*(i-1)+5])
                 
             }else{
-                global.animationstartX[slot,i]=global.spritelistpadding[slot,i]
-                
-                boxh=global.animdat[slot,16+128*(i-1)+12]
-                if !boxh boxh=global.boxheight[slot,0]
-                global.animationstartY[slot,i]+=boxh
+                global.animationstartX[slot,i]=0
+                global.animationstartY[slot,i]+=1
             }
            
             //If you ever get problems with the concatenate/split setup, then uncomment the thing below. It'll tell you on runtime bascially everything about an animation.

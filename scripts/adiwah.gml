@@ -32,9 +32,7 @@ for (i=0;i<c;i+=1) {
         k+size+8 loop
         k+size+9 offset x
         k+size+10 offset y
-        k+size+11 sprite box width
-        k+size+12 sprite box height
-        k+size+13... frame times
+        k+size+11... frame times
     */
 
     spr=tokens[i]
@@ -58,10 +56,6 @@ for (i=0;i<c;i+=1) {
     global.animdat[slot,k+maxsizes+9]=unreal(playerskindat(slot,name+" "+spr+" offset x"), 0)
     global.animdat[slot,k+maxsizes+10]=unreal(playerskindat(slot,name+" "+spr+" offset y"), 0)
 
-    //what a tasty snack
-    global.animdat[slot,k+maxsizes+11]=unreal(playerskindat(slot,name+" "+spr+" box width"), 0)
-    global.animdat[slot,k+maxsizes+12]=unreal(playerskindat(slot,name+" "+spr+" box height"), 0)
-
     list=string(playerskindat(slot,name+" "+spr+" frametimes"))
 
     c2=0
@@ -76,11 +70,11 @@ for (i=0;i<c;i+=1) {
 
     if (list="0") {
         for (j=0;j<global.animdat[slot,k+1];j+=1) {
-            global.animdat[slot,k+maxsizes+13+j]=1
+            global.animdat[slot,k+maxsizes+11+j]=1
         }
     } else {
         for (j=0;j<global.animdat[slot,k+1];j+=1) {
-            global.animdat[slot,k+maxsizes+13+j]=max(1,unreal(tokens2[j],1))
+            global.animdat[slot,k+maxsizes+11+j]=max(1,unreal(tokens2[j],1))
         }
     }
 }

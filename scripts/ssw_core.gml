@@ -6,7 +6,7 @@ if (argument[0]) {//animate
     k=16+128*sid
     if (sprite!=oldspr || size!=likesizebutold)
     frn=global.animdat[p2,k+1+size] //frame number //thats hardcoded size values GEEEET OOOOUT
-    frs=(frspd*animf*global.animdat[p2,k+MAXIMUMSIZESARGH+7])/max(1,global.animdat[p2,k+MAXIMUMSIZESARGH+13+floor(frame)]) //(game speed * percent * sprite speed) / frame time
+    frs=(frspd*animf*global.animdat[p2,k+MAXIMUMSIZESARGH+7])/max(1,global.animdat[p2,k+MAXIMUMSIZESARGH+11+floor(frame)]) //(game speed * percent * sprite speed) / frame time
     frl=global.animdat[p2,k+MAXIMUMSIZESARGH+8]-1 //loop point
 
     fox=global.animdat[p2,k+MAXIMUMSIZESARGH+9]
@@ -15,23 +15,12 @@ if (argument[0]) {//animate
     if (water && !cantslowanim) frs*=wf
     if (piped!=2) frame+=frs
     if (frame<0) frame+=frn
-    if (frame>=frn) {
-        if (waittime>maxwait && tempwait) {waittime=0}
-        {frame=frame-frn if (frl<frn) frame+=frl}
-    }
+    if (frame>=frn) {frame=frame-frn if (frl<frn) frame+=frl}
 
     if (sprite!=oldspr) && (prevent_spr_reset) {
         frame=frl
         prevent_spr_reset=0
     }
-
-    if global.animdat[p2,k+MAXIMUMSIZESARGH+11]{
-        trusprw=global.animdat[p2,k+MAXIMUMSIZESARGH+11]
-    } else trusprw=sprw[size]
-
-    if global.animdat[p2,k+MAXIMUMSIZESARGH+12]{
-        trusprh=global.animdat[p2,k+MAXIMUMSIZESARGH+12]
-    } else trusprh=sprh[size]
 
     frame=modulo(precise(frame),0,frn)
     likesizebutold=size
