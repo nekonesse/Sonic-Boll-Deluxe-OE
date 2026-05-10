@@ -1,0 +1,141 @@
+[knux]
+name=Knuckles
+
+icon speed=6
+icon loop=yes
+animation speed=1.0
+center x=24
+center y=33
+box width=49
+box height=49
+
+fire duration=8
+victory duration=60
+time until wait=300
+pipe squish=20
+pole center offset=8
+
+use paletting=true
+defaultspray 1=5
+defaultspray 2=6
+defaultspray 3=5
+defaultspray 4=8
+
+short small form=0.7
+
+custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,brake,spring,jump,bonk,ball,spindash,spincharge,push,hang,fire,upper,climb,climbstill,climbdown,glide,glideturn,recover,slide,climbing,flagslide,grind,piping,pipingup,sidepiping,doorenter,doorexit
+
+stand frames=1
+wait frames=5
+lookup frames=4
+pose frames=4
+crouch frames=2
+knock frames=1
+dead frames=1
+walk frames=8
+run frames=4
+brake frames=2
+spring frames=1
+jump frames=8
+bonk frames=2
+ball frames=8
+spindash frames=10
+spincharge frames=10
+push frames=4
+hang frames=3
+fire frames=3
+upper frames=6
+climb frames=6
+climbstill frames=1
+climbdown frames=6
+glide frames=1
+glideturn frames=5
+recover frames=2
+slide frames=1
+climbing frames=2
+
+ball offset y=4
+recover offset y=3
+glide offset y=8
+glideturn offset y=8
+run offset x=3
+hang offset x=-2
+climb offset x=-4
+climbstill offset x=-4
+climbdown offset x=-4
+
+stand speed=0.2
+wait speed=0.2
+lookup speed=0.2
+crouch speed=0.2
+walk speed=0.25
+run speed=0.25
+jump speed=0.5
+bonk speed=0.25
+ball speed=0.5
+spring speed=0.25
+spindash speed=0.5
+spincharge speed=0.5
+push speed=0.1
+hang speed=0.15
+fire speed=0.25
+upper speed=0.25
+climb speed=0.125
+climbstill speed=0.05
+climbdown speed=0.125
+glide speed=0.25
+glideturn speed=0.1
+recover speed=0.1
+climbing speed=0.125
+pose speed=0.13
+
+pose loop=4
+upper loop=6
+wait loop=2
+lookup loop=2
+crouch loop=2
+recover loop=2
+spincharge loop=3
+fire loop=3
+brake loop=2
+glide loop=2
+glideturn loop=1
+stand frametimes=32,1,1
+lookup frametimes=1,32,1,1
+crouch frametimes=1,32,1,1
+
+
+grind frames=1
+piping frames=8
+pipingup frames=8
+sidepiping frames=8
+doorenter frames=4
+doorexit frames=1
+
+piping speed=0.5
+pipingup speed=0.5
+sidepiping speed=0.4
+doorenter speed=0.20
+doorexit speed=0.20
+
+doorenter loop=4
+doorenter framestimes=1,1,1,1
+
+pitch spindash=yes
+glide animation=yes
+jump ball animation=no
+
+boll top=#ddbb00
+boll mid=#aa0000
+boll bot=#ff0000
+
+[lang]
+winspecial=Knuckles got a Chaos Emerald
+allspecial=Knuckles got all Chaos Emeralds
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Knuckles
+savetext4=Our Only Hero 
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship

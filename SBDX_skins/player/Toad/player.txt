@@ -31,9 +31,13 @@ single sheet=true
 singlesheet split width=8,8,392,8,8,8
 singlesheet spilt height=0,0,0,0,0,0
 
-custom sprite liss=stand,wait,lookup,pose,crouch,hurt,dead,walk,run,brake,bonk,jump,fall,longjump,runjump,doublejump,doublejumpbonk,doublejumpfall,groundpound,slide,wallslide,standcarry,crouchcarry,walkcarry,jumpcarry,bonkcarry,fallcarry,doublejumpcarry,throw,airthrow,swim,paddle,spinjump,fire,capeflight,climbing,flagslide,piping,doorenter,doorexit
+size reroute beet=big
+size reroute lui=big
 
-connect stand=true
+short small form=0.7
+
+custom sprite list=stand,wait,lookup,pose,crouch,hurt,dead,walk,run,brake,bonk,jump,fall,longjump,runjump,doublejump,doublejumpbonk,doublejumpfall,groundpound,slide,wallslide,standcarry,crouchcarry,walkcarry,jumpcarry,bonkcarry,fallcarry,doublejumpcarry,throw,swim,paddle,spinjump,fire,capeflight,climbing,flagslide,piping,doorenter,doorexit
+
 connect wait=true
 connect pose=true
 connect crouch=true
@@ -132,7 +136,6 @@ crouchcarry loop=2
 jumpcarry loop=3
 doublejumpcarry loop=2
 fallcarry loop=3
-groundpound loop=8
 poundfall loop=2
 dolphinkick loop=3
 dead loop=8
@@ -175,6 +178,7 @@ balancing speed=0.1
 bellyslide speed=0.2
 dive speed=0.8
 climbing speed=0.125
+capeflight speed=0.2
 
 stand frametimes=32,1,1
 wait frametimes=1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2

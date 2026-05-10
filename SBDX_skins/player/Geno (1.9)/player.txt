@@ -17,6 +17,8 @@ pole center offset=8
 
 multiple box sizes=true
 
+size reroute beet=big
+size reroute lui=big
 
 center x=12,16,16,16,16,12
 center y=13,19,19,19,19,13

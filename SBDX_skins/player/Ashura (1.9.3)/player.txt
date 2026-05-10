@@ -34,6 +34,9 @@ defaultspray 2=10
 defaultspray 3=1
 defaultspray 4=11
 
+size reroute beet=big
+size reroute lui=big
+
 custom sprite list=stand,wait,pose,crouch,knock,dead,walk,run,brake,spring,flagslide,ball,jump,spindash,teleport,push,balance,spacer1,bounce,dash
 
 connect stand=true
@@ -49,6 +52,8 @@ connect bounce=true
 connect spacer1=true
 connect dash=true
 connect teleport=true
+connect flagslide=true
+connect dash=true
 
 reroute lookup=stand
 reroute maxrun=run
@@ -71,6 +76,8 @@ stand speed=0.5
 stand frametimes=0
 stand offset x=0
 stand offset y=0
+
+flagslide frames=1
 
 wait frames=3
 wait loop=2
