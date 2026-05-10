@@ -1,0 +1,187 @@
+[kid]
+name=Syobon
+
+icon speed=9
+icon loop=yes
+animation speed=1.0
+center x=15
+center y=12
+box width=28
+box height=32
+marker offset=26
+
+carry offset x=5
+carry offset y=2
+fire duration=4
+blood splat=yes
+bow lag=yes
+victory duration=50
+time until wait=200
+pipe squish=20
+mario death=true
+death animation=true
+size reroute beet=big
+size reroute lui=big
+
+
+custom sprite list=stand,wall,standfire,wallfire,walk,walkfire,jump,fall,jumpfire,fallfire,bow,dash,pose,dashfire,posefire,lookup,lookupfire,climbing,flagslide,dead
+
+use paletting=true
+defaultspray 1=0
+defaultspray 2=0
+defaultspray 3=0
+defaultspray 4=0
+
+connect stand=true
+connect wall=true
+connect flagslide=true
+connect walkfire=true
+connect dead=true
+connect fall=true
+connect pose=true
+connect lookupfire=true
+connect posefire=true
+connect jumpfire=true
+connect fallfire=true
+connect standfire=true
+connect wallfire=true
+connect dashfire=true
+connect dash=true
+connect dead=true
+
+reroute wait=stand
+reroute standcarry=stand
+reroute walkcarry=walk
+reroute jumpcarry=jump
+reroute piping=pose
+reroute pipingup=pose
+reroute doorenter=pose
+reroute doorexit=stand
+reroute sidepiping=walk
+reroute fallcarry=fall
+reroute dashcarry=dash
+reroute bonk=jump
+reroute bonkcarry=jump
+reroute run=walk
+reroute spin=walk
+reroute grind=walk
+reroute wallcarry=wall
+reroute bonk2=jumpfire
+reroute jump2=jumpfire
+reroute stand2=standfire
+reroute walk2=walkfire
+reroute jump2=jumpfire
+reroute fall2=fallfire
+reroute dash2=dashfire
+reroute lookup2=lookupfire
+reroute wall2=wallfire
+
+stand frames=4
+wait frames=4
+lookup frames=4
+pose frames=1
+walk frames=4
+jump frames=2
+bonk frames=2
+fall frames=3
+wall frames=2
+dash frames=4
+spacer1 frames=1
+climbing frames=2
+bow frames=1
+spacer1 frames=1
+spacer2 frames=2
+
+jump loop=2
+fall loop=2
+bonk loop=2
+pose loop=8
+
+stand speed=0.2
+wait speed=0.2
+lookup speed=0.2
+pose speed=0.3
+walk speed=0.5
+jump speed=0.25
+bonk speed=0.25
+fall speed=0.25
+wall speed=0.25
+dash speed=0.25
+climbing speed=0.2
+
+standcarry frames=4
+walkcarry frames=4
+jumpcarry frames=2
+bonkcarry frames=2
+fallcarry frames=3
+dashcarry frames=4
+
+jumpcarry loop=2
+fallcarry loop=2
+bonkcarry loop=2
+
+standcarry speed=0.2
+walkcarry speed=0.5
+jumpcarry speed=0.25
+bonkcarry speed=0.25
+fallcarry speed=0.25
+dashcarry speed=0.25
+bow frames=1
+
+standfire frames=4
+lookupfire frames=4
+walkfire frames=4
+jumpfire frames=2
+bonkfire frames=2
+fallfire frames=3
+wallfire frames=2
+dashfire frames=4
+
+jumpfire loop=2
+fallfire loop=2
+bonkfire loop=2
+
+standfire speed=0.2
+lookupfire speed=0.2
+walkfire speed=0.5
+jumpfire speed=0.25
+bonkfire speed=0.25
+fallfire speed=0.25
+wallfire speed=0.25
+dashfire speed=0.25
+
+
+grind frames=4
+piping frames=8
+pipingup frames=8
+sidepiping frames=4
+doorenter frames=4
+doorexit frames=4
+
+doorenter loop=4
+doorexit loop=2
+
+grind speed=0.2
+sidepiping speed=0.5
+doorenter speed=0.2
+doorexit speed=0.2
+
+run frames=9
+run speed=0.35
+run loop=5
+
+boll top=#E00808
+boll mid=#000000
+boll bot=#006EEE
+
+
+[lang]
+winspecial=Syobon got a Chaos Emerald
+allspecial=Syobon got all Chaos Emeralds
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Syobon
+savetext4=Our Only Hero 
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship

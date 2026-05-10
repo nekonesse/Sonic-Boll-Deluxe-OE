@@ -348,6 +348,7 @@
 		|spr_boat
 	+enemies
 		|spr_goomba
+		|spr_pig
 		|spr_spikenemy
 		|spr_paragoomba
 		|spr_brat

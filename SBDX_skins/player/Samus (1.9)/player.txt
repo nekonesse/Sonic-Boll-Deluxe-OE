@@ -1,0 +1,150 @@
+[stan]
+name=Samus
+
+icon speed=6
+icon loop=no
+animation speed=1.0
+center x=24
+center y=24
+box width=48
+box height=48
+
+fire duration=2.75
+victory duration=30
+time until wait=200
+pipe squish=0
+pole center offset=8
+
+multiple box sizes=true
+
+size reroute beet=fire
+size reroute lui=fire
+
+center x=12,16,16,16,16,12
+center y=13,19,19,19,19,13
+
+box width=24,32,32,32,32,24
+box height=32,40,40,40,40,32
+
+use paletting=false
+
+single sheet=true
+singlesheet split width=8,200,456,712,456,8
+
+singlesheet split height=0,0,0,0,0,0
+
+custom sprite list=stand,fired,lookup,lookupfired,jumpdown,jumpdownfired,walk,walkfired,walkup,walkupfired,triple,groundpound,suckin,jumpup,jumpupfired,jump,fall,brake,dance,knock,pose,deadair,deadland,flagslide,climbing
+
+reroute doublejump=jump
+reroute doublejumpbonk=jump
+reroute doublejumpfall=fall
+reroute triplejump=triple
+reroute triplejumpbonk=triple
+reroute triplejumpfall=triple
+reroute swim=fall
+reroute paddle=jump
+reroute poundfall=groundpound
+reroute slide=groundpound
+reroute wait=stand
+reroute jumpfired=walk
+reroute bonk=jump
+reroute sidepiping=walk
+reroute piping=pose
+reroute pipingup=jump
+reroute doorenter=stand
+reroute doorexit=pose
+
+connect stand=true
+connect fired=true
+connect lookup=true
+connect lookupfired=true
+connect jumpdown=true
+connect jumpdownfired=true
+
+connect walkfired=true
+
+connect groundpound=true
+connect suckin=true
+connect jumpup=true
+connect jumpupfired=true
+connect jump=true
+connect fall=true
+connect dance=true
+
+connect knock=true
+connect pose=true
+connect deadair=true
+connect deadland=true
+
+connect climbing=true
+connect walkupfired=true
+
+stand frames=1
+wait frames=1
+lookup frames=1
+lookupfired frames=2
+pose frames=1
+crouch frames=2
+knock frames=1
+dead frames=2
+deadlanded frames=1
+walk frames=4
+walkfired frames=4
+walkup frames=4
+walkupfired frames=4
+brake frames=1
+jump frames=1
+bonk frames=1
+fall frames=1
+jumpfired frames=1
+jumpup frames=1
+jumpupfired frames=1
+jumpdown frames=1
+jumpdownfired frames=1
+climbing frames=2
+sliding frames=1
+dance frames=2
+suckin frames=2
+groundpound frames=1
+slide frames=1
+double frames=1
+triple frames=1
+deadair frames=2
+deadland frames=1
+fired frames=2
+
+stand loop=1
+jump loop=3
+fall loop=3
+wait speed=0.1
+walk speed=0.3
+walkfired speed=0.3
+walkup speed=0.3
+walkupfired speed=0.3
+jump speed=0.1
+fall speed=0.15
+springfall speed=0.4
+fired speed=0.1
+climbing speed=0.05
+sliding speed=0.05
+dance speed=0.1
+groundpound speed=0.75
+groundpound loop=8
+deadair speed=0.1
+suckin speed=0.05
+jumpfired speed=0.25
+
+boll top=#D82800
+boll mid=#280028
+boll bot=#EFEF00
+
+[lang]
+winspecial=Samus got a Chaos Emerald
+allspecial=Samus got all Chaos Emeralds
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Samus
+savetext4=Our Only Hero 
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship

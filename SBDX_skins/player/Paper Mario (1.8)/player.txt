@@ -21,6 +21,11 @@ defaultspray 4=0
 
 short small form=0.8
 
+old hammer rotation=false
+size reroute beet=big
+size reroute lui=big
+
+
 center x=17
 center y=18
 

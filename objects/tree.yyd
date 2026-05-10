@@ -344,6 +344,7 @@
 +enemies
 	|enemy
 	|goomba
+	|pig
 	|spikenemy
 	|wigglerhead
 	|wigglerbod

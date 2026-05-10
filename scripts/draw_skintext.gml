@@ -1,3 +1,4 @@
+///draw_skintext(x,y,str,col,a)
 var w,h,str,dx,dy,l,i,c,lw,lh,line,col,alpha,arr,tag,tagstr,cmd,dcol,dalp,dsca;
 
 if (global.sprfont=-1) exit

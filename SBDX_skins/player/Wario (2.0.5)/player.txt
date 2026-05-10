@@ -25,6 +25,9 @@ defaultspray 2=3
 defaultspray 3=9
 defaultspray 4=0
 
+size reroute beet=big
+size reroute lui=big
+
 reroute sidepiping=walk
 reroute piping=pose
 reroute pipingup=pose

@@ -17,6 +17,10 @@ time until wait=300
 pipe squish=20
 pole center offset=8
 
+size reroute beet=big
+size reroute lui=big
+
+
 use paletting=true
 defaultspray 1=1
 defaultspray 2=5

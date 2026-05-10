@@ -20,6 +20,8 @@ time until wait=200
 pipe squish=20
 mario death=false
 death animation=true
+size reroute beet=big
+size reroute lui=big
 
 
 custom sprite list=stand,wall,standfire,wallfire,walk,walkfire,jump,fall,jumpfire,fallfire,bow,dash,pose,dashfire,posefire,lookup,lookupfire,climbing,flagslide,dead
