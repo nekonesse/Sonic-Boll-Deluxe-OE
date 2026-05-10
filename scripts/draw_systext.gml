@@ -36,8 +36,7 @@ if (string(__text_sys_last)!=str) {
     __text_sys_length_lw = 0;
     __text_sys_length_lh = 0;
     j=1 tag=0
-    i=1
-    repeat l {
+    for (i=1;i<=l;i+=1) {
         ch=string_char_at(str,i)
 
         //tag system
@@ -67,7 +66,6 @@ if (string(__text_sys_last)!=str) {
         lw[line]+=8*s
         maxx=max(maxx,lw[line])
         __text_sys_length_lw[line] = lw[line];
-        i+=1
     }
     maxy=lh
     __text_sys_length_lh = lh;
@@ -87,8 +85,7 @@ dcol=col
 dalp=alpha
 dsca=s
 dlin=linespc
-i=1
-repeat l {
+for (i=1;i<=l;i+=1) {
     c=__text_sys_char_arr[i]
 
     if (__text_sys_tag_cmds[i,0]=1) dcol=color_mult(__text_sys_tag_cmds[i,1],col)
@@ -99,5 +96,4 @@ repeat l {
     if (c=35 || c=10) {dcol=col dalp=alpha dsca=s line+=1 dx=floor(argument[0]) if (global.halign=1) {dx-=floor(__text_sys_length_lw[line]/2)} if (global.halign=2) {dx-=__text_sys_length_lw[line]} dy+=dlin*s i+=1 continue}
     if (c!=32) draw_sprite_part_ext(cus_spr,0,__text_sys_char_arr[i, 0],__text_sys_char_arr[i, 1],9,9,dx,dy+(dlin+1)*s-(dlin+1)*dsca,s,dsca,dcol,dalp)
     dx+=8*s
-    i+=1
 }
