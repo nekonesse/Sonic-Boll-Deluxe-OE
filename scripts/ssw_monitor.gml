@@ -28,13 +28,17 @@ switch (argument[0]) {
         frx=0
         fry=3
     break}
-        case "1up": {
+    case "1up": {
         frx=0
         fry=4
     break}
     case "poison": {
         frx=0
         fry=5
+    break}
+    case "3up": {
+        frx=0
+        fry=6
     break}
 
     case "10coin": {

@@ -93,7 +93,7 @@ repeat (8) {
                     if (i.data[1]=="long") {i.data[1]="normal" i.data[4]="12"}
                 }
                 if (obj==itembox || obj==bigitembox || obj=noteblock) {
-                    if (i.data[1] == "moon") i.data[1]="life"
+                    if (i.data[1] == "moon") i.data[1]="moon"
                     if (i.data[1] == "bros" && obj!=itembox) i.data[1]=""
                     if (i.data[1] == "floorclock" || i.data[1] == "plusclock" || i.data[1] == "greenplusclock") {i.data[1]="time" i.obj=monitor}
                     if (i.data[1] == "rotten" || i.data[1] == "demon") i.data[1] = "poison"
@@ -147,7 +147,8 @@ repeat (8) {
                     if (i.data[1]=="ring") i.data[1]="superring"
                     if (i.data[1]=="dotter") i.data[1]="mini"
                     if (i.data[1]=="undotter") i.data[1]="mush"
-                    if (i.data[1]=="moon" || i.data[1]=="life") i.data[1]="1up"
+                    if (i.data[1]=="moon") i.data[1]="3up"
+                    if (i.data[1]=="life") i.data[1]="1up"
                     if (i.data[1]=="shard") {i.data[1]="" i.obj=starshard}
                     if (i.data[1]=="banana") i.data[1]="thenewitems"
                     
@@ -155,7 +156,8 @@ repeat (8) {
                 if (obj==crate) {
                     if (i.data[1]=="item") i.data[1]="flower"
                     if (i.data[1]=="coins") i.data[1]="coin"
-                    if (i.data[1]=="moon" || i.data[1]=="life") i.data[1]="1up"
+                    if (i.data[1]=="moon") i.data[1]="3up"
+                    if (i.data[1]=="life") i.data[1]="1up"
                     if (i.data[1]=="rotten" || i.data[1]=="demon") i.data[1]="poison"
                     if (i.data[1]=="vine") i.data[1]="spring"
                     if (i.data[1]=="dotter") i.data[1]="mini"

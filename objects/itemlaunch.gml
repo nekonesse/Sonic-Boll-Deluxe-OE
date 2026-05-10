@@ -18,6 +18,7 @@ var s;
 s=esign(x-(other.x),1)
 if (spawn="mushroom") with (instance_create(x,other.bbox_top-8,mushroom)) {c=1 drop=other.drop vspeed=-4 hspeed=s alarm[0]=-1 if (drop) hsp=4*s else hsp=3*s}
 if (spawn="1up") with (instance_create(x,other.bbox_top-8,lifemush))      {c=1 drop=other.drop vspeed=-4 hspeed=s alarm[0]=-1 if (drop) hsp=4*s else hsp=3*s}
+if (spawn="3up") with (instance_create(x,other.bbox_top-8,lifemoon))      {c=1 drop=other.drop vspeed=-4 hspeed=s alarm[0]=-1 if (drop) hsp=4*s else hsp=3*s}
 if (spawn="flower") with (instance_create(x,other.bbox_top-8,flower))     {c=1 drop=other.drop vspeed=-4                                hsp=4*s             }
 if (spawn="feather") with (instance_create(x,other.bbox_top-8,feather))   {c=1 drop=other.drop vspeed=-4                                hsp=4*s             }
 if (spawn="mini") with (instance_create(x,other.bbox_top-8,mushmini)) {c=1 drop=other.drop vspeed=-4 hspeed=s alarm[0]=-1 if (drop) hsp=4*s else hsp=3*s}

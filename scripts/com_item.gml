@@ -234,6 +234,10 @@ if (type="monitor_1up") {
     give_item(id,"1up")
 }
 
+if (type="monitor_3up") {
+    give_item(id,"3up")
+}
+
 if (type="coin") {
     sound("itemcoin")
     if (other.fresh) global.scor[p2]+=100

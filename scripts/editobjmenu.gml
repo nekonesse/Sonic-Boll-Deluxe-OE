@@ -5,7 +5,7 @@ type=argument[1]
 switch (argument[0]) {
     case itembox: {
         if (type=1) {
-            i=show_contextmenu("Box contents:|-|Single Coin|Fire Flower|Feather|Mini Mushroom|Multiple Coins|1-Up|Poison Mushroom|Green Spring|Starman|Key|Shield|Spring|Sideways Spring|P-Switch|Shard|Nothing"+drawregion.secrets,0)
+            i=show_contextmenu("Box contents:|-|Single Coin|Fire Flower|Feather|Mini Mushroom|Multiple Coins|1-Up|3-Up|Poison Mushroom|Green Spring|Starman|Key|Shield|Spring|Sideways Spring|P-Switch|Shard|Nothing"+drawregion.secrets,0)
             if (!i) return argument[2]
             if (i=1) return ""
             if (i=2) return "item"
@@ -13,18 +13,19 @@ switch (argument[0]) {
             if (i=4) return "mini"
             if (i=5) return "coins"
             if (i=6) return "life"
-            if (i=7) return "poison"
-            if (i=8) return "vine"
-            if (i=9) return "star"
-            if (i=10) return "key"
-            if (i=11) return "shield"
-            if (i=12) return "spring"
-            if (i=13) return "spreng"
-            if (i=14) return "pswitch"
-            if (i=15) return "shard"
-            if (i=16) return "none"
-            if (i=17) return "itembeetroot"
-            if (i=18) return "itemgreenlui"
+            if (i=7) return "moon"
+            if (i=8) return "poison"
+            if (i=9) return "vine"
+            if (i=10) return "star"
+            if (i=11) return "key"
+            if (i=12) return "shield"
+            if (i=13) return "spring"
+            if (i=14) return "spreng"
+            if (i=15) return "pswitch"
+            if (i=16) return "shard"
+            if (i=17) return "none"
+            if (i=18) return "itembeetroot"
+            if (i=19) return "itemgreenlui"
         }
         if (type=2) return string(!funnytruefalse(argument[2]))
         if (type=3) return string(!funnytruefalse(argument[2]))
@@ -34,7 +35,7 @@ switch (argument[0]) {
 
     case bigitembox: {
         if (type=1) {
-            i=show_contextmenu("Box contents:|-|Single Coin|Fire Flower|Feather|Mini Mushroom|Multiple Coins|1-Up|Poison Mushroom|Green Spring|Starman|Key|Shield|Spring|Sideways Spring|P Switch|Shard|Nothing"+drawregion.secrets,0)
+            i=show_contextmenu("Box contents:|-|Single Coin|Fire Flower|Feather|Mini Mushroom|Multiple Coins|1-Up|3-Up|Poison Mushroom|Green Spring|Starman|Key|Shield|Spring|Sideways Spring|P Switch|Shard|Nothing"+drawregion.secrets,0)
             if (!i) return argument[2]
             if (i=1) return ""
             if (i=2) return "item"
@@ -42,18 +43,19 @@ switch (argument[0]) {
             if (i=4) return "mini"
             if (i=5) return "coins"
             if (i=6) return "life"
-            if (i=7) return "poison"
-            if (i=8) return "vine"
-            if (i=9) return "star"
-            if (i=10) return "key"
-            if (i=11) return "shield"
-            if (i=12) return "spring"
-            if (i=13) return "spreng"
-            if (i=14) return "pswitch"
-            if (i=15) return "shard"
-            if (i=16) return "none"
-            if (i=17) return "itembeetroot"
-            if (i=18) return "itemgreenlui"
+            if (i=7) return "moon"
+            if (i=8) return "poison"
+            if (i=9) return "vine"
+            if (i=10) return "star"
+            if (i=11) return "key"
+            if (i=12) return "shield"
+            if (i=13) return "spring"
+            if (i=14) return "spreng"
+            if (i=15) return "pswitch"
+            if (i=16) return "shard"
+            if (i=17) return "none"
+            if (i=18) return "itembeetroot"
+            if (i=19) return "itemgreenlui"
         }
         if (type=2) return get_string("Bonus Target's name:",argument[2])
         if (type=0){return get_string("Alignment in pixels (x,y):",argument[2])}
@@ -62,7 +64,7 @@ switch (argument[0]) {
     case noteblock: {
         if (type=0) {return get_string("Alignment in pixels (x,y):",argument[2])}
         if (type=1) {
-            i=show_contextmenu("Box contents:|-|Single Coin|Fire Flower|Feather|Mini Mushroom|Multiple Coins|1-Up|Poison Mushroom|Green Spring|Starman|Key|Shield|Spring|Sideways Spring|P Switch|Shard|Nothing"+drawregion.secrets,0)
+            i=show_contextmenu("Box contents:|-|Single Coin|Fire Flower|Feather|Mini Mushroom|Multiple Coins|1-Up|3-Up|Poison Mushroom|Green Spring|Starman|Key|Shield|Spring|Sideways Spring|P Switch|Shard|Nothing"+drawregion.secrets,0)
             if (!i) return argument[2]
             if (i=1) return ""
             if (i=2) return "item"
@@ -70,18 +72,19 @@ switch (argument[0]) {
             if (i=4) return "mini"
             if (i=5) return "coins"
             if (i=6) return "life"
-            if (i=7) return "poison"
-            if (i=8) return "vine"
-            if (i=9) return "star"
-            if (i=10) return "key"
-            if (i=11) return "shield"
-            if (i=12) return "spring"
-            if (i=13) return "spreng"
-            if (i=14) return "pswitch"
-            if (i=15) return "shard"
-            if (i=16) return "none"
-            if (i=17) return "itembeetroot"
-            if (i=18) return "itemgreenlui"
+            if (i=7) return "moon"
+            if (i=8) return "poison"
+            if (i=9) return "vine"
+            if (i=10) return "star"
+            if (i=11) return "key"
+            if (i=12) return "shield"
+            if (i=13) return "spring"
+            if (i=14) return "spreng"
+            if (i=15) return "pswitch"
+            if (i=16) return "shard"
+            if (i=17) return "none"
+            if (i=18) return "itembeetroot"
+            if (i=19) return "itemgreenlui"
         }
         if (type=2) return string(!funnytruefalse(argument[2]))
         if (type=3) return string(!funnytruefalse(argument[2]))
@@ -90,7 +93,7 @@ switch (argument[0]) {
 
     case monitor: {
         if (type=1) {
-            i=show_contextmenu("Monitor contents:|-|10 Coins|Mushroom|Fire Flower|Mini Mushroom|Star|1-Up|Poison Mushroom|Feather|Shield|Super Ring|Time",0)
+            i=show_contextmenu("Monitor contents:|-|10 Coins|Mushroom|Fire Flower|Mini Mushroom|Star|1-Up|3-Up|Poison Mushroom|Feather|Shield|Super Ring|Time",0)
             if (!i) return argument[2]
             if (i=1) return "10coin"
             if (i=2) return "mush"
@@ -98,11 +101,12 @@ switch (argument[0]) {
             if (i=4) return "mini"
             if (i=5) return "star"
             if (i=6) return "1up"
-            if (i=7) return "poison"
-            if (i=8) return "feather"
-            if (i=9) return "shield"
-            if (i=10) return "superring"
-            if (i=11) return "time"
+            if (i=7) return "3up"
+            if (i=8) return "poison"
+            if (i=9) return "feather"
+            if (i=10) return "shield"
+            if (i=11) return "superring"
+            if (i=12) return "time"
         }
         if (type=0){return get_string("Alignment in pixels (x,y):",argument[2])}
     } break
@@ -142,8 +146,8 @@ switch (argument[0]) {
     case downpipe: case sidepipe: case pipeblock: case theothersidepipe: {
         if (type=5) return string(median(0,get_integer("Max Spawns (0-16):#> Lava Bubbles can only have one#> Limit zero makes the spawner unlimited",unreal(argument[2])),16))
         if (type=4) {
-            if (argument[0]=pipeblock) i=show_contextmenu("Contents:|-|None|Goomba|Koopa|Red Koopa|Shell|Beetle|Spiny|Blooper|Lava Bubble|-|Mushroom|1 Up|Starman|Fire Flower|Mini Mushroom|Poison Mushroom|Spring|Side Spring|Stone|Feather|Bob-omb|Lit Bob-omb"+drawregion.secrets,0)
-            else i=show_contextmenu("Contents:|-|None|Goomba|Koopa|Red Koopa|Shell|Beetle|Spiny|Blooper|-|Mushroom|1 Up|Starman|Fire Flower|Mini Mushroom|Poison Mushroom|Spring|Side Spring|Stone|Feather|Bob-omb|Lit Bob-omb"+drawregion.secrets,0)
+            if (argument[0]=pipeblock) i=show_contextmenu("Contents:|-|None|Goomba|Koopa|Red Koopa|Shell|Beetle|Spiny|Blooper|Lava Bubble|-|Mushroom|1 Up|3 Up|Starman|Fire Flower|Mini Mushroom|Poison Mushroom|Spring|Side Spring|Stone|Feather|Bob-omb|Lit Bob-omb"+drawregion.secrets,0)
+            else i=show_contextmenu("Contents:|-|None|Goomba|Koopa|Red Koopa|Shell|Beetle|Spiny|Blooper|-|Mushroom|1 Up|3 Up|Starman|Fire Flower|Mini Mushroom|Poison Mushroom|Spring|Side Spring|Stone|Feather|Bob-omb|Lit Bob-omb"+drawregion.secrets,0)
             if (!i) return argument[2]
             if (i=1) return ""
             if (i=2) return "goomba"
@@ -160,18 +164,19 @@ switch (argument[0]) {
 
             if (i=10) return "mushroom"
             if (i=11) return "1up"
-            if (i=12) return "star"
-            if (i=13) return "flower"
-            if (i=14) return "mini"
-            if (i=15) return "poison"
-            if (i=16) return "spring"
-            if (i=17) return "spreng"
-            if (i=18) return "stone"
-            if (i=19) return "feather"
-            if (i=20) return "bobomb"
-            if (i=21) return "litbobomb"
-            if (i=22) return "beetroot"
-            if (i=23) return "greenlui"
+            if (i=12) return "3up"
+            if (i=13) return "star"
+            if (i=14) return "flower"
+            if (i=15) return "mini"
+            if (i=16) return "poison"
+            if (i=17) return "spring"
+            if (i=18) return "spreng"
+            if (i=19) return "stone"
+            if (i=20) return "feather"
+            if (i=21) return "bobomb"
+            if (i=22) return "litbobomb"
+            if (i=23) return "beetroot"
+            if (i=24) return "greenlui"
         }
         if (type=3) return string(!funnytruefalse(argument[2]))
         if (type=2) return get_string("Next level name:",argument[2])
@@ -609,22 +614,23 @@ switch (argument[0]) {
     }
     case itemlaunch: {
         if (type=1) {
-            i=show_contextmenu("Item:|-|Mushroom|Fire Flower|Feather|Mini Mushroom|1 Up|Shield Mushroom|Starman|Poison Mushroom|Star Shard|Coin|White Token|Blue Token"+drawregion.secrets,0)
+            i=show_contextmenu("Item:|-|Mushroom|Fire Flower|Feather|Mini Mushroom|1 Up|3 Up|Shield Mushroom|Starman|Poison Mushroom|Star Shard|Coin|White Token|Blue Token"+drawregion.secrets,0)
             if (!i) return argument[2]
             if (i=1) return "mushroom"
             if (i=2) return "flower"
             if (i=3) return "feather"
             if (i=4) return "mini"
             if (i=5) return "1up"
-            if (i=6) return "shield"
-            if (i=7) return "star"
-            if (i=8) return "poison"
-            if (i=9) return "shard"
-            if (i=10) return "coin"
-            if (i=11) return "token"
-            if (i=12) return "tokenblue"
-            if (i=13) return "itembeetroot"
-            if (i=14) return "itemgreenlui"
+            if (i=6) return "3up"
+            if (i=7) return "shield"
+            if (i=8) return "star"
+            if (i=9) return "poison"
+            if (i=10) return "shard"
+            if (i=11) return "coin"
+            if (i=12) return "token"
+            if (i=13) return "tokenblue"
+            if (i=14) return "itembeetroot"
+            if (i=15) return "itemgreenlui"
         }
         if type=0 return get_string("Alignment in pixels (x,y):",argument[2])
     }
@@ -1141,7 +1147,7 @@ switch (argument[0]) {
     case crate: {
         if (type=0){return get_string("Alignment in pixels (x,y):",argument[2])}
         if (type=1) {
-            i=show_contextmenu("Crate contents:|-|Single Coin|Mushroom|Fire Flower|Feather|Mini Mushroom|1-Up|Poison Mushroom|Starman|Shield Mushroom|Spring|Sideways Spring|P-Switch|Shard|Nothing"+drawregion.secrets,0)
+            i=show_contextmenu("Crate contents:|-|Single Coin|Mushroom|Fire Flower|Feather|Mini Mushroom|1-Up|3-Up|Poison Mushroom|Starman|Shield Mushroom|Spring|Sideways Spring|P-Switch|Shard|Nothing"+drawregion.secrets,0)
             if (!i) return argument[2]
             if (i=1) return "coin"
             if (i=2) return "mushroom"
@@ -1149,16 +1155,17 @@ switch (argument[0]) {
             if (i=4) return "feather"
             if (i=5) return "mini"
             if (i=6) return "1up"
-            if (i=7) return "poison"
-            if (i=8) return "star"
-            if (i=9) return "shield"
-            if (i=10) return "spring"
-            if (i=11) return "spreng"
-            if (i=12) return "pswitch"
-            if (i=13) return "shard"
-            if (i=14) return ""
-            if (i=15) return "beetroot"
-            if (i=16) return "greenlui"
+            if (i=7) return "3up"
+            if (i=8) return "poison"
+            if (i=9) return "star"
+            if (i=10) return "shield"
+            if (i=11) return "spring"
+            if (i=12) return "spreng"
+            if (i=13) return "pswitch"
+            if (i=14) return "shard"
+            if (i=15) return ""
+            if (i=16) return "beetroot"
+            if (i=17) return "greenlui"
         }
     }
 

@@ -56,6 +56,7 @@ switch content {
     case "chopper": instance_create(x,y+4,chopper) instance_destroy() break
     case "mushroom": content=mushroom sprite="mushroom" break
     case "1up": content=lifemush sprite="lifemush" break
+    case "3up": content=lifemoon sprite="3moon" break
     case "star": content=starman sprite="star" break
     case "flower": content=flower sprite="fflower" break
     case "mini": content=mushmini sprite="mini" break

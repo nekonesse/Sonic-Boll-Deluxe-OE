@@ -52,6 +52,9 @@ if (content="shield") {
 if (content="life") {
     with (instance_create(x+8+offset,y+8+4*go,lifemush)) {iid=id vspeed=0.25*other.go alarm[0]=48}
 }
+if (content="moon") {
+    with (instance_create(x+8+offset,y+8+4*go,lifemoon)) {iid=id vspeed=0.25*other.go alarm[0]=48}
+}
 if (content="key") {
     with (instance_create(x+8+offset,y+8+4*go,keyitem)) {iid=id vspeed=0.25*other.go alarm[0]=48}
 }

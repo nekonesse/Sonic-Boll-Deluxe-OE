@@ -44,6 +44,7 @@ instance_create(x+8,y+8,smoke)
 s=(nearestplayer().xsc)
 if (content="mushroom") with (instance_create(x+8,y+8,mushroom)) {c=1 vspeed=-4 hspeed=1.5*other.s alarm[0]=-1}
 if (content="1up") with (instance_create(x+8,y+8,lifemush))      {c=1 vspeed=-4 hspeed=1.5*other.s alarm[0]=-1}
+if (content="3up") with (instance_create(x+8,y+8,lifemoon))      {c=1 vspeed=-4 hspeed=1.5*other.s alarm[0]=-1}
 if (content="flower") with (instance_create(x+8,y+8,flower))     {c=1 vspeed=-4 hspeed=1.5*other.s}
 if (content="feather") with (instance_create(x+8,y+8,feather))   {c=1 hspeed=0 vspeed=-4 alarm[0]=1}
 if (content="mini") with (instance_create(x+8,y+8,mushmini))     {c=1 vspeed=-4 hspeed=1.5*other.s alarm[0]=-1}
