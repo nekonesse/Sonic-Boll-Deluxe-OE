@@ -62,18 +62,24 @@ switch (argument[0]) {
 
     case "flag": {frx=26+fr*2 fry=0 w=2 h=1.5 break}
     case "door": {
-        w=2
-        h=2
-        frox=8
-        froy=16
-        if !(oneway || (target="" && nextlevel="")) {
+        if !(oneway) {
             frx=11+floor(frame)*2
             if (key && frame=0)
             frx=9
+
             fry=8
+            w=2
+            h=2
+            frox=8
+            froy=16
         } else {
             frx=17.5+floor(frame)*2
+
             fry=10
+            w=2
+            h=2
+            frox=8
+            froy=16
         }
     break}
     case "chardoor": {

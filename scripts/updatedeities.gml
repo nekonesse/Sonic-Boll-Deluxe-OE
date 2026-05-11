@@ -187,13 +187,9 @@
     break;
     case (door): {
         point=noone
-        //Pointer
-        if (data[2]!="") with (drawregion.deity) if (obj=door) if (data[1]=other.data[2]) other.point=id
-        //Locked Door
-        if (data[4]!="0" && !(data[2]="" && data[3]="")) {keyed=1 frame=1}
-        //One-Way Door
-        else if (data[2]="" && data[3]="") || funnytruefalse(data[5]) {keyed=0 frame=2}
-        //Normal Door
+        if (data[1]!="") with (drawregion.deity) if (obj=door) if (data[0]=other.data[1]) other.point=id
+        if (data[4]!="0") {frame=2}
+        else if (data[3]!="0") {keyed=1 frame=1}
         else {keyed=0 frame=0}
     } break
     case (warpbox): {
