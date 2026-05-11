@@ -9,7 +9,7 @@ duck,swim,fire,spin,stomp,taunt,superjump1,superjump2,hammer
 #define movelist
 Bowser
 #
-[c]: Shell Spin (ground)
+[dir]+[c]: Shell Spin (ground)
 [a]: Shell Glide (air)
 [up]+[a]: Highjump
 [down]: Groundpound (air)
@@ -839,7 +839,7 @@ if (ckey) {
 			spin=1
 			playsfx(name+"spin") 
 			if (spinplus) {hsp=maxspd*xsc} else {hsp=xsc*3}
-			} else hsp=0
+			} //else hsp=0
         }
     }
     poundlok=1
