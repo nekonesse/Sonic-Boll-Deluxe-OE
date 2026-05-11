@@ -840,7 +840,7 @@ com_di()
 //code for specifically the a button
 if ((abut || jumpbufferdo) && (!springin)) {
     if (!jump&&!piko||fall=69||grabflagpole&&!droplag) { //jump
-        if (crouch && push==0 && fall!=69) {
+        if (kick && push==0 && fall!=69) {
             jumpsnd=playsfx(name+"jump")
 			with shoot(x+8*xsc,y+8,psmoke,-1.5*xsc,-1) {friction=0.1 depth=other.depth+1}
 			
@@ -850,7 +850,6 @@ if ((abut || jumpbufferdo) && (!springin)) {
             vsp=-2
             skip=1
         } else {
-		
 		
             trip=0
             jumpsnd=playsfx(name+"jump")
@@ -990,7 +989,7 @@ if (bbut) {
 			kickjump=0
 			upper=0
 			dropkick=1
-			fall=4
+			fall=5
 			energy-=2
 			tatsu=0
 			playsfx('amydive')
