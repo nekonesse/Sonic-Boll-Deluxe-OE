@@ -28,7 +28,7 @@ defaultspray 3=8
 defaultspray 4=0
 
 single sheet=true
-singlesheet split width=8,200,456,456,456,8,200
+singlesheet split width=8,200,456,200,456,8,200,200,200
 singlesheet split height=0,0,0,0,0,0
 
 custom sprite list=stand,wait,pose,crouch,knock,dead,walk,run,brake,spring,climbing,ball,jump,spindash,upper,push,hang,climb,fire,glide,slide,climbstill,flagslide,recover
@@ -48,7 +48,8 @@ connect slide=true
 connect climbstill=true
 connect flagslide=true
 connect recover=true
-
+size reroute beet=big
+size reroute lui=big
 reroute lookup=stand
 reroute springfall=walk
 reroute bonk=jump

@@ -1,0 +1,184 @@
+[mario]
+name=Mario
+
+icon speed=6
+icon loop=yes
+animation speed=1.0
+center x=24
+center y=27
+box width=48
+box height=48
+pole center offset=3
+
+carry offset x=-1
+carry offset y=-1
+bubble offset small x=6
+bubble offset small y=4
+bubble offset x=6
+bubble offset y=2
+fire duration=8
+victory duration=50
+time until wait=600
+pipe squish=20
+
+size reroute beet=big
+size reroute lui=big
+
+use paletting=true
+defaultspray 1=5
+defaultspray 2=2
+defaultspray 3=10
+defaultspray 4=0
+
+custom sprite list=stand,wait,lookup,pose,crouch,hurt,dead,walk,run,brake,jump,bonk,fall,runjump,longjump,sideflip,doublejump,doublejumpbonk,doublejumpfall,wallslide,groundpound,slide,standcarry,lookupcarry,crouchcarry,walkcarry,jumpcarry,bonkcarry,fallcarry,doublejumpcarry,throw,airthrow,roll,poundfall,swim,paddle,swimcarry,spinjump,fire,push,balancing,bellyslide,dive,capeflight,climbing,flagslide,hanging,hangmove,grind,piping,pipingup,sidepiping,doorenter,doorexit
+
+
+stand frames=3
+wait frames=4
+lookup frames=1
+pose frames=1
+crouch frames=1
+hurt frames=1
+dead frames=7
+deadup frames=7
+walk frames=8
+run frames=4
+brake frames=1
+jump frames=2
+bonk frames=2
+fall frames=3
+runjump frames=1
+longjump frames=5
+doublejump frames=2
+doublejumpbonk frames=2 
+doublejumpfall frames=3
+wallslide frames=1
+groundpound frames=8
+slide frames=2
+standcarry frames=1
+lookupcarry frames=1
+crouchcarry frames=1
+walkcarry frames=8
+jumpcarry frames=2
+bonkcarry frames=1
+fallcarry frames=3
+doublejumpcarry frames=1
+throw frames=1
+roll frames=8
+poundfall frames=2
+swim frames=2
+paddle frames=2
+dolphinkick frames=2
+swimcarry frames=2
+spinjump frames=4
+fire frames=2
+push frames=1
+balancing frames=1
+bellyslide frames=1
+dive frames=1
+climbing frames=4
+capeflight frames=6
+flagslide frames=1
+
+pose loop=6
+brake loop=2
+lookup loop=2
+crouch loop=2
+jump loop=2
+doublejump loop=2
+longjump loop=5
+bonk loop=2
+doublejumpbonk loop=2
+fall loop=3
+doublejumpfall loop=3
+lookupcarry loop=2
+crouchcarry loop=2
+jumpcarry loop=2
+doublejumpcarry loop=2
+fallcarry loop=3
+groundpound loop=8
+poundfall loop=2
+dolphinkick loop=3
+dead loop=8
+dive loop=5
+fire loop=3
+
+stand speed=0.2
+standcarry speed=0.2
+wait speed=0.1
+lookup speed=0.2
+crouch speed=0.2
+lookupcarry speed=0.2
+crouchcarry speed=0.2
+brake speed=0.25
+pose speed=0.325
+dead speed=0.2
+deadup speed=0.2
+walk speed=0.4
+run speed=0.5
+jump speed=0.1
+doublejump speed=0.1
+longjump speed=0.25
+bonk speed=0.1
+doublejumpbonk speed=0.1
+fall speed=0.15
+doublejumpfall speed=0.15
+slide speed=0.25
+walkcarry speed=0.5
+jumpcarry speed=0.1
+fallcarry speed=0.15
+spinjump speed=0.75
+swim speed=0.2
+paddle speed=0.375
+dolphinkick speed=0.375
+swimcarry speed=0.3
+fire speed=0.3
+poundfall speed=0.1
+push speed=0.1
+balancing speed=0.1
+bellyslide speed=0.2
+dive speed=0.8
+climbing speed=0.125
+
+stand frametimes=32,1,1
+wait frametimes=1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2
+run frametimes=1.75,1.75,1,1,1,1,1,1
+lookup frametimes=1,32,1,1
+standcarry frametimes=24,1,1
+lookupcarry frametimes=1,32,1,1
+crouchcarry frametimes=1,32,1,1
+dead frametimes=1.5,3,1.35,1.35,1.35,1.35,1
+dive frametimes=2,2,2,24,2
+dolphinkick frametimes=2,2,3,3
+bellyslide frametimes=32,1,1
+
+grind frames=1
+piping frames=1
+pipingup frames=1
+sidepiping frames=8
+doorenter frames=1
+doorexit frames=1
+
+piping speed=0.5
+pipingup speed=0.5
+sidepiping speed=0.4
+doorenter speed=0.20
+doorexit speed=0.20
+
+doorenter loop=4
+doorenter framestimes=1,1,1,1
+
+boll top=#E00808
+boll mid=#000000
+boll bot=#006EEE
+
+[lang]
+winspecial=Mario got a Chaos Emerald
+allspecial=Mario got all Chaos Emeralds
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Mario
+savetext4=Our Only Hero 
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship

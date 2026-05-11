@@ -1,5 +1,6 @@
 [knux]
 name=Knuckles
+credits=Todadoat, SEGA
 
 icon speed=6
 icon loop=yes
@@ -22,6 +23,10 @@ defaultspray 3=5
 defaultspray 4=8
 
 short small form=0.7
+
+single sheet=true
+singlesheet split width=8,8,8,8,8,8,8,8
+singlesheet split height=0,0,0,0,0,0
 
 custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,brake,spring,jump,bonk,ball,spindash,spincharge,push,hang,fire,upper,climb,climbstill,climbdown,glide,glideturn,recover,slide,climbing,flagslide,grind,piping,pipingup,sidepiping,doorenter,doorexit
 

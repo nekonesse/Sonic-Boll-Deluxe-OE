@@ -27,8 +27,8 @@ defaultspray 2=7
 defaultspray 3=5
 defaultspray 4=5
 
-
-
+size reroute beet=big
+size reroute lui=big
 size reroute fire=big
 size reroute feather=big
 size reroute extra=big
