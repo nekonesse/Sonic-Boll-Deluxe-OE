@@ -254,6 +254,10 @@ if (keyboard_check_pressed(vk_enter) && !off) {
                     maxe=0
                     charm_init()
                     charm_run("start")
+                    global.pal_1[p2]=min(playerskindat(p2,"defaultpal1"+string(p2)),playerskindat(p2,"totpal"+string(p2)))
+                    global.pal_2[p2]=min(playerskindat(p2,"defaultpal2"+string(p2)),playerskindat(p2,"totpal"+string(p2)))
+                    global.pal_3[p2]=min(playerskindat(p2,"defaultpal3"+string(p2)),playerskindat(p2,"totpal"+string(p2)))
+                    global.pal_4[p2]=min(playerskindat(p2,"defaultpal4"+string(p2)),playerskindat(p2,"totpal"+string(p2)))
                 }
             }
             global.cheater=1
