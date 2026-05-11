@@ -14,7 +14,7 @@ name="Legacy UI"
 desc="Changes the Main Menu and certain system graphics to look like version 1.8 and early 1.9."
 
 #define create
-extdir=global.workdir+"mods\extensions\"
+extdir=global.workdir+"SBDX_mods\extensions\"
 
 //first boot
 if !settings('ext_legacyui_firstboot') {
