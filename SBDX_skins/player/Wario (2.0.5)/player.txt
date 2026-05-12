@@ -17,7 +17,7 @@ time until wait=200
 pipe squish=20
 afterimage blend=$ff00ff
 
-custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,brake,crawl,jump,bonker,fall,pound,poundland,swim,paddle,standcarry,lookupcarry,crouchcarry,walkcarry,jumpcarry,bonkcarry,fallcarry,throw,bash,bashjump,bashhit,sliding,rolling,fire,climbing,flagslide,machrun
+custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,brake,crawl,jump,bonk,fall,pound,poundland,swim,paddle,standcarry,lookupcarry,crouchcarry,walkcarry,jumpcarry,bonkcarry,fallcarry,throw,bash,bashjump,bashhit,sliding,rolling,fire,climbing,flagslide,machrun
 
 use paletting=true
 defaultspray 1=7
@@ -35,9 +35,8 @@ reroute doorenter=stand
 reroute doorexit=stand
 reroute grind=brake
 reroute machbash=machrun
-reroute bonk=bonker
 reroute crouchjump=crouch
-reroute bonkbrick=bonker
+reroute bonkbrick=bonk
 reroute idleswim=swim
 
 machrun offset y=2

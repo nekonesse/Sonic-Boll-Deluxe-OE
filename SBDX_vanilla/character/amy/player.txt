@@ -126,6 +126,9 @@ bonk frametimes=0
 bonk offset x=0
 bonk offset y=0
 
+size reroute beet=big
+size reroute lui=big
+
 hammerspin frames=8
 hammerspin loop=1
 hammerspin speed=0.25

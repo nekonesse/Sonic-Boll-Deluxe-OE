@@ -60,6 +60,7 @@ connect flagslide=true
 connect doorenter=true
 connect doorexit=true
 
+reroute bonkbrick=jump
 reroute airthrow=throw
 reroute poundfall=slide
 reroute roll=groundpound

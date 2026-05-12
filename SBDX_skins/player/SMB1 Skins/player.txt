@@ -68,6 +68,7 @@ reroute sidepiping=walk
 reroute doorenter=stand
 reroute doorexit=stand
 reroute handlegrab=handlegrab
+reroute bonkbrick=jump
 
 connect crouch=true
 connect brake=true

@@ -29,7 +29,7 @@ defaultspray 4=0
 
 custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,dash,mariojump,mariobonk,mariofall,wall,pound,slide,twirl,fire,flagslide,climbing,grind,piping,pipingup,sidepiping,doorenter,doorexit
 
-reroute bonkbrick=bonk
+reroute bonkbrick=mariojump
 
 stand frames=1
 wait frames=3
