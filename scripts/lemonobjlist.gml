@@ -303,9 +303,13 @@ listobj(axewall         ,0,spr_axewall      ,42,axe)
 
 listobj(cork            ,1,spr_cork         ,43,cork)
     listdoc("Cork","Cork blocks float in water and can be pushed or grabbed.")
+    listargs("align")
+    listdata("0"    )
 
 listobj(stone           ,0,spr_stone        ,44,cork)
     listdoc("Stone","Stone blocks fall with gravity, and are a bit heavy.")
+    listargs("align")
+    listdata("0"    )
 
 listobj(checkpoint      ,0,spr_checkpoint   ,45,checkpoint)
     listdoc("Checkpoint","Checkpoints will provide a Special Ring that activates red coins, or a Special Stage.")
