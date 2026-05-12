@@ -1033,7 +1033,7 @@ com_piping()
     mask_reset()
 }
 if (!grabflagpole && !piped && size==5) mask_set(9,8) //please dont ask why the width has to be 9 pipes are weird and wacky and this is the only way i got to stop players from getting stuck in pipes and turning invisible/
-else if (!grabflagpole && (trip || dash || spin || crouch || kick || size=0 || fall=5)) mask_set(12,12)
+else if (!grabflagpole && (trip || dash || spin || crouch || (kick) || size=0 || fall=5)) mask_set(12,12)
 else mask_set(12,24)
 
 #define movement
@@ -1453,7 +1453,7 @@ if (coll) {
         if (coll.object_index=lakitu) if (coll.flee) exit
         
         if (star  
-        || ((spin || kick || skip) && type!=spinyegg && type!=beetle && type!=koopa && !object_is_ancestor(type,koopa) && type!=shell)
+        || ((spin || kick || skip || dash) && type!=spinyegg && type!=beetle && type!=koopa && !object_is_ancestor(type,koopa) && type!=shell)
         || (pound>13 && type!=piranha && type!=spinyegg && type!=spiny)) {
             instance_create(mean(x,coll.x),mean(y,coll.y),kickpart)
             if (type=hammerbro) seqcount=max(5,seqcount)
@@ -1468,7 +1468,7 @@ if (coll) {
             exit
         }
         
-        if (spin || kick || skip) {
+        if (spin || kick || skip || dash) {
             if (type=shell) {if (coll.type!="beetle") {enemydie(coll) exit}}
             else if (type=beetle || object_is_ancestor(type,koopa) || type=koopa) {hsp=0 jump=1 jumpspd=0.5 spin=0 enemystomp(coll) exit}
             else if (type=spinyegg) {hurtplayer("enemy") exit}
