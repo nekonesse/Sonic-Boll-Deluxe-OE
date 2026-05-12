@@ -133,7 +133,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-if (global.wanna || global.tasing || global.debug || global.gamemode="timeattack" || global.lemontest) savetas()
+if (global.wanna || (global.tasing || (global.lemontest && settings("lemontasing"))) || global.debug || global.gamemode="timeattack" || global.lemontest) savetas()
 global.createcode = ""
 instance_activate_object(redring)
 with (redring) {

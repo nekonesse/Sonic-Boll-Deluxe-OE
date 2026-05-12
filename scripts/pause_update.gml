@@ -189,7 +189,7 @@ if (pause) {
             pause=1
             pauseplayer=other.p2
         }
-        if (!global.focus && settings("autopause") && !instance_exists(changectrl) && !global.tasing) {
+        if (!global.focus && settings("autopause") && !instance_exists(changectrl) && !(global.tasing || (global.lemontest && settings("lemontasing")))) {
             pause=1
             pauseplayer=0
         }

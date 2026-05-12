@@ -67,7 +67,7 @@ global.time=lemongrab.time
 
 global.gamemode="classic"
 global.option[0]=opt
-global.input[0]=-1
+if settings("lemoninput")=="Gamepad" global.input[0]=2 else global.input[0]=-1
 applyplayerskin(global.pbase,0,"all",global.option[0])
 global.pal_1[0]=(playerskindat(0,"defaultpal1"+string(0)))
 global.pal_2[0]=(playerskindat(0,"defaultpal2"+string(0)))

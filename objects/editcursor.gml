@@ -25,6 +25,7 @@ middle=mouse_check_button(mb_middle) || keyboard_check(vk_space)
 middlep=mouse_check_button_pressed(mb_middle) || keyboard_check_pressed(vk_space)
 ctrl=keyboard_check_direct(vk_control)
 shift=keyboard_check_direct(vk_shift)
+alt=keyboard_check_direct(vk_alt)
 scrw=mouse_wheel_down()-mouse_wheel_up()
 escape=input_esc()
 
@@ -45,10 +46,18 @@ if (ctrl) {
     if (keyboard_check_pressed(ord("X"))) editcopy(1)
     if (keyboard_check_pressed(ord("V"))) editpaste()
     if (keyboard_check_pressed(ord("A"))) editall()
+    if (keyboard_check_pressed(ord("N"))) editnew(1)
+    if (keyboard_check_pressed(ord("O"))) if shift editload(editmanager.autosave) else editload()
+} else if (alt && scrw!=0) {
+    editloadregion(wrap_val(drawregion.region+scrw,0,7))
+    if !(settings("nolemonsound")) sound("lemonselectitem")
 } else {
-    if (keyboard_check_pressed(ord("S"))) {tool=1 if !(settings("nolemonsound")) sound("lemonselecttool")}
-    if (keyboard_check_pressed(ord("D"))) {tool=0 if !(settings("nolemonsound")) sound("lemonselecttool")}
-    if (keyboard_check_pressed(ord("F"))) {tool=2 if !(settings("nolemonsound")) sound("lemonselecttool")}
+    if (keyboard_check_pressed(ord("S"))) {tool=1 if !(settings("nolemonsound")) sound("lemonselecttool")} //Select
+    if (keyboard_check_pressed(ord("D"))) {tool=0 if !(settings("nolemonsound")) sound("lemonselecttool")} //Draw
+    if (keyboard_check_pressed(ord("F"))) {tool=2 if !(settings("nolemonsound")) sound("lemonselecttool")} //Fill
+    if (keyboard_check_pressed(ord("W"))) {tool=9 if !(settings("nolemonsound")) sound("lemonselecttool")} //Spawn Marker
+    if (keyboard_check_pressed(ord("E"))) {tool=3 if !(settings("nolemonsound")) sound("lemonselecttool")} //Boundary Tool
+    if (keyboard_check_pressed(ord("R"))) {tool=7 if !(settings("nolemonsound")) sound("lemonselecttool")} //Reference Tool
     if (keyboard_check_pressed(ord("G"))) {if !(settings("nolemonsound")) sound("lemonselecttool") with (gridtoggle) event_user(0)}
     if (keyboard_check_pressed(vk_delete)) {editdeleteselection()}
     if (keyboard_check_pressed(vk_f5)) {edittest(1)}
@@ -88,6 +97,9 @@ if !settings("funmode") {
 }
 
 draw_self();
+
+//Selection Ruler
+if (drawregion.selecting && !settings("lemon disableruler")) draw_systext(round(x+4),round(y-12),string(drawregion.selw)+"x"+string(drawregion.selh))
 
 if (drawregion.flooding) draw_sprite(spr_editortools,6,x+18,y)
 else if (drawregion.grab || (middle && !drawregion.drawing && !drawregion.grabf && !drawregion.grabs && !drawregion.grabj && !drawregion.resize && !drawregion.selecting)) draw_sprite(spr_editortools,8,x+18,y)

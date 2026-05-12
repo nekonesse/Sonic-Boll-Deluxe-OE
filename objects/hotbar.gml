@@ -43,7 +43,7 @@ applies_to=self
 */
 if (!drawregion.flooding) {
     curp=cur
-    if (!editcursor.ctrl) {savecur=cur cur=modulo(cur+editcursor.scrw,1,10+pickeddata)  if savecur!=cur {if !(settings("nolemonsound")) sound("systemselect") /*while lemonobjname(lemongrab.objlist[obj[cur],0])="0" {cur=modulo(cur+editcursor.scrw,1,10)}*/}}
+    if (!editcursor.ctrl && !editcursor.alt) {savecur=cur cur=modulo(cur+editcursor.scrw,1,10+pickeddata)  if savecur!=cur {if !(settings("nolemonsound")) sound("systemselect") /*while lemonobjname(lemongrab.objlist[obj[cur],0])="0" {cur=modulo(cur+editcursor.scrw,1,10)}*/}}
     for (i=0;i<10;i+=1) {
         if (keyboard_check_pressed(ord("0")+i)) {
             if (pickeddata || i) {

@@ -9,10 +9,10 @@ event_inherited()
 toolname[0]="Draw (D)#Shift: move/properties#Ctrl: pick"
 toolname[1]="Select (S)#Ctrl+Shift+C/V: copy#using the clipboard"
 toolname[2]="Fill (F)#Left click: Flood Fill#Drag to fill rectangle"
-toolname[3]="Boundary Tool#Left click: Mark screen as forbidden#Right click: Mark screen as secret#Click again to remove boundary"
+toolname[3]="Boundary Tool (E)#Left click: Mark screen as forbidden#Right click: Mark screen as secret#Click again to remove boundary"
 toolname[4]="Thumbnail Tool"
-toolname[7]="Reference Graphic Tool#Left click: move#Right click: load/unload"
-toolname[9]="Spawn Point#Left click: Player Spawn#Right click: Testing Spawn"
+toolname[7]="Reference Graphic Tool (R)#Left click: move#Right click: load/unload"
+toolname[9]="Spawn Point (W)#Left click: Player Spawn#Right click: Testing Spawn"
 #define Other_10
 /*"/*'/**//* YYD ACTION
 lib_id=1

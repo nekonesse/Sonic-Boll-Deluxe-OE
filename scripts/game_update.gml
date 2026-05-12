@@ -142,7 +142,7 @@ if (deathtimer && (deathtimer<300 || global.wanna)) {deathtimer+=1
 }
 
 //load and save tas
-if (global.tasing) {
+if ((global.tasing || (global.lemontest && settings("lemontasing")))) {
     if (mouse_check_button(mb_right)) {with (memory) instance_destroy() with (player) spawnmemory() savetas()}
     if (mouse_check_button(mb_left) || player.rbut) {loadtas()}
 }

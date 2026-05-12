@@ -22,7 +22,7 @@ if (frames>=15) {
     frames=0
 }
 
-if (global.tasing || global.debug) {
+if ((global.tasing || (global.lemontest && settings("lemontasing"))) || global.debug) {
     global.spd=median(5,global.spd+5*((mouse_wheel_up() + keyboard_check_pressed(vk_pageup))-(mouse_wheel_down() + keyboard_check_pressed(vk_pagedown))),60+140*global.debug)
 }
 
