@@ -82,6 +82,8 @@ fire loop=3
 brake loop=4
 pound loop=2
 
+size reroute beet=basic
+size reroute lui=basic
 
 wait speed=0.1
 pose speed=0.1

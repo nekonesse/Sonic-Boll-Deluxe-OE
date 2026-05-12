@@ -314,6 +314,7 @@ else if (fired) {sprite="fire" cantslowanim=1}
 com_inputstack()
 
 tempbrick=0
+luijump-=1
 
 //situations in which it should skip controls entirely
 if (hurt || piped || move_lock) {
@@ -420,6 +421,7 @@ if abs(hsp)=maxspd vsp=-6.2
 sprite_angle=0
 
             jump=1
+            if (size==7) luijump=9
             fall=0
             braking=0
             spin=0
@@ -468,7 +470,7 @@ if (akey) {
     if (jumpbuffer) jumpbuffer-=1
 
 if jump && size=3 && vsp>3 {vsp=3}
-} else jumpbuffer=0
+} else {jumpbuffer=0 luijump=0}
 
 if (!akey) {
     if (canstopjump=1 && jump && vsp<-2 && !sprung) {
@@ -492,6 +494,18 @@ if (bbut) {
             fire_projectile(x+8*xsc,y+2)
             fired=16
             if (sprite="fire") frame=0
+        } else if (size=6 && (count_projectiles() < 2) && !crouch && !spin) {
+            p2 = 10;
+            with fire_projectile(x+8*xsc,y+2) {
+                hspeed=max((1 + (abs(other.hsp) / 2.2)),1.2) * xsc; //yaargh me formula
+                vspeed = -2.4;
+                visible = 0;
+            }
+            if (!jump) fired = 16;
+            if (sprite = "fire") frame = 0;
+            p2 = real(ss);
+
+            playsfx(name+"hadoken");
         }
         if (jump && (fall=0 || fall=2 || fall=5) && !airdash && !firedash) {
             airdash=1
@@ -645,7 +659,7 @@ player_nslopforce()
 			else if (pound>=14 && pound<15) vsp=6*wf
 			else if (water) {vsp-=0.1*wf if (vsp<1.5) pound=0}
 			else vsp+=0.375*wf
-		} else if (wall>0 && vsp>1 && !spinjump && !water) vsp=1.5 else if fall!=69 {
+		} else if (wall>0 && vsp>1 && !spinjump && !water) vsp=1.5 else if fall!=69 && !luijump {
 				//vsp+=0.15-((size==5)*0.025)*wf
 				vsp+=0.15*wf-(size=5 && vsp>-0.35 && !water)*0.075
 		} 
@@ -784,6 +798,16 @@ if (global.dustframe) {
     } else speedwagon=0
 }
 
+if (jump && size==7 && global.fastframe4 != ff4prev) {
+    ff4prev = global.fastframe4
+    with instance_create(x, y, afterimagenoblend) {
+        event_user(0)
+        alphadecay=1
+        alarm[0] = 24
+        maxalarm = 24
+        maxalpha=0.8
+    }
+}
 
 poundjump=max(0,poundjump-1)
 stomplok=max(0,stomplok-1)
@@ -1075,6 +1099,7 @@ bounce=0
 twirl=0
 oldsize=size
 jumpbuffer=0
+luijump=0
 hyperspeed=0
 hp=0
 star=0  
