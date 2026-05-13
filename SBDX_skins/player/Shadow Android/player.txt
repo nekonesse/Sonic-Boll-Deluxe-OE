@@ -11,6 +11,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -26,6 +27,41 @@ defaultspray 1=12
 defaultspray 2=9
 defaultspray 3=6
 defaultspray 4=5
+
+size reroute fire=big
+size reroute feather=big
+size reroute beet=big
+size reroute lui=big
+
+nametag graphic x=8
+nametag graphic y=8
+
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=8
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+spindash dust graphic x=8
+spindash dust graphic y=96
+
+instashield graphic x=224
+instashield graphic y=58
 
 custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit
 
@@ -170,6 +206,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -186,8 +223,40 @@ defaultspray 2=11
 defaultspray 3=6
 defaultspray 4=5
 
-spindash dust graphic x=10
-spindash dust graphic y=105
+size reroute fire=big
+size reroute feather=big
+size reroute beet=big
+size reroute lui=big
+
+nametag graphic x=8
+nametag graphic y=8
+
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=8
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+spindash dust graphic x=8
+spindash dust graphic y=96
+
+instashield graphic x=224
+instashield graphic y=58
 
 custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer,teleport,spacer2,bounce
 
@@ -343,6 +412,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -359,14 +429,56 @@ defaultspray 2=5
 defaultspray 3=7
 defaultspray 4=5
 
-custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer,spacer2,spacer3,pound
+size reroute big=basic
+size reroute fire=basic
+size reroute feather=basic
+size reroute beet=basic
+size reroute lui=basic
+
+
+nametag graphic x=8
+nametag graphic y=8
+
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=8
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+firedash graphic x=224
+firedash graphic y=98
+
+hadouken graphic x=8
+hadouken graphic y=79
+
+featherdash graphic x=384
+featherdash graphic y=58
+
+spindash dust graphic x=8
+spindash dust graphic y=96
+
+custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer,spacer2,spacer3,pound,wall
 
 reroute fall=jump
 reroute spincharge=spindash
 reroute mariojump=spring
 reroute mariofall=springfall
 reroute mariobonk=bonk
-reroute wall=flagslide
 reroute twirl=piping
 
 stand frames=1
@@ -507,6 +619,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -523,12 +636,41 @@ defaultspray 2=7
 defaultspray 3=6
 defaultspray 4=5
 
+size reroute fire=big
+size reroute feather=big
+size reroute beet=big
+size reroute lui=big
+
 smooth flight bar drain=true
 
-spindash dust graphic x=10
-spindash dust graphic y=105
+nametag graphic x=8
+nametag graphic y=8
 
-custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer1,spacer2,spacer3,spacer4,spacer5,spacer6,spacer7,spacer8,spacer9,spacernumberten,tailidle,tailspin,flyup,fly,flydown,flytired
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=8
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+spindash dust graphic x=8
+spindash dust graphic y=96
+
+custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer1,spacer2,spacer3,spacer4,spacer5,spacer6,spacer7,spacer8,spacer9,spacer10,spacer11,spacer12,tailidle,tailspin,flyup,fly,flydown,flytired
 
 reroute fall=jump
 reroute flyfast=maxrun
@@ -541,7 +683,7 @@ flyup loop=2
 flyup speed=0.25
 
 fly frames=3
-fly loop=3
+fly loop=2
 fly speed=0.25
 
 flydown frames=2
@@ -692,6 +834,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -708,13 +851,44 @@ defaultspray 2=6
 defaultspray 3=7
 defaultspray 4=5
 
-custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer,spacer2,spacer3,hammerdrop
+size reroute fire=big
+size reroute feather=big
+size reroute beet=big
+size reroute lui=big
+
+nametag graphic x=8
+nametag graphic y=8
+
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=8
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+spindash dust graphic x=8
+spindash dust graphic y=96
+
+custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer,spacer2,spacer3,hammerdrop,wall
 
 reroute fall=jump
 reroute spincharge=spindash
 reroute mightybounce=springfall
 reroute thunup=spring
-reroute wall=flagslide
 
 stand frames=1
 wait frames=6
@@ -914,6 +1088,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -929,6 +1104,38 @@ defaultspray 1=12
 defaultspray 2=1
 defaultspray 3=7
 defaultspray 4=5
+
+size reroute fire=big
+size reroute feather=big
+size reroute beet=big
+size reroute lui=big
+
+nametag graphic x=8
+nametag graphic y=8
+
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=8
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+spindash dust graphic x=8
+spindash dust graphic y=96
 
 custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,momentumbreak,teleport,slide
 
@@ -1071,6 +1278,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -1086,10 +1294,48 @@ defaultspray 2=4
 defaultspray 3=6
 defaultspray 4=5
 
-custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer1,spacer2,spacer3,spacer4,spacer5,piko,hammerfall,upper,kick,pikoball
+size reroute fire=big
+size reroute feather=big
+size reroute beet=big
+size reroute lui=big
 
-trail heart graphic x=228
-trail heart graphic y=46
+nametag graphic x=8
+nametag graphic y=8
+
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=33
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+fire wave graphic x=544
+fire wave graphic y=72
+
+fire boom graphic x=578
+fire boom graphic y=72
+
+trail heart graphic x=544
+trail heart graphic y=58
+
+effect fire graphic x=629
+effect fire graphic y=72
+
+custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,spacerrun,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit,spacer1,spacer2,spacer3,spacer4,spacer5,piko,hammerfall,upper,kick,pikoball,run,twirl
 
 reroute fall=jump
 reroute spincharge=spindash
@@ -1129,6 +1375,13 @@ pikoball speed=1
 pikoball frametimes=0
 pikoball offset x=0
 pikoball offset y=0
+
+twirl frames=6
+twirl loop=3
+twirl speed=0.5
+twirl frametimes=0
+twirl offset x=0
+twirl offset y=0
 
 stand frames=1
 wait frames=6
@@ -1258,6 +1511,7 @@ center x=24
 center y=28
 box width=48
 box height=48
+skin offset=156
 
 pitch spindash=no
 jump ball animation=no
@@ -1273,6 +1527,38 @@ defaultspray 1=12
 defaultspray 2=2
 defaultspray 3=6
 defaultspray 4=5
+
+size reroute fire=big
+size reroute feather=big
+size reroute beet=big
+size reroute lui=big
+
+nametag graphic x=8
+nametag graphic y=8
+
+emblem graphic x=74
+emblem graphic y=8
+
+macguffins graphic x=93
+macguffins graphic y=8
+
+smoke graphic x=212
+smoke graphic y=8
+
+flag graphic x=312
+flag graphic y=8
+
+energy horizontal graphic x=8
+energy horizontal graphic y=18
+
+energy vertical graphic x=8
+energy vertical graphic y=27
+
+signpost graphic x=17
+signpost graphic y=27
+
+spindash dust graphic x=8
+spindash dust graphic y=96
 
 custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit
 
