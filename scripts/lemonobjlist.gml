@@ -252,8 +252,8 @@ listobj(theothersidepipe,0,spr_othersidepipe,31,pipeblock)
 
 listobj(door            ,0,spr_door         ,33,pipeblock)
     listdoc("Warp Door","")
-    listargs("align", "name","target","nextlevel","key","oneway","locktype")
-    listdata("0,0"  ,""     ,""      ,""         ,"0"  ,"0"     ,"key")
+    listargs("align", "name","target","nextlevel","key","oneway","locktype","is_pdoor")
+    listdata("0,0"  ,""     ,""      ,""         ,"0"  ,"0"     ,"key"     ,"0")
 
 listobj(heaven          ,0,spr_heaven       ,34,heaven)
     listdoc("Coin Heaven Marker","Marks a coin heaven entrance, use the target field to specify the exit drop target.")

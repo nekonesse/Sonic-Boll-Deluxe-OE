@@ -66,7 +66,11 @@ switch (argument[0]) {
         h=2
         frox=8
         froy=16
-        if !(oneway || (target="" && nextlevel="")) {
+        if funnytruefalse(is_pdoor) {
+            if !switched && !frame frx=9
+            else frx=11+floor(frame)*2
+            fry=10
+        } else if !(oneway || (target="" && nextlevel="")) {
             frx=11+floor(frame)*2
             if (key && frame=0)
             frx=9

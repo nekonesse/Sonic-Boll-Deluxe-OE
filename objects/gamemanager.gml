@@ -191,6 +191,7 @@ with (bluecoin) {
     y=-verybignumber
     active=0
 }
+with (door) if (funnytruefalse(is_pdoor)) {switched=0}
 global.ptime=0
 if !global.finishmusic && !instance_exists(moranboll) stagemusic(players[0])
 if instance_exists(moranboll) instance_deactivate_object(regionmarker)

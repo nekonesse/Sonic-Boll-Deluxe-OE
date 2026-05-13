@@ -85,6 +85,7 @@ with (pblockoff) if !switched{
     with instance_create(x,y,pblock) switched=1
     instance_destroy()
 }
+with (door) if (funnytruefalse(is_pdoor) && !switched) {switched=1}
 gamemanager.switched=1
 instance_destroy()
 #define Draw_0

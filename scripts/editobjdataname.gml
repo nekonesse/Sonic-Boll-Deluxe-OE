@@ -195,12 +195,16 @@ switch (argument[0]) {
         return "Name: "+i
     }
     case door: {
+        if type=7 {
+            if unreal(i,0) return "P-Door: Yes"
+            else return "P-Door: No"
+        }
         if (type=6) {
             if (i=="key") return "Accepts: Key"
             if (i=="token") return "Accepts: White Token"
             if (i=="tokenblue") return "Accepts: Blue Token"
             if (i=="tokengreen") return "Accepts: Green Token"
-            return "Accepts: Boll Deluxe Android Port"
+            return "Accepts: Boll Deluxe Android Port" //♥♥♥
         }
         if (type=5) {if (i="1") return "One-Way" return "Two-Way"}
         if (type=4) {if (!string_pos(string(argument[2]),"01")) return "Keys: "+i if (t) return "Locked" return "Unlocked"}

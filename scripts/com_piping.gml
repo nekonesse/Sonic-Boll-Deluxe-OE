@@ -24,11 +24,11 @@ if (up && !pipe) {
     } else if position_meeting(x,y+8,door) {
         pipeid=instance_position(x,y+8,door)
         if (pipeid) if ((pipeid.t || pipeid.warp) && abs(x-(pipeid.x+8))<4 && !pipeid.oneway) {
-            if (!pipeid.key ||
-               (pipeid.locktype=="key" && count_owned(keyfollow)>=pipeid.key) ||
-               (pipeid.locktype=="token" && gamemanager.tokens>=pipeid.key) ||
-               (pipeid.locktype=="tokenblue" && global.tokens>=pipeid.key) ||
-               (pipeid.locktype=="tokengreen" && pipeid.greentoken==1)
+            if (!pipeid.key && (!funnytruefalse(pipeid.is_pdoor) || pipeid.switched) ||
+               (pipeid.locktype=="key" && count_owned(keyfollow)>=pipeid.key) && (!funnytruefalse(pipeid.is_pdoor) || pipeid.switched) ||
+               (pipeid.locktype=="token" && gamemanager.tokens>=pipeid.key) && (!funnytruefalse(pipeid.is_pdoor) || pipeid.switched) ||
+               (pipeid.locktype=="tokenblue" && global.tokens>=pipeid.key) && (!funnytruefalse(pipeid.is_pdoor) || pipeid.switched) ||
+               (pipeid.locktype=="tokengreen" && pipeid.greentoken==1) && (!funnytruefalse(pipeid.is_pdoor) || pipeid.switched)
             ) {
                 pipe=4
                 with (pipeid) if (key) {

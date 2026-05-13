@@ -189,8 +189,10 @@
         point=noone
         //Pointer
         if (data[2]!="") with (drawregion.deity) if (obj=door) if (data[1]=other.data[2]) other.point=id
+        //P-Door
+        if (funnytruefalse(data[7])) {keyed=0 frame=3}
         //Locked Door
-        if (data[4]!="0" && !(data[2]="" && data[3]="")) {keyed=1 frame=1}
+        else if (data[4]!="0" && !(data[2]="" && data[3]="")) {keyed=1 frame=1}
         //One-Way Door
         else if (data[2]="" && data[3]="") || funnytruefalse(data[5]) {keyed=0 frame=2}
         //Normal Door

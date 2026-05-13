@@ -204,6 +204,9 @@ switch (argument[0]) {
         return get_string("This heaven's name:",argument[2])
     } break
     case door: {
+        if (type=7) {
+            return string(!funnytruefalse(argument[2]))
+        }
         if (type=6) {
             i=show_contextmenu("Lock Currency:|-|Key|White Token|Blue Token|Green Token",0)
             if (!i) return argument[2]
