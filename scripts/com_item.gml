@@ -197,7 +197,7 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
     }
 
     if (type="monitor_bfeather") {
-        give_item(owner,"bfeather")
+        give_item(id,"bfeather")
     }
 
     if (type="monitor_shield") {
