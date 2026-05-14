@@ -96,6 +96,8 @@ jumpedoutspin=0
 #define effectsfront
 if iaminsidemyself=1 exit
 
+if projectilepalettes scr_applyPaletteSegmentedAlpha(global.shaderPaletteSwapAlpha,global.palettesprites[p2*100],global.pal_1[p2]+1,global.pal_2[p2]+1,global.pal_3[p2]+1,global.pal_4[p2]+1,size,alpha*(1-0.75*shadow),totpal+1)
+
 if (hsp!=0 && !jump){
 	
 	draw_sprite_general(sheets[size* !global.singlesheet[p2]],0,margin+dashspark_sheetx[size*projcoordbysize]+(sparkanim*16),dashspark_sheety[size*projcoordbysize],15,8,x-(sign(hsp)*20),y+6+dy,sign(hsp),1,sign(hsp),$ffffff,$ffffff,$ffffff,$ffffff,1)
@@ -112,6 +114,8 @@ if randomsparksGO mod 2{
 	draw_sprite_part_ext(sheets[size* !global.singlesheet[p2]],0,overlayspark_sheetx[size*projcoordbysize],overlayspark_sheety[size*projcoordbysize],25,31,round(x-10),round(y-16+dy),1,1,$ffffff,1)
 	
 }if randomsparksGO randomsparksGO-=1
+
+if projectilepalettes shader_reset()
 
 if e_timer mod 3 || (sparkcharge && sparkanim){
 	iaminsidemyself=1

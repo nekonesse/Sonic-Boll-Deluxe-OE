@@ -17,6 +17,7 @@ victory duration=30
 
 max sizes=7
 use paletting=true
+projectile palettes=true
 defaultspray 1=12
 defaultspray 2=6
 defaultspray 3=6
