@@ -587,14 +587,16 @@ else if (captype=-1) {captype=coll.object_index biome=coll.biome with (coll) {in
 }
 
 if (event="draw") {
-if owner.projectilepalettes scr_applyPaletteSegmentedAlpha(global.shaderPaletteSwapAlpha,global.palettesprites[owner.p2*100],global.pal_1[owner.p2]+1,global.pal_2[owner.p2]+1,global.pal_3[owner.p2]+1,global.pal_4[owner.p2]+1,owner.size,1,owner.totpal+1)
+   
+if owner.usepalette scr_applyPaletteSegmentedAlpha(global.shaderPaletteSwapAlpha,global.palettesprites[owner.p2*100],global.pal_1[owner.p2]+1,global.pal_2[owner.p2]+1,global.pal_3[owner.p2]+1,global.pal_4[owner.p2]+1,owner.size,1,owner.totpal+1)
+    
 depth=owner.depth+1
 if global.debug draw_self()
 w=8+(abs(x-owner.x))
 draw_sprite_part_ext(owner.sheets[owner.size* !global.singlesheet[p2]],0,(owner.claw_sheetx[owner.size*owner.projcoordbysize]+63)-(w),owner.claw_sheety[owner.size*owner.projcoordbysize],w,15,round(x-(w-8)*xsc),round(y-8),xsc,1,$ffffff,1)
-
-if owner.projectilepalettes shader_reset()
-
+    
+if owner.usepalette shader_reset()
+    
 if (captype) {
 if (captype=mushroom) ssw_items("mushroom") 
 if (captype=flower) ssw_items("fflower")
