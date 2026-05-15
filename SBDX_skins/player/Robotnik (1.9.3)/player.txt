@@ -21,6 +21,8 @@ stand,wait,jump,fly,crouch,lookup,knockstand,knockrun,run,turn,dead,deadair,claw
 
 custom sprite list=stand,crouch,jump,fly,lookup,knockstand,run,turn,deadair,dead,claw,ball
 
+projectile palettes=true
+
 use paletting=true
 defaultspray 1=5
 defaultspray 2=6
@@ -56,6 +58,9 @@ reroute doorexit=stand
 reroute knockrun=knockstand
 
 reroute armlessalt=claw
+
+size reroute beet=big
+size reroute lui=big
 
 fire duration=8
 victory duration=30
