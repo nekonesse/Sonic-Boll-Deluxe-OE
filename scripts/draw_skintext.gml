@@ -38,7 +38,7 @@ repeat l {
             continue
         } else {tagstr+=ch i+=1 continue}
     }
-    if (ch="$") if (string_char_at(str,i+1)="{") {tag=1 i+=1 tagstr="" continue}
+    if (ch="$") if (string_char_at(str,i+1)="{") {tag=1 i+=2 tagstr="" continue}
 
     c=string_pos(ch,global.fontmap)
     arr[j]=c j+=1 cmd[j,0]=0

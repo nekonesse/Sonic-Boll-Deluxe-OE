@@ -18,7 +18,7 @@ if (pause) {
             global.halign=1
             global.valign=1
             if (quitask) str=lang("pause quit ask")+"##"+arrow(pausel=0)+lang("pause quit")+arrowleft(pausel=0)+"#"+arrow(pausel=1)+lang("pause back")+arrowleft(pausel=1)
-            else if (retryask) str=lang("pause retry ask")+"##"+arrow(pausel=0)+checkcol+lang("pause checkpoint")+"${c=$ffffff}"+arrowleft(pausel=0)+"#"+arrow(pausel=1)+lang("pause start over")+arrowleft(pausel=1)+"#"+arrow(pausel=2)+lang("pause back")+arrowleft(pausel=2)
+            else if (retryask) str=lang("pause retry ask")+"##"+arrow(pausel=0)+checkcol+lang("pause checkpoint")+"${c=$ffffff}"+arrowleft(pausel=0)+"#"+arrow(pausel=1)+lang("pause start over")+arrowleft(pausel=1)+"#"+arrow(pausel=2)+lang("pause back")+arrowleft(pausel=2)+"##"
             else {
                 full=settings("fullscreen")
                 zoom=settings("zoom")*!full
