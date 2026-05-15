@@ -277,7 +277,8 @@ if (what="more" || what="all") {
     playerskinstr(slot,"savetext3"+ss,playerskinstr(slot,laniel+" savetext3"))
     playerskinstr(slot,"savetext4"+ss,playerskinstr(slot,laniel+" savetext4"))
     playerskinstr(slot,"savetext5"+ss,playerskinstr(slot,laniel+" savetext5"))
-    playerskinstr(slot,"savetext6"+ss,playerskinstr(slot,laniel+" savetext6"))   
+    playerskinstr(slot,"savetext6"+ss,playerskinstr(slot,laniel+" savetext6"))
+    playerskinstr(slot,"credits"+ss,playerskinstr(slot,laniel+" credits"))   
               
     
     if (dir != allyourbase) {

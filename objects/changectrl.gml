@@ -224,7 +224,7 @@ if (skindat("cardtext")) {
 if (go) draw_healthbar(x-64,68,x+64,84,timer/1.28,0,$ff,$ff0000,1,0,0)
 draw_skintext(x,72,ready)
 
-if (!global.playback && !global.tasing && str[view_current]!="") draw_skintext(x,144,skinstr("name"+string(view_current))+"##"+str[view_current])
+if (!global.playback && !global.tasing && str[view_current]!="") draw_skintext(x,144,playerskinstr(view_current,"name"+string(view_current))+"##"+str[view_current])
 if (global.playback) draw_sprite(spr_moviekeys,0,x,156)
 if (global.tasing) draw_skintext(x,160,global.spd)
 
