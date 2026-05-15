@@ -70,16 +70,35 @@ repeat (8) {
 
             m = 0; n = 0;
             scalex = max(1, scalex); scaley = max(1, scaley)
-            repeat (scalex) {
-                repeat (scaley) {
-                    o=instance_create(offx+x*16+off+off2x+(m*16*_xsc),y*16+off+off2y+(n*16*_ysc)+16,obj)
-                    count=lg.objlist[dataid,3]
-                    if (count) {j=0 repeat (count) {variable_instance_set(o,lg.objlist[dataid,5+j],data[j]) j+=1}}
-                    n += 1;
-                }
-                n = 0;
-                m += 1;
+            var _obj; _obj = obj;
+
+            switch (obj) {
+                case groundblock: _obj = ground;
+                case ground:
+                case phaser:
+                case barrier:
+                    o=instance_create(offx+x*16+off+off2x,y*16+off+off2y+16,_obj)
+                    o.image_xscale = scalex;
+                    o.image_yscale = scaley;
+                break;
+
+                case groundblock:
+                default:
+                    repeat (scalex) {
+                        repeat (scaley) {
+                            o=instance_create(offx+x*16+off+off2x+(m*16*_xsc),y*16+off+off2y+(n*16*_ysc)+16,obj)
+                            if (obj == groundblock) o.scaled = 1;
+                            count=lg.objlist[dataid,3]
+                            if (count) {j=0 repeat (count) {variable_instance_set(o,lg.objlist[dataid,5+j],data[j]) j+=1}}
+                            n += 1;
+                        }
+                        n = 0;
+                        m += 1;
+                    }
+                break;
             }
+
+
 
             if (current_time>global.loadtime+64) loadtext()
         }
@@ -124,9 +143,17 @@ repeat (8) {
 
             m = 0; n = 0;
             scalex = max(1, scalex); scaley = max(1, scaley)
+
+            if (obj == groundsemi) {
+                o=instance_create(offx+x*16,y*16+16,obj)
+                o.image_xscale = scalex;
+                o.image_yscale = scaley;
+            }
+
             repeat (scalex) {
                 repeat (scaley) {
-                    instance_create(offx+x*16+(m*16*_xsc),y*16+(n*16*_ysc)+16,obj)
+                    o=instance_create(offx+x*16+(m*16*_xsc),y*16+(n*16*_ysc)+16,obj)
+                    if (obj == groundsemi) o.scaled = 1;
                     n += 1;
                 }
                 n = 0;

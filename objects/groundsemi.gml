@@ -107,5 +107,5 @@ else if (!c8 && !c2) {
 }
 terraintile=0
 }
-if !c8 && !place_meeting(x,y,phaser) && !dontrender instance_create(x,y,phaser)
+if (!scaled) if !c8 && !place_meeting(x,y,phaser) && !dontrender instance_create(x,y,phaser)
 instance_destroy()

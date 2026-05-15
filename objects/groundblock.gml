@@ -114,5 +114,5 @@ else if (!c8 && !c2) {
 terraintile=0
 
 }
-with instance_create(x,y,ground) {myFavouriteTile=other.myFavouriteTile}
+if (!scaled) with instance_create(x,y,ground) {myFavouriteTile=other.myFavouriteTile}
 instance_destroy()
