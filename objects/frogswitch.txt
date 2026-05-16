@@ -1,0 +1,7 @@
+sprite=spr_frogswitch
+visible=1
+solid=0
+persistent=0
+depth=2
+parent=monitorbase
+mask=spr_frogswitchmask

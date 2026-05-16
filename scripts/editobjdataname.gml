@@ -1249,6 +1249,18 @@ switch (argument[0]) {
         if (i="11") return "Type: Right Smooth Semisolid Slope"
         return "Type: Left Slope"
     }
+
+    case frogswitch: {
+        if (type=0) {
+            return "Time: "+string(i)
+        }
+        if (type=1) {
+            if (i="0") return "Overtime effect: Nothing"
+            if (i="1") return "Overtime effect: Instant death"
+            if (i="2") return "Overtime effect: Drain level timer"
+        }
+
+    }
 }
 
 if (type=1) {

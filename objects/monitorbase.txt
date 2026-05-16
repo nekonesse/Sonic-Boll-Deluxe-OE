@@ -1,0 +1,7 @@
+sprite=
+visible=1
+solid=0
+persistent=0
+depth=2
+parent=hittable
+mask=spr_mask16x16

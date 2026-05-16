@@ -1263,6 +1263,17 @@ switch (argument[0]) {
         if (i<=0) return argument[2]
         return string(i-1)
     }
+
+    case frogswitch: {
+        if (type=0) return get_string("Time to escape:",argument[2])
+        if (type=1) {
+            i=show_contextmenu("Overtime effect:|-|Nothing|Instant death|Drain level timer",0)
+            if (!i) return argument[2]
+            if (i=1) return "0"
+            if (i=2) return "1"
+            if (i=3) return "2"
+        }
+    }
 }
 
 if (type=1) return string(!funnytruefalse(argument[2]))

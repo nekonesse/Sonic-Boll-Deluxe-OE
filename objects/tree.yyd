@@ -563,6 +563,7 @@
 		|genblock
 		|x1F0
 		|wind
+		|monitorbase
 	+objects
 		+platforms
 			|plat3
@@ -659,6 +660,7 @@
 		|dashpanel
 		|bumper
 		|fireballshooter
+		|frogswitch
 	+tilers
 		|autotiler
 		|pipetiler

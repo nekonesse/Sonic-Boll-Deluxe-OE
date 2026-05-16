@@ -9,6 +9,9 @@ fall=0
 x-=9
 y-=12
 getregion(x)
+shouldfall=1
+hitbehaviour=1
+landable=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

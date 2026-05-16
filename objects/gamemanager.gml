@@ -127,6 +127,10 @@ if (pack == global.lbase) pack = ""
 
 //this is a variable now to prevent a Freaky resetting bug
 global.reset_on_state_load=1
+
+gamemanager.frog_escape=0
+gamemanager.frog_escape_timer = 0
+gamemanager.frog_escape_timer_effect = 0
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

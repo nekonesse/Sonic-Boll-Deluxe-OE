@@ -28,6 +28,7 @@ with (globalmanager) {
     c+=1 mload[c]="finalboss"
     c+=1 mload[c]="finaldoss"
     c+=1 mload[c]="altunderground"
+    c+=1 mload[c]="escape"
 
     for (i=0;i<global.biomes;i+=1) {
         c+=1 mload[c]=global.biome[i]

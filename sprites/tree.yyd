@@ -80,6 +80,7 @@
 	|spr_playermask
 	|spr_monitormask
 	|spr_fallingmonitormask
+	|spr_frogswitchmask
 +ui
 	+opening
 		|spr_backcircle
@@ -348,6 +349,7 @@
 		|spr_fireballshooter
 		|spr_spikecrusher
 		|spr_boat
+		|spr_frogswitch
 	+enemies
 		|spr_goomba
 		|spr_pig

@@ -43,7 +43,7 @@ if (global.ptime) {song="pswitch"}
 
 with (gamemanager) {
     alarm[7]=1    
-    if (!drowning && !supermusic) {
+    if (!drowning && !supermusic && !frog_escape) {
         if ((song!=global.music) || (song=="pswitch" && argument[1])) {
             global.music=song
             global.musicmem=song                                    

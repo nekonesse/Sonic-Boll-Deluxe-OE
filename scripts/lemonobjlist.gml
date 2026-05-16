@@ -331,6 +331,11 @@ listobj(retainer        ,0,spr_retainer     ,48,flagpole)
     listargs("nextlevel","hostages")
     listdata(""         ,"1"       )
 
+listobj(frogswitch        ,0,spr_frogswitch     ,244,flagpole)
+    listdoc("Frog Switch","VERY WIP, please don't use for now!")
+    listargs("timer", "timerdeathtype")
+    listdata("60",    "2")
+
 listobj(itemlaunch     ,1,spr_itemspawner  ,49,itemlaunch)
     listdoc("Item Launcher","Shoots an item when touched.")
     listargs("align","spawn"   )

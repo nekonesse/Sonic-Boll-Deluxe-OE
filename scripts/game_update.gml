@@ -22,19 +22,21 @@ if (timeleft>0) {tl+=1 if (tl=60) {tl=0
 }}
 
 if (!flag.yup && !timedead && !deathtimer && !instance_exists(bollgate) && !global.wanna && global.inf_time!=1) {
-    tick=max(0,tick-1)
-    for (i=0;i<global.mplay;i+=1) if (!flag.passed[i]) players[i].tick=tick
-    if (tick/60<time) {
-        time=max(0,tick div 60)
-        for (i=0;i<global.mplay;i+=1) if (!flag.passed[i]) players[i].time=time
-        var supermusic;
-        supermusic=0 with (player) if (super && playsupermusic) supermusic=1
-        if (!stop && global.music!="boss" && !supermusic && !skindat("nofast")) {
-            if (time<=skindat("hurrytime") && timeleft=-1 && !fasting) {
-                fasting=1
-                l=0 if (skindat("hurry")) l=FMODSoundGetLength(ds_map_find_value(globalmanager.mushandles,"hurry"))
-                if (l<8) {fasttimer=1 fasttime=current_time-1}
-                else {mus_play("hurry",0) fasttimer=1 fasttime=current_time+l+200}
+    if (!frog_escape) {
+        tick=max(0,tick-1)
+        for (i=0;i<global.mplay;i+=1) if (!flag.passed[i]) players[i].tick=tick
+        if (tick/60<time) {
+            time=max(0,tick div 60)
+            for (i=0;i<global.mplay;i+=1) if (!flag.passed[i]) players[i].time=time
+            var supermusic;
+            supermusic=0 with (player) if (super && playsupermusic) supermusic=1
+            if (!stop && global.music!="boss" && !supermusic && !skindat("nofast")) {
+                if (time<=skindat("hurrytime") && timeleft=-1 && !fasting) {
+                    fasting=1
+                    l=0 if (skindat("hurry")) l=FMODSoundGetLength(ds_map_find_value(globalmanager.mushandles,"hurry"))
+                    if (l<8) {fasttimer=1 fasttime=current_time-1}
+                    else {mus_play("hurry",0) fasttimer=1 fasttime=current_time+l+200}
+                }
             }
         }
     }
@@ -57,6 +59,47 @@ if (global.inf_time==1 && global.gamemode="timeattack" && !gamemanager.timedead 
         supermusic=0 with (player) if (super && playsupermusic) supermusic=1
         //dont need hurry time its time attack
     }
+}
+
+//froggy
+if (frog_escape) {
+    frog_escape_timer = clamp(frog_escape_timer - 1,0,(500) * 60)
+    if (frog_escape_timer == 0) {
+       /*
+        if (i="0") return "Overtime effect: Nothing"
+        if (i="1") return "Overtime effect: Instant death"
+        if (i="2") return "Overtime effect: Drain level timer"
+       */
+       switch (frog_escape_timer_effect) {
+              case 0:
+                   break
+              case 1:
+                   with (player) if (!finish) com_cancel()
+                   if (global.mplay>1) {flag.alarm[7]=380 sekiro=1}
+                   else deathtimer=1
+                   timeleft=-1
+                   break
+              case 2:
+                   if (!global.inf_time) {
+                       tick=max(0,tick-60)
+                       for (i=0;i<global.mplay;i+=1) if (!flag.passed[i]) players[i].tick=tick
+                       time=max(0,tick div 60)
+
+                       if (tick == 0)
+                          timeleft=-1
+                   } else {
+                       with (player) if (!finish) com_cancel()
+                       if (global.mplay>1) {flag.alarm[7]=380 sekiro=1}
+                       else deathtimer=1
+                       timeleft=-1
+                   }
+                   break
+       }
+    }
+
+    if (frog_escape < 32+16) frog_escape += 1
+    if (frog_escape_timer == 0 && frog_escape_timer_effect == 2)
+       frog_escape = clamp(frog_escape + 1, 32+16, 32+32)
 }
 
 if (fasttimer && current_time>fasttime) {//play music after hurry
