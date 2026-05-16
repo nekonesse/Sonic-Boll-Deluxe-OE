@@ -470,29 +470,23 @@ if (within(editcursor.x,editcursor.y,mmx+100-mmw/2,mmy+72-mmh/2,mmw,mmh)) {
                 clicked = 2;
                 clicx=curx
                 clicy=cury
-                j=0
-                if current_layermode=0 with (watercontainer) if (selected && place_meeting(other.curx,other.cury,id)) j=1
-                if current_layermode=1 with (deity) if (selected && place_meeting(other.curx,other.cury,id)) j=1
-                if current_layermode=2 with (semicontainer) if (selected && place_meeting(other.curx,other.cury,id)) j=1
-                if current_layermode=3 with (backcontainer) if (selected && place_meeting(other.curx,other.cury,id)) j=1
-
+                j=0 var seli; seli = 1;
+                repeat (selected_array[0]) {
+                    if place_meeting(curx,cury,selected_array[seli]) {
+                        j=1
+                        break;
+                    }
+                    seli += 1;
+                }
                 if (j) {
                     grabs=1
-                    if current_layermode=0 with (watercontainer) {
-                        grabx=x
-                        graby=y
-                    }
-                    if current_layermode=1 with (deity) {
-                        grabx=x
-                        graby=y
-                    }
-                    if current_layermode=2 with (semicontainer) {
-                        grabx=x
-                        graby=y
-                    }
-                    if current_layermode=3 with (backcontainer) {
-                        grabx=x
-                        graby=y
+                    seli = 1;
+                    repeat (selected_array[0]) {
+                        with (selected_array[seli]) {
+                            grabx = x;
+                            graby = y;
+                        }
+                        seli += 1;
                     }
                 } else {
                     selected_array[0]=0
