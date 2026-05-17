@@ -415,3 +415,161 @@ savetext3=Hurrah to Sonic
 savetext4=Our Only Hero 
 savetext5=This Ends Your Trip
 savetext6=Of a Long Friendship
+
+[ashura]
+name=Ashura
+
+icon speed=6
+icon loop=yes
+animation speed=1.0
+center x=8
+center y=18
+box width=25
+box height=33
+
+victory duration=0
+time until wait=0
+pipe squish=0
+
+sheet splits=walk,dropdash
+sheet split size=83,183
+
+use paletting=true
+defaultspray 1=0
+defaultspray 2=0
+defaultspray 3=0
+defaultspray 4=0
+
+size reroute lui=big
+size reroute beet=big
+
+single sheet=true
+singlesheet split width=8,283,283,283,283,8,283,283
+singlesheet split height=0,0,0,0,0,0
+
+custom sprite list=stand,crouch,brake,walk,jump,spring,fire,dash,dropdash,knock,dead,flagslide,handlegrab,flaghold,climbing
+reroute wait=stand
+reroute lookup=stand
+reroute pose=stand
+reroute run=walk
+reroute maxrun=walk
+reroute springfall=walk
+reroute bonk=jump
+reroute ball=jump
+reroute spindash=jump
+reroute spincharge=jump
+reroute push=walk
+reroute hang=stand
+reroute specfall=dash
+reroute grinding=jump
+reroute piping=crouch
+reroute pipingup=stand
+reroute sidepiping=walk
+reroute doorenter=stand
+reroute doorexit=stand
+reroute bounce=jump
+reroute teleport=spring
+reroute airspindash=jump
+reroute airspincharge=jump
+
+connect crouch=true
+connect brake=true
+connect fire=true
+connect dash=true
+connect dropdash=true
+connect dead=true
+connect flagslide=true
+connect flaghold=true
+connect climbing=true
+
+pitch spindash=false
+jump ball animation=no
+fire duration=2.75
+victory duration=0
+time until wait=0
+pipe squish=0
+pole center offset=8
+mini sheet=0
+
+
+stand frames=1
+wait frames=1
+lookup frames=1
+pose frames=1
+crouch frames=1
+knock frames=1
+dead frames=1
+walk frames=3
+run frames=3
+maxrun frames=3
+brake frames=1
+spring frames=1
+jump frames=4
+bonk frames=4
+ball frames=4
+springfall frames=1
+specfall frames=1
+spindash frames=4
+spincharge frames=4
+dropdash frames=1
+push frames=1
+hang frames=1
+balance frames=1
+fire frames=1
+dash frames=1
+climbing frames=2
+climbon2 frames=2
+flagslide frames=2
+piping frames=1
+pipingup frames=1
+sidepiping frames=3
+doorenter frames=1
+doorexit frames=1
+
+stand speed=0.2
+wait speed=0.15
+springfall speed=0.5
+lookup speed=0.22
+crouch speed=0.22
+pose speed=0.20
+walk speed=0.5
+run speed=0.25
+maxrun speed=0.25
+jump speed=0.5
+bounce speed=0.25
+bonk speed=0.25
+knock speed=0.25
+brake speed=0.3
+ball speed=0.5
+spindash speed=0.5
+spincharge speed=0.5
+dropdash speed=0.5
+specfall speed=0.5
+push speed=0.05
+balance speed=0.16
+hang speed=0.16
+fire speed=0.2
+dash speed=0.2
+climbing speed=0.125
+flagslide speed=0.125
+piping speed=0.50
+pipingup speed=0.50
+sidepiping speed=0.5
+doorenter speed=0.15
+doorexit speed=0.1
+
+boll top=#00A800
+boll mid=#000000
+boll bot=#0000A8
+
+[lang ashura]
+winspecial=Ashura got a Chaos Emerald
+allspecial=Ashura got all Chaos Emeralds
+credits= DaJumpJump,Amelia,CyanideJam,-S-,Flareguy,Todadoat
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Ashura
+savetext4=Our Only Hero 
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship
