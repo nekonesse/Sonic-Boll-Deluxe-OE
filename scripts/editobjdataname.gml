@@ -196,8 +196,11 @@ switch (argument[0]) {
     }
     case door: {
         if type=7 {
-            if unreal(i,0) return "P-Door: Yes"
-            else return "P-Door: No"
+            var luizdoro;
+            luizdoro=unreal(i,0)
+            if luizdoro==1 return "Door Type: P-Door"
+            if luizdoro==2 return "Door Type: Frog Door"
+            else return "Door Type: Regular"
         }
         if (type=6) {
             if (i=="key") return "Accepts: Key"
@@ -1248,6 +1251,18 @@ switch (argument[0]) {
         if (i="10") return "Type: Left Smooth Semisolid Slope"
         if (i="11") return "Type: Right Smooth Semisolid Slope"
         return "Type: Left Slope"
+    }
+
+    case frogswitch: {
+        if (type=0) {
+            return "Time: "+string(i)
+        }
+        if (type=1) {
+            if (i="0") return "Overtime effect: Nothing"
+            if (i="1") return "Overtime effect: Instant death"
+            if (i="2") return "Overtime effect: Drain level timer"
+        }
+
     }
 }
 

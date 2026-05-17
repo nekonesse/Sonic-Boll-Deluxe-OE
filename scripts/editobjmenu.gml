@@ -205,7 +205,13 @@ switch (argument[0]) {
     } break
     case door: {
         if (type=7) {
-            return string(!funnytruefalse(argument[2]))
+            //return string(!funnytruefalse(argument[2]))
+            i=show_contextmenu("Door Type:|-|Regular|P-Door|Frog Door",0)
+            if (!i) return argument[2]
+            if (i=1) return "0"
+            if (i=2) return "1"
+            if (i=3) return "2"
+            return "0"
         }
         if (type=6) {
             i=show_contextmenu("Lock Currency:|-|Key|White Token|Blue Token|Green Token",0)
@@ -1262,6 +1268,17 @@ switch (argument[0]) {
         i=show_contextmenu("Slope type:|-|Left Slope|Right Slope|Left Smooth Slope|Right Smooth Slope|Left Ceiling Slope|Right Ceiling Slope|Left Smooth Ceiling Slope|Right Smooth Ceiling Slope|Left Semisolid Slope|Right Semisolid Slope|Left Smooth Semisolid Slope|Right Smooth Semisolid Slope",-1)
         if (i<=0) return argument[2]
         return string(i-1)
+    }
+
+    case frogswitch: {
+        if (type=0) return get_string("Time to escape:",argument[2])
+        if (type=1) {
+            i=show_contextmenu("Overtime effect:|-|Nothing|Instant death|Drain level timer",0)
+            if (!i) return argument[2]
+            if (i=1) return "0"
+            if (i=2) return "1"
+            if (i=3) return "2"
+        }
     }
 }
 

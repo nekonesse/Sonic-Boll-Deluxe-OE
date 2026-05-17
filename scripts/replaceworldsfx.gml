@@ -113,3 +113,6 @@ replacesound("smallbumper",wskin+"sfx\smallbumper.wav")
 replacesound("bigbumper",wskin+"sfx\bigbumper.wav")
 
 replacesound("playerwaterrun",wskin+"sfx\playerwaterrun.wav")
+
+replacesound("frogswitch",wskin+"sfx\frogswitch.wav")
+replacesound("frogswitch2",wskin+"sfx\frogswitch2.wav")

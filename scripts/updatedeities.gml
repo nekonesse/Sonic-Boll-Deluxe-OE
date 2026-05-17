@@ -205,7 +205,7 @@ switch (obj) {
         //Pointer
         if (data[2]!="") with (drawregion.deity) if (obj=door) if (data[1]=other.data[2]) other.point=id
         //P-Door
-        if (funnytruefalse(data[7])) {keyed=0 frame=3}
+        if (funnytruefalse(data[7])) {keyed=0 if (funnytruefalse(data[7]) == 2) frame=4 else frame=3}
         //Locked Door
         else if (data[4]!="0" && !(data[2]="" && data[3]="")) {keyed=1 frame=1}
         //One-Way Door

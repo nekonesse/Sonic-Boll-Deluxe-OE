@@ -80,6 +80,7 @@
 	|spr_playermask
 	|spr_monitormask
 	|spr_fallingmonitormask
+	|spr_frogswitchmask
 +ui
 	+opening
 		|spr_backcircle
@@ -270,6 +271,9 @@
 	|spr_falcon
 	|spr_lainthrow
 	|spr_trollitor
+	+orange
+		|spr_premiere
+		|spr_feverhour
 +graphics
 	+tiles
 		|spr_ground
@@ -323,6 +327,8 @@
 		|spr_onswitch
 		|spr_onblock
 		|spr_offblock
+		|spr_konblock
+		|spr_koffblock
 		|spr_onspike
 		|spr_offspike
 		|spr_wind
@@ -349,6 +355,7 @@
 		|spr_fireballshooter
 		|spr_spikecrusher
 		|spr_boat
+		|spr_frogswitch
 	+enemies
 		|spr_goomba
 		|spr_pig

@@ -9,6 +9,7 @@ frame=0
 open=0
 fc=0
 flash=0
+is_frogdoor=0
 #define Alarm_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -29,6 +30,11 @@ lib_id=1
 action_id=603
 applies_to=self
 */
+if (string(is_pdoor) == "2") {
+   is_pdoor = 0
+   is_frogdoor=1
+}
+
 if (open) frame=min(2,frame+0.125)
 else frame=max(0,frame-0.125)
 

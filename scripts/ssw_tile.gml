@@ -41,6 +41,10 @@ switch (argument[0]) {
     //case "stone": {frx=17 fry=19 frox=8 froy=8 break}
     case "onblock": {frx=15 fry=12+blue break}
     case "offblock": {frx=16 fry=12+blue break}
+
+    case "konblock": {frx=15 fry=14 break}
+    case "koffblock": {frx=16 fry=14 break}
+
     case "onspike": {frx=17+fr fry=12+blue break}
     case "offspike": {frx=21 fry=12+blue break}
     case "onswitch": {frx=14 fry=13-gamemanager.onblockstate break}
@@ -66,10 +70,17 @@ switch (argument[0]) {
         h=2
         frox=8
         froy=16
-        if funnytruefalse(is_pdoor) {
-            if !switched && !frame frx=9
-            else frx=11+floor(frame)*2
-            fry=10
+        if funnytruefalse(is_pdoor) || is_frogdoor {
+            if (is_frogdoor) {
+                fry=22
+                if !frogged && !frame {frx=19}
+                else frx=21+floor(frame)*2
+            }
+            else {
+                if !switched && !frame frx=9
+                else frx=11+floor(frame)*2
+                fry=10
+            }
         } else if !(oneway || (target="" && nextlevel="")) {
             frx=11+floor(frame)*2
             if (key && frame=0)

@@ -53,13 +53,20 @@ collp=collision(hsp,vsp)
             with (collp) event_user(6)
     }
 //Monitors here so that they don't fuck up movement.
-if (coll.object_index=monitor && jump && ((vsp>0 && !antigrav) || (vsp<0 && antigrav)) && (fall=0 || fall=5) && !hurt) {
+if (object_is_ancestor(coll.object_index,monitorbase) && jump && ((vsp>0 && !antigrav) || (vsp<0 && antigrav)) && ((coll.hitbehaviour == 1 && fall=0 || fall=5) || (coll.hitbehaviour == 0)) && !hurt) {
+    if (!coll.activated) {
         global.coll=id
         with (coll) event_user(6)
         vsp=min(vsp,-2,-vsp)
-        coll= noone
         
-} else if coll.object_index=monitor && (vsp<0 && !antigrav) &&(coll.bbox_bottom<bbox_bottom && !hurt) {
+    } else {
+        vsp=0
+    }
+    if (coll.landable)
+       com_landing()
+    else coll=noone
+        
+} else if object_is_ancestor(coll.object_index,monitorbase) && coll.shouldfall && (vsp<0 && !antigrav) &&(coll.bbox_bottom<bbox_bottom && !hurt) {
     coll.fall=1
     coll.y-=coll.vspeed
     coll.vspeed=-2

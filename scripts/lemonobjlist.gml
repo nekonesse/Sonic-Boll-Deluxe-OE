@@ -331,6 +331,17 @@ listobj(retainer        ,0,spr_retainer     ,48,flagpole)
     listargs("nextlevel","hostages")
     listdata(""         ,"1"       )
 
+listobj(frogswitch        ,0,spr_frogswitch     ,244,flagpole)
+    listdoc("Frog Switch","Activates an escape sequence Wario Land-style. Or maybe Pizza Tower-style if you're a LAMER. Or Antonblast if you're an even LAMER..")
+    listargs("timer", "timerdeathtype")
+    listdata("60",    "2")
+
+listobj(konblock         ,0,spr_konblock      ,245,flagpole)
+    listdoc("Solid Kaeru Block","Becomes intangible after the Frog Switch is activated.")
+
+listobj(koffblock        ,0,spr_koffblock     ,246,flagpole)
+    listdoc("Nonsolid Kaeru Block","Becomes tangible after the Frog Switch is activated.")
+
 listobj(itemlaunch     ,1,spr_itemspawner  ,49,itemlaunch)
     listdoc("Item Launcher","Shoots an item when touched.")
     listargs("align","spawn"   )

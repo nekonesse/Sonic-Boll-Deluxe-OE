@@ -3,5 +3,5 @@ visible=1
 solid=0
 persistent=0
 depth=2
-parent=hittable
+parent=monitorbase
 mask=spr_monitormask

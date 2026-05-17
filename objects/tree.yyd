@@ -564,6 +564,7 @@
 		|genblock
 		|x1F0
 		|wind
+		|monitorbase
 	+objects
 		+platforms
 			|plat3
@@ -603,6 +604,8 @@
 			|onswitch
 			|onblock
 			|offblock
+			|konblock
+			|koffblock
 			|beepblockon
 			|beepblockoff
 			|axewall
@@ -660,6 +663,7 @@
 		|dashpanel
 		|bumper
 		|fireballshooter
+		|frogswitch
 	+tilers
 		|autotiler
 		|pipetiler

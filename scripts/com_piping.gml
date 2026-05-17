@@ -30,25 +30,29 @@ if (up && !pipe) {
                (pipeid.locktype=="tokenblue" && global.tokens>=pipeid.key) && (!funnytruefalse(pipeid.is_pdoor) || pipeid.switched) ||
                (pipeid.locktype=="tokengreen" && pipeid.greentoken==1) && (!funnytruefalse(pipeid.is_pdoor) || pipeid.switched)
             ) {
-                pipe=4
-                with (pipeid) if (key) {
-                    if (locktype == "key") {
-                        repeat (key) {
-                            o=other.follower
-                            while (o.follower) o=o.follower
-                            if (o) with (o) {follow.follower=noone instance_destroy() instance_create(x,y,smoke)}
+                if (pipeid.is_frogdoor && !pipeid.frogged) {
+                   if (!oup) sound("itemblockbump")
+                } else {
+                    pipe=4
+                    with (pipeid) if (key) {
+                        if (locktype == "key") {
+                            repeat (key) {
+                                o=other.follower
+                                while (o.follower) o=o.follower
+                                if (o) with (o) {follow.follower=noone instance_destroy() instance_create(x,y,smoke)}
+                            }
                         }
-                    }
-                    else if (locktype == "token") gamemanager.tokens-=key
-                    else if (locktype == "tokenblue") {global.tokens-=key repeat(key) spendtoken()}
-                    else if (locktype == "tokengreen") settings("token " + name + " " + chr(187) + pack,2)
+                        else if (locktype == "token") gamemanager.tokens-=key
+                        else if (locktype == "tokenblue") {global.tokens-=key repeat(key) spendtoken()}
+                        else if (locktype == "tokengreen") settings("token " + name + " " + chr(187) + pack,2)
 
-                    key=0
-                    with (instance_create(x,y-8,smoke)) {direction=135 speed=2 friction=0.1}
-                    with (instance_create(x+16,y-8,smoke)) {direction=45 speed=2 friction=0.1}
-                    with (instance_create(x,y+8,smoke)) {direction=225 speed=2 friction=0.1}
-                    with (instance_create(x+16,y+8,smoke)) {direction=315 speed=2 friction=0.1}
-                    instance_create(x+8,y,kickpart)
+                        key=0
+                        with (instance_create(x,y-8,smoke)) {direction=135 speed=2 friction=0.1}
+                        with (instance_create(x+16,y-8,smoke)) {direction=45 speed=2 friction=0.1}
+                        with (instance_create(x,y+8,smoke)) {direction=225 speed=2 friction=0.1}
+                        with (instance_create(x+16,y+8,smoke)) {direction=315 speed=2 friction=0.1}
+                        instance_create(x+8,y,kickpart)
+                    }
                 }
             } else if (!oup) sound("itemblockbump")
         }
