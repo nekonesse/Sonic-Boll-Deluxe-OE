@@ -31,7 +31,13 @@ switch (argument[0]) {
             if (i="itemgreenlui") {if !settings("topsecret") return "Contains: Nothing" return "Contains: Green Lui"}
             return "Contains: Coin"
         }
-        if (type=2) {if (t) return "Brick: Yes" return "Brick: No"}
+        if (type=2) {
+            if (i="0") return "Variant: Normal"
+            if (i="1") return "Variant: Brick"
+            if (i="2") return "Variant: On Block"
+            if (i="3") return "Variant: Off Block"
+            if (i="4") return "Variant: Kaeru Block"
+        }
         if (type=3) {if (t) return "Invisible: Yes" return "Invisible: No"}
         if (type=4) return "Bonus Target: "+i
         if (type=0) return "Align: "+string(i)
@@ -1261,6 +1267,7 @@ switch (argument[0]) {
             if (i="0") return "Overtime effect: Nothing"
             if (i="1") return "Overtime effect: Instant death"
             if (i="2") return "Overtime effect: Drain level timer"
+            if (i="3") return "Overtime effect: Revert"
         }
 
     }

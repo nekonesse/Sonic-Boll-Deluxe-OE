@@ -246,8 +246,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-bricked=funnytruefalse(bricked)
-if (bricked) {
+variant=funnytruefalse(variant)
+if (variant == 1) {
     sprite="brick"
     if (skindat("brickvar")) frame=rchoose(0,1,2,3)
     else anim=!skindat("bricd")
@@ -272,6 +272,22 @@ if (content="none") {
     hit=1
 }
 
-if (funnytruefalse(invisible) && content!="bros") {
+if (funnytruefalse(invisible) && content!="bros" && variant < 2) {
     instance_change(invisibox,0)
+}
+
+//on block
+if variant = 2 {
+    on_block = 1
+}
+//off block
+else if variant = 3 {
+    off_block = 1
+    blue = 1
+    instance_change(offblock,0)
+}
+//kaeru block
+else if variant = 4 {
+    kblock = 1
+    instance_change(koffblock,0)
 }

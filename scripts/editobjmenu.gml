@@ -27,7 +27,10 @@ switch (argument[0]) {
             if (i=18) return "itembeetroot"
             if (i=19) return "itemgreenlui"
         }
-        if (type=2) return string(!funnytruefalse(argument[2]))
+        if (type=2) {//return string(!funnytruefalse(argument[2]))
+            i=show_contextmenu("Variant:|-|Normal|Bricked|On Block|Off Block|Kaeru Block",0)
+            if (!i) return argument[2] else return string(i-1)
+        }
         if (type=3) return string(!funnytruefalse(argument[2]))
         if (type=4) return get_string("Bonus Target's name:",argument[2])
         if (type=0){return get_string("Alignment in pixels (x,y):",argument[2])}
@@ -1273,11 +1276,9 @@ switch (argument[0]) {
     case frogswitch: {
         if (type=0) return get_string("Time to escape:",argument[2])
         if (type=1) {
-            i=show_contextmenu("Overtime effect:|-|Nothing|Instant death|Drain level timer",0)
+            i=show_contextmenu("Overtime effect:|-|Nothing|Instant death|Drain level timer|Revert",0)
             if (!i) return argument[2]
-            if (i=1) return "0"
-            if (i=2) return "1"
-            if (i=3) return "2"
+            return string(i-1)
         }
     }
 }

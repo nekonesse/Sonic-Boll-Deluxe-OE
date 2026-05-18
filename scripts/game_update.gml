@@ -69,6 +69,7 @@ if (frog_escape) {
         if (i="0") return "Overtime effect: Nothing"
         if (i="1") return "Overtime effect: Instant death"
         if (i="2") return "Overtime effect: Drain level timer"
+        if (i="3") return "Overtime effect: Revert"
        */
        switch (frog_escape_timer_effect) {
               case 0:
@@ -94,6 +95,20 @@ if (frog_escape) {
                        timeleft=-1
                    }
                    break
+            case 3:
+                {
+                    frog_escape=0
+                    frog_escape_timer=0
+                    frog_escape_timer_effect=0
+                    frog_secret=0
+                    if !global.finishmusic && !instance_exists(moranboll) stagemusic(players[0])
+                    with frogswitch {activated=0 shoot(x,y-40,smoke) frame=0 fr=0}
+                    with konblock {alarm[0]=1}
+                    with koffblock {alarm[0]=1}
+                    with itembox if kblock {instance_change(koffblock,0)}
+                    gamemanager.kaerublockstate=!gamemanager.kaerublockstate
+                    with (door) if (is_frogdoor) {frogged=0}
+                break}
        }
     }
 

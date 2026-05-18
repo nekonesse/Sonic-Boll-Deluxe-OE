@@ -16,9 +16,13 @@ switch (argument[0]) {
     case "bricd": {frx=9+frame fry=16 if biggie {frx=9+(frame*2) fry=22} break}
     case "box": {
         if (content="bros") {frx=2 fry=23 break}
-        if (hit) frx=15-goinup
+        if (hit) {frx=15-goinup}
         else frx=9+fr
         fry=15
+        if !hit
+        if on_block {frx=19}
+        else if off_block {frx=19 fry=16}
+        else if kblock {frx=19 fry=17}
     break}
     case "bigbox": {
         w=3
@@ -40,10 +44,13 @@ switch (argument[0]) {
     //case "cork": {frx=17 fry=20 frox=8 froy=8 break}
     //case "stone": {frx=17 fry=19 frox=8 froy=8 break}
     case "onblock": {frx=15 fry=12+blue break}
-    case "offblock": {frx=16 fry=12+blue break}
+    case "offblock": {
+        frx=16 fry=12+blue
+        if string(content)!="" && string(content)!="0" {frx=20+hit fry=15+blue}
+    break}
 
     case "konblock": {frx=15 fry=14 break}
-    case "koffblock": {frx=16 fry=14 break}
+    case "koffblock": {frx=16 fry=14 if string(content)!="" && string(content)!="0" {frx=20+hit fry=17} break}
 
     case "onspike": {frx=17+fr fry=12+blue break}
     case "offspike": {frx=21 fry=12+blue break}

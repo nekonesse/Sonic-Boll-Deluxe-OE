@@ -16,7 +16,7 @@ with (instance_place(x,y,player)) hurtplayer("crush")
 global.coll=owner
 with (enemy) if (place_meeting(x,y,other.id)) enemydie(id,2)
 
-instance_change(konblock,0)
+if string(content)="" || string(content)="0" instance_change(konblock,0) else {instance_change(itembox,0)} //The K-On! Block no way :exploding_head:
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

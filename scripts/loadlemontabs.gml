@@ -40,7 +40,7 @@ if (argument[0]=2) {
 if (argument[0]=3) {
     l[ 0]=-1           l[ 1]=-1     l[ 2]=onswitch  l[ 3]=onoffscreen l[ 4]=cardreader    l[ 5]=skullblock   l[ 6]=bumper     l[ 7]=cork       l[8]=dashpanel     l[ 9]=beepblockon         l[10]=gearplatform       l[11]=chardoor     l[12]=-1     l[13]=-1      l[14]=-1    l[15]=-1        l[16]=spring    l[17]=pollenflower       l[18]=-1     l[19]=-1
     l[20]=-1           l[21]=-1     l[22]=onblock   l[23]=onspike     l[24]=carditem      l[25]=skullbloff   l[26]=powblock   l[27]=stone      l[28]=conveyorbelt       l[29]=beepblockoff         l[30]=-1       l[31]=-1     l[32]=-1     l[33]=-1      l[34]=-1    l[35]=-1        l[36]=spreng    l[37]=terrainspring       l[38]=-1     l[39]=-1
-    l[40]=-1           l[41]=-1     l[42]=offblock  l[43]=offspike    l[44]=-1            l[45]=-1           l[46]=pswitch         l[47]=crystaltap l[48]=-1       l[49]=-1         l[50]=-1       l[51]=-1     l[52]=-1     l[53]=-1      l[54]=-1    l[55]=-1        l[56]=sprong    l[57]=terrainsprong      l[58]=-1     l[59]=-1
+    l[40]=-1           l[41]=-1     l[42]=offblock  l[43]=offspike    l[44]=frogswitch    l[45]=konblock           l[46]=pswitch         l[47]=crystaltap l[48]=-1       l[49]=-1         l[50]=-1       l[51]=-1     l[52]=-1     l[53]=-1      l[54]=-1    l[55]=-1        l[56]=sprong    l[57]=terrainsprong      l[58]=-1     l[59]=-1
 }
 //Technical
 if (argument[0]=4) {

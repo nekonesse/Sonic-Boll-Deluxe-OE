@@ -63,8 +63,8 @@ listobj(bigbrick        ,0,spr_bigbrick        ,184,brick)
 
 listobj(itembox         ,0,spr_box          ,10,itembox)
     listdoc("Item Box","Item Boxes can be invisible or look like bricks, and the bonus target is for green springs contained inside.")
-    listargs("align","content","bricked","invisible","target")
-    listdata("0",""       ,"0"      ,"0"        ,""      )
+    listargs("align","content","variant","invisible","target")
+    listdata("0"    ,""       ,"0"      ,"0"        ,""      )
 
 listobj(bigitembox         ,0,spr_bigbox          ,141,itembox)
     listdoc("Long Item Box","Thrice the size, acts like a regular box but spits out 2 coins on the side.")
@@ -331,15 +331,15 @@ listobj(retainer        ,0,spr_retainer     ,48,flagpole)
     listargs("nextlevel","hostages")
     listdata(""         ,"1"       )
 
-listobj(frogswitch        ,0,spr_frogswitch     ,244,flagpole)
+listobj(frogswitch        ,0,spr_frogswitch     ,244,frogswitch)
     listdoc("Frog Switch","Activates an escape sequence Wario Land-style. Or maybe Pizza Tower-style if you're a LAMER. Or Antonblast if you're an even LAMER..")
     listargs("timer", "timerdeathtype")
     listdata("60",    "2")
 
-listobj(konblock         ,0,spr_konblock      ,245,flagpole)
+listobj(konblock         ,0,spr_konblock      ,245,frogswitch)
     listdoc("Solid Kaeru Block","Becomes intangible after the Frog Switch is activated.")
 
-listobj(koffblock        ,0,spr_koffblock     ,246,flagpole)
+listobj(koffblock        ,0,spr_koffblock     ,246,frogswitch)
     listdoc("Nonsolid Kaeru Block","Becomes tangible after the Frog Switch is activated.")
 
 listobj(itemlaunch     ,1,spr_itemspawner  ,49,itemlaunch)

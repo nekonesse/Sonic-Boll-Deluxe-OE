@@ -327,6 +327,9 @@ switch (obj) {
         if (data[3]="1") frame=1
         if (data[2]="1") frame+=2
         if (data[1]="none") frame=4
+        if (data[2]="2") frame=5
+        if (data[2]="3") frame=6
+        if (data[2]="4") frame=7
     } break
     case (platform): {
         spr=spr_platform frame=0

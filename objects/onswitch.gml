@@ -24,6 +24,10 @@ if(!wait) {
     with (offblock) {alarm[0]=1 owner=global.coll}
     with (offspike) alarm[0]=1
     with (onspike) {alarm[0]=1 owner=global.coll}
+    with (itembox) {
+        if (on_block || off_block)/* && !hit*/ {instance_change(offblock,0)}
+        //if off_block && !hit {instance_change(offblock,0)}
+    }
     gamemanager.onblockstate=!gamemanager.onblockstate
     wait=13
     tpos=1
