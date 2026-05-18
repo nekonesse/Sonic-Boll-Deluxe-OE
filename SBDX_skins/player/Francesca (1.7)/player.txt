@@ -1,0 +1,119 @@
+[knux]
+name=Francesca
+
+icon speed=6
+icon loop=yes
+animation speed=1.0
+multiple box sizes=true
+
+center x=16,16,16,16,16,16,16
+center y=18,18,18,18,18,18,18
+
+box width=32,32,32,32,32,32,32
+box height=40,40,40,40,40,40,40
+
+fire duration=8
+victory duration=60
+time until wait=0
+pipe squish=20
+pole center offset=8
+
+old glide animation=true
+
+short small form=0.8
+
+use paletting=false
+
+single sheet=true
+singlesheet split width=8,8,200,392,200,8,200,200,200
+singlesheet split height=0,0,0,0,0,0
+
+custom sprite list=stand,lookup,crouch,glide,recover,pose,jump,brake,knock,fire,slide,walk,hang,run,spindash,ball,upper,climbing
+
+size reroute beet=big
+size reroute lui=big
+
+connect lookup=true
+connect crouch=true
+connect glide=true
+connect recover=true
+connect jump=true
+connect brake=true
+connect knock=true
+connect fire=true
+connect slide=true
+connect hang=true
+connect spindash=true
+connect upper=true
+
+reroute wait=stand
+reroute dead=knock
+reroute spring=jump
+reroute springfall=jump
+reroute bonk=jump
+reroute spincharge=spindash
+reroute push=ball
+reroute flagslide=jump
+reroute piping=pose
+reroute pipingup=jump
+reroute sidepiping=walk
+reroute doorenter=pose
+reroute doorexit=stand
+reroute climb=glide
+reroute climbstill=glide
+reroute climbdown=glide
+reroute glideturn=glide
+
+stand frames=1
+lookup frames=1
+crouch frames=1
+glide frames=1
+recover frames=2
+pose frames=1
+jump frames=1
+brake frames=1
+knock frames=1
+fire frames=1
+slide frames=1
+walk frames=4
+hang frames=2
+run frames=2
+spindash frames=4
+ball frames=4
+upper frames=2
+climbing frames=2
+
+recover loop=2
+upper loop=2
+
+fire offset x=4
+spindash offset x=0
+upper offset x=4
+upper offset y=-5
+
+recover speed=0.1
+walk speed=0.225
+hang speed=0.1
+run speed=0.25
+spindash speed=0.5
+ball speed=0.3
+upper speed=1
+climbing speed=0.25
+
+upper frametimes=8,8,8,8
+
+boll top=#d82800
+boll mid=#fcc4d8
+boll bot=#d82800
+
+[lang]
+winspecial=Francesca got a Chaos Emerald
+allspecial=Francesca got all Chaos Emeralds
+credits=Ethan
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Francesca
+savetext4=Our Only Hero
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship

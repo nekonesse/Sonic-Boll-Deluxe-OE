@@ -1,7 +1,7 @@
 [mecha]
 name=Gold Mantis
 
-icon speed=6
+icon speed=3
 icon loop=yes
 animation speed=1.0
 center x=19

@@ -11,7 +11,7 @@ box height=67
 
 additive blend dash effects=yes
 3d death=yes
-victory duration=90
+victory duration=100
 victory frame=12
 time until wait=300
 pipe squish=20
