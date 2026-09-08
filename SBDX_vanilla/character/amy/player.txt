@@ -78,8 +78,8 @@ lookup frametimes=1,16,1,1
 lookup offset x=0
 lookup offset y=0
 
-pose frames=1
-pose loop=1
+pose frames=4
+pose loop=4
 pose speed=0.20
 wait frametimes=0
 wait offset x=0

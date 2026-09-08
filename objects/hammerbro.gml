@@ -46,8 +46,8 @@ if (trap) {
     }
 
     jc+=1 if (jc=224) {jc=0 if (!jump) {
-        if ((nearest.y>y+64 || rchoose(0,1)) && y+64<region.ky) {coll=collpos(0,16) if (coll) if (coll.object_index=brick || coll.object_index=phaser || coll.object_index=itembox) {vspeed=-3 jumping=40 jump=1 sprite="hammerbrojump"}}
-        else {coll=collpos(0,-48) if (coll) if (coll.object_index=brick || coll.object_index=phaser || coll.object_index=itembox) {vspeed=-6 jumping=30 jump=1 sprite="hammerbrojump"}}
+        if ((nearest.y>y+64 || rchoose(0,1)) && y+64<region.ky) {coll=collpos(0,16,1) if (coll) if (coll.object_index=brick || coll.object_index=phaser || coll.object_index=itembox) {vspeed=-3 jumping=40 jump=1 sprite="hammerbrojump"}}
+        else {coll=collpos(0,-48,1) if (coll) if (coll.object_index=brick || coll.object_index=phaser || coll.object_index=itembox) {vspeed=-6 jumping=30 jump=1 sprite="hammerbrojump"}}
     }}
 
     if (sprtime) {sprtime-=1 if (!sprtime) sprite="hammerbroaim"}

@@ -314,7 +314,9 @@ else if (owner.upper) {
 	if (coll) {
 		if (object_is_ancestor(coll.object_index,hittable) && coll.object_index!=itembox) {
 			if (coll.object_index=brick) brickc+=1 else brickc=4
+			owner.s=owner.vsp
 			hitblock(coll,owner,0,esign(coll.y-owner.y),0)
+			owner.vsp=owner.s
 		}    
 	}
 	
@@ -1160,6 +1162,7 @@ if !dropkick boost=0
 is_intangible=0
 with (flag) if (passed[other.p2]) other.is_intangible=1
 if (transform || finish || piped=1 || piko || upper) is_intangible=1
+vertvspstop=!!upper
 
 //Power levels
 power_lv=0

@@ -1,4 +1,4 @@
-///collision(x,y)
+///collision(x,y, force semisolid ground)
 //finds a collision with the current mask
 
 var o,yp,repeatthisass,returnnobody;
@@ -31,7 +31,7 @@ if (object_index=player) {
     with (movingphaser) {
         ycollcheckstart=y //The y in which I started the coll check, changed the variable just in case it's what's wrong
         if (dir=2) {if (other.vsp>0 || other.bbox_top<y-1+other.vsp) y-=verybignumber}
-        else if (dir=0) {if (other.vsp<0 || other.bbox_bottom>y+1+other.vsp) y-=verybignumber}
+        else if (dir=0) {if (other.vsp<0 || other.bbox_bottom>y+1+other.vsp) && (!argument[2]) y-=verybignumber}
         else {
             if (dir) {if (other.hsp>0 || other.bbox_left<x+15+other.hsp) y-=verybignumber}
             else {if (other.hsp<0 || other.bbox_right>x+1+other.hsp) y-=verybignumber}
@@ -43,7 +43,7 @@ if (object_index=player) {
     with (phaser) {
         if (nslop=0){
             if (dir=2) {if (other.vspeed>0 || other.bbox_top<y-1+other.vspeed) y-=verybignumber}
-            else if (dir=0) {if (other.vspeed<0 || other.bbox_bottom>y+1+other.vspeed) y-=verybignumber}
+            else if (dir=0) {if (other.vspeed<0 || other.bbox_bottom>y+1+other.vspeed) && (!argument[2]) y-=verybignumber}
             else {
                 if (dir) {if (other.hspeed>0 || other.bbox_left<x+15+other.hspeed) y-=verybignumber}
                 else {if (other.hspeed<0 || other.bbox_right>x+1+other.hspeed) y-=verybignumber}
