@@ -35,6 +35,7 @@ year=calcyear()
 classic=!!year
 classicm=0
 cantriangel=0
+pb_length=0
 
 df=degtorad(135)
 
@@ -327,7 +328,15 @@ if (year && introtape.f20=1) {
 }
 
 if (global.frame88<4 && introtape.f20=1 && !year) {
-    draw_sprite(spr_pressbutton,0,x+4,208)
+    //pb stands for pressbutton here dw :p
+    pb_counter=(pb_counter+1) mod 64
+    if !(pb_counter mod 4) pb_length=min(pb_length+1,16)
+
+    pb=0
+    repeat (pb_length) {
+        draw_sprite(spr_pressbutton,pb,136+8*pb,208-((pb_counter div 4) == pb))
+        pb+=1
+    }
 }
 #define KeyPress_32
 /*"/*'/**//* YYD ACTION
