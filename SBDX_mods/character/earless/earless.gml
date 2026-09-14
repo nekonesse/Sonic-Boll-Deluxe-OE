@@ -1,6 +1,3 @@
-#define description
-Mod made by CyanideJam, Christian32307, & EthGaming101
-
 #define spritelist
 stand,lookup,wait,pose,run,jump,ball,thwick,dead,climbing,flagslide
 
@@ -161,144 +158,114 @@ if (hsp>=3 || push) {
 
 #define projectile
 if (event="create") {
+image_xscale=8
+image_yscale=4
 
+frame_sub=0
+frame=0
+brickc=0
+seqcount=2
+getregion(x) 
+timer0=3
+timer1=128
 
-type=owner.proj_type
-event="earlesscreate"
+hspeed=xsc*5*(xsc=sign(owner.xsc))
+speed=median(2,speed,5)
+playsfx("earlessboom")
+}
+if (event="step") {
+timer0-=1 if (timer0=0) visible=1
+timer1-=1 if (timer1=0) instance_destroy()
+calcmoving()
 
+frame_sub=!frame_sub
+if frame_sub frame+=1
+if (frame>=3) frame=0
+
+if (!inview()) instance_destroy()
+xsc=sign(hspeed)
+ignoreoncount=1
+if (!waterdust && !feathdash){
+ignoreoncount=0
+coll=instance_place(x,y,collider)
+if (coll) {
+if (object_is_ancestor(coll.object_index,hittable)) {
+if (coll.object_index=brick) brickc+=1 else brickc=4
+hitblock(coll,owner,1,-1,0)
+} else brickc=4
+instance_create(x,y,kickpart)     
+if (brickc=4) {sound("itemblockbump") instance_destroy()}
 }
 
+coll=instance_place(x,y,enemy)
+if (coll) {
+if (coll.object_index!=beetle) {
+yes=1
+if (coll.object_index=shell) if (coll.type="beetle") yes=0
+if (yes) {
+global.coll=owner.id  
+instance_create(x,y,kickpart)  
+enemydie(coll,2)
+}
+}
+instance_destroy()
+}
+
+coll=instance_place(x,y,bowserboss)
+if (coll) {
+if (!coll.flash) {
+coll.hp-=1
+coll.flash=64
+coll.owner=owner
+sound("enemybowserhurt")
+instance_create(x,y,kickpart)
+instance_destroy()
+}
+}
+
+coll=instance_place(x,y,player)
+if (coll) {
+if (coll.id!=owner) if (!invincible(coll)) {    
+if (!flag.passed[owner.p2] && !flag.passed[coll.p2] && !coll.flash && !coll.piped) { 
+if (coll.name="knux" && coll.glide && sign(hspeed)=-sign(coll.hsp) && object_index!=powah_wave) {hspeed=abs(coll.hsp+1)*esign(coll.hsp,1) owner=coll.id with (owner) playsfx("knuxreflect") exit}                                                                   
+if (coll.name="robo" && coll.lookup && coll.xsc=sign(hspeed)) {instance_create(x,y,kickpart) instance_destroy() exit}
+with(coll) fragplayer(other.owner)
+}
+instance_create(x,y,kickpart) instance_destroy()
+}
+}
+} else{
+timer0=0
+visible=1
+if timer1>14 timer1=14 
+if timer1=14 setxsc=owner.xsc
+efxfr=efxfr+0.25 
+if waterdust{
+hspeed=(sign(setxsc)*(-3/efxfr*2))
+xsc=sign(hspeed)
+}
+else {xsc=setxsc hspeed=-setxsc}
 
 
-switch (type) {
-
-	case "slingring": {
-	
-		if (event="earlesscreate") {
-		image_xscale=8
-		image_yscale=4
-
-		frame_sub=0
-		frame=0
-		brickc=0
-		seqcount=2
-		getregion(x) 
-		timer0=3
-		timer1=128
-
-		hspeed=xsc*5*(xsc=sign(owner.xsc))
-		speed=median(2,speed,5)
-		playsfx("earlessboom")
-		}
-		
-		if (event="step") {
-			timer0-=1 if (timer0=0) visible=1
-			timer1-=1 if (timer1=0) instance_destroy()
-			calcmoving()
-
-			frame_sub=!frame_sub
-			if frame_sub frame+=1
-			if (frame>=3) frame=0
-
-			if (!inview()) instance_destroy()
-			xsc=sign(hspeed)
-			ignoreoncount=1
-			if (!waterdust && !feathdash){
-			ignoreoncount=0
-			coll=instance_place(x,y,collider)
-			if (coll) {
-			if (object_is_ancestor(coll.object_index,hittable)) {
-			if (coll.object_index=brick) brickc+=1 else brickc=4
-			hitblock(coll,owner,1,-1,0)
-			} else brickc=4
-			instance_create(x,y,kickpart)     
-			if (brickc=4) {sound("itemblockbump") instance_destroy()}
-			}
-
-			coll=instance_place(x,y,enemy)
-			if (coll) {
-			if (coll.object_index!=beetle) {
-			yes=1
-			if (coll.object_index=shell) if (coll.type="beetle") yes=0
-			if (yes) {
-			global.coll=owner.id  
-			instance_create(x,y,kickpart)  
-			enemydie(coll,2)
-			}
-			}
-			instance_destroy()
-			}
-
-			coll=instance_place(x,y,bowserboss)
-			if (coll) {
-			if (!coll.flash) {
-			coll.hp-=1
-			coll.flash=64
-			coll.owner=owner
-			sound("enemybowserhurt")
-			instance_create(x,y,kickpart)
-			instance_destroy()
-			}
-			}
-
-			coll=instance_place(x,y,player)
-			if (coll) {
-			if (coll.id!=owner) if (!invincible(coll)) {    
-			if (!flag.passed[owner.p2] && !flag.passed[coll.p2] && !coll.flash && !coll.piped) { 
-			if (coll.name="knux" && coll.glide && sign(hspeed)=-sign(coll.hsp) && object_index!=powah_wave) {hspeed=abs(coll.hsp+1)*esign(coll.hsp,1) owner=coll.id with (owner) playsfx("knuxreflect") exit}                                                                   
-			if (coll.name="robo" && coll.lookup && coll.xsc=sign(hspeed)) {instance_create(x,y,kickpart) instance_destroy() exit}
-			with(coll) fragplayer(other.owner)
-			}
-			instance_create(x,y,kickpart) instance_destroy()
-			}
-			}
-			} else{
-			timer0=0
-			visible=1
-			if timer1>14 timer1=14 
-			if timer1=14 setxsc=owner.xsc
-			efxfr=efxfr+0.25 
-			if waterdust{
-			hspeed=(sign(setxsc)*(-3/efxfr*2))
-			xsc=sign(hspeed)
-			}
-			else {xsc=setxsc hspeed=-setxsc}
-
-
-			}
-			}
-			if (event="draw") {
-			if !waterdust && !feathdash{
-			draw_sprite_part_ext(sheet,0,10+25*frame,88,24,24,round(x-12*xsc),round(y-8),xsc,1,$ffffff,1)
-			}
-			else if !feathdash{
-			draw_sprite_general(global.effectssheet[biome],0,8+25*floor(efxfr),158,24,24,x,round(y-8)-13,-1,-xsc,90,$ffffff,$ffffff,$ffffff,$ffffff,1)
-			draw_sprite_general(global.effectssheet[biome],0,8+25*floor(efxfr),158,24,24,x,round(y-8)+15,1,-xsc,90,$ffffff,$ffffff,$ffffff,$ffffff,1)
-			if efxfr<3{draw_sprite_general(global.effectssheet[biome],0,8+25*floor(efxfr*2),183,24,24,x,round(y-8)+18,1,-xsc,90,$ffffff,$ffffff,$ffffff,$ffffff,1)}
-			} 
-			else {
-			draw_sprite_part_ext(owner.sheets[3],0,227+40*floor(efxfr),46,39,39,round(x-19.5*xsc),round(y-19.5)+4,xsc,1,$ffffff,owner.alpha)
-			savedepth=depth
-			depth=owner.depth+1
-			draw_sprite_part_ext(owner.sheets[3],0,227+40*floor(efxfr),86,39,39,round(x-19.5*xsc),round(y-19.5)+4,xsc,1,$ffffff,owner.alpha)
-			depth=savedepth
-			}
-			}
-	}
-	break
-	
-	case "lostcoin": {
-		if (event="earlesscreate") {
-			image_xscale=8
-			image_yscale=4
-			}
-		if (event="draw") {
-			draw_sprite_part_ext(sheet,0,110+25*frame,88,24,24,round(x-12*xsc),round(y-8),xsc,1,$ffffff,1)
-			}
-		}
-	break 
-	}
-
+}
+}
+if (event="draw") {
+if !waterdust && !feathdash{
+draw_sprite_part_ext(sheet,0,10+25*frame,88,24,24,round(x-12*xsc),round(y-8),xsc,1,$ffffff,1)
+}
+else if !feathdash{
+draw_sprite_general(global.effectssheet[biome],0,8+25*floor(efxfr),158,24,24,x,round(y-8)-13,-1,-xsc,90,$ffffff,$ffffff,$ffffff,$ffffff,1)
+draw_sprite_general(global.effectssheet[biome],0,8+25*floor(efxfr),158,24,24,x,round(y-8)+15,1,-xsc,90,$ffffff,$ffffff,$ffffff,$ffffff,1)
+if efxfr<3{draw_sprite_general(global.effectssheet[biome],0,8+25*floor(efxfr*2),183,24,24,x,round(y-8)+18,1,-xsc,90,$ffffff,$ffffff,$ffffff,$ffffff,1)}
+} 
+else {
+draw_sprite_part_ext(owner.sheets[3],0,227+40*floor(efxfr),46,39,39,round(x-19.5*xsc),round(y-19.5)+4,xsc,1,$ffffff,owner.alpha)
+savedepth=depth
+depth=owner.depth+1
+draw_sprite_part_ext(owner.sheets[3],0,227+40*floor(efxfr),86,39,39,round(x-19.5*xsc),round(y-19.5)+4,xsc,1,$ffffff,owner.alpha)
+depth=savedepth
+}
+}
 
 #define sprmanager
 frspd=1
@@ -466,8 +433,7 @@ if (bbut) {
         if (!count_projectiles() && global.coins[p2]>0) {
 		    fire_projectile(x+8*xsc,y+2) 
 			global.coins[p2]-=1
-            //fired=16
-			fired=firelength
+            fired=16
 			}
       
 
@@ -524,7 +490,7 @@ if (yground!=verybignumber) yground-=14
 if fall!=69 || !canistick {
             vsp+=0.15*wf
         }
-		if (!hurt) vine_climbing()
+		vine_climbing()
         crouch=0
         spindash=0
         braking=max(0,braking-1)
@@ -907,36 +873,41 @@ global.coins[p2]=0
 
 
 //create flyaway coins
-
-
-i1=fire_projectile(x+hsp,y-24)	//up
-i1.proj_type="lostcoin"
+i1=instance_create(x+hsp,y-24,coin) //up
+i1.youshouldstopcollidingNOW=1
 i1.gravity=0
 i1.direction=90
 i1.speed=1.5
 i1.friction=0
+i1.mask_index=-1
+i1.sprite_index=-1
+i1.alarm1=480
 
-i2=fire_projectile(x+16+hsp,y) //right
-i2.proj_type="lostcoin"
+i2=instance_create(x+16+hsp,y,coin) //right
+i2.youshouldstopcollidingNOW=1
 i2.gravity=0
 i2.direction=0
 i2.speed=2.2
 i2.friction=0
+i2.mask_index=-1
+i2.sprite_index=-1
+i2.alarm1=480
 
-i3=fire_projectile(x-16+hsp,y) //left
-i3.proj_type="lostcoin"
+i3=instance_create(x-16+hsp,y,coin) //left
+i3.youshouldstopcollidingNOW=1
 i3.gravity=0
 i3.direction=180
 i3.speed=2
 i3.friction=0
-
+i3.mask_index=-1
+i3.sprite_index=-1
+i3.alarm1=480
 }
 } //hsp=0 vsp=0     //unused hurtstun
     
 }
 
 
-//Block hitting
 #define hitblocks
 if typeblockhit=0{
 	with (blockcoll){
@@ -984,6 +955,7 @@ if typeblockhit=0{
 } else if typeblockhit=1{
 	hititembox()
 }
+
 
 #define hitwall
 //hit blocks sideways
