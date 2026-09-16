@@ -30,7 +30,7 @@ object_event_clear(changectrl,ev_other,ev_user0+p2)
 sheets[0]=skindat("tex_"+name+"0"+ss)
 if (global.singlesheet[p2]) {
     i=1
-    repeat (5) {
+    repeat (7) {
         sheets[i]=sheets[0]
         i+=1
     }

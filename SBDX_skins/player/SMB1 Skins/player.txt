@@ -38,6 +38,8 @@ singlesheet split width=8,371,371,371,371,8,371,371
 singlesheet split height=0,0,0,0,0,0
 
 size reroute feather=big
+size reroute lui=big
+size reroute beet=big
 
 custom sprite list=stand,crouch,brake,walk,jump,hurt,dead,flagslide,standcarry,crouchcarry,throw,walkcarry,jumpcarry,handlegrab,flaghold,climbing,groundpound,poundfall,roll,swim,paddle,swimcarry,fire,spinjump,dive,capeflight
 reroute wait=stand
@@ -290,6 +292,8 @@ defaultspray 2=0
 defaultspray 3=0
 defaultspray 4=0
 
+size reroute lui=big
+size reroute beet=big
 
 single sheet=true
 singlesheet split width=8,283,283,283,283,8,283,283
