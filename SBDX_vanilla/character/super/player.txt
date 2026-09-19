@@ -24,6 +24,7 @@ max sizes=11
 
 size reroute fire=big
 size reroute feather=big
+use super sheets=no
 
 use paletting=true
 defaultspray 1=2

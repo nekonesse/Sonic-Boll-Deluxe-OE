@@ -183,10 +183,12 @@ if (itemget) {
     } else if (type=="coin" || type=="ring") {
         energy+=0.3
     }
+     else if (type=="coinblock") {
+        energy+=0.175
+    }
 }
 
 #define effectsfront
-
 if (firedash && !piped) {
     draw_sprite_part_ext(sheets[2*!global.singlesheet[p2]],0,firedash_sheetx[size*projcoordbysize]+40*(firedash mod 4),firedash_sheety[size*projcoordbysize],39,39,round(x-19.5*xsc),round(y-19.5+dy)+4,xsc,1,$ffffff,alpha)
 }
@@ -1167,7 +1169,7 @@ if (spindash || spin) {
         if (!crouch) && !(jump) {
             if (spindash>3) boost=3
             spin=1
-            hsp=xsc*5*(0.75+0.075*median(0,spindash,2)) * (1 - (0.275 * underwater())) //wf is too strong
+            hsp=xsc*6.25*(0.75+0.075*median(0,spindash,2)) * (1 - (0.275 * underwater())) //wf is too strong
             spindash=0
             
                 soundstop(name+"spindash")
@@ -1464,7 +1466,7 @@ if typeblockhit=0{
 
 #define hitwall
 //hit blocks sideways
-if (firedash || (spin && abs(hsp)>0.5) || (super && fall=10)) {
+if (firedash || (spin && abs(hsp)>0.5) || (super && fall=10) || (super && vsp=0 && (abs(hsp)>maxspd*0.9))) {
     global.coll=id
     with (hittable) if (instance_place(x-other.hitside,y,other.id)) {   
         if global.coll.firedash go=sign(global.coll.vsp) else go=-1
@@ -1500,10 +1502,11 @@ if (dropdash) {
     //smoke and shit
     playsfx(name+"release")
     if dropdash>3 boost=1
-    hsp=esign(h,xsc)*min(dropdash*1.125, maxspd+3)
+    hsp=esign(h,xsc)*min(dropdash*1.125, maxspd+4.25)
     dropdash=0
     spin=1
     shoot(x-8*xsc,y+8,psmoke,-2*xsc,-1)
+    screenshake(x,5)
 }
 
 if (downpiped) {
