@@ -59,13 +59,9 @@ with (blockcoll){
                             if (object_index == bigitembox) {
                             with (instance_create(x+8,y+8+16*go,coinup)) {sound("itemcoin") vspeed=-1.5+2*other.go p2=other.owner.p2}
                             with (instance_create(x+8+(offset*2),y+8+16*go,coinup)) {sound("itemcoin") vspeed=-1.5+2*other.go p2=other.owner.p2}
-                            global.coins[owner.p2]+=3
-                            owner.coint+=3
-                            global.scor[owner.p2]+=300
+                            repeat (3) give_item(owner,"coinblock")
                             } else {
-                            global.coins[owner.p2]+=1
-                                    owner.coint+=1
-                            global.scor[owner.p2]+=100
+                            give_item(owner,"coinblock")
                             }
                         cc-=1
                     }
@@ -81,9 +77,7 @@ with (blockcoll){
                     if (object_index == bigitembox) {
                     with (instance_create(x+8,y+8+16*go,coinup)) {sound("itemcoin") vspeed=-1.5+2*other.go p2=other.owner.p2}
                     with (instance_create(x+8+(offset*2),y+8+16*go,coinup)) {sound("itemcoin") vspeed=-1.5+2*other.go p2=other.owner.p2}
-                    global.scor[owner.p2]+=200
-                    global.coins[owner.p2]+=2
-                        owner.coint+=2
+                    repeat (2) give_item(owner,"coinblock")
                     }
                     sound("itemappear")
                     mush=!owner.size

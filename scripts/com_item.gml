@@ -247,6 +247,14 @@ if (type="coin") {
     itemget=1
 }
 
+if (type="coinblock") {
+    global.scor[p2]+=100
+    global.coins[p2]+=1
+    coint+=1
+    hit=1
+    itemget=1
+}
+
 if (type="monitor_10coin") {
     gib10coin(id)
 }
