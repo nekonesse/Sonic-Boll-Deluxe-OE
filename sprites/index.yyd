@@ -650,3 +650,11 @@ spr_bubble
 spr_redcoinringmask
 spr_redcoinring
 spr_nothing
+spr_tencoin
+spr_thirtycoin
+spr_fiftycoin
+spr_hundredcoin
+spr_rotten
+spr_stateblock
+spr_stateblockoff
+spr_stateblockicons

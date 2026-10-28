@@ -101,6 +101,8 @@ switch (obj) {
         if (data[1]="superring") frame=8
         if (data[1]="mini") frame=9
         if (data[1]="time") frame=11
+        if (data[1]="beetroot") frame=13
+        if (data[1]="greenlui") frame=14
     } break
 
     case (noteblock):{
@@ -400,6 +402,10 @@ switch (obj) {
         if (data[1]="shield") frame=8
         if (data[1]="token") frame=9
         if (data[1]="tokenblue") frame=10
+        if (data[1]="rotten") frame=11
+        if (data[1]="demon") frame=2
+        if (data[1]="itembeetroot") frame=12
+        if (data[1]="itemgreenlui") frame=13
     } break
     case (shell): {
         if (data[0]="0") frame=0
@@ -431,6 +437,10 @@ switch (obj) {
         if (data[2]="2") frame=5
         if (data[2]="3") frame=6
         if (data[2]="4") frame=7
+    } break
+    case (powerupblock): {
+        spr=spr_stateblock frame=0
+        if (data[2]="1") frame=1
     } break
     case (platform): {
         spr=spr_platform frame=0

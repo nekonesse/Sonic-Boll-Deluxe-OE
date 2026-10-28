@@ -1251,7 +1251,7 @@ with (deity) {
         } break
 
         case (itemlaunch): {
-            draw_sprite(spr_itemspawner,11,(x*16)+8,(y*16)+8) break;
+            draw_sprite(spr_itemspawner,14,(x*16)+8,(y*16)+8) break;
         }
 
         case (spawncancel): if (point) {
@@ -1413,6 +1413,9 @@ with (deity) {
                 case "life": {
                     draw_sprite_ext(spr_1up,0,x*16+off+off2x+8+bigboxoffset,y*16+off+off2y+8,1,1,0,c_white,0.5)
                 } break
+                case "demon": {
+                    draw_sprite_ext(spr_1up,0,x*16+off+off2x+8+bigboxoffset,y*16+off+off2y+8,1,1,0,c_white,0.5)
+                } break
                 case "moon": {
                     draw_sprite_ext(spr_3moon,0,x*16+off+off2x+8+bigboxoffset,y*16+off+off2y+8,1,1,0,c_white,0.5)
                 } break
@@ -1442,6 +1445,43 @@ with (deity) {
                 } break
                 case "shard": {
                     draw_sprite_ext(spr_shard,0,x*16+off+off2x+8+bigboxoffset,y*16+off+off2y+8,1,1,0,c_white,0.5)
+                } break
+                case "rotten": {
+                    draw_sprite_ext(spr_rotten,0,x*16+off+off2x+8+bigboxoffset,y*16+off+off2y+8,1,1,0,c_white,0.5)
+                } break
+            }
+        } break
+                case (powerupblock): {
+            switch data[1] {
+                case "0": {
+                    draw_sprite_ext(spr_stateblockicons,0,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "1": {
+                    draw_sprite_ext(spr_stateblockicons,1,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "2": {
+                    draw_sprite_ext(spr_stateblockicons,2,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "3": {
+                    draw_sprite_ext(spr_stateblockicons,3,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "4": {
+                    draw_sprite_ext(spr_stateblockicons,4,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "5": {
+                    draw_sprite_ext(spr_stateblockicons,5,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "6": {
+                    draw_sprite_ext(spr_stateblockicons,6,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "7": {
+                    draw_sprite_ext(spr_stateblockicons,7,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "8": {
+                    draw_sprite_ext(spr_stateblockicons,8,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
+                } break
+                case "9": {
+                    draw_sprite_ext(spr_stateblockicons,9,x*16+off+off2x,y*16+off+off2y,1,1,0,c_white,1)
                 } break
             }
         } break

@@ -309,11 +309,13 @@
 	|assethelper
 	|assethelperanim
 	|pollen
+	|bigcoinup
 	|coinup
 	|part
 	|spikeballpart
 	|bridgepart
 	|smoke
+	|rottensmoke
 	|psmoke
 	|badniksmoke
 	|gianafirepart
@@ -451,6 +453,10 @@
 	|item
 	|itemdrop
 	|coin
+	|tencoin
+	|thirtycoin
+	|fiftycoin
+	|hundredcoin
 	|itemring
 	|redring
 	|redcoin
@@ -458,8 +464,10 @@
 	|starshard
 	|shield
 	|token
-	|mushroom
+	|mushrotten
 	|lifemush
+	|greendemon
+	|mushroom
 	|mushpoison
 	|mushmini
 	|flower
@@ -668,6 +676,7 @@
 		|dashpanel
 		|bumper
 		|fireballshooter
+		|powerupblock
 		|frogswitch
 	+tilers
 		|autotiler

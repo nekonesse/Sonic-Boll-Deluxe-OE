@@ -304,6 +304,9 @@
 		|spr_cardreader
 		|spr_box
 		|spr_bigbox
+		|spr_stateblock
+		|spr_stateblockoff
+		|spr_stateblockicons
 		|spr_brick
 		|spr_bigbrick
 		|spr_crate
@@ -464,6 +467,10 @@
 		|spr_newslope2x
 	+items
 		|spr_redcoinring
+		|spr_tencoin
+		|spr_thirtycoin
+		|spr_fiftycoin
+		|spr_hundredcoin
 		|spr_coin
 		|spr_ring
 		|spr_redring
@@ -483,6 +490,7 @@
 		|spr_mushroom
 		|spr_1up
 		|spr_poison
+		|spr_rotten
 		|spr_mushsmall
 		|spr_flower
 		|spr_feather

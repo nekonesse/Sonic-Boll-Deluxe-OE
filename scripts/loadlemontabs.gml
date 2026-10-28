@@ -34,7 +34,7 @@ switch(argument0) {
     break;
     case 1: //Items
     l[ 0]=-1           l[ 1]=-1     l[ 2]=coin      l[ 3]=itemring    l[ 4]=mushroom    l[ 5]=mushmini   l[ 6]=starman     l[ 7]=starshard        l[8]=shell     l[ 9]=token         l[10]=-1       l[11]=-1     l[12]=-1     l[13]=-1      l[14]=-1    l[15]=-1        l[16]=-1    l[17]=-1       l[18]=-1     l[19]=-1
-    l[20]=-1           l[21]=-1     l[22]=redcoin   l[23]=redring     l[24]=flower      l[25]=lifemush   l[26]=shield      l[27]=jumprefresh      l[28]=pswitch  l[29]=tokencruncher         l[30]=-1       l[31]=-1     l[32]=-1     l[33]=-1      l[34]=-1    l[35]=-1        l[36]=-1    l[37]=-1       l[38]=-1     l[39]=-1
+    l[20]=-1           l[21]=-1     l[22]=redcoin   l[23]=redring     l[24]=flower      l[25]=lifemush   l[26]=shield      l[27]=jumprefresh      l[28]=pswitch  l[29]=tokencruncher         l[30]=-1       l[31]=tencoin     l[32]=-1     l[33]=-1      l[34]=-1    l[35]=-1        l[36]=-1    l[37]=-1       l[38]=-1     l[39]=-1
     l[40]=-1           l[41]=-1     l[42]=keyitem   l[43]=carditem    l[44]=feather     l[45]=mushpoison l[46]=itemlaunch  l[47]=monitor          l[48]=bluecoin       l[49]=cardreader         l[50]=-1       l[51]=-1     l[52]=-1     l[53]=-1      l[54]=-1    l[55]=-1        l[56]=-1    l[57]=-1       l[58]=-1     l[59]=-1
     break;
     case 2: //Hazards
@@ -44,7 +44,7 @@ switch(argument0) {
     break;
     case 3: //Gizmos
     l[ 0]=-1           l[ 1]=-1     l[ 2]=onswitch  l[ 3]=onoffscreen l[ 4]=cardreader    l[ 5]=skullblock   l[ 6]=bumper     l[ 7]=cork       l[8]=dashpanel     l[ 9]=beepblockon         l[10]=gearplatform       l[11]=chardoor     l[12]=-1     l[13]=-1      l[14]=-1    l[15]=-1        l[16]=spring    l[17]=pollenflower      l[18]=-1     l[19]=-1
-    l[20]=-1           l[21]=-1     l[22]=onblock   l[23]=onspike     l[24]=carditem      l[25]=skullbloff   l[26]=powblock   l[27]=stone      l[28]=conveyorbelt l[29]=beepblockoff        l[30]=-1                 l[31]=-1           l[32]=-1     l[33]=-1      l[34]=-1    l[35]=-1        l[36]=spreng    l[37]=terrainspring     l[38]=-1     l[39]=-1
+    l[20]=-1           l[21]=-1     l[22]=onblock   l[23]=onspike     l[24]=carditem      l[25]=skullbloff   l[26]=powblock   l[27]=stone      l[28]=conveyorbelt l[29]=beepblockoff        l[30]=powerupblock       l[51]=-1           l[32]=-1     l[33]=-1      l[34]=-1    l[35]=-1        l[36]=spreng    l[37]=terrainspring     l[38]=-1     l[39]=-1
     l[40]=-1           l[41]=-1     l[42]=offblock  l[43]=offspike    l[44]=frogswitch    l[45]=konblock     l[46]=pswitch    l[47]=crystaltap l[48]=bubble       l[49]=redcoinring         l[50]=-1                 l[51]=-1           l[52]=-1     l[53]=-1      l[54]=-1    l[55]=-1        l[56]=sprong    l[57]=terrainsprong     l[58]=-1     l[59]=-1
     break;
     case 4: //Technical

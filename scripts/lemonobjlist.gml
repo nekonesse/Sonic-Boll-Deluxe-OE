@@ -595,6 +595,31 @@ listobj(monitor              ,1,spr_monitor          ,104,itembox)
     listargs("align","contents")
     listdata("0","10coin")
 
+listobj(redcoinring         ,1,spr_redcoinring     ,248,checkpoint)
+listdoc("Red Coin Ring","Makes red coins show up")
+listargs("align")
+listdata("0,0"  )
+
+listobj(tencoin         ,0,spr_tencoin     ,249,tencoin)
+listdoc("10-Coin","Gives you 10 coins")
+listargs("align")
+listdata("0,0"  )
+
+listobj(thirtycoin         ,0,spr_thirtycoin     ,250,tencoin)
+listdoc("30-Coin","Gives you 30 coins")
+listargs("align")
+listdata("0,0"  )
+
+listobj(fiftycoin         ,0,spr_fiftycoin     ,251,tencoin)
+listdoc("50-Coin","Gives you 50 coins")
+listargs("align")
+listdata("0,0"  )
+
+listobj(hundredcoin         ,0,spr_hundredcoin     ,252,tencoin)
+listdoc("100-Coin","Gives you 100 coins")
+listargs("align")
+listdata("0,0"  )
+
 //105= drybones, moved further down for family to display nicer
 
 listobj(drybones             ,1,spr_drybones          ,105, koopa)
@@ -1161,10 +1186,10 @@ listobj(bubble              ,0,spr_bubble           ,247,bubble)
     listargs("content","nogt")
     listdata("coin","")
 
-listobj(redcoinring         ,1,spr_redcoinring     ,248,checkpoint)
-    listdoc("Red Coin Ring","Makes red coins show up")
-    listargs("align")
-    listdata("0,0"  )
+listobj(powerupblock         ,0,spr_stateblock     ,254,skullblock)
+listdoc("State Block","If your status matches that of the item pictured, it'll let you through")
+listargs("align","state","inverted")
+listdata("0,0","0","0")
 
 //LOAD MODDED OBJECTS
 var size, key, _mapid, lemonmap;

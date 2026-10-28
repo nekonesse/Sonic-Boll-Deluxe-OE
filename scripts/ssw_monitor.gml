@@ -61,6 +61,14 @@ switch (argument[0]) {
         frx=1
         fry=4
     break}
+    case "beetroot": {
+        frx=1
+        fry=6
+    break}
+    case "greenlui": {
+        frx=0
+        fry=7
+    break}
     case "custom": {
         frx=0
         fry=6

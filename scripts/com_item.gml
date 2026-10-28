@@ -204,6 +204,14 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
         give_item(id,"shield")
     }
 
+    if (type="monitor_beetroot") {
+    give_item(id,"btroot")
+    }
+
+    if (type="monitor_greenlui") {
+    give_item(id,"glui")
+    }
+
     if (type="monitor_superring") {
         gibsuperring(id)
     }
@@ -239,7 +247,7 @@ if (type="monitor_3up") {
 }
 
 if (type="coin") {
-    if other.object_index!=redcoin && !other.red sound("itemcoin")
+    if ((other.object_index!=redcoin && !other.red) && ((other.object_index!=tencoin && other.object_index!=thirtycoin && other.object_index!=fiftycoin && other.object_index!=hundredcoin) && !other.biggie)) sound("itemcoin")
     if (other.fresh) global.scor[p2]+=100
     global.coins[p2]+=1
     coint+=1

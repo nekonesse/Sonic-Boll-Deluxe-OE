@@ -8,6 +8,7 @@ var frox,froy, frx,fry, fr,ffr4,fr88, xsc,ysc,w,h,sheet;
 fr=global.frame
 ifr=global.itemframe
 ffr4=global.fastframe4
+fffr4=global.fasterframe4
 fr88=global.frame88
 
 frox=0 froy=0 frx=0 fry=0 w=1 h=1 xsc=1 ysc=1
@@ -44,6 +45,15 @@ switch (argument[0]) {
     case "glui":      {sheet=global.topsheetcret[biome] frx=ifr fry=1 frox=8 froy=8 break}
     case "btroot":    {sheet=global.topsheetcret[biome] frx=ifr fry=0 frox=8 froy=8 if (object_index == projectile) {xsc=0.88 ysc=0.88} break}
     case "3moon":     {sheet=global.topsheetcret[biome] frx=ifr fry=2 frox=8 froy=8 break}
+    case "mushrotten":     {sheet=global.topsheetcret[biome] frx=4+ifr fry=0 frox=8 froy=8 break}
+    case "10coin": {sheet=global.topsheetcret[biome] frx=ifr*2 fry=3 w=2 h=2 frox=16 froy=16 break}
+    case "10coinup": {sheet=global.topsheetcret[biome] frx=fffr4*2 fry=3 w=2 h=2 frox=16 froy=16 break}
+    case "30coin": {sheet=global.topsheetcret[biome] frx=ifr*2 fry=5 w=2 h=2 frox=16 froy=16 break}
+    case "30coinup": {sheet=global.topsheetcret[biome] frx=fffr4*2 fry=5 w=2 h=2 frox=16 froy=16 break}
+    case "50coin": {sheet=global.topsheetcret[biome] frx=ifr*2 fry=7 w=2 h=2 frox=16 froy=16 break}
+    case "50coinup": {sheet=global.topsheetcret[biome] frx=fffr4*2 fry=7 w=2 h=2 frox=16 froy=16 break}
+    case "100coin": {sheet=global.topsheetcret[biome] frx=ifr*2 fry=9 w=2 h=2 frox=16 froy=16 break}
+    case "100coinup": {sheet=global.topsheetcret[biome] frx=fffr4*2 fry=9 w=2 h=2 frox=16 froy=16 break}
 }
 
 draw_sprite_part_ext(sheet,1,frx*16+8,fry*16+8,w*16,h*16,floor(x-frox*xsc),floor(y-froy*ysc)+dy,xsc,ysc,$ffffff,1)
