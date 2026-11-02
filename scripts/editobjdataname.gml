@@ -629,7 +629,7 @@ switch (argument[0]) {
         }
     }
 
-    case code: {
+    case scriptblock: {
         if (type=0) {
             return "Align: "+string(i)
         }
