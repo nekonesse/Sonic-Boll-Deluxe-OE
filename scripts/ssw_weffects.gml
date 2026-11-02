@@ -19,6 +19,7 @@ switch (argument[0]) {
     case "waterout": {frx=8+25*floor(frame) fry=183 w=24 h=24 frox=12 froy=12 break}
     case "lavain": {frx=8+25*floor(frame) fry=208 w=24 h=24 frox=12 froy=12 xsc=side break}
     case "lavaout": {frx=8+25*floor(frame) fry=233 w=24 h=24 frox=12 froy=12 break}
+    case "rottensmoke": {frx=158+25*frame fry=233 w=24 h=24 frox=12 froy=12 break}
 }
 
 draw_sprite_part_ext(global.effectssheet[biome],0,frx,fry,w,h,floor(x-frox*xsc),floor(y-froy*ysc)+dy,xsc,ysc,$ffffff,1)

@@ -30,6 +30,7 @@ switch (argument[0]) {
             if (i="shard") return "Contains: Star Shard"
             if (i="pswitch") return "Contains: P Switch"
             if (i="shard") return "Contains: Shard"
+            if (i="demon") return "Contains: Green Demon"
             if (i="none") return "Contains: Nothing"
             if (i="itembeetroot") {if !settings("topsecret") return "Contains: Nothing" return "Contains: Beetroot"}
             if (i="itemgreenlui") {if !settings("topsecret") return "Contains: Nothing" return "Contains: Green Lui"}
@@ -66,6 +67,7 @@ switch (argument[0]) {
             if (i="shard") return "Contains: Star Shard"
             if (i="pswitch") return "Contains: P Switch"
             if (i="shard") return "Contains: Shard"
+            if (i="demon") return "Contains: Green Demon"
             if (i="none") return "Contains: Nothing"
             if (i="itembeetroot") {if !settings("topsecret") return "Contains: Nothing" return "Contains: Beetroot"}
             if (i="itemgreenlui") {if !settings("topsecret") return "Contains: Nothing" return "Contains: Green Lui"}
@@ -95,6 +97,7 @@ switch (argument[0]) {
             if (i="shard") return "Contains: Star Shard"
             if (i="pswitch") return "Contains: P Switch"
             if (i="shard") return "Contains: Shard"
+            if (i="demon") return "Contains: Green Demon"
             if (i="none") return "Contains: Nothing"
             if (i="itembeetroot") {if !settings("topsecret") return "Contains: Nothing" return "Contains: Beetroot"}
             if (i="itemgreenlui") {if !settings("topsecret") return "Contains: Nothing" return "Contains: Green Lui"}
@@ -125,6 +128,8 @@ switch (argument[0]) {
             if (i="shield") return "Contains: Shield"
             if (i="superring") return "Contains: Super Ring"
             if (i="time") return "Contains: Time"
+            if (i="beetroot") {if !settings("topsecret") return "Contains: 10 Coins" return "Contains: Beetroot"}
+            if (i="greenlui") {if !settings("topsecret") return "Contains: 10 Coins" return "Contains: Green Lui"}
         }
         if (type=0) return "Align: "+string(i)
     }
@@ -565,8 +570,10 @@ switch (argument[0]) {
             if (i="coin") return "Type: Coin"
             if (i="token") return "Type: White Token"
             if (i="tokenblue") return "Type: Blue Token"
-            if (i="beetroot") {if !settings("topsecret") return "Type: Fire Flower" return "Type: Beetroot"}
-            if (i="greenlui") {if !settings("topsecret") return "Type: Feather" return "Type: Green Lui"}
+            if (i="rotten") return "Type: Rotten Mushroom"
+            if (i="demon") return "Type: Green Demon"
+            if (i="itembeetroot") {if !settings("topsecret") return "Type: Fire Flower" return "Type: Beetroot"}
+            if (i="itemgreenlui") {if !settings("topsecret") return "Type: Feather" return "Type: Green Lui"}
         }
         if (type=2) {
             if (i="0") return "Physics: On"
@@ -1318,6 +1325,24 @@ switch (argument[0]) {
         }
         if i="" return "Name of Green Token: <unset>"
         else return "Name of Green Token: "+string(i)
+    }
+    case powerupblock: {
+        if (type=1) {
+            if (i="0") return "State: Small"
+            if (i="1") return "State: Big"
+            if (i="2") return "State: Fire"
+            if (i="3") return "State: Feather"
+            if (i="4") return "State: Extra"
+            if (i="5") return "State: Mini"
+            if (i="6") {if !settings("topsecret") return "State: Small" return "State: Beetroot"}
+            if (i="7") {if !settings("topsecret") return "State: Small" return "State: Green Lui"}
+            if (i="8") return "State: Star"
+            if (i="9") return "State: Super"
+        }
+        if (type=2) {if (t) return "Inverted: Yes" return "Inverted: No"}
+        if (type=3) {if (t) return "Invisible: Yes" return "Invisible: No"}
+        if (type=4) return "Bonus Target: "+i
+        if (type=0) return "Align: "+string(i)
     }
 
 }

@@ -2449,3 +2449,6 @@ custom_sprite_exists
 editnameconvert
 create_custom_object
 
+gib30coin
+gib50coin
+gib100coin

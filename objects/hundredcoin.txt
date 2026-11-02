@@ -1,0 +1,7 @@
+sprite=spr_thirtycoin
+visible=1
+solid=0
+persistent=0
+depth=4
+parent=item
+mask=spr_grindermask

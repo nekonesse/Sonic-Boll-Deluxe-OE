@@ -115,6 +115,10 @@ applies_to=self
 if !vanillaitem {if owner!=noone {with owner {dropid=id droptype=other.type charm_run("itemdrop")}}} //prevent conflict between charms with different versions of the same powerup by looking for the owner of the itemdrop before everyone else
 if !vanillaitem && yep==0 {with player {if !other.yep {dropped=id droptype=other.type charm_run("itemdrop")}}} //now check every player. if it still doesnt get destroyed then the instance_destroy() at the bottom will
 if (type="coinup") with (instance_create(x,y,coin)) {sound("itemcoinping") drop=1 p2=other.p2 biome=other.biome depth=0 if (other.dissapear) life=max(0,180-other.dissapear)}
+else if (type="10coinup") with (instance_create(x,y,tencoin)) {sound("itemcoinping") drop=1 p2=other.p2 biome=other.biome depth=0 if (other.dissapear) life=max(0,180-other.dissapear)}
+else if (type="30coinup") with (instance_create(x,y,thirtycoin)) {sound("itemcoinping") drop=1 p2=other.p2 biome=other.biome depth=0 if (other.dissapear) life=max(0,180-other.dissapear)}
+else if (type="50coinup") with (instance_create(x,y,fiftycoin)) {sound("itemcoinping") drop=1 p2=other.p2 biome=other.biome depth=0 if (other.dissapear) life=max(0,180-other.dissapear)}
+else if (type="100coinup") with (instance_create(x,y,hundredcoin)) {sound("itemcoinping") drop=1 p2=other.p2 biome=other.biome depth=0 if (other.dissapear) life=max(0,180-other.dissapear)}
 else if (type="ringup") {vspeed=-2}
 else if (type="mushroom") with (instance_create(x,y,mushroom)) {vspeed=0 alarm[0]=-1 drop=1 p2=other.p2 depth=0}
 else if (type="star") with (instance_create(x,y,starman)) {hspeed=sign(other.hspeed) fuel=other.fuel c=2 alarm[0]=-1 depth=0 drop=1 p2=other.p2}

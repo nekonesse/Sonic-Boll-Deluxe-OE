@@ -9,6 +9,7 @@ if (skindat("anims")) {
     global.frame=max(0,floor(gframe-2))
 }
 fastframe=(fastframe+0.25) mod 12
+fasterframe=(fasterframe+0.5) mod 12
 frame8=(frame8+0.125) mod 8
 framefire=(framefire+0.25) mod 4
 frameitem=frameitem+1/max(1,skindat("itspd"))
@@ -17,6 +18,7 @@ boostfrtimer=(boostfrtimer+1) mod 4
 global.fastframe2=floor(fastframe/2) mod 2
 global.fastframe3=floor(fastframe) mod 3
 global.fastframe4=floor(fastframe) mod 4
+global.fasterframe4=floor(fasterframe) mod 4
 global.frame8=floor(frame8) mod 2
 global.frame8flip=((frame8 mod 4)>=2)
 global.frame8flipy=(frame8>=4)

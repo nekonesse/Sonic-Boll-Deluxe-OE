@@ -97,6 +97,9 @@ if (content="shard") {
 if (content="life") {
     with (instance_create(x+8+offset,y+8+4*go,lifemush)) {iid=id vspeed=0.25*other.go alarm[0]=48}
 }
+if (content="demon") {
+    with (instance_create(x+8+offset,y+8+4*go,greendemon)) {vspeed=3.75*other.go}
+}
 if (content="moon") {
     with (instance_create(x+8+offset,y+8+4*go,lifemoon)) {iid=id vspeed=0.25*other.go alarm[0]=48}
 }
@@ -123,6 +126,9 @@ if (content="spreng") {
 }
 if (content="poison") {
     with (instance_create(x+8+offset,y+8+4*go,mushpoison)) {iid=id vspeed=0.25*other.go alarm[0]=48 owner=other.owner}
+}
+if (content="rotten") {
+    with (instance_create(x+8+offset,y+8+4*go,mushrotten)) {iid=id vspeed=0.25*other.go alarm[0]=48 owner=other.owner}
 }
 if (content="vine") {
     with (instance_create(x+offset,y+4*go,sprong)) {

@@ -300,6 +300,9 @@
 		|gibcoinred
 		|gibtoken
 		|gib10coin
+		|gib30coin
+		|gib50coin
+		|gib100coin
 		|gibsuperring
 		|gosuper
 		|stopsuper

@@ -46,6 +46,12 @@ else if contents="feather" {
 else if contents="shield" {
     give_item(owner,"monitor_shield")
 }
+else if contents="beetroot" {
+    give_item(owner,"monitor_beetroot")
+}
+else if contents="greenlui" {
+    give_item(owner,"monitor_greenlui")
+}
 else if contents="superring" {
     give_item(owner,"monitor_superring")
 }
