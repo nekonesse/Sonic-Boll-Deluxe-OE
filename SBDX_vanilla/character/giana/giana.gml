@@ -852,7 +852,7 @@ if (underwater()) {
         vsp=min(1,vsp/2)
         jumpspd=1
     }
-    water=1 wf=0.45
+    water=1 wf=0.7
 } else {
     if (water) {
         water=0
