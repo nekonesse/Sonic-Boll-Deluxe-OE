@@ -407,7 +407,7 @@ sprite="climbing" frspd=sign(left+right+up+down)
 }
 else if (hurt) {sprite="knock" onvine = 0}
 else if (gianadash) sprite="dash"
-    else if (twirl) {sprite="twirl" if (!ckey) frspd=0.5}
+    else if (twirl) {sprite="twirl" frspd=0.5+0.25*bkey if (vsp>0 && down) frspd=max(0.5+0.25*bkey,vsp/4)}
 else if (gianadashed) sprite="specialfall"
     else if (fired) {sprite="firejump" cantslowanim=1}
     else if (bonk) sprite="bonk"
@@ -563,6 +563,11 @@ else if (!jump || abs(hsp)<2.6) stridejump=max(0,inch(stridejump,0,0.075))
 else if (twirl && bkey) stridejump=max(0,inch(stridejump,0,0.03))
 jumpbufferdo=0
 springin=0
+
+if (strideanim){
+	if (vsp<0 && abs(hsp)>3.25) boost=1 
+	else boost=0
+}
 
 if (akey) {
     if (jumpbuffer) jumpbuffer-=1
@@ -747,7 +752,13 @@ player_nslopforce()
 //yground=easyground()
 //if (yground!=verybignumber) yground-=14
 if (jump) {
-if (twirl && !luijump) vsp=min(vsp+0.1*wf,3-2.5*bkey)
+if (twirl && !luijump) {
+	vsp=min(vsp+0.1*wf,3-(2.5*!down)+(2.5*down))
+	if (vsp>3.5) {
+		if !boost && !count_owned(psmoke) shoot(x,y,psmoke,0,0)
+		boost=1
+	}
+}
 else if (water) vsp=min(1.5,vsp+0.04)
 else if fall!=69 && !luijump {
 vsp=min(4,vsp+0.15*wf)
@@ -916,11 +927,11 @@ if (gianadash) {
         else gianadash=min(gianadash,10)
     }
     if (hsp>=0) {
-        if (xsc=-1) {sprite_angle=(sprite_angle+180) mod 360 xsc=1}
-        sprite_angle=dashdir
+       // if (xsc=-1) {sprite_angle=(sprite_angle+180) mod 360 xsc=1}
+		//sprite_angle=dashdir
     } else {
-        if (xsc=1) {sprite_angle=(sprite_angle+180) mod 360 xsc=-1}
-        sprite_angle=dashdir-180
+       // if (xsc=1) {sprite_angle=(sprite_angle+180) mod 360 xsc=-1}
+        //sprite_angle=dashdir-180
     }
 } else sprite_angle=0
 
@@ -1238,6 +1249,17 @@ playsfx(name+"step")
 
 //jump buffering
 if (jumpbuffer) jumpbuffer=-1
+
+if (twirl && boost) {
+	with (hittable) if (instance_place(x,y-max(4,other.vsp),other.id)) {
+		go=1    
+		event_user(0)
+		picked=1
+	} 
+	boost=0
+}
+if (boost && hsp<maxspeed && !hyperspeed && !gm8exspd) boost=0
+
 
 #define death
 if (event="create"){
