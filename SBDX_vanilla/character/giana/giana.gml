@@ -1221,7 +1221,7 @@ if (twirl && size && size!=5) {
     global.coll=id
     with (hittable) if (instance_place(x-other.hitside,y,other.id)) {
         go=-1
-        insted=0
+        insted=1
         event_user(0)
         insted=0 picked=0
     }
@@ -1251,13 +1251,18 @@ playsfx(name+"step")
 if (jumpbuffer) jumpbuffer=-1
 
 if (twirl && boost) {
+	global.coll=id
 	with (hittable) if (instance_place(x,y-max(4,other.vsp),other.id)) {
-		go=1    
-		event_user(0)
-		picked=1
+		go=1
+        event_user(0)
+		picked=0
 	} 
+	coll=collision(0,y-max(4,vsp))
 	boost=0
 }
+
+if (coll=noone) exit
+
 if (boost && hsp<maxspeed && !hyperspeed && !gm8exspd) boost=0
 
 
