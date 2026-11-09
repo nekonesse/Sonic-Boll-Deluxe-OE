@@ -1,10 +1,8 @@
 #define spritelist
-stand,wait,lookup,pose,crouch,hurt,dead,walk,run,brake,jump,bonk,fall,runjump,roll,groundpound,poundfall,swim,paddle,spinjump,fire,push,balancing,climbing,flagslide,growing,piping,pipingup,sidepiping,doorenter,doorexit
-
-//lyb here, the variable to replace with the skindata stuff is SKINSHITHERE. it gets set to 1 in the movement code so that i can actually test the stuff with it, you will want to remove that as well
+stand,wait,lookup,pose,crouch,hurt,dead,walk,run,brake,jump,bonk,fall,runjump,swim,paddle,fire,push,balancing,climbing,flagslide,growing,piping,pipingup,sidepiping,doorenter,doorexit
 
 #define soundlist
-skid,swim,pound,stomp,smalljump,flip,spin,slide,kick,fireball,wallkick,smallwallkick,dive,spinjump,spinbounce,longjump
+skid,swim,pound,stomp,smalljump,kick,fireball
 
 #define rosterswap
 mario
@@ -12,8 +10,8 @@ mario
 #define movelist
 Mario (SMB1)
 #
-[flwr]&[b]: Fireball
-Collect a [fthr] to swim midair!
+[a]: Jump / [fthr]: Double Jump
+[b]: Run / [flwr]: Fireball
 
 #define rosterorder
 5
@@ -25,6 +23,8 @@ with (carryid) {hspeed=0 event_user(1)}
 //draw_skintext(floor(x)-string_length(string(crouch))*4,floor(y)-32,crouch)
 //draw_skintext(floor(x)-string_length(string(jump))*4,floor(y)-24,jump)
 
+//draw_skintext(floor(x),floor(y)-40,hsp)
+
 #define grabflagpole
 grabflagpole=1
 hsp=0
@@ -34,10 +34,6 @@ auto=1
 #define start
 mask_set(12,12)
 global.animatePrincess=1
-shittwirl=funnytruefalse(playerskindat(p2,name+" midspin"))
-poundin=funnytruefalse(playerskindat(p2,name+" groundpound"))
-luigimode=funnytruefalse(playerskindat(p2,name+" luigimode"))
-
 
 #define stop
 if (skidding) {soundstop(name+"skid") skidding=0}
@@ -264,31 +260,33 @@ if (h!=0 && !wallkick) {
             xsc=h
             braking=0
         }
-        if (!pound && !water && fall!=6 && !crouch && h=xsc && kicked!=h && !carry) if (knuxcanclimb(collision(8*h,0))) {
+        /* if (!pound && !water && fall!=6 && !crouch && h=xsc && kicked!=h && !carry) if (knuxcanclimb(collision(8*h,0))) {
             if (jump) hang=4
             if (vsp>1) crouch=0
             xsc=h
-        }
+        } */
     } else {
-		if (!jump) {
-			if (sign(hsp)!=h) {
-				if (abs(hsp)>2) {
-					braking=1
-					brakedir=h
-					skidding=1
-					playsfx(name+"skid",1)
-				}
-				hsp+=(0.33-0.175*!water+0.04*(abs(hsp)<1))*wf*h
-				if (abs(hsp)<0.5) xsc=h
-			} else {
-				hsp+=(0.06+0.06*(abs(hsp)<1))*wf*h
-				xsc=h
-				braking=0
-			}       
-		} else {
-		hsp+=(0.06+0.06*(abs(hsp)<1))*wf*h
-		}
-        
+        if (!jump) {
+            if (esign(hsp,xsc)!=h) {
+                if (abs(hsp)>2 && !carry) {
+                    braking=1
+                    skidding=1
+                    playsfx(name+"skid",1)
+                    brakedir=h
+                }
+                hsp+=(min(0.0508,frick)*2)*wf*(h*2)
+                if (abs(hsp)<0 || carry && !spin) xsc=h
+            } else {
+                hsp+=(frick)*wf*h
+                xsc=h
+                braking=0
+            }
+        } else {
+            if (water) {if (h!=sign(hsp)) hsp+=0.1*h else hsp+=0.0475*h}
+            else if (dropkick) hsp+=0.1*wf*h
+            else if (size==5) hsp+=0.085*wf*h
+            else hsp+=(0.07+0.02*run)*wf*h
+        }
     }
 }
 
@@ -305,14 +303,10 @@ if ((abut || jumpbufferdo) && !springin) {
 			}
 		}
         else {
-            if ((abs(hsp)<=2.5 && triplejump) && size!=3) || triplejump>=1 || (triplexsc!=sign(hsp)  && triplexsc!=0) || poundjump && !carry && !crouch {triplejump=0 triplexsc=0}
-            else if (jumptiming && ((abs(hsp+hyperspeed)>2.5 || !triplejump) || size==3) && !carry && !crouch && triplejump < 1.5) {triplejump+=0.5 triplexsc=sign(hsp)}
-			
 			if (size==0 || size==5) jumpsnd=playsfx(name+"smalljump",0,1+triplejump/2+(size==5)/3)
             else jumpsnd=playsfx(name+"jump",0,1+triplejump/2)
             
-			if (spin) {vsp=-1 instance_create(x,y+12,smoke)}
-            else {vsp=-(4.7+min(1,abs(hsp)/8)+!!poundjump+triplejump) hellothisisajump=1}
+			vsp=-4-0.125 hellothisisajump=1
 		   if (water || size=3) vsp=-sqrt(sqr(vsp)*wf+2)
         }
 		if !crouch {cancrouch=0} else {cancrouch=1}
@@ -341,10 +335,6 @@ if ((abut || jumpbufferdo) && !springin) {
             wallkick=12 crouch=0
             run=1
             canstopjump=1
-        }
-        
-        if (shittwirl) {
-        	if (jump && !crouch && !twist && !dive && vsp>-3 && !spinjump && !slidejump) {sxsc=xsc twist=25 jumpspd=0 playsfx(name+'flip') vsp=min(vsp,0)}
         }
         
         if (super && !crouch && !flying && fall!=6 && !float && ((abs(hsp)>2 && (vsp)<0) || fly)) {
@@ -403,15 +393,6 @@ if (ckey) {
 
 //crouching
 if (down && !up) {
-	if (poundin && jump && !carry && fall!=6 && !dive && !pound && !poundlok && fall!=69) {
-            pound=1
-			nocratebounce=1
-            if (water || size=3) seqcount=1
-            slidejump=0
-            dropkick=0
-            spinjump=0
-            playsfx(name+"pound")
-        }
 	if (!braking) {
         if (cancrouch && size>0 && size!=5) {
             crouch=1    
@@ -446,19 +427,18 @@ if (auto) {hsp=1}
 if ((loose && !jump) || (crouch && !jump)) {
 if (braking) xsc=brakedir
 braking=0
-if (luigimode) frick=0.035
-else frick=0.09
 
-if (slipnslide) frick=0.01
+frick=0.0371
+if (abs(hsp)>=2.4) frick=0.0557
+if (abs(hsp)>1.5 && !run) frick=0.0508
+
+
+
 if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
 }
 
-if (toadmode) {
-maxspd=(1.2+runvar*1.7+(_longjump*0.8)+water+(size==5)*0.55+slipnslide+!!spin)*(wf+((carry/2)*underwater()))
-if (abs(hsp)>maxspd) hsp=(abs(hsp)*2+maxspd)/3*sign(hsp)
-} else
-maxspd=(1.2+runvar*1.2+(_longjump*0.8)+water+(size==5)*0.55+slipnslide+!!spin)*(wf+((carry/2)*underwater()))
-if (abs(hsp)>maxspd) hsp=(abs(hsp)*2+maxspd)/3*sign(hsp)
+maxspd=1.5+(run*(2/3))
+if (abs(hsp)>maxspd) hsp=maxspd*sign(hsp)
 
 ///movement
 //hi moster here dont uncomment the yground or easyground stuff because its required for the cool new slope system to work
@@ -472,65 +452,10 @@ player_nslopforce()
 //yground=easyground()
 //if (yground!=verybignumber) yground-=14
 if (jump) {
-	if (flight) {
-		if !frame1flight{
-		frame1flight=1
-		flightdir=sign(xsc)
-		}
-		hsp=flightdir*maxspd
-		if hsp!=0
-		xsc=sign(hsp)
-		if !(bellyslide) {
-			movevar=xsc*(right-left)
-		} else {
-			movevar=xsc
-		}
-
-		if movevar>0 { //pulling down, make gravity stronk + give speed
-		vsp=min(4,vsp+0.25)
-		frame1uppies=0
-		} else if movevar=0{ //Neutral, let gravity do it's thing
-		vsp=min(4,vsp+0.15)
-		frame1uppies=0
-		} else if movevar<0{  //pulling up, glide and gain upward force based on how hard you're falling
-		if !frame1uppies{
-		airtime=vsp*5
-		savedvsp=vsp
-		frame1uppies=1
-		if energy=0 airtime=0
-		energy-=1
-		}
-		if vsp>=1{ //stop falling, transition into gliding/flying
-		vsp*=0.9  
-		} else {
-		if savedvsp<1||airtime<=0{ //No more uppies for you! *vine boom sfx*
-		vsp=min(1,vsp+0.05)
-		}
-		else { //use up airtime 
-		vsp-=0.6
-		if vsp<-1.25 vsp=-2.25
-		airtime-=1
-		}
-		}
-
-		}
-		if pound flight=0
-
-		if sign(hsp)!=flightdir flight=0
-	} 
-	else if (pound>0) {
-		hsp=0
-		if (pound<14) {vsp=0}
-		else if (underwater() && carry) {vsp=approach_val(vsp,0,0.075)}
-		else if (pound>=14 && pound<15) {vsp=6*wf}
-		else if (water || size=3) {vsp-=0.1*wf if (vsp<1.5) {pound=0}}
-		else {vsp+=0.375*wf}
-	}
-	else if (vsp<-2) vsp+=0.15
-	else if (water || size=3) vsp=min(1.5,vsp+0.04)
+	if (water || size=3) vsp=min(1.5,vsp+0.04)
 	else if (twist>5) vsp=min(1,vsp+0.1)
-	else if fall!=69 && !flight {
-		vsp=min(4,vsp+0.25)
+	else if fall!=69 {
+		vsp=min(4,vsp+0.125+(0.3125*vsp>0.1250)/3)
 		if size==5 && vsp>-0.75 vsp-=0.175
 	} 
 	vine_climbing() 
@@ -542,7 +467,7 @@ if (jump) {
 		spinjump=0
 		triplejump=0
 	}
-	if (hang>0 && vsp>1 && !spinjump && !water && size!=3) vsp=1.5
+	
 
 	if (skidding) {soundstop(name+"skid") skidding=0}
 	braking=0
