@@ -26,6 +26,31 @@ Punk Giana
 #define rosterorder
 12
 
+#define skininit
+
+addbde=funnytruefalse(playerskindat(p2,name+" additive blend dash effects"))
+
+var looper;
+
+//graphic offsets
+loopey=0
+looper=0
+repeat((projcoordbysize*MAXIMUMSIZESARGH)+1) {
+	if (projcoordbysize) {
+		looper=string(loopey)
+	} else {looper=""}
+	
+	fireball_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" fireball graphic x"+looper),10) 
+	fireball_sheety[loopey]=nozerounreal(playerskindat(p2,name+" fireball graphic y"+looper),87)
+
+	dashgraphics_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" dash assets graphic x"+looper),80) 
+	dashgraphics_sheety[loopey]=nozerounreal(playerskindat(p2,name+" dash assets graphic y"+looper),55)	
+	
+	items_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" items graphic x"+looper),218) 
+	items_sheety[loopey]=nozerounreal(playerskindat(p2,name+" items graphic y"+looper),38)	
+	
+	loopey+=1
+}
 
 #define start
 mask_set(12,15)
@@ -257,8 +282,8 @@ dir=point_direction(x,y,targeter.x,targeter.y)
 lock=targeter
 hspeed=lengthdir_x(3,dir)
 vspeed=lengthdir_y(3,dir)
-} else {vspeed=min(2.75,vspeed+0.35)}
-} else {vspeed=min(2.75,vspeed+0.35)}
+} else {vspeed=min(2.75,vspeed+0.25)}
+} else {vspeed=min(2.75,vspeed+0.25)}
 
 coll=instance_place(x,y,bowserboss)
 if (coll) {
@@ -564,7 +589,7 @@ if (up) {
             run=0
         }
 } else if (energy || size=6) && (size!=7) && (!gianadash) {
-        if (size!=6 && size!=7 && count_projectiles()<1) {
+        if (size!=6 && size!=7 && count_projectiles()<2) {
             if (h) {xsc=h braking=0}
 		    hasfired=1
             fire_projectile(x+7*xsc,y)
