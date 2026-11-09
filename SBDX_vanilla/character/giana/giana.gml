@@ -1176,7 +1176,7 @@ hurting_rn=30
 #define hitblocks
 if typeblockhit=0{
 with (blockcoll){
-if (stonebump || (owner.size=0 || owner.size=5) && insted!=1 && !owner.tempkill && (cracked=0 || (cracked=1 && owner.size=5))) {
+if (stonebump || (owner.size=0 || owner.size=5 || owner.twirl) && insted!=1 && !owner.tempkill && (cracked=0 || (cracked=1 && owner.size=5))) {
     if (!goinup) {if (insted!=2) owner.vsp=1.5 sound("itemblockbump") tpos=1}
     if (owner.gianadash && !stonebump/* && owner.size!=5*/){
         owner.vsp=1.5
@@ -1221,7 +1221,7 @@ if (twirl && size && size!=5) {
     global.coll=id
     with (hittable) if (instance_place(x-other.hitside,y,other.id)) {
         go=-1
-        insted=1
+        insted=0
         event_user(0)
         insted=0 picked=0
     }
