@@ -637,7 +637,9 @@ com_piping()
 }else {crouch=0 slide=0}
 
 
-if (size==5) mask_set(9,8) else mask_set(12,15)        
+if (size==5) mask_set(9,8) 
+else if (crouch) mask_set(12,12)
+else mask_set(12,15)        
 
 #define movement
 if (piped || move_lock || transforming || growing_rn || hurting_rn) exit
