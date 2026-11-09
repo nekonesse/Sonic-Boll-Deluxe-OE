@@ -33,10 +33,13 @@ autorun=0
 skipmush=1
 global.animatePrincess=1
 
-#define grabbedflagpole
-grabbedflagpole=1
+#define grabflagpole
+grabflagpole=1
 hsp=0
 vsp=0
+twirl=0
+insted=0
+gianadash=0
 
 #define stop
 if (skidding) {soundstop(name+"skid") skidding=0}
