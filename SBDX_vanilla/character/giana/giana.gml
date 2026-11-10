@@ -662,6 +662,7 @@ if (up) {
                 hspeed=max((1 + (abs(other.hsp) / 2.2)),1.2) * xsc; //yaargh me formula
                 vspeed = -2.4;
                 visible = 0;
+				ignoreoncount=0
             }
 			p2 = real(ss);
 			playsfx("gianafireball")
@@ -911,6 +912,7 @@ if (myitemhelper=noone || !instance_exists(myitemhelper) || myitemhelper==0) {
 		other.myitemhelper=id
 		itemhelper=1
 		visible=1
+		ignoreoncount=1
 	}
 	
 }
@@ -1001,7 +1003,9 @@ if (!stridejump && !jump) {stridealt=1 strideanim=0}
 if (gianadash) {
     gianadash-=1
     insted=1
-    if (!(gianadash mod 2)) i=fire_projectile(x,y)i.trail=1
+    if (!(gianadash mod 2)) {
+		i=fire_projectile(x,y) i.trail=1 i.ignoreoncount=1
+	}
     if (!gianadash) {fall=13 dashcooldown=8}
     if ((left || right || up || down) && !dashlock) {
         d=anglediff(dashdir,point_direction(0,0,right-left,down-up))
