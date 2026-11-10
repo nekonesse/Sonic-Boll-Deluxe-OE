@@ -3,7 +3,7 @@ stand,wait,lookup,pose,crouch,walk,run,brake,jump,bonk,fall,grow,knock,die,fire,
 
 
 #define soundlist
-smalljump,fireball,pop,explosion,twirl,dash,swim
+smalljump,fireball,pop,explosion,twirl,dash,swim,drill
 
 
 #define movelist
@@ -12,16 +12,28 @@ Giana
 [up]+[b]: Twirl
 [a]>[a]>[a]: Stride Jump
 [left]+[a]: Side Somersault
-<big>
+Hold Down while twirling to fall faster,
+and [b] to smack enemies away
+<fire>
 Punk Giana 
 #
 [b]: Energy Ball
 [up]+[b]: Twirl
-[c]: Dash
+[c]+[dir]: Dash
 [a]>[a]>[a]: Stride Jump
 [left]+[a]: Side Somersault
+Hold Down while twirling to fall faster,
+and [b] to smack enemies away
 <feather>
-
+Mirror-Punk Giana 
+#
+[b]: Energy Ball
+[up]+[b]: Twirl
+[c]+[dir]: Dash
+[a]>[a]>[a]: Stride Jump
+[left]+[a]: Side Somersault
+Hold Down while twirling to fall faster,
+and [b] to smack enemies away
 
 #define rosterorder
 12
@@ -222,8 +234,23 @@ autorun=1
 
 
 
+#define damager
+if (owner.twirl && owner.bkey) {
 
+	sprite_index=spr_mask2x2
+	mask_index=spr_mask2x2
 
+	x=owner.x y=owner.y-3 image_yscale=8 image_xscale=11
+
+	coll=instance_place(x,y,enemy)
+	if (coll) {                    
+		if (coll.object_index!=bombenemy && coll.object_index!=boo
+		&& coll.object_index!=urchin) {
+		global.coll=owner.id
+		enemydie(coll,2)
+		}
+	}
+} else {y=-1000}
 
 
 #define projectile
@@ -396,6 +423,7 @@ if (addbde) draw_set_blend_mode(0)
 
 #define sprmanager
 frspd=1
+cantslowanim=0
 
 if (grabflagpole) {sprite="flagslide"}
 else if (growing_rn) {sprite="grow"}
@@ -407,7 +435,7 @@ sprite="climbing" frspd=sign(left+right+up+down)
 }
 else if (hurt) {sprite="knock" onvine = 0}
 else if (gianadash) sprite="dash"
-    else if (twirl) {sprite="twirl" frspd=0.5+0.25*bkey if (vsp>0 && down) frspd=max(0.5+0.25*bkey,vsp/4)}
+    else if (twirl) {sprite="twirl" cantslowanim=1 frspd=0.5+0.3*bkey if (vsp>0 && down) frspd=max(0.5+0.4*bkey,vsp/3)}
 else if (gianadashed) sprite="specialfall"
     else if (fired) {sprite="firejump" cantslowanim=1}
     else if (bonk) sprite="bonk"
@@ -623,6 +651,7 @@ hasfired=0
         if (twirl) {
             fall=13
             twirl=0
+			boost=0
             insted=1
         } else if energy && size!=6 && size!=7{
             gianadash=15-(7*energy<2)
@@ -755,9 +784,12 @@ if (jump) {
 if (twirl && !luijump) {
 	vsp=min(vsp+0.1*wf,3-(2.5*!down)+(2.5*down))
 	if (vsp>3.5) {
-		if !boost && !count_owned(psmoke) shoot(x,y,psmoke,0,0)
+		if !boost && !count_owned(psmoke) {
+			shoot(x,y,psmoke,0,0)
+			playsfx(name+"drill")
+			}
 		boost=1
-	}
+	} else boost=0
 }
 else if (water) vsp=min(1.5,vsp+0.04)
 else if fall!=69 && !luijump {
@@ -1259,6 +1291,7 @@ if (twirl && boost) {
 	} 
 	coll=collision(0,y-max(4,vsp))
 	boost=0
+	hsp=0
 }
 
 if (coll=noone) exit
