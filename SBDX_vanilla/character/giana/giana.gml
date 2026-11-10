@@ -131,7 +131,7 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 			if (!super && size!=3) grow=1
 			energy+=1
 			itemget=1
-            if (size=0 || size=1 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}               
+            if (size=0 || size=1 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") mynewitems=2 growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}               
 		}
 	}
 	else if (type="mini" || type="monitor_mini") {
@@ -235,7 +235,8 @@ else if (type="redcoinreward") {
         give_item(id,"1up")
 		energy=3
     } else {
-        if !size give_item(id,"mushroom") else {if size<=1 {give_item(id,"shield")}}
+        if !size give_item(id,"mushroom") else {if size<=1 give_item(id,"shield")}
+	}
 } 
 com_item()
 
