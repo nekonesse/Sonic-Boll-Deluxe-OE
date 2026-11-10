@@ -3,7 +3,7 @@ stand,wait,lookup,pose,crouch,walk,run,brake,jump,bonk,fall,grow,knock,die,fire,
 
 
 #define soundlist
-smalljump,fireball,pop,explosion,twirl,dash,swim
+smalljump,fireball,pop,explosion,twirl,dash,swim,drill
 
 
 #define movelist
@@ -12,31 +12,71 @@ Giana
 [up]+[b]: Twirl
 [a]>[a]>[a]: Stride Jump
 [left]+[a]: Side Somersault
-<big>
+Hold Down while twirling to fall faster,
+and [b] to smack enemies away
+<fire>
 Punk Giana 
 #
 [b]: Energy Ball
 [up]+[b]: Twirl
-[c]: Dash
+[c]+[dir]: Dash
 [a]>[a]>[a]: Stride Jump
 [left]+[a]: Side Somersault
+Hold Down while twirling to fall faster,
+and [b] to smack enemies away
 <feather>
-
+Mirror-Punk Giana 
+#
+[b]: Energy Ball
+[up]+[b]: Twirl
+[c]+[dir]: Dash
+[a]>[a]>[a]: Stride Jump
+[left]+[a]: Side Somersault
+Hold Down while twirling to fall faster,
+and [b] to smack enemies away
 
 #define rosterorder
 12
 
+#define skininit
+
+addbde=funnytruefalse(playerskindat(p2,name+" additive blend dash effects"))
+
+var looper;
+
+//graphic offsets
+loopey=0
+looper=0
+repeat((projcoordbysize*MAXIMUMSIZESARGH)+1) {
+	if (projcoordbysize) {
+		looper=string(loopey)
+	} else {looper=""}
+	
+	fireball_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" fireball graphic x"+looper),10) 
+	fireball_sheety[loopey]=nozerounreal(playerskindat(p2,name+" fireball graphic y"+looper),87)
+
+	dashgraphics_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" dash assets graphic x"+looper),80) 
+	dashgraphics_sheety[loopey]=nozerounreal(playerskindat(p2,name+" dash assets graphic y"+looper),55)	
+	
+	items_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" items graphic x"+looper),218) 
+	items_sheety[loopey]=nozerounreal(playerskindat(p2,name+" items graphic y"+looper),38)	
+	
+	loopey+=1
+}
 
 #define start
 mask_set(12,15)
 autorun=0
-skipmush=1
+skipmush=0
 global.animatePrincess=1
 
-#define grabbedflagpole
-grabbedflagpole=1
+#define grabflagpole
+grabflagpole=1
 hsp=0
 vsp=0
+twirl=0
+insted=0
+gianadash=0
 
 #define stop
 if (skidding) {soundstop(name+"skid") skidding=0}
@@ -52,7 +92,7 @@ mynewitems=0
 #define itemget
 
 if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
-	if (type="mushroom") {
+	if (type="mushroom" || type="monitor_mush") {
 		if (!growing_rn && !hurting_rn) {
 			coll=other.id
 			if (p2!=other.p2) {
@@ -60,12 +100,13 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 				doscore_p(1000,1)
 			}
 			if (skidding) {soundstop(name+"skid") skidding=0}
+			if (!super && size!=1) grow=1
 			energy+=1
 			itemget=1
-			if (size=0 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}
+			if (size=0 || size=3 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}
 		}
 	}
-	else if (type="fflower") {
+	else if (type="fflower" || type="monitor_fire") {
 		if (!growing_rn && !hurting_rn) {
 			coll=other.id
 			if (p2!=other.p2) {
@@ -73,12 +114,13 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 				doscore_p(1000,1)
 			}
 			if (skidding) {soundstop(name+"skid") skidding=0}
+			if (!super && size!=1) grow=1
 			energy+=1
 			itemget=1
-			if (size=0 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}           
+			if (size=0 || size=3 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}           
 		}
 	}
-	else if (type="bfeather") {
+	else if (type="bfeather" || type="monitor_bfeather") {
 		if (!growing_rn && !hurting_rn) {
 			coll=other.id
 			if (p2!=other.p2) {
@@ -86,12 +128,13 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 				doscore_p(1000,1)
 			}
 			if (skidding) {soundstop(name+"skid") skidding=0}
+			if (!super && size!=3) grow=1
 			energy+=1
 			itemget=1
-            if (size=0 || size=5) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}               
+            if (size=0 || size=1 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}               
 		}
 	}
-	else if (type="mini") {
+	else if (type="mini" || type="monitor_mini") {
 		if (!growing_rn && !hurting_rn) {
 			coll=other.id
 			if (p2!=other.p2) {
@@ -107,7 +150,7 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 			itemget=1
 		}
 	}      
-	else if (type="star") {
+	else if (type="star" || type="monitor_star") {
 		if (!growing_rn && !hurting_rn) {
 			coll=other.id
 			doscore_p(1000)
@@ -128,7 +171,7 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 			itemget=1          
 		}
 	}
-	else if (type="shield") {
+	else if (type="shield" || type="monitor_shield") {
 		if (!growing_rn && !hurting_rn) {
 			coll=other.id
 			if (p2!=other.p2) {
@@ -140,7 +183,7 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 			itemget=1
 		}
 	} 
-	else if (type="btroot") {
+	else if (type="btroot" || type="monitor_beetroot") {
         coll=other.id
         if (p2!=other.p2) {
             itemc+=1
@@ -155,9 +198,9 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
         //oldsize=size
         //size=6
         itemget=1
-		{playgrowsfx("2") set_sprite("grow") mynewitems=1 growing_rn=60 sprite_angle=0 }
+		{playgrowsfx("2") set_sprite("grow") mynewitems=3 growing_rn=60 sprite_angle=0 }
     }
-    else if (type="glui") {
+    else if (type="glui" || type="monitor_greenlui") {
         coll=other.id
         if (p2!=other.p2) {
             itemc+=1
@@ -172,7 +215,7 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
         //oldsize=size
         //size=7
         itemget=1
-		{playgrowsfx("2") set_sprite("grow") mynewitems=2 growing_rn=60 sprite_angle=0 }
+		{playgrowsfx("2") set_sprite("grow") mynewitems=4 growing_rn=60 sprite_angle=0 }
     }
 	
 	//else if (type!="jumprefresh" && type!="1up" && type!="coin" && type!="ring") com_item()
@@ -185,6 +228,15 @@ if (type="1up") {
 	if (super) superpower=6000
 	itemget=1
 } 
+
+else if (type="redcoinreward") {
+    itemc+=1
+    if ((size==1 || size=2 || super || size=3 || size=6 || size=7) && shielded) {
+        give_item(id,"1up")
+		energy=3
+    } else {
+        if !size give_item(id,"mushroom") else {if size<=1 {give_item(id,"shield")}}
+} 
 com_item()
 
 #define endofstage
@@ -192,159 +244,187 @@ right=1
 grabbedflagpole=0
 autorun=1
 
+#define damager
+if (owner.twirl && owner.bkey) {
 
+	sprite_index=spr_mask2x2
+	mask_index=spr_mask2x2
 
+	x=owner.x y=owner.y-3 image_yscale=8 image_xscale=11
 
-
+	coll=instance_place(x,y,enemy)
+	if (coll) {                    
+		if (coll.object_index!=bombenemy && coll.object_index!=boo
+		&& coll.object_index!=urchin) {
+		global.coll=owner.id
+		enemydie(coll,2)
+		}
+	}
+} else {y=-1000}
 
 
 #define projectile
 if (event="create") {
-if ((owner.hang && owner.vsp>1) || owner.braking) {hspeed*=-1 x-=8*xsc}
-image_xscale=3
-image_yscale=2
-imaproj=1
-frame_sub=0
-frame=0
-vspeed=1
-seqcount=2
-wait=8
-energy=owner.energy
-alarm1=256
-frame_sub=0
-frame=0
-brickc=0
-seqcount=2
-kek=8
-hspeed=owner.xsc*3.2+owner.hsp*0.2
-vspeed=0.7
-exploding=0
-exploframe=0
-visible=1
-
-frame1proj=1
+	if ((owner.hang && owner.vsp>1) || owner.braking) {hspeed*=-1 x-=8*xsc}
+	image_xscale=3
+	image_yscale=2
+	imaproj=1
+	frame_sub=0
+	frame=0
+	vspeed=1
+	seqcount=2
+	wait=8
+	energy=owner.energy
+	alarm1=256
+	frame_sub=0
+	frame=0
+	brickc=0
+	seqcount=2
+	kek=8
+	hspeed=owner.xsc*3.2+owner.hsp*0.2
+	vspeed=0.7
+	exploding=0
+	exploframe=0
+	visible=1
 }
 
 if (event="step") {
-calcmoving()
-ignoreoncount=0
-if exploding=0 && !trail{
+	calcmoving()
+	if (exploding=0 && !trail && !itemhelper) {
+		xsc=esign(hspeed,1)
 
-xsc=esign(hspeed,1)
+		frame_sub=!frame_sub
+		frame_sub+=1
+		if (frame_sub==4) {frame=(frame+1) mod 4 frame_sub=0}
 
-frame_sub=!frame_sub
-frame_sub+=1
-if (frame_sub==4) {frame=(frame+1) mod 4 frame_sub=0}
+		if (!inview()) instance_destroy()
+		alarm1-=1 if alarm1<0{exploding=1}
+		xsc=esign(hspeed,xsc)
 
-if (!inview()) instance_destroy()
-alarm1-=1 if alarm1<0{exploding=1}
-xsc=esign(hspeed,xsc)
+		if energy>2{
+			od=96 
+			with (enemy) {
+				other.d=point_distance(x,y,other.x,other.y)
+				if (other.d<other.od) {
+				other.od=other.d
+				other.targeter=id
+				}
+			}
+			if (targeter) {
+				dir=point_direction(x,y,targeter.x,targeter.y)
+				lock=targeter
+				hspeed=lengthdir_x(3,dir)
+				vspeed=lengthdir_y(3,dir)
+				} else {vspeed=min(2.75,vspeed+0.25)}
+		} else {vspeed=min(2.75,vspeed+0.25)}
 
-if energy>2{
-od=96 
-with (enemy) {
-other.d=point_distance(x,y,other.x,other.y)
-if (other.d<other.od) {
-other.od=other.d
-other.targeter=id
-}
-}
-if (targeter) {
-dir=point_direction(x,y,targeter.x,targeter.y)
-lock=targeter
-hspeed=lengthdir_x(3,dir)
-vspeed=lengthdir_y(3,dir)
-} else {vspeed=min(2.75,vspeed+0.35)}
-} else {vspeed=min(2.75,vspeed+0.35)}
+		coll=instance_place(x,y,bowserboss)
+		if (coll) {
+			if (!coll.flash) {
+				coll.hp-=1
+				coll.flash=64
+				coll.owner=owner
+				sound("enemybowserhurt")
+				instance_create(x,y,kickpart)
+				instance_destroy()
+			}
+		}
 
-coll=instance_place(x,y,bowserboss)
-if (coll) {
-if (!coll.flash) {
-coll.hp-=1
-coll.flash=64
-coll.owner=owner
-sound("enemybowserhurt")
-instance_create(x,y,kickpart)
-instance_destroy()
-}
-}
+		coll=collision(0,0)
+		if (coll) {
+			if (coll.object_index=lavablock) {instance_destroy() exit}
+			if (y<coll.y+4 && !instance_place(x,y-8,collider)) {vspeed=-2.75 y-=2 exit}
+			if energy>1{
+			if ((x<coll.x+4 && !instance_place(x-8,y,collider))||(x>coll.x-4 && !instance_place(x+8,y,collider)))  {hspeed=-hspeed exit}}
 
-coll=collision(0,0)
-if (coll) {
-if (coll.object_index=lavablock) {instance_destroy() exit}
-if (y<coll.y+4 && !instance_place(x,y-8,collider)) {vspeed=-2.75 y-=2 exit}
-if energy>1{
-if ((x<coll.x+4 && !instance_place(x-8,y,collider))||(x>coll.x-4 && !instance_place(x+8,y,collider)))  {hspeed=-hspeed exit}}
+			exploding=1
+			sound("itemblockbump")
+		}
 
-exploding=1
-sound("itemblockbump")
-}
+		coll=instance_place(x,y,enemy)
+		if coll {
+			if (coll.object_index!=beetle 
+			&& coll.object_index!=bombenemy && coll.object_index!=drybones 
+			&& coll.object_index!=boo && coll.object_index!=urchin
+			&& coll.object_index!=pokey && coll.object_index!=pokeybody) {
+				yes=1
+				if (coll.object_index=shell) if (coll.type="beetle") yes=0
+				if (yes) {
+					global.coll=owner.id  
+					instance_create(x,y,kickpart)  
+					enemydie(coll,2)
+				}
+			}
+			exploding=1
+		}
 
-coll=instance_place(x,y,enemy)
-if coll {
-if (coll.object_index!=beetle 
-&& coll.object_index!=bombenemy && coll.object_index!=drybones 
-&& coll.object_index!=boo && coll.object_index!=urchin
-&& coll.object_index!=pokey && coll.object_index!=pokeybody) {
-yes=1
-if (coll.object_index=shell) if (coll.type="beetle") yes=0
-if (yes) {
-global.coll=owner.id  
-instance_create(x,y,kickpart)  
-enemydie(coll,2)
-}
-}
-exploding=1
-}
-
-
-
-coll=instance_place(x,y,player)
-if (coll) {
-if (coll.id!=owner) if (!invincible(coll)) {    
-if (!flag.passed[owner.p2] && !flag.passed[coll.p2] && !coll.flash && !coll.piped) { 
-if (coll.name="knux" && coll.glide && sign(hspeed)=-sign(coll.hsp)) {hspeed=abs(coll.hsp+1)*esign(coll.hsp,1) owner=coll.id with (owner) playsfx("knuxreflect") exit}                                                                   
-if (coll.name="robo" && coll.lookup && coll.xsc=sign(hspeed)) {instance_create(x,y,kickpart) instance_destroy() exit}
-with (coll) hurtplayer("enemy")
-}
-exploding=1
-}
-}
-} else if exploding=1 && !trail{
-exploframe+=0.5
-if (exploframe>=3) {visible=0 instance_destroy()}
-hspeed=0
-vspeed=0
-} else if trail {
-ignoreoncount=1
-hspeed=0
-vspeed=0
-gravity=0
-depth=3
-framesub+=1
-if framesub>4 if frame!=3 {frame+=1 framesub=0} else instance_destroy()
-}
+		coll=instance_place(x,y,player)
+		if (coll) {
+				if (coll.id!=owner) if (!invincible(coll)) {    
+				if (!flag.passed[owner.p2] && !flag.passed[coll.p2] && !coll.flash && !coll.piped) { 
+					if (coll.name="knux" && coll.glide && sign(hspeed)=-sign(coll.hsp)) {hspeed=abs(coll.hsp+1)*esign(coll.hsp,1) owner=coll.id with (owner) playsfx("knuxreflect") exit}                                                                   
+					if (coll.name="robo" && coll.lookup && coll.xsc=sign(hspeed)) {instance_create(x,y,kickpart) instance_destroy() exit}
+					with (coll) hurtplayer("enemy")
+				}
+				exploding=1
+			}
+		}
+	} else if exploding=1 && !trail && !itemhelper{
+		exploframe+=0.5
+		if (exploframe>=3) {visible=0 instance_destroy()}
+		hspeed=0
+		vspeed=0
+	} else if trail && !itemhelper{
+		ignoreoncount=1
+		hspeed=0
+		vspeed=0
+		gravity=0
+		depth=3
+		framesub+=1
+		if framesub>4 if frame!=3 {frame+=1 framesub=0} else instance_destroy()
+	} else if (itemhelper) {
+		with item other.depth=depth
+	}
 
 }
 
 if (event="draw") {
-
-if (owner.addbde && trail) draw_set_blend_mode(bm_add)
-if trail{draw_sprite_part_ext(sheet,0,80+floor(frame)*33,90,32,32,floor(x)-16,floor(y-16),1,1,$ffffff,1)  }
-else 
-if exploding=0{
-draw_sprite_part_ext(sheet,0,10+frame*17,87,16,16,round(x-7*xsc),round(y-7),xsc,1,$ffffff,1)
-} else{
-draw_sprite_part(sheet,0,10+floor(exploframe)*17,106,16,16,round(x-7),round(y-7))
-}
-if (owner.addbde && trail) draw_set_blend_mode(0)
+	if (owner.addbde && trail) draw_set_blend_mode(bm_add)
+	if (itemhelper) {
+	
+		with (item) if (gianadrawon) with other {
+			depth=other.depth
+			other.cusframesub+=1
+			if other.cusframesub>3 {other.cusframe+=1*sign(other.hspeed) other.cusframesub=0}
+			if other.cusframe>7 {other.cusframe=0 }
+			if other.cusframe<0 {other.cusframe=7}
+			if (owner.size=0 || owner.size==5) draw_sprite_part_ext(owner.sheets[owner.size],1,218+other.cusframe*17,38,16,16,other.x-8,floor(other.y-7),1,1,$ffffff,1) 
+			else if owner.energy=0 draw_sprite_part_ext(owner.sheets[owner.size],1,218+other.cusframe*17,55,16,16,other.x-8,floor(other.y-7),1,1,$ffffff,1) 
+			else if owner.energy=1 draw_sprite_part_ext(owner.sheets[owner.size],1,218+other.cusframe*17,72,16,16,other.x-8,floor(other.y-7),1,1,$ffffff,1) 
+			else if owner.energy>=2 draw_sprite_part_ext(owner.sheets[owner.size],1,218+other.cusframe*17,89,16,16,other.x-8,floor(other.y-7),1,1,$ffffff,1)
+		}
+	
+	
+		if (iid>0 && iid.gianadrawon) {
+			
+		}
+	} else {
+		if trail{
+			draw_sprite_part_ext(sheet,0,80+floor(frame)*33,90,32,32,floor(x)-16,floor(y-16),1,1,$ffffff,1)  
+		} else if exploding=0 {
+			draw_sprite_part_ext(sheet,0,10+frame*17,87,16,16,round(x-7*xsc),round(y-7),xsc,1,$ffffff,1)
+		} else {
+			draw_sprite_part(sheet,0,10+floor(exploframe)*17,106,16,16,round(x-7),round(y-7))
+		}
+	}
+	if (owner.addbde && trail) draw_set_blend_mode(0)
 }
 
 
 #define effectsbehind
 cantslowanim=0
 
-var myvis;
+/* var myvis;
 myvis = visible;
 visible = 1;
 with item if gianadrawon {
@@ -358,7 +438,7 @@ with item if gianadrawon {
 	else if other.energy>=2 draw_sprite_part_ext(other.sheets[size],1,218+cusframe*17,89,16,16,x-8,floor(y-7),1,1,$ffffff,1)
 }
 visible = myvis;
-//visible is false when in a pipe, so we need to temporarily enable it while drawing and set it back
+//visible is false when in a pipe, so we need to temporarily enable it while drawing and set it back */
 
 if (addbde) draw_set_blend_mode(bm_add)
 if (gianadash) {
@@ -368,6 +448,7 @@ if (addbde) draw_set_blend_mode(0)
 
 #define sprmanager
 frspd=1
+cantslowanim=0
 
 if (grabflagpole) {sprite="flagslide"}
 else if (growing_rn) {sprite="grow"}
@@ -379,7 +460,7 @@ sprite="climbing" frspd=sign(left+right+up+down)
 }
 else if (hurt) {sprite="knock" onvine = 0}
 else if (gianadash) sprite="dash"
-    else if (twirl) {sprite="twirl" if (!ckey) frspd=0.5}
+    else if (twirl) {sprite="twirl" cantslowanim=1 frspd=0.5+0.3*bkey if (vsp>0 && down) frspd=max(0.5+0.4*bkey,vsp/3)}
 else if (gianadashed) sprite="specialfall"
     else if (fired) {sprite="firejump" cantslowanim=1}
     else if (bonk) sprite="bonk"
@@ -536,6 +617,11 @@ else if (twirl && bkey) stridejump=max(0,inch(stridejump,0,0.03))
 jumpbufferdo=0
 springin=0
 
+if (strideanim){
+	if (vsp<0 && abs(hsp)>3.25) boost=1 
+	else boost=0
+}
+
 if (akey) {
     if (jumpbuffer) jumpbuffer-=1
 } else jumpbuffer=0
@@ -561,7 +647,7 @@ if (up) {
             run=0
         }
 } else if (energy || size=6) && (size!=7) && (!gianadash) {
-        if (size!=6 && size!=7 && count_projectiles()<1) {
+        if (size!=6 && size!=7 && count_projectiles()<2) {
             if (h) {xsc=h braking=0}
 		    hasfired=1
             fire_projectile(x+7*xsc,y)
@@ -590,6 +676,7 @@ hasfired=0
         if (twirl) {
             fall=13
             twirl=0
+			boost=0
             insted=1
         } else if energy && size!=6 && size!=7{
             gianadash=15-(7*energy<2)
@@ -637,7 +724,9 @@ com_piping()
 }else {crouch=0 slide=0}
 
 
-if (size==5) mask_set(9,8) else mask_set(12,15)        
+if (size==5) mask_set(9,8) 
+else if (crouch) mask_set(12,12)
+else mask_set(12,15)        
 
 #define movement
 if (piped || move_lock || transforming || growing_rn || hurting_rn) exit
@@ -648,6 +737,7 @@ if (loose) {
     braking=0
 }
 
+global.coll=id
 collmon=instance_position(x,y+22,monitor)
 if (collmon) {
 jump=1 vsp=-2
@@ -717,7 +807,16 @@ player_nslopforce()
 //yground=easyground()
 //if (yground!=verybignumber) yground-=14
 if (jump) {
-if (twirl && !luijump) vsp=min(vsp+0.1*wf,3-2.5*bkey)
+if (twirl && !luijump) {
+	vsp=min(vsp+0.1*wf,3-(2.5*!down)+(2.5*down))
+	if (vsp>3.5) {
+		if !boost && !count_owned(psmoke) {
+			shoot(x,y,psmoke,0,0)
+			playsfx(name+"drill")
+			}
+		boost=1
+	} else boost=0
+}
 else if (water) vsp=min(1.5,vsp+0.04)
 else if fall!=69 && !luijump {
 vsp=min(4,vsp+0.15*wf)
@@ -781,17 +880,39 @@ pvp_ignore=0 //For when you wanna hit the others but not yourself
 pvp_knockaway=0 //I won't hurt you, just go away
 
 if (piped||transforming) exit
+
+
 //custom powerups
-with item { if object_index=mushroom
-if global.mplay<=1 || instance_nearest(x,y,player).name="giana"
-{
-visible=0
-gianadrawon=1
-is_beingdrawnonbycharm=1
-} else {gianadrawon=1 is_beingdrawnonbycharm=0 visible=1}
+with (item) { 
+	if (object_index=mushroom) {
+		if (global.mplay<=1 || instance_nearest(x,y,player).name="giana") {
+			visible=0
+			gianadrawon=1
+			is_beingdrawnonbycharm=1
+		} else {
+			gianadrawon=1 
+			is_beingdrawnonbycharm=0 
+			visible=1
+		}
+	}
 }
 
 
+//item helper (lets us draw at a depth independent of giana)
+if (myitemhelper=noone || !instance_exists(myitemhelper) || myitemhelper==0) {
+	with instance_create(x,y,projectile) {
+		owner=other.id
+		p2=owner.p2
+		orig=owner
+		xsc=esign(owner.hspeed,owner.xsc)
+		sheet=owner.sheets[owner.size]
+	
+		other.myitemhelper=id
+		itemhelper=1
+		visible=1
+	}
+	
+}
 
 //waiting animation
 if maxwait{
@@ -799,9 +920,6 @@ if (sprite="stand")
 {waittime+=1}
 else if sprite!="wait" waittime=0
 }
-
-
-
 
 
 if (!jump) {
@@ -822,7 +940,7 @@ if (underwater()) {
         vsp=min(1,vsp/2)
         jumpspd=1
     }
-    water=1 wf=0.45
+    water=1 wf=0.6
 } else {
     if (water) {
         water=0
@@ -848,14 +966,22 @@ if (jump && !fall) fall=1
 dashcooldown=max(0,dashcooldown-1)
 swim=max(0,swim-1)
 growing_rn=max(0,growing_rn-1)
-if growing_rn{set_sprite("grow")
-hsp=0
-hspeed=0
-vsp=0
-vspeed=0
-gianadash=0
-twirl=0
-if growing_rn=1 {if mynewitems=1 {size=6 mynewitems=0} else if mynewitems=2 {size=7 mynewitems=0} else size=1}
+
+if (growing_rn) {
+	set_sprite("grow")
+	hsp=0
+	hspeed=0
+	vsp=0
+	vspeed=0
+	gianadash=0
+	twirl=0
+	if growing_rn=1 {
+		if mynewitems==1 {size=1 mynewitems=0}
+		else if mynewitems=2 {size=3 mynewitems=0} 
+		else if mynewitems=3 {size=6 mynewitems=0} 
+		else if mynewitems=4 {size=7 mynewitems=0} 
+	else size=1
+	}
 }
 hurting_rn-=1
 if hurting_rn{set_sprite("knock")
@@ -886,11 +1012,11 @@ if (gianadash) {
         else gianadash=min(gianadash,10)
     }
     if (hsp>=0) {
-        if (xsc=-1) {sprite_angle=(sprite_angle+180) mod 360 xsc=1}
-        sprite_angle=dashdir
+       // if (xsc=-1) {sprite_angle=(sprite_angle+180) mod 360 xsc=1}
+		//sprite_angle=dashdir
     } else {
-        if (xsc=1) {sprite_angle=(sprite_angle+180) mod 360 xsc=-1}
-        sprite_angle=dashdir-180
+       // if (xsc=1) {sprite_angle=(sprite_angle+180) mod 360 xsc=-1}
+        //sprite_angle=dashdir-180
     }
 } else sprite_angle=0
 
@@ -1133,45 +1259,46 @@ hurting_rn=30
 //Block hitting
 
 #define hitblocks
-if typeblockhit=0{
-with (blockcoll){
-if (stonebump || (owner.size=0 || owner.size=5) && insted!=1 && !owner.tempkill && (cracked=0 || (cracked=1 && owner.size=5))) {
-    if (!goinup) {if (insted!=2) owner.vsp=1.5 sound("itemblockbump") tpos=1}
-    if (owner.gianadash && !stonebump/* && owner.size!=5*/){
-        owner.vsp=1.5
-        cracked=1
-        i=instance_create(x,y,crackedbrick)
-        i.owner=id
-        i.biome=biome
-        i.imcrack=1
-        i.go=go
-        i.tpos=1
-    }
-} else { 
-if (!insted) {owner.vsp=1.5}
-tpos=1
-owner.blockc+=1
-upwardthrust()
-global.scor[owner.p2]+=10
-sound("itemblockbreak")
-hit=1
-if (skindat("bricd")) {
-i=instance_create(x,y,bricd)
-i.biome=biome
-i.depth=depth
-}
-if (stoned="1") with (instance_create(x,y+8,stone)) phase=1
-i=instance_create(x+4,y+12,part) i.hspeed=-1 i.vspeed=-1+2*go
-i=instance_create(x+12,y+12,part) i.hspeed=1 i.vspeed=-1+2*go 
-i=instance_create(x+4,y+4,part) i.hspeed=-1 i.vspeed=-3+2*go
-i=instance_create(x+12,y+4,part) i.hspeed=1 i.vspeed=-3+2*go
+if (typeblockhit=0) {
+	with (blockcoll){
+	if (stonebump || (owner.size=0 || owner.size=5 || owner.twirl) && insted!=1 && !owner.tempkill && (cracked=0 || (cracked=1 && owner.size=5))) {
+		if (owner.gianadash && !stonebump/* && owner.size!=5*/){
+			owner.vsp=1.5
+			cracked=1
+			i=instance_create(x,y,crackedbrick)
+			i.owner=id
+			i.biome=biome
+			i.imcrack=1
+			i.go=go
+			i.tpos=1
+		}
+		if (!goinup) {if (insted!=2) owner.vsp=1.5 sound("itemblockbump") tpos=1}
+	} else { 
+		if (!insted) {owner.vsp=1.5}
+		tpos=1
+		owner.blockc+=1
+		upwardthrust()
+		global.scor[owner.p2]+=10
+		sound("itemblockbreak")
+		hit=1
+		if (skindat("bricd")) {
+		i=instance_create(x,y,bricd)
+		i.biome=biome
+		i.depth=depth
+		}
+		if (stoned="1") with (instance_create(x,y+8,stone)) phase=1
+		i=instance_create(x+4,y+12,part) i.hspeed=-1 i.vspeed=-1+2*go
+		i=instance_create(x+12,y+12,part) i.hspeed=1 i.vspeed=-1+2*go 
+		i=instance_create(x+4,y+4,part) i.hspeed=-1 i.vspeed=-3+2*go
+		i=instance_create(x+12,y+4,part) i.hspeed=1 i.vspeed=-3+2*go
 
-with (turing) event_user(4)
-instance_destroy()
-}
-}
-}  else if typeblockhit=1{
-hititembox()
+		with (turing) event_user(4)
+		instance_destroy()
+		}
+	}
+}  else if typeblockhit=1 {
+	with (blockcoll) {if (content=="item") mush=1}
+	hititembox()
 }
 
 #define hitwall
@@ -1209,52 +1336,70 @@ playsfx(name+"step")
 //jump buffering
 if (jumpbuffer) jumpbuffer=-1
 
+if (twirl && boost) {
+	global.coll=id
+	with (hittable) if (instance_place(x,y-max(4,other.vsp),other.id)) {
+		go=1
+        event_user(0)
+		picked=0
+	} 
+	coll=collision(0,y-max(4,vsp))
+	boost=0
+	hsp=0
+}
+
+if (coll=noone) exit
+
+if (boost && hsp<maxspeed && !hyperspeed && !gm8exspd) boost=0
+
+
 #define death
-if (event="create"){
+if (event="create") {
+	gravity=0.1
+	vspeed=-3
+	sprite_angle=0
+	c=4
 
-gravity=0.1
-vspeed=-3
-sprite_angle=0
-c=4
-
-frame=0
-frspd=1
-name="giana"
-sprite="die"
-alpha=1
+	frame=0
+	frspd=1
+	name="giana"
+	sprite="die"
+	alpha=1
 
 
-alarm1=300
+	alarm1=300
 
-if owner.sprite!=sprite {owner.sprite=sprite with owner set_sprite(sprite)}
-depth=-4
-name=owner.name
-p2=owner.p2
-owner=owner.id
-size=owner.size
-if size==5 size=0
-xsc=owner.xsc
-ysc=owner.ysc
-frn=owner.frn
+	if owner.sprite!=sprite {owner.sprite=sprite with owner set_sprite(sprite)}
+	depth=-4
+	name=owner.name
+	p2=owner.p2
+	owner=owner.id
+	size=owner.size
+	if size==5 size=0
+	xsc=owner.xsc
+	ysc=owner.ysc
+	frn=owner.frn
 
-vspeed=-3.5 gravity=0.1-(owner.water*0.015)
+	vspeed=-3.5 gravity=0.1-(owner.water*0.015)
 } 
 else if (event="step"){
-if owner.sprite!=sprite {owner.sprite=sprite with owner set_sprite(sprite)}
-alarm1=max(0,alarm1-1)
+	if owner.sprite!=sprite {owner.sprite=sprite with owner set_sprite(sprite)}
+	alarm1=max(0,alarm1-1)
 
-if (rotate) {
-    c-=1
-    if (!c) {c=4 sprite_angle-=8 xsc+=0.05*sign(xsc) ysc+=0.05}
-}
-spriteswitch(1)
+	if (rotate) {
+		c-=1
+		if (!c) {c=4 sprite_angle-=8 xsc+=0.05*sign(xsc) ysc+=0.05}
+	}
+	spriteswitch(1)
 
-if alarm1=0 instance_destroy()
-} else if (event="draw"){
+	if alarm1=0 instance_destroy()
+} 
+else if (event="draw"){
+
 }
 
 #define enterpipe
-if (gianadash) fastpipe=1
+if (gianadash || (twirl && boost)) fastpipe=1
 gianadash=0
 braking=0
 crouch=0
