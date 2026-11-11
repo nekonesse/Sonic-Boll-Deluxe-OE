@@ -549,11 +549,6 @@ listobj(turing          ,0,spr_turing       ,78,turing)
     listargs("src","dst")
     listdata("0,0","0,0")
 
-listobj(function        ,0,spr_function     ,79,function)
-    listdoc("Function Block")
-    listargs("type","text")
-    listdata("char",""    )
-
 listobj(code            ,0,spr_code         ,80,code)
     listdoc("Code Block","Read the Technical Document for info.")
     listargs("text","run","channelid")
@@ -974,8 +969,6 @@ listdoc("Gobble","Compares two signals from external sources.")
 listargs("src","src2","type","channelid")
 listdata("0,0","0,0","0","0")
 
-//End
-
 listobj(spawnerblock          ,0,spr_spawnerblock      ,163,spawnerblock)
 listdoc("Spawner","Spawns any object with a signal. Read the Technical Document for info.")
 listargs("align","object","ccode","channelid","invis")
@@ -985,11 +978,6 @@ listobj(enemydummy          ,1,spr_enemydummy      ,211,enemydummy)
 listdoc("Samba","When you just feel like sitting around and doing nothing.#Can execute creation code.")
 listargs("align","ccode")
 listdata("0","")
-
-/*listobj(spriteswitcher          ,0,spr_spriteswitcher     ,166,signalcommunicator)
-listdoc("Sprite Switcher","Visually changes the player's sprite. Read the Technical Document for info.")
-listargs("align","nearest","setspr","channelid")
-listdata("0","0","","0")*/
 
 listobj(cloudtile         ,0,spr_cloudtile     ,166,groundsemi)
 listdoc("Cloud Tile","Acts like a single tile semisolid.")

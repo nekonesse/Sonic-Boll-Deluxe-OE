@@ -603,14 +603,6 @@ switch (argument[0]) {
         if (type=2) return "Height: "+string(i)
     }
 
-    case function: {
-        if (type=0) {
-            if (i="save") return "Save Block"
-            if (i="char") return "Character Swap Block"
-            if (i="end") return "Level End Block"
-        }
-        if (type=1) return "Text: "+i
-    }
     case code: {
         if (type=0) {
             return "Code: "+i
@@ -1073,22 +1065,6 @@ switch (argument[0]) {
         if (type=0) {return "Align: "+string(i)}
         if (type=1) {
             if (i="1") return "Jumping" return "Stationary"
-        }
-    }
-
-    case spriteswitcher: {
-        if (type=0) {return "Align: "+string(i)}
-        if (type=1) {
-            if (i="0") return "All Players"
-            if (i="1") return "Nearest Player"
-        }
-        if (type=2) {
-            return "Set Sprite: "+i
-        }
-        if (type=3) {
-            if (i="0") return "Input Channel: None"
-            else
-            return "Input Channel: "+i
         }
     }
 
