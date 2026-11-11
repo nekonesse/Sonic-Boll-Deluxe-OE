@@ -10,7 +10,7 @@ mario
 #define movelist
 Mario (SMB1)
 #
-[a]: Jump / [fthr]: Double Jump
+[a]: Jump
 [b]: Run / [flwr]: Fireball
 
 #define rosterorder
@@ -268,16 +268,16 @@ if (h!=0 && !wallkick) {
     } else {
         if (!jump) {
             if (esign(hsp,xsc)!=h) {
-                if (abs(hsp)>2 && !carry) {
+                if (abs(hsp)>0.5625 && !carry) {
                     braking=1
                     skidding=1
                     playsfx(name+"skid",1)
                     brakedir=h
                 }
-                hsp+=(min(0.0508,frick)*2)*wf*(h*2)
-                if (abs(hsp)<0 || carry && !spin) xsc=h
+                hsp+=frick*wf*h*2
+                if (abs(hsp)<0.5625 || carry && !spin) xsc=h
             } else {
-                hsp+=(frick)*wf*h
+                hsp+=frick*wf*h
                 xsc=h
                 braking=0
             }
@@ -1137,8 +1137,8 @@ if egg() if (piped=1 && star=0 && depth=-11 && friction=0.05 && jump=0) set_spri
 #define death
 if (event="create"){
 alarmmp=60
-alarm0=30
-alarm1=300
+alarm0=60
+alarm1=600
 sprite="dead"
 didonce=0
 frspd=1
