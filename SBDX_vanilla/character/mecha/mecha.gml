@@ -1095,7 +1095,7 @@ if (global.dustframe) {
 }
 
 maxe=4+(!!size && size!=5)*2
-if (jet || lookup || chargestored || sparkcharge ) mcs=0
+if (jet || chargestored || sparkcharge ) mcs=0
 if (mcs>=(60-30*(size==3))) {energy+=1 mcs=0}
 if (!jump && !sparkcharge && !chargestored) energy=max(2,energy)
 

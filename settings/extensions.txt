@@ -1,3 +1,5 @@
+ds_bin
 Game Maker 8.2 Buffer
 Game Maker 8.2 Core
 Game Maker 8.2 DirectX9
+Useless JSON

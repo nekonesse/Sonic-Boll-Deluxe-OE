@@ -27,20 +27,26 @@ cpu_deadstore=dead
 if !auto &&  (global.joynum>(global.input[p2]))||global.input[p2]<2 input_get(global.input[p2])
 if (left||right||down||up||akey||bkey||ckey||skey||xkey||ykey||zkey)
 {
-player_controlled=1
-backtocputimer=0
+    player_controlled=1
+    backtocputimer=0
 }
 if !player_controlled { 
-akey=0 
-bkey=0 
-ckey=0 
-skey=0
-left=0 
-xkey=0 
-ykey=0 
-zkey=0
-backtocputimer=0
-} else { backtocputimer+=1 if backtocputimer>480 {player_controlled=0 backtocputimer=0} }
+    akey=0 
+    bkey=0 
+    ckey=0 
+    skey=0
+    left=0 
+    xkey=0 
+    ykey=0 
+    zkey=0
+    backtocputimer=0
+} else { 
+    backtocputimer+=1 
+    if backtocputimer>480 {
+        player_controlled=0 
+        backtocputimer=0
+    } 
+}
 
 if player_controlled exit
 
@@ -60,10 +66,18 @@ if cpu_myleader.down down=1
 if cpu_myleader.spindash&&abs(hsp)<0.5&&!jump{xsc=cpu_myleader.xsc spindash=cpu_myleader.xsc}
 if cpu_myleader.abut && !jump {jumpwait=abs(cpu_myleader.x-x)/max(abs(cpu_myleader.hsp),1)  }
 
-if !jump {if jumpwait {jumpwait-=1 if jumpwait<=1 akey=1}}
+if !jump {
+    if jumpwait {
+        jumpwait-=1 
+        if jumpwait<=1 akey=1
+    }
+}
 
 if vsp>0 canstopjump=0
-if jump && (cpu_myleader.vsp+cpu_myleader.y) <(y+16)&&canstopjump &&vsp<-1 {akey=1 cpu_akeystuck=0}
+if jump && (cpu_myleader.vsp+cpu_myleader.y) <(y+16)&&canstopjump &&vsp<-1 {
+    akey=1 
+    cpu_akeystuck=0
+}
 
 
 
@@ -71,22 +85,20 @@ if jump && (cpu_myleader.vsp+cpu_myleader.y) <(y+16)&&canstopjump &&vsp<-1 {akey
 if push!=0 && !instance_place(x+8*xsc,y-32,collider) akey=1
 if !jump
 if collision_line(x,y,cpu_myleader.x,cpu_myleader.y,collider,0,1){
-//Determine where the thing is.
-
-if abs(cpu_myleader.x-x)<32 && !push{ //Unlikely that there's something between us horizontally, let's check vertically.
-
-
-} else{//Ah shit there's something here, even worse, jumping wont fix our issues.
-if collision_line(x,bbox_bottom,cpu_myleader.x,cpu_myleader.bbox_bottom,collider,0,1){
-//It's not a tube... (From here characters would likely react differently)
-
-} else{ //Oh it's just a tube lmao (Found a small tunnel, characters will react differently.)
-down=1 akey=1
-}
-
-}
-
-
+    //Determine where the thing is.
+    
+    if abs(cpu_myleader.x-x)<32 && !push{ //Unlikely that there's something between us horizontally, let's check vertically.
+    
+    
+    } else{//Ah shit there's something here, even worse, jumping wont fix our issues.
+        if collision_line(x,bbox_bottom,cpu_myleader.x,cpu_myleader.bbox_bottom,collider,0,1){
+        //It's not a tube... (From here characters would likely react differently)
+        
+        } else{ //Oh it's just a tube lmao (Found a small tunnel, characters will react differently.)
+            down=1
+            akey=1
+        }
+    }
 }
 
 
@@ -95,9 +107,17 @@ down=1 akey=1
 
 
 //Back to general stuff
-if akey cpu_akeystuck+=1 else cpu_akeystuck=0
-if cpu_akeystuck>5{akey=0 cpu_akeystuck=0}
+if akey cpu_akeystuck+=1
+else cpu_akeystuck=0
 
-    if !inview() && !dead {x=cpu_myleader.x y=cpu_myleader.y}
+if cpu_akeystuck>5 {
+    akey=0
+    cpu_akeystuck=0
+}
+
+if !inview() && !dead {
+    x=cpu_myleader.x
+    y=cpu_myleader.y
+}
 
 }

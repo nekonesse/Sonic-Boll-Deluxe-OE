@@ -360,6 +360,7 @@
 			|is_mini
 			|is_extra
 			|is_shielded
+			|has_starman
 			|com_proj_dmg_enemies
 			|com_proj_dmg_blocks
 			|com_proj_mov_bouncefloor
@@ -374,7 +375,6 @@
 			|com_handlespindashdust
 			|com_dorecurl
 			|com_handlesonicdash
-			|com_handlecloverwallrun
 			|com_starthomingattack
 			|com_handlehomingattack
 			|com_startpeelout

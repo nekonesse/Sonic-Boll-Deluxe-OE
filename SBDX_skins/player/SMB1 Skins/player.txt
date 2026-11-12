@@ -1,7 +1,7 @@
 [mario]
 name=Mario
 
-
+sheetname=classicmario
 
 first spray: hat, signpost black, hair, moustache and eyes
 second spray: pants outline, shirt
@@ -575,6 +575,171 @@ princess=our Princess
 savetext1=Peace is Paved
 savetext2=With Kingdom Saved
 savetext3=Hurrah to Ashura
+savetext4=Our Only Hero 
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship
+
+[retromario]
+name=Mario
+
+sheetname=classicmario
+
+first spray: hat, signpost black, hair, moustache and eyes
+second spray: pants outline, shirt
+third spray: signpost bg, pants, buttons
+fourth spray: skin, shoes, gloves, gloves outline
+
+
+
+icon speed=6
+icon loop=yes
+animation speed=1.0
+center x=16
+center y=18
+box width=33
+box height=34
+
+victory duration=0
+time until wait=0
+pipe squish=0
+pole center offset=8
+fire duration=8
+
+sheet splits=0
+sheet split size=0
+
+use paletting=true
+defaultspray 1=0
+defaultspray 2=0
+defaultspray 3=0
+defaultspray 4=0
+
+single sheet=true
+singlesheet split width=8,371,371,371,371,8,371,371
+singlesheet split height=0,0,0,0,0,0
+
+size reroute feather=big
+size reroute lui=big
+size reroute beet=big
+
+custom sprite list=stand,crouch,brake,walk,jump,hurt,dead,flagslide,standcarry,crouchcarry,throw,walkcarry,jumpcarry,handlegrab,flaghold,climbing,groundpound,poundfall,roll,swim,paddle,swimcarry,fire,spinjump,dive,capeflight,growing
+reroute wait=stand
+reroute lookup=stand
+reroute pose=stand
+reroute run=walk
+reroute bonk=jump
+reroute bonkbrick=jump
+reroute fall=jump
+reroute runjump=jump
+reroute longjump=jump
+reroute sideflip=jump
+reroute doublejump=jump
+reroute doublejumpbonk=jump
+reroute doublejumpfall=jump
+reroute wallslide=brake
+reroute slide=crouch
+reroute lookupcarry=standcarry
+reroute bonkcarry=jumpcarry
+reroute fallcarry=jumpcarry
+reroute doublejumpcarry=jumpcarry
+reroute airthrow=throw
+reroute push=walk
+reroute balancing=stand
+reroute bellyslide=dive
+reroute grind=jump
+reroute piping=crouch
+reroute pipingup=stand
+reroute sidepiping=walk
+reroute doorenter=stand
+reroute doorexit=stand
+reroute handlegrab=handlegrab
+reroute bonkbrick=jump
+
+connect crouch=true
+connect brake=true
+connect walk=true
+connect jump=true
+connect hurt=true
+connect dead=true
+connect flagslide=true
+connect crouchcarry=true
+connect throw=true
+connect walkcarry=true
+connect jumpcarry=true
+connect handlegrab=true
+connect flaghold=true
+connect climbing=true
+connect poundfall=true
+connect paddle=true
+connect swimcarry=true
+connect fire=true
+connect dive=true
+connect capeflight=true
+connect growing=true
+
+stand frames=1
+crouch frames=1
+brake frames=1
+walk frames=3
+jump frames=1
+hurt frames=1
+dead frames=1
+standcarry frames=1
+crouchcarry frames=1
+throw frames=1
+walkcarry frames=3
+jumpcarry frames=1
+groundpound frames=8
+poundfall frames=1
+roll frames=8
+slide frames=1
+swim frames=2
+paddle frames=3,4,4,4,4,3
+swimcarry frames=2
+fire frames=1
+spinjump frames=4
+dive frames=1
+capeflight frames=3
+flaghold frames=1
+climbing frames=2
+flagslide frames=2
+
+groundpound loop=8
+paddle loop=3
+
+stand speed=0.2
+crouch speed=0.22
+brake speed=0.3
+walk speed=0.5
+jump speed=0.5
+roll speed=1
+swim speed=0.4
+paddle speed=0.75
+swimcarry speed=0.3
+walkcarry speed=0.5
+jumpcarry speed=0.1
+fallcarry speed=0.15
+spinjump speed=0.375
+climbing speed=0.125
+flagslide speed=0.125
+piping speed=0.50
+pipingup speed=0.50
+sidepiping speed=0.5
+doorenter speed=0.15
+doorexit speed=0.1
+
+boll top=#d82800
+boll mid=#000000
+boll bot=#887000
+
+[lang retromario]
+winspecial=Mario got a Chaos Emerald
+allspecial=Mario got all Chaos Emeralds
+credits=Gorsal, Artie, Rapid the Hedgehog, MarioBegins, PolarKoala
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Mario
 savetext4=Our Only Hero 
 savetext5=This Ends Your Trip
 savetext6=Of a Long Friendship

@@ -299,16 +299,6 @@ switch (argument[0]) {
         if (type=1) return string(show_contextmenu("Left|Center|Right",unreal(argument[2])))
         if (type=2) return string(get_color(unreal(argument[2])))
     }
-    case function: {
-        if (type=0) {
-            i=show_contextmenu("Function:|-|Save|Character Swap|Level End",0)
-            if (!i) return argument[2]
-            if (i=1) return "save"
-            if (i=2) return "char"
-            if (i=3) return "end"
-        }
-        if (type=1) return get_string("Function block text:",argument[2])
-    }
     case turing: {
         with (drawregion) {
             turingpick=1
@@ -1078,19 +1068,6 @@ switch (argument[0]) {
         if (type=0) return get_string("Alignment in pixels (x,y):",argument[2])
         if (type=1) {
             return get_string("Create Code:",argument[2])
-        }
-    }
-
-    case spriteswitcher: {
-        if (type=0) return get_string("Alignment in pixels (x,y):",argument[2])
-        if (type=1) {
-            return string(!funnytruefalse(argument[2]))
-        }
-        if (type=2) {
-            return get_string("Set Sprite:",argument[2])
-        }
-        if (type=3) {
-            return get_string("Input Channel ID (0-999):",argument[2])
         }
     }
 

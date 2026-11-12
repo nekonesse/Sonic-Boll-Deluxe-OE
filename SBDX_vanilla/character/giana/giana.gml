@@ -131,7 +131,7 @@ if ((!piped && !hurt && !(global.mplay>1 && flash)) || monitem) {
 			if (!super && size!=3) grow=1
 			energy+=1
 			itemget=1
-            if (size=0 || size=1 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}               
+            if (size=0 || size=1 || size=5 || size=6 || size=7) {playgrowsfx("") set_sprite("grow") mynewitems=2 growing_rn=60 sprite_angle=0 } else {playgrowsfx("2")}               
 		}
 	}
 	else if (type="mini" || type="monitor_mini") {
@@ -235,7 +235,8 @@ else if (type="redcoinreward") {
         give_item(id,"1up")
 		energy=3
     } else {
-        if !size give_item(id,"mushroom") else {if size<=1 {give_item(id,"shield")}}
+        if !size give_item(id,"mushroom") else {if size<=1 give_item(id,"shield")}
+	}
 } 
 com_item()
 
@@ -661,6 +662,7 @@ if (up) {
                 hspeed=max((1 + (abs(other.hsp) / 2.2)),1.2) * xsc; //yaargh me formula
                 vspeed = -2.4;
                 visible = 0;
+				ignoreoncount=0
             }
 			p2 = real(ss);
 			playsfx("gianafireball")
@@ -910,6 +912,7 @@ if (myitemhelper=noone || !instance_exists(myitemhelper) || myitemhelper==0) {
 		other.myitemhelper=id
 		itemhelper=1
 		visible=1
+		ignoreoncount=1
 	}
 	
 }
@@ -1000,7 +1003,9 @@ if (!stridejump && !jump) {stridealt=1 strideanim=0}
 if (gianadash) {
     gianadash-=1
     insted=1
-    if (!(gianadash mod 2)) i=fire_projectile(x,y)i.trail=1
+    if (!(gianadash mod 2)) {
+		i=fire_projectile(x,y) i.trail=1 i.ignoreoncount=1
+	}
     if (!gianadash) {fall=13 dashcooldown=8}
     if ((left || right || up || down) && !dashlock) {
         d=anglediff(dashdir,point_direction(0,0,right-left,down-up))

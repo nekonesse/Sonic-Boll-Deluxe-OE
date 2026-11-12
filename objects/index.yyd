@@ -332,7 +332,7 @@ hitswitch
 anchor
 
 turing
-function
+
 code
 genblock
 gravitymanager
@@ -1058,7 +1058,7 @@ staticdummy
 enemydummy
 colliderdummy
 hazarddummy
-spriteswitcher
+
 orbinautgreen
 orbispikyball
 orbinautblue

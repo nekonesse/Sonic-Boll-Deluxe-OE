@@ -728,7 +728,6 @@
 		|fencezone
 		|anchor
 		|slopebox
-		|function
 		|code
 		|cleanuphelper
 		|badcode
@@ -750,7 +749,6 @@
 		|gate
 		|sidegate
 		|signalblock
-		|spriteswitcher
 		|lightbulb
 	|lemon_tile
 |DISCLAIMERSCREEN
