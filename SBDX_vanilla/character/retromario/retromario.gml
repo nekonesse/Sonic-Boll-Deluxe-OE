@@ -8,7 +8,7 @@ skid,swim,pound,stomp,smalljump,kick,fireball
 mario
 
 #define movelist
-Mario (SMB1)
+Retro Mario
 #
 [a]: Jump
 [b]: Run / [flwr]: Fireball
