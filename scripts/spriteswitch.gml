@@ -15,7 +15,9 @@ if (object_index=player ) {
 
 
     mem=size //memphis tennesse
-    if (((hurt || fall=6) && hk<4) || (grow && gk mod 6<3)) size=oldsize
+
+    if (((hurt || fall=6) && hk<4) || ((grow && gk mod 6<3) && showgrow) || (showoldsize)) size=oldsize
+
     sheet=sheets[size]
 } else {
     if (step==1) { //CONGRATULATIONS!!! YOU WIN A FREE iPHONE 5
@@ -37,7 +39,7 @@ if (step) {
     //reset frame on sprite change
     if (sprite!=oldspr && !keepframebetween) frame=0
         //find sprite position in list
-    if ((sprite!=oldspr) || (((hurt || fall=6) && hk<4) || (grow && gk mod 6<3))|| object_index==charmdeath ) {
+    if ((sprite!=oldspr) || (((hurt || fall=6) && hk<4) || ((grow && gk mod 6<3) && showgrow)) || (showoldsize) || object_index==charmdeath ) {
         sid=0
 
         //From sprite(string) which expects default sprite list, into sid(int) which expects custom sprite list
@@ -68,5 +70,5 @@ if (step) {
 
 if (object_index=player||object_index=charmdeath||is_spriteswitcher) {
     ssw_core(step)
-    if (!super) if (((hurt || fall=6) && hk<4) || (grow && gk mod 6<3)) size=mem
+    if (!super) if (((hurt || fall=6) && hk<4) || ((grow && gk mod 6<3) && showgrow) || (showoldsize)) size=mem
 } else ssw_core(step)

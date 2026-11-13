@@ -219,10 +219,10 @@ if !global.playerbecomesmall
 if !(flash && global.bgscroll mod 5<3)
     if !(diggity=32 && digvisible){
         mem=size
-        if (((hurt || fall=6) && hk<4) || (grow && gk mod 6<3)) size=oldsize
+        if (((hurt || fall=6) && hk<4) || ((grow && gk mod 6<3) && showgrow) || (showoldsize)) size=oldsize
         sheet=sheets[size]
         ssw_core(0)
-        if (!super) if (((hurt || fall=6) && hk<4) || (grow && gk mod 6<3)) size=mem
+        if (!super) if (((hurt || fall=6) && hk<4) || ((grow && gk mod 6<3) && showgrow) || (showoldsize)) size=mem
     }
 
 
