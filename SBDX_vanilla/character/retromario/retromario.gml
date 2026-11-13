@@ -50,14 +50,37 @@ else if (type="1up") {
 	deaths=max(0,deaths-1)
 	itemget=1
 } 
+
 switch(type) {
 	case "mushroom":
+		if (size==0) || (size==5) {
+			powerupfreeze = 60;
+		}
+	break;
 	case "fflower":
+		if (size!=2) {
+			powerupfreeze = 60;
+		}
+	break;
 	case "bfeather":
+		if (size!=3) {
+			powerupfreeze = 60;
+		}
+	break;
 	case "btroot":
+		if (size!=6) {
+			powerupfreeze = 60;
+		}
+	break;
 	case "glui":
+		if (size!=7) {
+			powerupfreeze = 60;
+		}
+	break;
 	case "mini":
-		powerupfreeze = 60;
+		if (size!=5) {
+			powerupfreeze = 60;
+		}
 	break;
 }
 com_item()
@@ -331,7 +354,7 @@ if ((abut || jumpbufferdo || jumpglitch) && !springin) {
 			}
 		}
         else {
-        	if !(jumpglitch) {
+        	if !(jumpglitch) || (size != 2) {
 				if (size==0 || size==5) jumpsnd=playsfx(name+"smalljump",0,1+(size==5)/3)
 		        else jumpsnd=playsfx(name+"jump",0,1)
         	} else {
@@ -456,7 +479,11 @@ else mask_set(12,24)
 if (piped || move_lock) exit
 
 if (powerupfreeze) {
+	is_intangible = true;
 	powerupfreeze -= 1;
+	if !(powerupfreeze) {
+		is_intangible = false;
+	}
 	hsp=0;
     vsp=0;
 	exit;
@@ -466,16 +493,16 @@ if (auto) {hsp=1}
 
 //speed limits
 if ((loose && !jump) || (crouch && !jump)) {
-if (braking) xsc=brakedir
-braking=0
-
-frick=0.0371
-if (abs(hsp)>=2.4) frick=0.0557
-if (abs(hsp)>1.5 && !run) frick=0.0508
-
-
-
-if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
+	if (braking) xsc=brakedir
+	braking=0
+	
+	frick=0.0371
+	if (abs(hsp)>=2.4) frick=0.0557
+	if (abs(hsp)>1.5 && !run) frick=0.0508
+	
+	
+	
+	if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
 }
 
 maxspd=1.5+(run*(2/3))
@@ -523,6 +550,15 @@ if (jump) {
 	push=0
 	rise=0 risec=0
 	coyote=0
+	var monitorcoll;
+	monitorcoll=collision(0,vsp)
+	if (monitorcoll.object_index=monitor && ((vsp > 0 && !antigrav) || (vsp < 0 && antigrav))) {
+        vsp=-2-(akey*1.5)
+        with(monitorcoll) {
+            event_user(0);
+        }
+    }
+	
 	player_vertstep()
 }
 else if (_longjump) {
@@ -796,19 +832,6 @@ if (coll) {
             exit
         }
         
-        if (spinjump) {
-            if (fall && (hurt || piped || (intangible() && !diggity))) {if (y>coll.y && type!=shell && type!=bomb && type!=boo && type!=urchin ) hurtplayer("enemy")}
-            else if (type=spinyegg || type=spiny || type=piranha) {
-                instance_create(mean(x,coll.x),mean(y,coll.y),kickpart)
-                playsfx(name+"spinbounce",0,1+(size==5)/3)
-                vsp=-3-ckey*1.5
-                canstopjump=akey
-                pound=0
-                coll.phase=id
-            } else if size==5 {vsp=-3-ckey*1.5 playsfx(name+"spinbounce",0,1+(size==5)/3) canstopjump=akey exit} else enemyexplode(coll)
-            exit
-        }
-    
     if (hurt || piped || (intangible() && !diggity)) exit
         
         if (type=piranha || coll.damage_player_on_contact)  {
@@ -958,13 +981,14 @@ if ((((!size || size==5) && global.rings[p2]==0) || ohgoditslava || name="kid") 
     starhit=0
 
     fired=0
-    if (shielded) {shielded=0} else if global.rings[p2]>0 {droprings(0)} else {if size>=3 size=2 size-=1}
+    if (shielded) {shielded=0} else if global.rings[p2]>0 {droprings(0)} else {size=0}
     jump=1
     fall=6
     
     hsp=0;
     vsp=0;
     powerupfreeze = 60;
+    is_intangible = true;
 }
 
 //Block hitting
