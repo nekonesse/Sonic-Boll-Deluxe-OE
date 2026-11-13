@@ -1,10 +1,0 @@
-ERROR in
-action number 1
-of Other Event: <unknown>
-for object __newobject1166:
-
-Error in code at line 1:   if (type="door") {}
-if (type="side") {}
-if (type="up") {}
-if (type="down") {}
-           ^at position 10: Cannot compare arguments.

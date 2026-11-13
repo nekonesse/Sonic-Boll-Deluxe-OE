@@ -3,9 +3,6 @@ var l,i,b,o,size,map,r,deity,water,w,h,obj,ent,did,k,str;
 
 map=argument[0]
 
-lemongrab.thumbx=ds_map_find_value(map,"thumbx")
-lemongrab.thumby=ds_map_find_value(map,"thumby")
-lemongrab.thumbregion=ds_map_find_value(map,"thumbregion")
 lemongrab.spawnx=ds_map_find_value(map,"spawnx")
 lemongrab.spawny=ds_map_find_value(map,"spawny")
 lemongrab.spawnr=0

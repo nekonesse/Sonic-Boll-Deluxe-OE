@@ -1,6 +1,6 @@
 ///lemonloader(filename)
 //loads the actual level data into lemongrab and objcontainers
-var fn,fnf,l,t,f,fs,i,o,b,c,lv,size,map,r,deity,water,w,h,obj,realobj,ent,did,k,converted,str,test;
+var fn,fnf,l,t,f,fs,i,o,b,c,lv,size,map,r,deity,water,w,h,obj,realobj,ent,did,k,converted,str,test,moe;
 
 fn=argument[0]
 
@@ -75,25 +75,56 @@ if (string_starts_with(lv,"1.")) { //Lol
     exit
 }
 
-lemongrab.thumbx=ds_map_find_value(map,"thumbx")
-lemongrab.thumby=ds_map_find_value(map,"thumby")
-lemongrab.thumbregion=ds_map_find_value(map,"thumbregion")
 lemongrab.spawnx=ds_map_find_value(map,"spawnx")
 lemongrab.spawny=ds_map_find_value(map,"spawny")
-lemongrab.spawnr=ds_map_find_value(map,"spawnr")
 if (lv="2.1.5" || lv="2.1.6" || lv="2.1.6s") {
     lemongrab.tspawnx=ds_map_find_value(map,"tspawnx")
     lemongrab.tspawny=ds_map_find_value(map,"tspawny")
     lemongrab.tspawnr=ds_map_find_value(map,"tspawnr")
+    lemongrab.spawnr=ds_map_find_value(map,"spawnr")
 } else {
     lemongrab.tspawnx=ds_map_find_value(map,"spawnx")
     lemongrab.tspawny=ds_map_find_value(map,"spawny")
     lemongrab.tspawnr=0
+    lemongrab.spawnr=0
 }
 lemongrab.levelname=string(ds_map_find_value(map,"name"))
 lemongrab.leveldesc=string(ds_map_find_value(map,"desc"))  
 lemongrab.time=max(30,ds_map_find_value(map,"time"))
+
+if (ds_map_exists(map,"modded")) {
+    moe = ds_list_create();
+    ds_list_read(moe,string(ds_map_find_value(map,"modded")));
+    
+    var missingstr,showmissing;
+    showmissing = false;
+    missingstr = "WARNING:#This level contains Modded Objects that are not installed!##Please install: "
+    
+    r=0
+    repeat(ds_list_size(moe)) {
+        if !ds_map_exists(global.objectlemonlist,ds_list_find_value(moe, r)) {
+            showmissing = true;
+            if (r < (ds_list_size(moe)-1)) {
+                missingstr+=ds_list_find_value(moe, r)+", "
+            } else if (ds_list_size(moe) > 1) {
+                missingstr+="and "+ds_list_find_value(moe, r)+"!"
+            } else {
+                missingstr+=ds_list_find_value(moe, r)+"!"
+            }
+        }
+        
+        r+=1;
+    }
+    
+    if (showmissing) {
+        show_message(missingstr);
+    }
+    
+    ds_list_destroy(moe);
+}
+
 if (lv!="2.1.5" && lv!="2.1.6" && lv!="2.1.6s" && lemongrab.time==600) lemongrab.time=12001
+
 ds_map_destroy(map)
 
 global.levelname=lemongrab.levelname
@@ -315,6 +346,10 @@ repeat (8) {
                     if string(i.obj) != string(i.dataid) {
                         var z;
                         z=1 repeat l {if (string(i.obj)=string(lemongrab.objlist[z,0])) {i.spr=lemongrab.objlist[z,1] i.off=lemongrab.objlist[z,2] i.dataid=z break} z+=1}
+                    }
+                    
+                    if (string(realobj)=="0") {
+                        with(i) instance_destroy();
                     }
                 }
             }

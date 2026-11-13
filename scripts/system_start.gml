@@ -136,12 +136,6 @@ global.plattable=
 
 
 for (i=0;i<12;i+=1) { //The sneaky worm, slithering around, decided to make it so that it was 12 instead of 4, becuase sonic&tails baby haha fuck yeah lets go baby hahahahaha  - -S-
-    //this method crashes the game on certain PCs
-    //i believe it's from there not actually being anything to create, 
-    //but could be wrong
-    
-    //global.playermask[i]=sprite_create_from_screen(0,0,96,96,0,0,48,82)
-    
     global.playermask[i]=sprite_duplicate(spr_playermask)
 }
 
