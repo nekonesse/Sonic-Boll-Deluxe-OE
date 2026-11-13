@@ -1,2 +1,2 @@
-COMPILATION ERROR in string to be executedError in code at line 61:   
-var keepsize = 0;                ^at position 15: Unexpected symbol in expression.
+COMPILATION ERROR in string to be executedError in code at line 349:   
+maxspd=1.5+(run*)                   ^at position 18: Unexpected symbol in expression.

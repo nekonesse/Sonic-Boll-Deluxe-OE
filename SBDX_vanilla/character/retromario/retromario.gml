@@ -22,6 +22,7 @@ auto=1
 #define start
 powerupfreeze=0;
 jumpglitch=false;
+walljumpglitch=0;
 
 mask_set(12,12)
 global.animatePrincess=1
@@ -202,7 +203,7 @@ keepframebetween=0
 showgrow = false;
 
 if (powerupfreeze) {
-	flash=0;
+	dontflash = true;
 	
 	if (powerupfreeze < 30) {
 		showoldsize = false;
@@ -218,6 +219,7 @@ if (powerupfreeze) {
 	
 	exit;
 } else {
+	dontflash = false;
 	gk = 3;
 	showoldsize = false;
 }
@@ -488,6 +490,7 @@ if (powerupfreeze) {
 	powerupfreeze -= 1;
 	if !(powerupfreeze) {
 		is_intangible = false;
+		fk=0;
 	}
 	hsp=0;
     vsp=0;
@@ -510,7 +513,7 @@ if ((loose && !jump) || (crouch && !jump)) {
 	if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
 }
 
-maxspd=1.5+(run*(2/3))
+maxspd=1.5+(run/1.25)
 if (abs(hsp)>maxspd) hsp=maxspd*sign(hsp)
 
 ///movement
@@ -979,7 +982,7 @@ if ((((!size || size==5) && global.rings[p2]==0) || ohgoditslava || name="kid") 
     if (shielded) {shielded=0} else if global.rings[p2]>0 {droprings(0)} else {size=0}
     jump=1
     fall=6
-    
+    flash=1
     hsp=0;
     vsp=0;
     powerupfreeze = 60;

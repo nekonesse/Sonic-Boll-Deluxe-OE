@@ -40,6 +40,7 @@ piped=0
 move_lock=0
 hurttype=0
 prevent_spr_reset=0
+iframeslength=90;
 
 water=0
 frame=0
@@ -216,7 +217,7 @@ if latchedtoflagpole x-=(poleoffx*xsc)
 
 
 if !global.playerbecomesmall
-if !(flash && global.bgscroll mod 5<3)
+if !(flash && global.bgscroll mod 5<3) || (dontflash)
     if !(diggity=32 && digvisible){
         mem=size
         if (((hurt || fall=6) && hk<4) || ((grow && gk mod 6<3) && showgrow) || (showoldsize)) size=oldsize
