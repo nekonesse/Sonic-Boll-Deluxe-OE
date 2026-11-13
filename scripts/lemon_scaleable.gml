@@ -4,10 +4,12 @@
 var a; a = argument[0]
 var obj;
 
-if is_real(argument[0]) {
-    obj=object_get_name(a);
+if is_undefined(a) return noone;
+
+if is_real(a.obj) {
+    obj=object_get_name(a.obj);
 } else {
-    obj=a
+    obj=a.obj;
 }
 
 if (keyboard_check(vk_insert)) return a;

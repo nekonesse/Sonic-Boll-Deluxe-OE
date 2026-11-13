@@ -144,6 +144,7 @@ repeat (8) {
         bpb=8
         lightlevel=0
     }
+    
     size=w*h
     lemongrab.w[r]=w
     lemongrab.h[r]=h
