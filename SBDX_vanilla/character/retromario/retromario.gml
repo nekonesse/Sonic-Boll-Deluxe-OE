@@ -459,7 +459,12 @@ if (down && !up) {
     com_piping()
 } else {
     if (pound=-1) pound=0
-    if (!jump && (!collision(0,-12) || !size || size==5)) crouch=0
+    if !(jump) && (crouch) {
+    	if (collision(0,-12)) {
+    		y-=16;
+    	}
+    	crouch=0
+    }
     poundlok=0
 }
 
@@ -663,16 +668,6 @@ if (!jump) {
 	if (push=0 && hsp!=0 && braking) {
 	if (!skidding) {skidding=1 playsfx(name+"skid",1)}
 	} else if (skidding) {soundstop(name+"skid") skidding=0}
-	if (abs(hsp)<0.2 && spin) { //stop spinning
-		spinc+=1 
-		if (spinc==8) {
-			spinc=0
-			spin=0    
-			hsp=0
-			soundstop(name+"spin")
-			crouch=down
-		}
-	}
 }
 
 //water
@@ -741,7 +736,7 @@ sprung=0
 if (slipnslide) {
 slipnslide=0
 crouch=1
-if ((slobal=0 && (hsp=0 || ((left || right) && !down))) || jump) && (!collision(0,-12) || !size || size==5) {slipnslide=0 crouch=0}
+if ((slobal=0 && (hsp=0 || ((left || right) && !down))) || jump) {slipnslide=0 crouch=0}
 }
 jumpspd=min(jumpspd,100)
 
