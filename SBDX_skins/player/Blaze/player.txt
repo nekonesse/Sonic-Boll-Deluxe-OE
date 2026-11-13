@@ -18,6 +18,14 @@ pipe squish=20
 pole center offset=8
 disable spindust=true
 
+use paletting=true
+defaultspray 1=3
+defaultspray 2=3
+defaultspray 3=5
+defaultspray 4=4
+
+total palettes=13
+
 custom sprite list=stand,wait,lookup,pose,crouch,knock,dead,walk,run,maxrun,brake,spring,springfall,jump,bonk,ball,spindash,push,hang,fire,dash,specfall,climbing,flagslide,dropdash,piping,pipingup,sidepiping,doorenter,doorexit
 
 reroute fall=jump
