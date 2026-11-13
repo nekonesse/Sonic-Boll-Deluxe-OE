@@ -8,22 +8,10 @@ skid,swim,pound,stomp,smalljump,kick,fireball
 mario
 
 #define movelist
-Mario (SMB1)
+Retro Mario
 #
 [a]: Jump
 [b]: Run / [flwr]: Fireball
-
-#define rosterorder
-5
-
-
-#define effectsbehind
-with (carryid) {hspeed=0 event_user(1)}
-//draw_skintext(floor(x),floor(y)-40,slobal)
-//draw_skintext(floor(x)-string_length(string(crouch))*4,floor(y)-32,crouch)
-//draw_skintext(floor(x)-string_length(string(jump))*4,floor(y)-24,jump)
-
-//draw_skintext(floor(x),floor(y)-40,hsp)
 
 #define grabflagpole
 grabflagpole=1
@@ -32,6 +20,9 @@ vsp=0
 auto=1
 
 #define start
+powerupfreeze=0;
+jumpglitch=false;
+
 mask_set(12,12)
 global.animatePrincess=1
 
@@ -59,6 +50,39 @@ else if (type="1up") {
 	deaths=max(0,deaths-1)
 	itemget=1
 } 
+
+switch(type) {
+	case "mushroom":
+		if (size==0) || (size==5) {
+			powerupfreeze = 60;
+		}
+	break;
+	case "fflower":
+		if (size!=2) {
+			powerupfreeze = 60;
+		}
+	break;
+	case "bfeather":
+		if (size!=3) {
+			powerupfreeze = 60;
+		}
+	break;
+	case "btroot":
+		if (size!=6) {
+			powerupfreeze = 60;
+		}
+	break;
+	case "glui":
+		if (size!=7) {
+			powerupfreeze = 60;
+		}
+	break;
+	case "mini":
+		if (size!=5) {
+			powerupfreeze = 60;
+		}
+	break;
+}
 com_item()
 
 #define endofstage
@@ -175,13 +199,35 @@ draw_sprite_part_ext(sheet,0,10+17*floor(exploframe/1.333333333),87,16,16,round(
 #define sprmanager
 frspd=1
 keepframebetween=0
+showgrow = false;
+
+if (powerupfreeze) {
+	flash=0;
+	
+	if (powerupfreeze < 30) {
+		showoldsize = false;
+	} else {
+		showoldsize = true;
+	}
+	
+	if (powerupfreeze mod 10 >= 5) {
+		sprite="growing"
+	} else {
+		sprite="stand"
+	}
+	
+	exit;
+} else {
+	gk = 3;
+	showoldsize = false;
+}
+
 if (grabflagpole) {sprite="flagslide"}
 else if (hurt) {sprite="hurt"}
 else if (dive) {sprite="dive"}
 else if (spin) {sprite="roll"}
 else if (bellyslide) {sprite="bellyslide"}
 else if (fired && !spinjump) {sprite="fire" cantslowanim=1}
-else if (throw) {cantslowanim=1 if !(jump) {sprite="throw" if oldspr="airthrow" keepframebetween=1} else {sprite="airthrow" if oldspr="throw" keepframebetween=1}}
 else if (pound) {sprite="groundpound" if (pound>12 || vsp>0) sprite="poundfall"}
 else if (slipnslide) {sprite="slide"}
 else if (_longjump) {sprite="longjump"}
@@ -192,35 +238,40 @@ if (onvine)
 sprite="climbing" frspd=sign(left+right+up+down)
 }
 else if (fall=6) {sprite="hurt"}
-else if (flight) {sprite= "capeflight" frspd=0 frame=((vsp+2.5)/6.5)*(global.animdat[p2,(16+128*32)+1+min(4,size)]-1) if frame>=frn frame=frn-1}
-else if (spinjump || twist>17) {sprite="spinjump"}
-else if (hang && vsp>=1 && !spinjump) {sprite="wallslide"}
-else if ((double || triplejump>=1) && !water) { if carry {sprite="jump" if (vsp>0) sprite="fall"} else sprite="roll" frspd=0.4}
-else if (triplejump>=0.5 && !water) {sprite="doublejump" if vsp>0 sprite="doublejumpfall"}
 else if (water || size=3) {sprite="swim" if (swim) sprite="paddle"}
-else if (bonk) {sprite="bonk" if (jumpspd=99) || triplejump>=0.5 sprite="doublejumpbonk"} 
-else {sprite="jump" if (vsp>0) sprite="fall" if (jumpspd=99) sprite="doublejump" if (!carry && runjump) sprite="runjump"}
+else if (bonk) {sprite="bonk"} 
+else {sprite="jump" if (vsp>0) sprite="fall"}
 } else {
-if (push!=0 && !carry) {sprite="push" frspd=1+abs(hsp/3)}
-else if (braking && !carry) {sprite="brake" xsc=-brakedir}
-else if (hsp=0) {
-if (lookup) {sprite="lookup"}
-else if (balancing) {sprite="balancing"}
-else if (waittime>maxwait &&!carry) {sprite="wait"}
-else if (posed) {sprite="pose"}
-else {sprite="stand"}
-} else {
-if (abs(hsp+hyperspeed)>2.25 && !carry) {sprite="run"}
-else {
-sprite="walk"
-frspd=median(0.5,1,0.3+abs(hsp/4))
-}
-}
+	if (push!=0 && !carry) {sprite="push" frspd=1+abs(hsp/3)}
+	else if (braking && !carry) {sprite="brake" xsc=-brakedir}
+	else if (hsp=0) {
+	if (lookup) {sprite="lookup"}
+	else if (balancing) {sprite="balancing"}
+	else if (waittime>maxwait &&!carry) {sprite="wait"}
+	else if (posed) {sprite="pose"}
+	else {sprite="stand"}
+	} else {
+		if (abs(hsp+hyperspeed)>3 && !carry) {sprite="run"}
+		else {
+			sprite="walk"
+			frspd=median(0.5,1,0.3+abs(hsp/4))
+		}
+	}
 }
 if (carry) sprite=sprite+"carry"
 
 #define controls
 com_inputstack()
+
+if (powerupfreeze) && !(piped) {
+	hsp=0;
+    vsp=0;
+    
+    if (abut) && !(hurt) {
+    	jumpglitch = true;
+    }
+	exit;
+}
 
 tempbrick=0
 carryoffsetx=10
@@ -294,8 +345,8 @@ if (push!=h) push=0
 
 com_di()
 
-if ((abut || jumpbufferdo) && !springin) {
-    if (!jump || water || size=3 ||fall=69||grabflagpole) {
+if ((abut || jumpbufferdo || jumpglitch) && !springin) {
+    if (!jump || water ||fall=69 || grabflagpole || jumpglitch) {
         if (water || size=3) {
 			if (!pound && !carry && !dive ){
 				vsp=-1.5-up*0.75 swim=24 crouch=0 playsfx(name+"swim") double=0
@@ -303,8 +354,12 @@ if ((abut || jumpbufferdo) && !springin) {
 			}
 		}
         else {
-			if (size==0 || size==5) jumpsnd=playsfx(name+"smalljump",0,1+triplejump/2+(size==5)/3)
-            else jumpsnd=playsfx(name+"jump",0,1+triplejump/2)
+        	if !(jumpglitch) || (size != 2) {
+				if (size==0 || size==5) jumpsnd=playsfx(name+"smalljump",0,1+(size==5)/3)
+		        else jumpsnd=playsfx(name+"jump",0,1)
+        	} else {
+        		jumpsnd=playsfx(name+"fireball",0,1)
+        	}
             
 			vsp=-4-0.125 hellothisisajump=1
 		   if (water || size=3) vsp=-sqrt(sqr(vsp)*wf+2)
@@ -315,6 +370,8 @@ if ((abut || jumpbufferdo) && !springin) {
         jumptiming=0
         onvine=0
         jump=1
+        jumpglitch=false
+        
 		if (run && energy=maxe && abs(hsp+hyperspeed)>3) {runjump=1}
         fall=0
         dropkick=0
@@ -323,11 +380,11 @@ if ((abut || jumpbufferdo) && !springin) {
         if (mymoving) hsp+=avgmovingh
         if (!star) fall=1
         else crouch=0
-        if (rise && !down) && (!collision(0,-12) || !size || size==5) crouch=0
+        if (rise && !down) crouch=0
         jumpspd=min(1,0.5+abs(hsp)/5)
     } else {
         if (hang && !carry && !flying) {
-            hang=0 spinjump=0 dive=0 triplejump=0 triplexsc=0
+            hang=0 spinjump=0 dive=0 triplexsc=0
             kicked=xsc
             hsp=esign((right)+(-left),xsc)*-2.5 jumpspd=100 instance_create(x+6*xsc,y+8,kickpart)
             xsc*=-1 vsp=-4
@@ -352,7 +409,7 @@ if ((abut || jumpbufferdo) && !springin) {
 
 if (!jump) {
     if (jumptiming) jumptiming-=1
-    else {triplejump=0 triplexsc=0}
+    else {triplexsc=0}
 }
 jumpbufferdo=0
 springin=0
@@ -402,7 +459,12 @@ if (down && !up) {
     com_piping()
 } else {
     if (pound=-1) pound=0
-    if (!jump && (!collision(0,-12) || !size || size==5)) crouch=0
+    if !(jump) && (crouch) {
+    	if (collision(0,-12)) {
+    		y-=16;
+    	}
+    	crouch=0
+    }
     poundlok=0
 }
 
@@ -421,20 +483,31 @@ else mask_set(12,24)
 #define movement
 if (piped || move_lock) exit
 
+if (powerupfreeze) {
+	is_intangible = true;
+	powerupfreeze -= 1;
+	if !(powerupfreeze) {
+		is_intangible = false;
+	}
+	hsp=0;
+    vsp=0;
+	exit;
+}
+
 if (auto) {hsp=1}
 
 //speed limits
 if ((loose && !jump) || (crouch && !jump)) {
-if (braking) xsc=brakedir
-braking=0
-
-frick=0.0371
-if (abs(hsp)>=2.4) frick=0.0557
-if (abs(hsp)>1.5 && !run) frick=0.0508
-
-
-
-if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
+	if (braking) xsc=brakedir
+	braking=0
+	
+	frick=0.0371
+	if (abs(hsp)>=2.4) frick=0.0557
+	if (abs(hsp)>1.5 && !run) frick=0.0508
+	
+	
+	
+	if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
 }
 
 maxspd=1.5+(run*(2/3))
@@ -465,7 +538,6 @@ if (jump) {
 		_longjump=0
 		crouch=0
 		spinjump=0
-		triplejump=0
 	}
 	
 
@@ -483,6 +555,15 @@ if (jump) {
 	push=0
 	rise=0 risec=0
 	coyote=0
+	var monitorcoll;
+	monitorcoll=collision(0,vsp)
+	if (monitorcoll.object_index=monitor && ((vsp > 0 && !antigrav) || (vsp < 0 && antigrav))) {
+        vsp=-2-(akey*1.5)
+        with(monitorcoll) {
+            event_user(0);
+        }
+    }
+	
 	player_vertstep()
 }
 else if (_longjump) {
@@ -527,22 +608,8 @@ bartype=1
 
 if size!=3 watering=0
 
-if jump&&triplejump>=1&&size=3&&vsp>=0&&akey&&!carry{
-	if hsp=0 hsp=sign(xsc)*0.01
-	flight=1
-	triplejump=1
-}
 if !(pound) {
 	nocratebounce=0
-}
-//Cancel the Bellyslide !!
-if ((spin || bellyslide) && abs(hsp)<1)
-{
-	if (left || right)
-	{
-		bellyslide = 0
-		spin = 0
-	}
 }
 
 maxe=4
@@ -570,11 +637,6 @@ if (!poundcancel && pound) power_lv=3
 if (star) power_lv=5
 if (super) power_lv+=1
 
-if (piped) {
-updatecarry()
-exit
-}
-
 
 //Special interactions
 pvp_spin=spin //rolling clash
@@ -588,42 +650,6 @@ if maxwait{
 if (sprite="stand")
 {waittime+=1}
 else if sprite!="wait" waittime=0
-}
-
-coll=instance_place(x+(abs(hsp)+2)*xsc,y,cork)
-if (coll || carryid.object_index==cork) && (!coll.time) {
-	if (bkey && !carry && !spin && !dropkick && !dive && size!=5) {
-		coll.carry=id coll.owner=id carryid=coll
-		carry=1
-		skidding=0
-		updatecarry()
-	} else if !(bkey) { 
-		if (carry) {
-			updatecarry()
-			if (!down) {throw=16 instance_create(carryid.x,carryid.y,kickpart) sound("enemykick")}
-			with (carryid) event_user(0)
-			carryid=noone
-			carry=0
-		}
-    }              	
-}
-
-coll=instance_place(x+(abs(hsp)+2)*xsc,y,litbobomb)
-if (coll || carryid.object_index==litbobomb) && (!coll.time) {
-	if (bkey && !carry && !spin && !dropkick && !dive && size!=5) {
-		coll.carry=id coll.owner=id carryid=coll
-		carry=1
-		skidding=0
-		updatecarry()
-	} else if !(bkey) { 
-		if (carry) {
-			updatecarry()
-			if (!down) {throw=16 instance_create(carryid.x,carryid.y,kickpart) sound("enemykick")}
-			with (carryid) event_user(0)
-			carryid=noone
-			carry=0
-		}
-    }              	
 }
 
 if (!jump) {
@@ -642,16 +668,6 @@ if (!jump) {
 	if (push=0 && hsp!=0 && braking) {
 	if (!skidding) {skidding=1 playsfx(name+"skid",1)}
 	} else if (skidding) {soundstop(name+"skid") skidding=0}
-	if (abs(hsp)<0.2 && spin) { //stop spinning
-		spinc+=1 
-		if (spinc==8) {
-			spinc=0
-			spin=0    
-			hsp=0
-			soundstop(name+"spin")
-			crouch=down
-		}
-	}
 }
 
 //water
@@ -665,16 +681,6 @@ if (underwater()) {
 		dropkick=0
 	}
 	water=1 wf=0.45 eoll=0 dropkick=0 run=0
-	if (carry && carryid) {
-		if !(jump) jump=1
-		
-		if (up)
-		vsp=min(vsp-0.01,-1)
-		else if (down)
-		vsp=min(vsp+0.01,1)
-		else
-		vsp=approach_val(vsp,0,0.075)
-	}
 } else {
 if (water) {
 	water=0
@@ -713,7 +719,7 @@ wsk=(wsk+0.1) mod 4
 if (spin) spinframe+=1
 else spinframe=0
 if (spinframe>=8) spinframe=0
-if (sprung) {triplejump=0 triplexsc=0}
+if (sprung) {triplexsc=0}
 
 if (!jump && run && !bkey) run=0
 if (!collpos(xsc*16,0) || !jump) hang=0
@@ -730,7 +736,7 @@ sprung=0
 if (slipnslide) {
 slipnslide=0
 crouch=1
-if ((slobal=0 && (hsp=0 || ((left || right) && !down))) || jump) && (!collision(0,-12) || !size || size==5) {slipnslide=0 crouch=0}
+if ((slobal=0 && (hsp=0 || ((left || right) && !down))) || jump) {slipnslide=0 crouch=0}
 }
 jumpspd=min(jumpspd,100)
 
@@ -771,6 +777,8 @@ jesus=(((boost && vsp<4)||(size==5 && !down && abs(hsp)>2.8)) && !water)
 com_endactions()
 
 #define enemycoll
+if (powerupfreeze) exit;
+
 coll=noone extracheck=id inst=0
 if (insta) {extracheck=myhitbox inst=1}
 
@@ -819,19 +827,6 @@ if (coll) {
             exit
         }
         
-        if (spinjump) {
-            if (fall && (hurt || piped || (intangible() && !diggity))) {if (y>coll.y && type!=shell && type!=bomb && type!=boo && type!=urchin ) hurtplayer("enemy")}
-            else if (type=spinyegg || type=spiny || type=piranha) {
-                instance_create(mean(x,coll.x),mean(y,coll.y),kickpart)
-                playsfx(name+"spinbounce",0,1+(size==5)/3)
-                vsp=-3-ckey*1.5
-                canstopjump=akey
-                pound=0
-                coll.phase=id
-            } else if size==5 {vsp=-3-ckey*1.5 playsfx(name+"spinbounce",0,1+(size==5)/3) canstopjump=akey exit} else enemyexplode(coll)
-            exit
-        }
-    
     if (hurt || piped || (intangible() && !diggity)) exit
         
         if (type=piranha || coll.damage_player_on_contact)  {
@@ -941,7 +936,6 @@ pipe=0
 sprongin=0
 speed=0
 if (skidding) {soundstop(name+"skid") skidding=0}
-if (carry && carryid) {with (carryid) event_user(0) carryid=noone carry=0}
 onvine=0
 energy=0
 braking=0
@@ -981,12 +975,15 @@ if ((((!size || size==5) && global.rings[p2]==0) || ohgoditslava || name="kid") 
 
     starhit=0
 
-        fired=0
-        if (shielded) {shielded=0} else if global.rings[p2]>0 {droprings(0)} else {if size>=3 size=2 size-=1}
-        flash=1
-        jump=1
-        fall=6
-        hsp=xsc*-2*wf vsp=-3*wf
+    fired=0
+    if (shielded) {shielded=0} else if global.rings[p2]>0 {droprings(0)} else {size=0}
+    jump=1
+    fall=6
+    
+    hsp=0;
+    vsp=0;
+    powerupfreeze = 60;
+    is_intangible = true;
 }
 
 //Block hitting
@@ -1060,7 +1057,7 @@ else {
 }
 if (dropkick || spin || flight || dive || _longjump) {instance_create(x+8*s,y+6,kickpart) x-=hsp dropkick=-1 hsp=-2*esign(hitside,xsc) vsp=-2*spin jump=(jump || spin) _longjump=0 spin=0 dive=0 crouch=1 skiphsp=1}
 
-if (hurt) {hurt=0 fall=6 flash=1 fk=0}
+if (hurt) {hurt=0 fall=6 fk=0}
 
 if (!collpos(sign(hitside)*10,8,1)) {
     //gap running
@@ -1096,7 +1093,7 @@ if (downpiped) {
 shoot(x+8,y+4,psmoke,2,-1)
     downpiped=0
 }
-if (hurt) {flash=1 fk=0 hsp=0 hurt=0}
+if (hurt) {fk=0 hsp=0 hurt=0}
            
 playsfx(name+"step")
 
