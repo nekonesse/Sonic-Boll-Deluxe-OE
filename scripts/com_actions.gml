@@ -35,7 +35,7 @@ if (transform) {
 }
 
 if (grow) {gk+=1 if (gk>48) {grow=0 gk=0}}
-if (flash) {fk+=1 if (fk>90) {flash=0 fk=0}}
+if (flash) {fk+=1 if (fk>iframeslength) {flash=0 fk=0}}
 
 fired=max(0,fired-1)
 bonk=max(0,bonk-1) if (!bonk) bonkbrick = 0;

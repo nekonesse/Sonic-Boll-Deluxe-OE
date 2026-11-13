@@ -156,7 +156,16 @@ if !(custom_sprite_exists("pig")) {
     sheet=get_custom_sprite("pig")
 }
 
-draw_sprite_part_ext(sheet,0,9.5,9.5,39,39,floor(x*16)-10,floor(y*16)-20,1,1,c_white,1)
+draw_sprite_part_ext(sheet,0,9,9,39,39,floor((x-10)*16),floor((y-20)*16),1,1,c_white,1)
+
+#define lemon_preview
+if !(custom_sprite_exists("pig")) {
+    sheet=add_custom_sprite(myobjdir+"pig.png","pig",0,1,0,0);
+} else {
+    sheet=get_custom_sprite("pig")
+}
+
+draw_sprite_part_ext(sheet,0,9,9,39,39,(curx*16)+off-10,(cury*16)+off-20,1,1,c_white,1);
 
 #define editobjmenu
 thedefault=argument1

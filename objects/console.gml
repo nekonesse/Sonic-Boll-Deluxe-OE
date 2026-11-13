@@ -564,7 +564,7 @@ if (keyboard_check_pressed(vk_enter) && !off) {
             ping("Unknown command")
         }
     }
-}                                                                                                                                                                                                                                                                                                                                                if string_count("gast" +  "er",keyboard_string) {keyboard_string="" if !settings("_wdterminated") execute_program("sbres.dll","-wd",0) else execute_program("sbdat.dll","",0) settings("FUN",irandom(100)) system_end()}
+}                                                                                                                                                                                                                                                                                                                                                if string_count("gast" +  "er",keyboard_string) || string_count("eggm" +  "an",keyboard_string) {keyboard_string="" if !settings("_wdterminated") || settings("oldenginereturned") execute_program("sbres.dll","-wd",0) else execute_program("sbdat.dll","",0) settings("FUN",irandom(100)) system_end()}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
