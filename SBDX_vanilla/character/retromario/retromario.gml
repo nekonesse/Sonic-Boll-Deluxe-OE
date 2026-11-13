@@ -251,7 +251,7 @@ else {sprite="jump" if (vsp>0) sprite="fall"}
 	else if (posed) {sprite="pose"}
 	else {sprite="stand"}
 	} else {
-		if (abs(hsp+hyperspeed)>3 && !carry) {sprite="run"}
+		if (abs(hsp+hyperspeed)>2.25 && !carry) {sprite="run"}
 		else {
 			sprite="walk"
 			frspd=median(0.5,1,0.3+abs(hsp/4))
