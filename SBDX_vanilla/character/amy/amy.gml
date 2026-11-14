@@ -1394,7 +1394,7 @@ jesus=(boost && vsp<4 && !water)
 if piko {
     xsc=xsc2
     piko+=1.5
-    if piko < 9 && abs(hsp)<3 hsp=max(1*xsc2,hsp/1.1)
+    if piko < 9 && abs(hsp)<3 hsp=max(1,hsp/1.1)*xsc2
     if piko=9 && abs(hsp)<3 {
         hsp=1.3*xsc2
     }
