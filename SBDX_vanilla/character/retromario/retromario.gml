@@ -17,6 +17,8 @@ Retro Mario
 grabflagpole=1
 hsp=0
 vsp=0
+frspd=0
+yflagfake=y
 auto=1
 
 #define start
@@ -255,7 +257,12 @@ if (powerupfreeze) {
 	showoldsize = false;
 }
 
-if (grabflagpole) {sprite="flagslide"}
+if (grabflagpole) {
+	sprite="flagslide"
+	if yflagfake!=y {frspd=abs(y-yflagfake) yflagfake=y}
+	else if yflagfake=y && frspd!=0 {frspd=0}
+	//frspd=abs(vsp)
+}
 else if (hurt) {sprite="hurt"}
 else if (dive) {sprite="dive"}
 else if (spin) {sprite="roll"}
