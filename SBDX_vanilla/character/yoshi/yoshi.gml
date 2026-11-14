@@ -187,7 +187,7 @@ while c>57
 c-=1
 
 
-if mode=2
+if mode=2 && owner.jump //no longer grapples on the ground
 {
 owner.toungecling=1
 owner.vsp=0
@@ -966,9 +966,9 @@ if (size!=2 && size!=6)
 spit=8
 playsfx("yoshispit")
 if holdind=koopa || holdind=redkoopa || holdind=yelkoopa || holdind=blukoopa || holdind=redhover || holdind=yelhover || holdind=hopkoopa
-with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.hsp+4*other.xsc}
+with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.xsc*min(5,abs(other.hsp)+3)}
 if holdind=shell
-with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.hsp+4*other.xsc}
+with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.xsc*min(5,abs(other.hsp)+3)}
 if holdind!=shell && holdind!=koopa && holdind!=redkoopa && holdind!=yelkoopa && holdind!=blukoopa && holdind!=redhover && holdind!=yelhover && holdind!=hopkoopa && holdind!=brick && holdind!=piranha && holdind!=redpiranha && holdind!=firepiranha
 with instance_create(x+12*xsc+hsp,y,holdind) {if other.bratstore {brat=1 sprite="goombrat"} enemy2=other.enemy2store owner=other.id gh=other.jeffstore other.anemyeat=id spitted=1 if object_index!=bulletbill && object_index!=cannonball && object_index!=redcannonball vspeed=-1 else xsc=sign(hspeed) hspeed=other.hsp+4*other.xsc}
 }
@@ -1009,7 +1009,7 @@ anemyeat=0
 holdind=0
 }
 
-if down && hold && holdind!=brick || (hold && (holdind=piranha || holdind=redpiranha || holdind=firepiranha))
+if down && !jump && hold && holdind!=brick || (hold && (holdind=piranha || holdind=redpiranha || holdind=firepiranha))
 {
 eggcount+=1
 if eggcount<=6
