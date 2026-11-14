@@ -1,7 +1,7 @@
 ///savemovie()
 //saves a movie, if applicable at the current moment.
 
-if (settings("replaydisabled")) exit;
+if (settings("replaydisabled")) discardmovie() exit;
 if (!global.actually_recording_goddamnit) exit
 if ((room=stagesel || room=change) && global.stagecount=0) {discardmovie() exit}
 if (global.pos<3*60*global.mplay || global.cheater || global.lemontest || global.enteredachardoor) {discardmovie() exit}

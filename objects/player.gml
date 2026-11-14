@@ -41,6 +41,7 @@ move_lock=0
 hurttype=0
 prevent_spr_reset=0
 iframeslength=90;
+showgrow = true;
 
 water=0
 frame=0

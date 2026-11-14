@@ -37,7 +37,7 @@ jumpindex = 0;
 //usually jumpspeed 0/1 are -4 in smb1's code, but for some reason it doesnt go as high here
 jumpspeed[0] = -4.1;
 jumpspeed[1] = -4.1;
-jumpspeed[2] = -5;
+jumpspeed[2] = -5.1;
 
 jumpgravity[0] = 0.125;
 jumpgravity[1] = 0.117;
@@ -1133,7 +1133,7 @@ if (pound) {
 }
 
 #define sprung
-currentgravity = fallgravity[jumpindex];
+currentgravity = fallgravity[0];
 
 if (spronge.object_index == pollenflower) {
 	vsp*=1.8;
