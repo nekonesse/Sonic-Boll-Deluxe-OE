@@ -20,8 +20,41 @@ vsp=0
 auto=1
 
 #define start
+releasedinput = false;
 powerupfreeze=0;
 jumpglitch=false;
+walljumpglitch=false;
+runningtimer=0;
+
+savedposx = x;
+savedposy = y;
+
+currentgravity = 0.156;
+
+jumpindex = 0;
+
+//there are multiple outcomes when jumping, depending on mario's speed
+//usually jumpspeed 0/1 are -4 in smb1's code, but for some reason it doesnt go as high here
+jumpspeed[0] = -4.1;
+jumpspeed[1] = -4.1;
+jumpspeed[2] = -5;
+
+jumpgravity[0] = 0.125;
+jumpgravity[1] = 0.117;
+jumpgravity[2] = 0.156;
+
+fallgravity[0] = 0.438;
+fallgravity[1] = 0.375;
+fallgravity[2] = 0.563;
+
+frick = walkfriction;
+currentaccel = walkfriction;
+
+//also used for accel!
+walkfriction = 0.0371
+//
+runaccel = 0.0557
+runfriction = 0.0508
 
 mask_set(12,12)
 global.animatePrincess=1
@@ -312,32 +345,43 @@ if (h!=0 && !wallkick) {
             xsc=h
             braking=0
         }
-        /* if (!pound && !water && fall!=6 && !crouch && h=xsc && kicked!=h && !carry) if (knuxcanclimb(collision(8*h,0))) {
-            if (jump) hang=4
-            if (vsp>1) crouch=0
-            xsc=h
-        } */
     } else {
         if (!jump) {
             if (esign(hsp,xsc)!=h) {
+            	///SKIDDING DEACCEL
                 if (abs(hsp)>0.5625 && !carry) {
                     braking=1
                     skidding=1
                     playsfx(name+"skid",1)
                     brakedir=h
                 }
-                hsp+=frick*wf*h*2
+                hsp+=(currentaccel*h)*2
+                ///
                 if (abs(hsp)<0.5625 || carry && !spin) xsc=h
-            } else {
-                hsp+=frick*wf*h
+            } else if !(down) {
+            	///WALKING ACCEL
+            	if (run) {
+            		currentaccel = runaccel;
+            	} else {
+            		currentaccel = walkfriction;
+            	}
+            	
+                hsp+=currentaccel*h
                 xsc=h
                 braking=0
+                ///
             }
         } else {
-            if (water) {if (h!=sign(hsp)) hsp+=0.1*h else hsp+=0.0475*h}
-            else if (dropkick) hsp+=0.1*wf*h
-            else if (size==5) hsp+=0.085*wf*h
-            else hsp+=(0.07+0.02*run)*wf*h
+        	///MIDAIR ACCEL
+            if (water) {
+            	if (h!=sign(hsp)) hsp+=0.1*h else hsp+=0.0475*h
+            	
+            } else if (size==5) {
+            	hsp+=0.085*wf*h
+            } else {
+            	hsp+=(0.07+0.02*run)*wf*h
+            }
+            ///
         }
     }
 }
@@ -346,8 +390,15 @@ if (push!=h) push=0
 
 com_di()
 
+if !(akey) {
+    if (canstopjump && jump && !sprung && !water && size!=3) {
+    	currentgravity = fallgravity[jumpindex];
+    }
+	canstopjump=0
+}
+
 if ((abut || jumpbufferdo || jumpglitch) && !springin) {
-    if (!jump || water ||fall=69 || grabflagpole || jumpglitch) {
+    if (!jump || water || fall=69 || grabflagpole || jumpglitch) {
         if (water || size=3) {
 			if (!pound && !carry && !dive ){
 				vsp=-1.5-up*0.75 swim=24 crouch=0 playsfx(name+"swim") double=0
@@ -361,8 +412,20 @@ if ((abut || jumpbufferdo || jumpglitch) && !springin) {
         	} else {
         		jumpsnd=playsfx(name+"fireball",0,1)
         	}
+        	
+        	if abs(hsp) >= 1.56 {
+        		jumpindex = 2;
+        	} else if (abs(hsp)) > 1 {
+        		jumpindex = 1;
+        	} else {
+        		jumpindex = 0;
+        	}
+        	
+            currentgravity = jumpgravity[jumpindex];
             
-			vsp=-4-0.125 hellothisisajump=1
+			vsp=jumpspeed[jumpindex]; 
+			
+			hellothisisajump=1
 		   if (water || size=3) vsp=-sqrt(sqr(vsp)*wf+2)
         }
 		if !crouch {cancrouch=0} else {cancrouch=1}
@@ -382,7 +445,7 @@ if ((abut || jumpbufferdo || jumpglitch) && !springin) {
         if (!star) fall=1
         else crouch=0
         if (rise && !down) crouch=0
-        jumpspd=min(1,0.5+abs(hsp)/5)
+        //jumpspd=min(1,0.5+abs(hsp)/5)
     } else {
         if (hang && !carry && !flying) {
             hang=0 spinjump=0 dive=0 triplexsc=0
@@ -407,23 +470,7 @@ if ((abut || jumpbufferdo || jumpglitch) && !springin) {
     }
 }
 
-
-if (!jump) {
-    if (jumptiming) jumptiming-=1
-    else {triplexsc=0}
-}
-jumpbufferdo=0
 springin=0
-
-if (akey) {
-    if (jumpbuffer) jumpbuffer-=1
-} else {
-    jumpbuffer=0
-    if (canstopjump=1 && jump && vsp<-2 && !sprung && !water && size!=3) {
-        vsp*=0.6
-    }
-canstopjump=0
-}
 
 if (bbut) {
     if (size=2 && count_projectiles()<2 && !crouch && !dive) {
@@ -434,7 +481,10 @@ if (bbut) {
 }
 
 if (bkey) {
-    if (!jump && !bellyslide) run=1.5
+    if (!jump) {
+    	run=1.5
+    	runningtimer = 10;
+    }
 } 
 
 if (cbut) {
@@ -502,43 +552,62 @@ if (powerupfreeze) {
 
 if (auto) {hsp=1}
 
-//speed limits
-if ((loose && !jump) || (crouch && !jump)) {
+if (!left && !right && !releasedinput) {
+	releasedinput = true;
+	if (run) {
+		frick = runfriction;
+	} else {
+		frick = walkfriction;
+	}
+}
+
+///FRICTION
+if ((loose && !jump) || (down && !jump)) {
 	if (braking) xsc=brakedir
 	braking=0
 	
-	frick=0.0371
-	if (abs(hsp)>=2.4) frick=0.0557
-	if (abs(hsp)>1.5 && !run) frick=0.0508
-	
-	
-	
 	if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
 }
+///
 
-maxspd=1.5+(run*(2/3))
+//RUNNING
+if (runningtimer) {
+	run=1;
+	runningtimer=max(runningtimer-1,0);
+}
+
+if !(underwater()) {
+	maxspd=1.5+(run)
+} else {
+	maxspd=1;
+}
 if (abs(hsp)>maxspd) hsp=maxspd*sign(hsp)
+///
 
-///movement
-//hi moster here dont uncomment the yground or easyground stuff because its required for the cool new slope system to work
-//for anyone porting a charm from unfinished build or below to this build, delete or comment all of the commented code and add player_nslopforce()
 calcmoving()
 
+///GRAVITY
 if (!dead && !grabflagpole) {
 	if fall!=69
 	player_horstep()
 	player_nslopforce()
-	//yground=easyground()
-	//if (yground!=verybignumber) yground-=14
+	
 	if (jump) {
-		if (water || size=3) vsp=min(1.5,vsp+0.04)
-	else if (vsp<-2 && !luijump) vsp+=0.15
-		else if (twist>5) vsp=min(1,vsp+0.1)
-		else if fall!=69 && !luijump {
-			vsp=min(4,vsp+0.125+(0.3125*vsp>0.1250)/3)
+		if (water) vsp=min(1.5,vsp+0.04)
+		else {
+			vsp=min(4,vsp+currentgravity);
+			
+			if (vsp > 0.1) {
+				currentgravity = fallgravity[jumpindex];
+			} else if (sprung) {
+				currentgravity = jumpgravity[0];
+			}
+			
 			if size==5 && vsp>-0.75 vsp-=0.175
 		} 
+		
 		vine_climbing() 
+		
 		if (onvine) {
 			dive=0
 			pound=0
@@ -556,16 +625,14 @@ if (!dead && !grabflagpole) {
 		if (pound=-1) pound=0
 		if (sprung && !fall) fall=1
 		if (fall=12) {vsp=6*wf hsp=0}
-		if fall=69 {dive=0 flight=0}
 		if !flight frame1flight=0
 	
 		push=0
 		rise=0 risec=0
-		coyote=0
 		var monitorcoll;
 		monitorcoll=collision(0,vsp)
 		if (monitorcoll.object_index=monitor && ((vsp > 0 && !antigrav) || (vsp < 0 && antigrav))) {
-	        vsp=-2
+	        vsp = jumpspeed[0];
 	        canstopjump = false;
 	        with(monitorcoll) {
 	            event_user(0);
@@ -577,35 +644,16 @@ if (!dead && !grabflagpole) {
 	
 	if (osld<180 && osld>0 && !instance_place(x-16,y+4,ground)) dy=3
 	else if (osld>180 && osld<320 && !instance_place(x-16,y+4,ground)) dy=3
-	
-	if (!jump) {
-		//if (yground!=verybignumber) {y=yground while collision(0,0) && !collision(0,-8) {y-=1 }}
-		if (finish && ending="retainer" && !jump) coyote=0
-		if (!collision(0,4) /*&& (y<yground-2)*/) {
-			coyote+=1
-			if (down || !run) {y+=1 coyote=3}
-			if (coyote=3) {
-				jump=1
-				fall=1
-				if (crouch) vsp=1.5
-				if (spin) {vsp=-1.5}
-			}
-		} else coyote=0
-		
-		if (jumpbuffer=-1) {
-			jumpbuffer=0
-			//jump buffering
-			if (rise=0 && !down) {
-				jumpbufferdo=1
-				if (insta) insted=1
-			}
-		}
-	}
+}
+///
+
+///Falling off a ledge
+if (!collision(0,4)) {
+	jump=1
+	fall=1
 }
 
-
 com_finishmove()
-
 
 #define actions
 com_warping()
@@ -636,7 +684,7 @@ else
 is_intangible=0
 
 with (flag) if (passed[other.p2]) other.is_intangible=1
-if (transform || finish || piped=1 ) is_intangible=1
+if (transform || finish || piped=1 || poweruptimer) is_intangible=1
 
 power_lv=0
 if (spin || dropkick) power_lv=1
@@ -701,24 +749,23 @@ wf=1
 
 //smoke generation
 if (global.dustframe) {
-if (slipnslide) {
-i=shoot(x,y+10,psmoke) i.depth=depth+2
-}
-if (spin) {
-i=shoot(x,y+10,psmoke) i.depth=depth+2
-}
-if (vsp<-5-2*!sprung) {
-shoot(x,y+8,psmoke,0,-1)
-}
-if (vsp>7) {
-speedwagon+=1
-if (speedwagon>60) shoot(x,y,psmoke,0,1)
-} else speedwagon=0
+	if (slipnslide) {
+		i=shoot(x,y+10,psmoke) i.depth=depth+2
+	}
+	if (spin) {
+		i=shoot(x,y+10,psmoke) i.depth=depth+2
+	}
+	if (vsp<-5-2*!sprung) {
+		shoot(x,y+8,psmoke,0,-1)
+	}
+	if (vsp>7) {
+		speedwagon+=1
+		if (speedwagon>60) shoot(x,y,psmoke,0,1)
+	} else speedwagon=0
 }
 
 if (jump && size==7 && global.fastframe4 != ff4prev) {ff4prev = global.fastframe4 with instance_create(x, y, afterimagenoblend) {event_user(0) alphadecay=1 alarm[0] = 24 maxalarm = 24 maxalpha=0.8}}
 
-twist=max(0,twist-1)
 runvar=inch(runvar,run,0.05)
 stomplok=max(0,stomplok-1)
 wallkick=max(0,wallkick-1)
@@ -737,55 +784,36 @@ if (sprung) {triplexsc=0}
 if (!jump && run && !bkey) run=0
 if (!collpos(xsc*16,0) || !jump) hang=0
 if (pound) {
-crouch=1
-hang=0
-if (pound<15) pound+=1
-else if (up || (water && vsp>5)) {pound=0 dive=-1 fall=0 insted=1 crouch=0 canstopjump=1}
-else fall=4
+	crouch=1
+	hang=0
+	if (pound<15) pound+=1
+	else if (up || (water && vsp>5)) {pound=0 dive=-1 fall=0 insted=1 crouch=0 canstopjump=1}
+	else fall=4
 } else poundcancel=0
 if (fall=6 && sign(hsp)=xsc) fall=1
 if (rise!=0) {crouch=1 hsp=0 xsc=rise risec+=1 if (risec=10) {risec=0 rise=0 crouch=down}}
 sprung=0
 if (slipnslide) {
-slipnslide=0
-crouch=1
-if ((slobal=0 && (hsp=0 || ((left || right) && !down))) || jump) {slipnslide=0 crouch=0}
+	slipnslide=0
+	crouch=1
+	if ((slobal=0 && (hsp=0 || ((left || right) && !down))) || jump) {slipnslide=0 crouch=0}
 }
 jumpspd=min(jumpspd,100)
 
 if (dropkick) xsc=esign(hsp,xsc)
 if (spinjump) {
-fall=(vsp<0)
-spinball+=1 if (spinball=16) {spinball=0
-if (count_projectiles()<2 && !poundcancel && size=2 && !pound && !carry) {
-ballspin=!ballspin
-i=fire_projectile(x+8*ballspin,y+2)
-fired=8
-i.hspeed=-4+8*ballspin
+	fall=(vsp<0)
+	spinball+=1 if (spinball=16) {spinball=0
+	if (count_projectiles()<2 && !poundcancel && size=2 && !pound && !carry) {
+			ballspin=!ballspin
+			i=fire_projectile(x+8*ballspin,y+2)
+			fired=8
+			i.hspeed=-4+8*ballspin
+		}
+	}
 }
-}
-}
-
-
-
 
 jesus=(((boost && vsp<4)||(size==5 && !down && abs(hsp)>2.8)) && !water)
-// if jeezus==1 {
-    // if !plat plat=instance_create(0,0,ground)
-    // plat.x=x-6
-    // plat.y=y-80
-    // plat.image_yscale=0.3
-    // with instance_place(x,y+4,waterblock) other.plat.y=y
-    // if plat.y=y-80 {
-        // if plat with plat instance_destroy() plat=0
-    // }
-    // else if instance_place(x,y+4,plat) && splashtime<=0 {splashtime=9 water_splash(-1)}
-    // splashtime-=1
-// } else {splashtime=0 plat.x=verybignumber plat.y=verybignumber if plat with plat instance_destroy() plat=0}
-
-// if (vsp>=0 )
-// jesus=jeezus
-// else jesus=0
 
 com_endactions()
 
@@ -833,7 +861,7 @@ if (coll) {
         if (star  
         || (spin && type!=spinyegg && type!=beetle && type!=shell)
         || (pound>13 && type!=piranha && type!=spinyegg && type!=spiny)) {
-            if size==5 && !spin && !star && (hurt || piped || (intangible() && !diggity)) {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false if !pound exit else pound=0}
+            if size==5 && !spin && !star && (hurt || piped || (intangible() && !diggity)) {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=jumpspeed[0] canstopjump=false if !pound exit else pound=0}
             instance_create(mean(x,coll.x),mean(y,coll.y),kickpart)
             if (type=hammerbro) seqcount=max(5,seqcount)
             enemydie(coll)                
@@ -889,13 +917,13 @@ if (coll) {
                 else {
                     if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2 canstopjump=false if fall=12 fall=5 exit}
                     with (coll) {hspeed=0 owner=noone phase=other.id stop=0 kicked=0 time=15}
-                    vsp=-2.5 canstopjump=false sound("enemystomp") doscore_p() if (fall=12) fall=5 exit
+                    vsp=jumpspeed[0] canstopjump=false sound("enemystomp") doscore_p() if (fall=12) fall=5 exit
                 }
             }                    
         }
         
         if (type=blooper) {
-            if (jump && (!calcfall || !water) && vsp>0) {if (calcfall) {enemystomp(coll,5) vsp=-2.5 canstopjump = false} else enemyexplode(coll)}
+            if (jump && (!calcfall || !water) && vsp>0) {if (calcfall) {enemystomp(coll,5) vsp=jumpspeed[0] canstopjump = false} else enemyexplode(coll)}
             else hurtplayer("enemy") exit
         }
         
@@ -908,18 +936,18 @@ if (coll) {
             if (type=koopa || type=beetle || object_is_ancestor(type,koopa)) {
                 if (vsp<0) {
                     if (calcfall) hurtplayer("enemy")
-                    else if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit}
+                    else if size==5 {playsfx(name+"smalljump",0,3.6) vsp=jumpspeed[0] canstopjump=false exit}
                     else enemyexplode(coll) exit
                 }
             } else {
                 if (!calcfall && size!=5) {enemyexplode(coll) exit}
-                if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false if fall=12 fall=5 exit}
+                if size==5 {playsfx(name+"smalljump",0,3.6) vsp=jumpspeed[0] canstopjump=false if fall=12 fall=5 exit}
                 if (vsp<0) {hurtplayer("enemy") exit}
             }
             
             if (type=bulletbill)
             {
-            if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemydie(coll) exit}}
+            if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=jumpspeed[0] canstopjump=false exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemydie(coll) exit}}
             }
             
             if (type=goomba && seqcount=1 && !scorelok4) {seqcount=0 scorelok4=1}    
@@ -928,9 +956,9 @@ if (coll) {
             if (type=hammerbro) seqcount=max(5,seqcount)
             if (fall=12) fall=5     
             dive=0                   
-            if size==5 {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit}
-            enemystomp(coll) vsp=-2.5 canstopjump = false exit      
-        } else if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemystomp(coll) vsp=-2.5 canstopjump = false exit}} //boll team watching me paste this same line 12 times like an idiot:
+            if size==5 {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=jumpspeed[0] canstopjump=false exit}
+            enemystomp(coll) vsp=jumpspeed[0] canstopjump = false exit      
+        } else if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=jumpspeed[0] canstopjump=false exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemystomp(coll) vsp=jumpspeed[0] canstopjump = false exit}} //boll team watching me paste this same line 12 times like an idiot:
         
         hurtplayer("enemy")   
     } else hurtplayer("enemy")
@@ -1034,35 +1062,6 @@ if blockcoll.object_index == goalblock hititembox()
 #define hitwall
 skiphsp=0
 flight=0
-if (object_is_ancestor(coll.object_index,hittable)) {
-    if (dropkick || dive) || (spin && abs(hsp)>0.5){
-        s=vsp
-        global.coll=id
-        with (coll) {
-        go=1
-        event_user(0)
-        }
-        if (coll.object_index=brick && coll.hit || !instance_exists(coll)) coll=noone
-    }
-}
-else {
-    if (abut && dive && knuxcanclimb(coll)) {
-        dive=0
-        hsp=-(hsp+1)
-        jumpspd=100 
-        instance_create(x+6*xsc,y+8,kickpart)
-        xsc*=-1 
-        vsp=-4
-        if (size) playsfx(name+"wallkick") else playsfx(name+"smallwallkick")
-        wallkick=12 
-        crouch=0
-        run=1
-        canstopjump=1
-        hyperspeed=(abs(hyperspeed)+1)*xsc
-        exit
-    }
-}
-if (dropkick || spin || flight || dive || _longjump) {instance_create(x+8*s,y+6,kickpart) x-=hsp dropkick=-1 hsp=-2*esign(hitside,xsc) vsp=-2*spin jump=(jump || spin) _longjump=0 spin=0 dive=0 crouch=1 skiphsp=1}
 
 if (!collpos(sign(hitside)*10,8,1)) {
     //gap running
@@ -1161,15 +1160,15 @@ frn=owner.frn
 
 } 
 else if (event="step"){
-if owner.sprite!=sprite {owner.sprite=sprite with owner set_sprite(sprite)}
-alarm0=max(0,alarm0-1)
-alarm1=max(0,alarm1-1)
-if (alarm0=0 && !didonce) {
-    vspeed=-3.5 gravity=0.1-(owner.water*0.015) didonce=1
-}
-alarmmp=max(0,alarmmp-1)
-if alphadecay &&!alarmmp alpha-=0.1
-if alarm1=0 instance_destroy()
+	if owner.sprite!=sprite {owner.sprite=sprite with owner set_sprite(sprite)}
+	alarm0=max(0,alarm0-1)
+	alarm1=max(0,alarm1-1)
+	if (alarm0=0 && !didonce) {
+	    vspeed=-3.5 gravity=0.1-(owner.water*0.015) didonce=1
+	}
+	alarmmp=max(0,alarmmp-1)
+	if alphadecay &&!alarmmp alpha-=0.1
+	if alarm1=0 instance_destroy()
 } else if (event="draw"){
 
 }

@@ -37,6 +37,7 @@
 		|wrap_val
 		|draw_sprite_tiled_area
 		|roundtowards
+		|bool
 	+fmod
 		|FMODInit
 		|FMODFree

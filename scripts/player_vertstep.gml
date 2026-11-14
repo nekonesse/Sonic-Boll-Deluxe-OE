@@ -230,7 +230,7 @@ if (coll /*|| y>yground*/) {
                 exit
             }                      
         }                                     
-    }       
+    }
     s=sign(vsp)
     y=yp
     repeat ( ceil(abs(vsp))) {
