@@ -181,7 +181,7 @@ if !up
 coll=knuxcanclimb(instance_place(x+3*xsc,y,collider)) 
 
 if (c>=56) || (c>56) mode=1
-if coll && coll.object_index!=brick  && !mode & !brickpull && capture=0 && coll.nslop=0 && owner.bkey if !instance_place(x+3*xsc,y,phaser)  mode=2
+if coll && coll.object_index!=brick  && !mode & !brickpull && capture=0 && coll.nslop=0 && ( owner.bkey && owner.jump ) if !instance_place(x+3*xsc,y,phaser)  mode=2
 if (mode) c=approach_val(c,0,6)  else c=approach_val(c,56,6) 
 while c>57
 c-=1
