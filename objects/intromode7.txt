@@ -2,6 +2,6 @@ sprite=tex_introground
 visible=0
 solid=0
 persistent=0
-depth=100
+depth=200
 parent=
 mask=

@@ -62,6 +62,7 @@ if (keyboard_check_pressed(vk_enter) && !off) {
         }
     }
     switch (cmd) {
+        /*
         case "nethost":
             if !instance_exists(bollnetmanager)
             instance_create(0,0,bollnetmanager)
@@ -93,7 +94,7 @@ if (keyboard_check_pressed(vk_enter) && !off) {
                 global.onlinemode=1
             }
         break;
-
+        */
         case "reloadobject":
         case "reloadobjects":
         case "relobj":

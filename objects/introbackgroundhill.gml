@@ -24,12 +24,12 @@ applies_to=self
 */
 image_index=0
 image_speed=0
-x=0
 y=96
+x=0
 
 if (!introctrl.classic) image_blend=merge_color($ffff80,$808040,1-(y-104)/110)
 
-hspeed=-(1+(y-104)/17.5)/3.25
+hspeed=-0.25
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1

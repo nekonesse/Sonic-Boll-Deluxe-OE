@@ -1,5 +1,5 @@
 sprite=spr_backhills
-visible=1
+visible=0
 solid=0
 persistent=0
 depth=100

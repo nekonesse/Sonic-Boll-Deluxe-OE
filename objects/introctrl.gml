@@ -51,8 +51,10 @@ instance_create(200,y+16,introtape)
 instance_create(0,y+16,introslide1)
 instance_create(0,y+16,introslide2)
 
-repeat (32) instance_create(0,0,introslide)
 instance_create(0,0,introbackgroundhill)
+instance_create(0,0,introbackgroundhill2)
+
+repeat (32) instance_create(0,0,introslide)
 
 event_user(0)
 
@@ -330,7 +332,12 @@ if (year && introtape.f20=1) {
 if (global.frame88<4 && introtape.f20=1 && !year) {
     //pb stands for pressbutton here dw :p
     pb_counter=(pb_counter+1) mod 64
-    if !(pb_counter mod 4) pb_length=min(pb_length+1,16)
+    if !(pb_counter mod 4) {
+        if (pb_length<16) {
+            pb_counter = pb_length*4;
+        }
+        pb_length=min(pb_length+1,16)
+    }
 
     pb=0
     repeat (pb_length) {

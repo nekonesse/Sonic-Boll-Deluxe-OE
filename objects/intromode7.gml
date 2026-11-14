@@ -60,15 +60,20 @@ if (sureface_set_target("mode7")) {
     //if (introctrl.classic) {col1=$bbbbbb col2=$bbbbbb}
     /*else*/ {col1=$404000 col2=$aaaa00}
 
+    //DRAW SKY
     texture_set_interpolation(!introctrl.craft)
     d3d_set_projection_ortho(0,0,400,224,0)
-    draw_sprite_stretched(tex_sky,3-introctrl.classic,0,0,401,112) //draw the sky texture
+    draw_sprite_stretched(tex_sky,3-introctrl.classic,0,0,401,112)
+    //
 
+    //DRAW STARS
     d3d_transform_add_rotation_z(zz)
     d3d_transform_add_translation(200,96,0)
     d3d_model_draw(starfield,0,0,0,-1)
     d3d_transform_set_identity()
+    //
 
+    //DRAW CLOUDS
     texture_set_repeat(1)
     d3d_set_projection_ext(0,0,0,0,-10,3,0,0,-1,105,400/224,1,1000)
     draw_set_blend_mode(bm_add)
@@ -79,8 +84,21 @@ if (sureface_set_target("mode7")) {
         d3d_vertex_texture_color(70,-5,-5,(xx+lengthdir_x(2.5,30)+lengthdir_x(2.5,300))*s,-(yy+lengthdir_y(2.5,30)+lengthdir_y(2.5,300))*s,$d1b09b,1)
     d3d_primitive_end()
     draw_set_blend_mode(0)
+    //
 
 
+
+    //DRAW BACKGROUND HILLS
+    texture_set_repeat(0)
+    d3d_set_projection_ortho(0,0,400,224,0)
+    d3d_transform_set_identity()
+    with(introbackgroundhill2) event_perform(ev_draw,0);
+    with(introbackgroundhill) event_perform(ev_draw,0);
+    d3d_set_projection_ext(0,0,0,0,-10,3,0,0,-1,105,400/224,1,1000)
+    texture_set_repeat(1)
+    //
+
+    //DRAW 3D GROUND
     d3d_primitive_begin_texture(pr_trianglestrip,tex2)
         d3d_vertex_texture_color(-70,-30,5,x2,0,col1,1)
         d3d_vertex_texture_color(-70,0,5,x2,8,col2,1)
@@ -88,6 +106,7 @@ if (sureface_set_target("mode7")) {
         d3d_vertex_texture_color(70,0,5,x2-16,8,col2,1)
     d3d_primitive_end()
     texture_set_interpolation(0)
+    //
 
     d3d_set_projection_ortho(0,0,400,224,0)
     draw_set_blend_mode(bm_subtract)

@@ -1,6 +1,4 @@
 |globalmanager
-+bollnet
-	|bollnetmanager
 +UI
 	+title screen
 		+boot
@@ -18,6 +16,7 @@
 		|intromode7
 		|introslide
 		|introbackgroundhill
+		|introbackgroundhill2
 		|introfade
 		|introblink
 		|cool_lens_flare
