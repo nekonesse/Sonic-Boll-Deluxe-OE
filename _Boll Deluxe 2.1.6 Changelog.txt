@@ -19,6 +19,7 @@ Boll Deluxe "2.1.6" Changelog:
 
 [Bugfixes]
 
+- Fixed outdated Boundary Tool description in Lemon
 - Fixed Lain mushroom retainer easter egg causing constant errors.
 - Gobble now uses the current biome's objects sheet rather than always using Ground's.
 - Fixed player collision checking for objects at double the speed the player is moving at.
@@ -59,6 +60,7 @@ Boll Deluxe "2.1.6" Changelog:
 
 [Character Tweaks]
 
+- Mario, Luigi, and Stanley can now run with the X button (without throwing projectiles)
 - Stanley is now part of the main cast.
 - The Kid is now locked again.
 - The Kid is now rewarded with a shield if he collects 8 red coins while already wearing a bow.

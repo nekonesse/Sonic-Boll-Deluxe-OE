@@ -1158,17 +1158,6 @@ listobj(greenlui          ,1,spr_greenlui     ,239,beetroot)
     listargs("align", "jumping")
     listdata("0"    , "0")
 
-listobj(customobject    ,0,spr_anchor       ,240,customobject)
-    listdoc("Custom Object","")
-    listargs("mytype","data_1","data_2","data_3","data_4","data_5","data_6","data_7","data_8","data_9","data_10","data_11")
-    listdata("Collectible" ,""      ,""      ,""      ,""      ,""      ,""      ,""      ,""      ,""      ,""       ,""       )
-
-
-listobj(pig          ,0,spr_pig     ,243,pig)
-    listdoc("The pig from angry birds","Bye Bye Broom")
-    listargs("align")
-    listdata("0,0"  )
-
 listobj(bubble              ,0,spr_bubble           ,247,bubble)
     listdoc("Bubble","Contains objects. Popped upon contact with players.")
     listargs("content","nogt")

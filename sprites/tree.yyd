@@ -184,6 +184,14 @@
 	+modloader
 		|spr_modicons
 		|spr_moddesc
+	+TFPsprites
+		|spr_TFPscrollpart
+		|spr_TFPbackground
+		|spr_TFPsonicloop1
+		|spr_TFPsonicpoint
+		|spr_TFPsonicloop2
+		|spr_TFPsonicretract
+		|spr_TFPsonicshutup
 	|spr_cursor
 	|spr_coolhandcursor
 	|spr_bigbuttons
@@ -561,7 +569,6 @@
 		|spr_spriteswitcher
 		|spr_camwall
 		|spr_signalblock
-		|spr_darkarea
 		|spr_staticdummy
 		|spr_objectdummy
 		|spr_enemydummy
@@ -598,11 +605,3 @@
 |BETAspr
 |spr_unknown_bak
 |spr_pausesprblank
-+TFPsprites
-	|spr_TFPscrollpart
-	|spr_TFPbackground
-	|spr_TFPsonicloop1
-	|spr_TFPsonicpoint
-	|spr_TFPsonicloop2
-	|spr_TFPsonicretract
-	|spr_TFPsonicshutup

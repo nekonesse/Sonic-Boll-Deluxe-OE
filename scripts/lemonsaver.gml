@@ -34,7 +34,7 @@ WW+.....................:**-...................................................
 ...................................................................#WWWWWWWWWWW
 */
 //--------------------------------HEADER
-var t,l,map;
+var t,l,map,moe;
 
 clearbuffer()
 t=createbuffer()
@@ -43,11 +43,30 @@ t=createbuffer()
 writestring("[lemon]")
 l=lemongrab.length
 
+moe = ds_list_create(); //modded object detection
+for (r=0;r<8;r+=1) {
+    deity=lemongrab.gods[r]
+    with(deity) {
+        var test;
+
+        if (is_real(obj)) {
+            test=object_get_name(lemongrab.objlist[j,0]);
+        } else {
+            test=string(obj);
+        }
+
+        if string_starts_with(test,"MODDEDOBJECT_") {
+            test = string_delete(test,1,13) //remove the modded object tag
+
+            if (ds_list_find_index(moe, test) < 0) {
+                ds_list_add(moe, test)
+            }
+        }
+    }
+}
+
 map=ds_map_create()
 ds_map_add(map,"v","2.1.6s")
-ds_map_add(map,"thumbx",lemongrab.thumbx)
-ds_map_add(map,"thumby",lemongrab.thumby)
-ds_map_add(map,"thumbregion",lemongrab.thumbregion)
 ds_map_add(map,"spawnx",lemongrab.spawnx)
 ds_map_add(map,"spawny",lemongrab.spawny)
 ds_map_add(map,"spawnr",lemongrab.spawnr)
@@ -58,7 +77,9 @@ ds_map_add(map,"stage",lemongrab.stage)
 ds_map_add(map,"time",lemongrab.time)
 ds_map_add(map,"name",lemongrab.levelname)
 ds_map_add(map,"desc",lemongrab.leveldesc)
+ds_map_add(map,"modded",ds_list_write(moe))
 writestring(ds_map_write(map))
+ds_list_destroy(moe);
 ds_map_destroy(map)
 
 lemongrab.ky=224

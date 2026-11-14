@@ -92,7 +92,7 @@ with (globalmanager) {
         "lavabubble,lavabubbledown,thwomp,thwompangry,thwompdown,thwompangryside,thwompside,bthwomp,bthwompangry,bthwompdown,bthwompangryside,bthwompside,thwimp,hotfoot,hotfootwalk,"+
         "crabmeat,crabmeatshoot,newtrontrans,newtronshoot,newtrongo,chopper,greenorbinaut,blueorbinaut,redorbinaut,bumperorbinaut,"+
         "bombstand,bombwalk,bombignite,buzzbombfly,buzzbombhover,"+
-        "samba,pig,"
+        "samba,"
 
     global.enemysprites=string_count(",",list)
     for (i=0;i<global.enemysprites;i+=1) {

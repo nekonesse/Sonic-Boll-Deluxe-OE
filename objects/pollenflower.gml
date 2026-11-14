@@ -69,7 +69,7 @@ else {
         }
 
         sprung=0
-
+        charm_run("sprung");
         pollenated=1
         crouch=0
         rise=0
