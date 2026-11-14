@@ -48,8 +48,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-draw_sprite(spr_20,0,x,y+cosine(200,76,f20))
-draw_sprite_ext(spr_20,1,x,y+cosine(200,76,f20),1,1,0,$ffffff,fg20)
+draw_sprite(spr_deluxe,0,x,y+cosine(200,76,f20))
+draw_sprite_ext(spr_deluxe,1,x,y+cosine(200,76,f20),1,1,0,$ffffff,fg20)
 draw_self()
 with (introslide1) if (visible) event_user(0)
 with (introslide2) if (visible) event_user(0)

@@ -40,7 +40,7 @@ pb_length=0
 df=degtorad(135)
 
 x=round(200+(20+80*cos(df)))
-y=round(140-80*sin(df))
+y=round(140-8-80*sin(df))
 instance_create(x,y,introblink)
 ystart=96
 
@@ -52,7 +52,7 @@ instance_create(0,y+16,introslide1)
 instance_create(0,y+16,introslide2)
 
 repeat (32) instance_create(0,0,introslide)
-repeat (32) instance_create(0,0,introbackgroundhill)
+instance_create(0,0,introbackgroundhill)
 
 event_user(0)
 
@@ -107,7 +107,7 @@ if (!ye) {
     df=degtorad(135-sqr(f)*360)
 
     x=200+(20+80*cos(df))*sqrt(1-f)
-    y=128-80*sin(df)
+    y=120-80*sin(df)
 
     if (f=1 && !ye) {
         ye=1

@@ -5,14 +5,14 @@ action_id=603
 applies_to=self
 */
 event_user(0)
-x=300
+x=0
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-if (x<-96) event_user(0)
+if (x < -(sprite_width)) event_user(0)
 
 image_xscale=1
 image_yscale=1
@@ -37,3 +37,5 @@ action_id=603
 applies_to=self
 */
 draw_sprite_ext(sprite_index,image_index,floor(x),y,abs(image_xscale),abs(image_yscale),0,c_white,1)
+
+draw_sprite_ext(sprite_index,image_index,floor(x+sprite_width),y,abs(image_xscale),abs(image_yscale),0,c_white,1)
