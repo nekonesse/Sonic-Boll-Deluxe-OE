@@ -1,2 +1,2 @@
-COMPILATION ERROR in string to be executedError in code at line 349:   
-maxspd=1.5+(run*)                   ^at position 18: Unexpected symbol in expression.
+COMPILATION ERROR in string to be executedError in code at line 673:   
+            if (jump && (!calcfall || !water) && vsp>0) {if (calcfall) enemystomp(coll,5) vsp=-2.5 canstopjump = false else enemyexplode(coll)}                                                                                                                          ^at position 121: Unexpected symbol in expression.

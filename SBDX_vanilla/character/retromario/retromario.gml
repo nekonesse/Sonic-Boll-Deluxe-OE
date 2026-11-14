@@ -524,80 +524,81 @@ if (abs(hsp)>maxspd) hsp=maxspd*sign(hsp)
 calcmoving()
 
 if (!dead && !grabflagpole) {
-if fall!=69
-player_horstep()
-player_nslopforce()
-//yground=easyground()
-//if (yground!=verybignumber) yground-=14
-if (jump) {
-	if (water || size=3) vsp=min(1.5,vsp+0.04)
-	else if (twist>5) vsp=min(1,vsp+0.1)
-	else if fall!=69 {
-		vsp=min(4,vsp+0.125+(0.3125*vsp>0.1250)/3)
-		if size==5 && vsp>-0.75 vsp-=0.175
-	} 
-	vine_climbing() 
-	if (onvine) {
-		dive=0
-		pound=0
-		_longjump=0
-		crouch=0
-		spinjump=0
+	if fall!=69
+	player_horstep()
+	player_nslopforce()
+	//yground=easyground()
+	//if (yground!=verybignumber) yground-=14
+	if (jump) {
+		if (water || size=3) vsp=min(1.5,vsp+0.04)
+		else if (twist>5) vsp=min(1,vsp+0.1)
+		else if fall!=69 {
+			vsp=min(4,vsp+0.125+(0.3125*vsp>0.1250)/3)
+			if size==5 && vsp>-0.75 vsp-=0.175
+		} 
+		vine_climbing() 
+		if (onvine) {
+			dive=0
+			pound=0
+			_longjump=0
+			crouch=0
+			spinjump=0
+		}
+		
+	
+		if (skidding) {soundstop(name+"skid") skidding=0}
+		braking=0
+		braking=max(0,braking-1)
+	
+		if (!fall && !spinjump) fall=1
+		if (pound=-1) pound=0
+		if (sprung && !fall) fall=1
+		if (fall=12) {vsp=6*wf hsp=0}
+		if fall=69 {dive=0 flight=0}
+		if !flight frame1flight=0
+	
+		push=0
+		rise=0 risec=0
+		coyote=0
+		var monitorcoll;
+		monitorcoll=collision(0,vsp)
+		if (monitorcoll.object_index=monitor && ((vsp > 0 && !antigrav) || (vsp < 0 && antigrav))) {
+	        vsp=-2
+	        canstopjump = false;
+	        with(monitorcoll) {
+	            event_user(0);
+	        }
+	    }
+		
+		player_vertstep()
 	}
 	
-
-	if (skidding) {soundstop(name+"skid") skidding=0}
-	braking=0
-	braking=max(0,braking-1)
-
-	if (!fall && !spinjump) fall=1
-	if (pound=-1) pound=0
-	if (sprung && !fall) fall=1
-	if (fall=12) {vsp=6*wf hsp=0}
-	if fall=69 {dive=0 flight=0}
-	if !flight frame1flight=0
-
-	push=0
-	rise=0 risec=0
-	coyote=0
-	var monitorcoll;
-	monitorcoll=collision(0,vsp)
-	if (monitorcoll.object_index=monitor && ((vsp > 0 && !antigrav) || (vsp < 0 && antigrav))) {
-        vsp=-2-(akey*1.5)
-        with(monitorcoll) {
-            event_user(0);
-        }
-    }
+	if (osld<180 && osld>0 && !instance_place(x-16,y+4,ground)) dy=3
+	else if (osld>180 && osld<320 && !instance_place(x-16,y+4,ground)) dy=3
 	
-	player_vertstep()
-}
-else if (_longjump) {
-	movevar=xsc
-}
-if (osld<180 && osld>0 && !instance_place(x-16,y+4,ground)) dy=3
-else if (osld>180 && osld<320 && !instance_place(x-16,y+4,ground)) dy=3
-if (!jump) {
-//if (yground!=verybignumber) {y=yground while collision(0,0) && !collision(0,-8) {y-=1 }}
-if (finish && ending="retainer" && !jump) coyote=0
-if (!collision(0,4) /*&& (y<yground-2)*/) {
-coyote+=1
-if (down || !run) {y+=1 coyote=3}
-if (coyote=3) {
-jump=1
-fall=1
-if (crouch) vsp=1.5
-if (spin) {vsp=-1.5}
-}
-} else coyote=0
-if (jumpbuffer=-1) {
-jumpbuffer=0
-//jump buffering
-if (rise=0 && !down) {
-jumpbufferdo=1
-if (insta) insted=1
-}
-}
-}
+	if (!jump) {
+		//if (yground!=verybignumber) {y=yground while collision(0,0) && !collision(0,-8) {y-=1 }}
+		if (finish && ending="retainer" && !jump) coyote=0
+		if (!collision(0,4) /*&& (y<yground-2)*/) {
+			coyote+=1
+			if (down || !run) {y+=1 coyote=3}
+			if (coyote=3) {
+				jump=1
+				fall=1
+				if (crouch) vsp=1.5
+				if (spin) {vsp=-1.5}
+			}
+		} else coyote=0
+		
+		if (jumpbuffer=-1) {
+			jumpbuffer=0
+			//jump buffering
+			if (rise=0 && !down) {
+				jumpbufferdo=1
+				if (insta) insted=1
+			}
+		}
+	}
 }
 
 
@@ -825,7 +826,7 @@ if (coll) {
         if (star  
         || (spin && type!=spinyegg && type!=beetle && type!=shell)
         || (pound>13 && type!=piranha && type!=spinyegg && type!=spiny)) {
-            if size==5 && !spin && !star && (hurt || piped || (intangible() && !diggity)) {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=-3-((ckey && spin) || (akey && star))*1.5 canstopjump=akey if !pound exit else pound=0}
+            if size==5 && !spin && !star && (hurt || piped || (intangible() && !diggity)) {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false if !pound exit else pound=0}
             instance_create(mean(x,coll.x),mean(y,coll.y),kickpart)
             if (type=hammerbro) seqcount=max(5,seqcount)
             enemydie(coll)                
@@ -839,13 +840,6 @@ if (coll) {
             exit
         }
         
-        if (spin) {
-            if (type=shell) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-ckey*1.5 canstopjump=akey exit} else if (coll.type!="beetle") {enemydie(coll) exit}}
-            else if (type=beetle) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-ckey*1.5 canstopjump=akey exit} else {hsp=0 jump=1 jumpspd=0.5 dropkick=1 spin=0 enemystomp(coll) exit}}
-            else if (type=spinyegg) {hurtplayer("enemy") exit}
-            else {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-ckey*1.5 canstopjump=akey exit} else enemydie(coll) exit}
-        }
-                         
         if (type=spiny) {
             if (!fall && vsp<0) enemyexplode(coll)
             else hurtplayer("enemy") exit
@@ -886,15 +880,15 @@ if (coll) {
                     exit
                 } else if (coll.kicked && (!coll.stop || (coll.owner!=id && coll.vspeed<0)) && (vsp<0 || !jump)) {hurtplayer("enemy") exit}
                 else {
-                    if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-akey*1.5 canstopjump=akey if fall=12 fall=5 exit}
+                    if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2 canstopjump=false if fall=12 fall=5 exit}
                     with (coll) {hspeed=0 owner=noone phase=other.id stop=0 kicked=0 time=15}
-                    vsp=-3-akey*1.5 canstopjump=akey sound("enemystomp") doscore_p() if (fall=12) fall=5 exit
+                    vsp=-2.5 canstopjump=false sound("enemystomp") doscore_p() if (fall=12) fall=5 exit
                 }
             }                    
         }
         
         if (type=blooper) {
-            if (jump && (!calcfall || !water) && vsp>0) {if (calcfall) enemystomp(coll,5) else enemyexplode(coll)}
+            if (jump && (!calcfall || !water) && vsp>0) {if (calcfall) {enemystomp(coll,5) vsp=-2.5 canstopjump = false} else enemyexplode(coll)}
             else hurtplayer("enemy") exit
         }
         
@@ -907,18 +901,18 @@ if (coll) {
             if (type=koopa || type=beetle || object_is_ancestor(type,koopa)) {
                 if (vsp<0) {
                     if (calcfall) hurtplayer("enemy")
-                    else if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-akey*1.5 canstopjump=akey exit}
+                    else if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit}
                     else enemyexplode(coll) exit
                 }
             } else {
                 if (!calcfall && size!=5) {enemyexplode(coll) exit}
-                if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-akey*1.5 canstopjump=akey if fall=12 fall=5 exit}
+                if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false if fall=12 fall=5 exit}
                 if (vsp<0) {hurtplayer("enemy") exit}
             }
             
             if (type=bulletbill)
             {
-            if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-akey*1.5 canstopjump=akey exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemydie(coll) exit}}
+            if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemydie(coll) exit}}
             }
             
             if (type=goomba && seqcount=1 && !scorelok4) {seqcount=0 scorelok4=1}    
@@ -927,9 +921,9 @@ if (coll) {
             if (type=hammerbro) seqcount=max(5,seqcount)
             if (fall=12) fall=5     
             dive=0                   
-            if size==5 {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=-3-akey*1.5 canstopjump=akey exit}
-            enemystomp(coll) exit      
-        } else if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-3-akey*1.5 canstopjump=akey exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemystomp(coll) exit}} //boll team watching me paste this same line 12 times like an idiot:
+            if size==5 {if vsp<=0 {hurtplayer("enemy") exit} else playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit}
+            enemystomp(coll) vsp=-2.5 canstopjump = false exit      
+        } else if (coll.vspeed<0 && coll.y>y+8) {if size==5 {playsfx(name+"smalljump",0,3.6) vsp=-2.5 canstopjump=false exit} else {jump=1 fall=1 dive=0 vsp=-0.5 enemystomp(coll) vsp=-2.5 canstopjump = false exit}} //boll team watching me paste this same line 12 times like an idiot:
         
         hurtplayer("enemy")   
     } else hurtplayer("enemy")
