@@ -82,6 +82,8 @@ else {
             jump=1
         }
 
+
+        charm_run("sprung")
         sprung=1
         crouch=0
         rise=0

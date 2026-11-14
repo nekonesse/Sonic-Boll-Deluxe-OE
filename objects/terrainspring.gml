@@ -73,12 +73,16 @@ else {
             jump=1
         }
 
-        if !(abs(hvelocity)) {
+        if !(abs(spronge.hvelocity)) {
             sprung=1
             fall=1
             insted=0
             fly=0
             slide=0
+        }
+
+        if (spronge.velocity < 0) {
+            charm_run("sprung");
         }
         crouch=0
         rise=0

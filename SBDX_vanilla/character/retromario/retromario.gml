@@ -1015,6 +1015,7 @@ if ((((!size || size==5) && global.rings[p2]==0) || ohgoditslava || name="kid") 
     jump=1
     fall=6
     flash=1;
+    hurt=1;
     hsp=0;
     vsp=0;
     powerupfreeze = 60;
@@ -1131,8 +1132,13 @@ if (pound) {
 	if stoppounding=0 {pound=0}     
 }
 
-if egg() if (piped=1 && star=0 && depth=-11 && friction=0.05 && jump=0) set_sprite("roll")
- 
+#define sprung
+currentgravity = fallgravity[jumpindex];
+
+if (spronge.object_index == pollenflower) {
+	vsp*=1.8;
+	canstopjump = false;
+}
 
 #define death
 if (event="create"){
