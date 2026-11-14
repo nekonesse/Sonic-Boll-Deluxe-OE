@@ -274,6 +274,7 @@ if (powerupfreeze) && !(piped) {
 }
 
 tempbrick=0
+luijump-=1
 carryoffsetx=10
 carryoffsety=5
 
@@ -371,7 +372,7 @@ if ((abut || jumpbufferdo || jumpglitch) && !springin) {
         onvine=0
         jump=1
         jumpglitch=false
-        
+         if (size==7) luijump=9
 		if (run && energy=maxe && abs(hsp+hyperspeed)>3) {runjump=1}
         fall=0
         dropkick=0
@@ -531,8 +532,9 @@ if (!dead && !grabflagpole) {
 	//if (yground!=verybignumber) yground-=14
 	if (jump) {
 		if (water || size=3) vsp=min(1.5,vsp+0.04)
+	else if (vsp<-2 && !luijump) vsp+=0.15
 		else if (twist>5) vsp=min(1,vsp+0.1)
-		else if fall!=69 {
+		else if fall!=69 && !luijump {
 			vsp=min(4,vsp+0.125+(0.3125*vsp>0.1250)/3)
 			if size==5 && vsp>-0.75 vsp-=0.175
 		} 
@@ -713,6 +715,9 @@ speedwagon+=1
 if (speedwagon>60) shoot(x,y,psmoke,0,1)
 } else speedwagon=0
 }
+
+if (jump && size==7 && global.fastframe4 != ff4prev) {ff4prev = global.fastframe4 with instance_create(x, y, afterimagenoblend) {event_user(0) alphadecay=1 alarm[0] = 24 maxalarm = 24 maxalpha=0.8}}
+
 twist=max(0,twist-1)
 runvar=inch(runvar,run,0.05)
 stomplok=max(0,stomplok-1)
@@ -726,6 +731,8 @@ if (spin) spinframe+=1
 else spinframe=0
 if (spinframe>=8) spinframe=0
 if (sprung) {triplexsc=0}
+
+
 
 if (!jump && run && !bkey) run=0
 if (!collpos(xsc*16,0) || !jump) hang=0
@@ -942,6 +949,7 @@ sprung=0
 diggity=0
 grow=0
 gk=0
+luijump=0
 fk=0
 punch=0
 bounce=0
