@@ -54,5 +54,4 @@ with globalmanager {
 
     gamemanager.hudspr=skindat("tex_hud-"+global.gamemode) //reload hud sprite so the game doesnt cry its eyes out when switching mid-level
     gamemanager.hudw=round(sprite_get_width(hudspr)/2)
-
 }

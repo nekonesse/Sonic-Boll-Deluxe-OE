@@ -1,14 +1,22 @@
-//drawassets()
+//makeassets()
+//initializes assets inside asset anchors
+
+if (settings("removeassets")) {
+    instance_activate_object(anchor)
+    with(anchor) {
+        instance_destroy();
+    }
+    exit;
+}
 
 
-
-var j,i,spr,w,h,fh,hw,top,dx,dy,type,ab,blend;
+var j,i,spr,w,h,fh,hw,top,dx,dy,type,ab,blend,ifounditshutyobitchassmouth;
 global.hassprite=0
 instance_activate_object(anchor)
 if instance_exists(anchor)
 for (j=1;j<=global.asset[0,0];j+=1) {
     i=global.assetz[j]
-    if (global.asset[i,8]!="" && global.asset[i,1]=0 && global.asset[i,5]=argument[0]) {
+    if (global.asset[i,8]!="" && global.asset[i,1]=0) {
 
 
         spr=global.asset[i,0]
@@ -18,9 +26,10 @@ for (j=1;j<=global.asset[0,0];j+=1) {
         anim=global.asset[i,4]
         anim2=global.asset[i,7]
         type=global.asset[i,8]
+
         if i!=1
-            //if type!=global.asset[i-1,8]
-                global.hassprite=0
+        global.hassprite=0
+
         ab=global.asset[i,9]
         blend=global.asset[i,10]
         w=global.asset[i,11]
@@ -35,107 +44,150 @@ for (j=1;j<=global.asset[0,0];j+=1) {
         hw=floor(w/2)
         if (blend=1) draw_set_blend_mode(bm_add)
         if (blend=2) draw_set_blend_mode(bm_subtract)
-        // -S- here, I need to test this new asset shit I'm making, so checkpoints and the castle flag are currently not viewable
-        /*
-        if (type="left") with (regionmarker) if (self.type=ab || ab==-1) draw_sprite_part(spr,0,0,top,w,fh,lefthand+dx,ky+dy-fh)
-        if (type="right") with (regionmarker) if (self.type=ab || ab==-1) draw_sprite_part(spr,0,0,top,w,fh,x+dx-w,ky+dy-fh)
-        if (type="spawn") with (spawner) if (biome=ab || ab==-1) draw_sprite_part(spr,0,0,top,w,fh,x+dx-hw,y+dy-fh+16)
-        if (type="checkpoint") with (checkpoint) if (biome=ab || ab==-1) draw_sprite_part(spr,0,0,top,w,fh,x+dx-hw,y+dy-fh+16)
-        if (type="checkpoint_off") with (checkpoint) if (biome=ab || ab==-1 && !passed) draw_sprite_part(spr,0,0,top,w,fh,x+dx-hw,y+dy-fh+16)
-        if (type="checkpoint_on") with (checkpoint) if (biome=ab || ab==-1 && passed) draw_sprite_part(spr,0,0,top,w,fh,x+dx-hw,y+dy-fh+16)
-        if (type="flag") with (flaggy) if (visible) draw_sprite_part(spr,0,0,top,w,fh,x+dx-hw,y+dy-fh/2)
-        */
-        // -S- here again, we moved this shit outside of assets
+
         ifounditshutyobitchassmouth=0
-        with (anchor){ 
+        with (anchor){
             if ((biome=ab) && name=type) {
                 if !global.hassprite {
-                    global.assetsprite=sprite_add(spr,0,1,0,0,0)
+                    if background_exists(ds_map_get(global.assetmap,type)) {
+                        ds_map_set(global.assetmap,type,background_add(spr,1,0))
+                    }
+                    global.assetsprite=ds_map_get(global.assetmap,type)
                     global.hassprite=1
                 }
                 ifounditshutyobitchassmouth=1
-                global.asset[i,11]=sprite_get_width(global.assetsprite)
-                global.asset[i,12]=sprite_get_height(global.assetsprite)
+                global.asset[i,11]=background_get_width(global.assetsprite)
+                global.asset[i,12]=background_get_height(global.assetsprite)
                 w=global.asset[i,11]
                 h=global.asset[i,12]
                 hw=floor(w/2)
                 fh=round(h/global.asset[i,4])
                 if other.noanimasset {
-                    with (instance_create(x+dw-hw,y+dy-fh,assethelper)) {
-                            sprite_index=global.assetsprite
+                    other.createmyasshole=1
+                    other.createx=x+dx-hw
+                    other.createy=y+dy-h
+                    with (other) {
+                        if createmyasshole {
+                            createmyasshole=0
+                            bruhmoment=noone
+                            bruhmoment=instance_create(createx,createy,assethelper)
+                            if (global.asset[i,5]) {
+                                bruhmoment.depth=-100;
+                            }
+                            bruhmoment.spr=global.assetsprite
+                            bruhmoment.sprite_index=spr_mask1x1
+                            bruhmoment.image_xscale=global.asset[i,11]
+                            bruhmoment.image_yscale=global.asset[i,12]
+                            bruhmoment.w=w
+                            bruhmoment.h=h
+                            bruhmoment.dx=dx
+                            bruhmoment.hw=hw
+                            bruhmoment.dy=dy
                         }
-                        instance_destroy()
-                        
+                    }
                 } else {
-                    other.createmyasshole=1 
-                    other.createx=x 
+                    other.createmyasshole=1
+                    other.createx=x
                     other.createy=y
                     //dude why
                     with (other) {
                         if createmyasshole {
-                            createmyasshole=0 
-                            bruhmoment=noone   
+                            createmyasshole=0
+                            bruhmoment=noone
                             bruhmoment=instance_create(createx,createy,assethelperanim)
-                            bruhmoment.myass2=anim2  
-                            bruhmoment.myass1=anim bruhmoment.spr=global.assetsprite
-                            bruhmoment.sprite_index=global.assetsprite
-                            bruhmoment.top=top 
-                            bruhmoment.w=w 
-                            bruhmoment.fh=fh 
-                            bruhmoment.dx=dx 
-                            bruhmoment.hw=hw 
+                            if (global.asset[i,5]) {
+                                bruhmoment.depth=-100;
+                            }
+                            bruhmoment.myass2=anim2
+                            bruhmoment.myass1=anim
+                            bruhmoment.spr=global.assetsprite
+                            bruhmoment.sprite_index=spr_mask1x1
+                            bruhmoment.image_xscale=global.asset[i,11]
+                            bruhmoment.image_yscale=global.asset[i,12]
+                            bruhmoment.top=top
+                            bruhmoment.w=w
+                            bruhmoment.fh=fh
+                            bruhmoment.dx=dx
+                            bruhmoment.hw=hw
                             bruhmoment.dy=dy
                         }
                     }
-                } 
-                instance_destroy() 
-                biomefoundforasset=1 
+                }
+                instance_destroy()
+                biomefoundforasset=1
             }
         }
         if !ifounditshutyobitchassmouth
-        with (anchor){ 
+        with (anchor){
             if ((ab=69||ab=-1) && name=type && biomefoundforasset=0 ) {
                 if !global.hassprite {
-                    global.assetsprite=sprite_add(spr,0,1,0,0,0)
+                    if background_exists(ds_map_get(global.assetmap,type)) {
+                        ds_map_set(global.assetmap,type,background_add(spr,1,0))
+                    }
+                    global.assetsprite=ds_map_get(global.assetmap,type)
                     global.hassprite=1
                 }
-                global.asset[i,11]=sprite_get_width(global.assetsprite)
-                global.asset[i,12]=sprite_get_height(global.assetsprite)
+                global.asset[i,11]=background_get_width(global.assetsprite)
+                global.asset[i,12]=background_get_height(global.assetsprite)
                 w=global.asset[i,11]
                 h=global.asset[i,12]
                 hw=floor(w/2)
                 fh=round(h/global.asset[i,4])
                 if other.noanimasset {
-                    with (instance_create(x+dw-hw,y+dy-fh,assethelper)) {
-                        sprite_index=global.assetsprite
-                    }
-                    instance_destroy()
-                } else {
-                    other.createmyasshole=1 
-                    other.createx=x 
-                    other.createy=y 
+                    other.createmyasshole=1
+                    other.createx=x+dx-hw
+                    other.createy=y+dy-h
                     with (other) {
                         if createmyasshole {
-                            createmyasshole=0 
-                            bruhmoment=noone   
-                            bruhmoment=instance_create(createx,createy,assethelperanim)
-                            bruhmoment.myass2=anim2  
-                            bruhmoment.myass1=anim bruhmoment.spr=global.assetsprite
-                            bruhmoment.sprite_index=global.assetsprite
-                            bruhmoment.top=top 
-                            bruhmoment.w=w 
-                            bruhmoment.fh=fh 
-                            bruhmoment.dx=dx 
-                            bruhmoment.hw=hw 
+                            createmyasshole=0
+                            bruhmoment=noone
+                            bruhmoment=instance_create(createx,createy,assethelper)
+                            if (global.asset[i,5]) {
+                                bruhmoment.depth=-100;
+                            }
+                            bruhmoment.spr=global.assetsprite
+                            bruhmoment.sprite_index=spr_mask1x1
+                            bruhmoment.image_xscale=global.asset[i,11]
+                            bruhmoment.image_yscale=global.asset[i,12]
+                            bruhmoment.w=w
+                            bruhmoment.h=h
+                            bruhmoment.dx=dx
+                            bruhmoment.hw=hw
                             bruhmoment.dy=dy
                         }
                     }
-                } 
-                        instance_destroy()
+                } else {
+                    other.createmyasshole=1
+                    other.createx=x
+                    other.createy=y
+                    with (other) {
+                        if createmyasshole {
+                            createmyasshole=0
+                            bruhmoment=noone
+                            bruhmoment=instance_create(createx,createy,assethelperanim)
+                            if (global.asset[i,5]) {
+                                bruhmoment.depth=-100;
+                            }
+                            bruhmoment.myass2=anim2
+                            bruhmoment.myass1=anim
+                            bruhmoment.spr=global.assetsprite
+                            bruhmoment.sprite_index=spr_mask1x1
+                            bruhmoment.image_xscale=global.asset[i,11]
+                            bruhmoment.image_yscale=global.asset[i,12]
+                            bruhmoment.top=top
+                            bruhmoment.w=w
+                            bruhmoment.fh=fh
+                            bruhmoment.dx=dx
+                            bruhmoment.hw=hw
+                            bruhmoment.dy=dy
+                        }
+                    }
+                }
+                instance_destroy()
             }
         }
 
-       
+
          if (blend) draw_set_blend_mode(0)
     }
 }

@@ -253,6 +253,8 @@
 		|applyworldskin
 		|applybundle
 		|applylevelskin
+		|cleanupassets
+		|makeassets
 		+subroutines
 			|adiwah
 			|replaceinfo
@@ -548,7 +550,6 @@
 	|playercol
 	|drawskinnablehud
 	|drawlayeredbackground
-	|drawassets
 	|drawmoviehud
 	|drawpausehud
 	|drawhudlet

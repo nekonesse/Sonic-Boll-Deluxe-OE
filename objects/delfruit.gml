@@ -56,6 +56,7 @@ if (del) with (instance_place(x,y,player)) {
             visible=0
             with (instance_create(x,y+4,deadkid)) {del=1 name=other.name}
             other.alarm[0]=20
+            die();
 
             unlockchar("kid")
         } else hurtplayer("delfruit")

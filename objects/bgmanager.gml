@@ -14,9 +14,6 @@ offmoran=0
 
 lowdetail=(settings("detail"))
 
-instance_create(0,0,fgmanager)
-instance_create(0,0,fgassetmanager)
-
 sb[0]=-1 sb[1]=-1 sb[2]=-1 sb[3]=-1
 sf[0]=-1 sf[1]=-1 sf[2]=-1 sf[3]=-1
 #define Step_0
@@ -71,8 +68,6 @@ if (lowdetail) {
     drawlayeredbackground(1,view_current)
 }
 
-drawassets(1)
-
 waterbiome[view_current]=getbiomeid(gamemanager.typebg[view_current])
 
 //water surface
@@ -92,7 +87,6 @@ if global.removebackgrounddrawing exit
 
 if (lowdetail) {
     if (sureface_exists("background"+string(view_current))) if surface_exists(sb[view_current]) draw_surface(sb[view_current],view_xview[view_current],view_yview[view_current])
-} else if settings("removeassets"){
-} else {
+} else if !(settings("removeassets")) {
     drawlayeredbackground(0,view_current)
 }

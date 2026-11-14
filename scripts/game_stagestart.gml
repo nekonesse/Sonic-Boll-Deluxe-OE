@@ -49,6 +49,9 @@ repeat (999){
 autotilehandler()
 liquidtilehandler()
 
+cleanupassets();
+makeassets();
+
 if (!global.lemontest) {
     var l;
 

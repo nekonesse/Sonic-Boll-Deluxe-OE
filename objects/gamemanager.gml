@@ -290,8 +290,6 @@ else FMODInstanceSetPitch(globalmanager.handle,1)
 
 global.lemontestviewhack=0
 
-with(darkareamanager){}
-
 if (pausequit) {
     instance_activate_all()
     if (pausequit=1) {
@@ -299,6 +297,8 @@ if (pausequit) {
         inputstats()
     }
 }
+
+cleanupassets();
 #define Other_10
 /*"/*'/**//* YYD ACTION
 lib_id=1

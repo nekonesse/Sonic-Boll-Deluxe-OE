@@ -290,8 +290,6 @@
 	|compiler_dummy
 	|hudlayer
 	|bgmanager
-	|fgmanager
-	|fgassetmanager
 	|liquidlayer
 	|timecounter
 	|pipefader

@@ -1,7 +1,12 @@
-#define Other_5
+#define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-if sprite_exists(sprite_index) sprite_delete(sprite_index)
+if (blend=1) draw_set_blend_mode(bm_add)
+else if (blend=2) draw_set_blend_mode(bm_subtract)
+
+draw_background(spr,x,y)
+
+if (blend) draw_set_blend_mode(0);

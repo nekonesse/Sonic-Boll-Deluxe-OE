@@ -432,7 +432,7 @@ ssw_shield
 ssw_weffects
 drawskinnablehud
 drawlayeredbackground
-drawassets
+makeassets
 drawmoviehud
 drawpausehud
 drawhudlet
@@ -2519,3 +2519,4 @@ gib100coin
 has_starman
 
 bool
+cleanupassets

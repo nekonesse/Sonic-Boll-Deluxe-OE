@@ -3,6 +3,7 @@
 
 with (globalmanager) {
     skinmap=ds_map_create()
+    global.assetmap = ds_map_create();
 
     playerskinmap[0]=ds_map_create()
     playerskinmap[1]=ds_map_create()
