@@ -200,9 +200,8 @@ draw_sprite_part_ext(sheet,0,10+17*floor(exploframe/1.333333333),87,16,16,round(
 frspd=1
 keepframebetween=0
 showgrow = false;
-
 if (powerupfreeze) {
-	flash=0;
+	dontflash = true;
 	
 	if (powerupfreeze < 30) {
 		showoldsize = false;
@@ -218,6 +217,7 @@ if (powerupfreeze) {
 	
 	exit;
 } else {
+	dontflash = false;
 	gk = 3;
 	showoldsize = false;
 }
@@ -488,6 +488,11 @@ if (powerupfreeze) {
 	powerupfreeze -= 1;
 	if !(powerupfreeze) {
 		is_intangible = false;
+		if (hurt) {
+			flash=1;
+			fk=0;
+			hurt=0;
+		}
 	}
 	hsp=0;
     vsp=0;
@@ -856,7 +861,7 @@ if (coll) {
                 { 
                     if (coll.stop && !coll.kicked && size!=5) doscore_p(8000)
                     else if size!=5 {seqcount=max(seqcount,2+scorelok1) doscore_p()}
-                    if (jump) {
+                    /*if (jump) {
                         if (vsp>0) {
                             vsp=-3-akey*1.5
                             canstopjump=akey
@@ -864,7 +869,7 @@ if (coll) {
                             if (fall=12) fall=5
                             dive=0
                         }
-                    }
+                    }*/
                     if size!=5 {
                     kicksound(0)
                     instance_create(mean(x,coll.x),mean(y,coll.y),kickpart)
@@ -979,7 +984,7 @@ if ((((!size || size==5) && global.rings[p2]==0) || ohgoditslava || name="kid") 
     if (shielded) {shielded=0} else if global.rings[p2]>0 {droprings(0)} else {size=0}
     jump=1
     fall=6
-    
+    flash=1;
     hsp=0;
     vsp=0;
     powerupfreeze = 60;
@@ -1057,8 +1062,6 @@ else {
 }
 if (dropkick || spin || flight || dive || _longjump) {instance_create(x+8*s,y+6,kickpart) x-=hsp dropkick=-1 hsp=-2*esign(hitside,xsc) vsp=-2*spin jump=(jump || spin) _longjump=0 spin=0 dive=0 crouch=1 skiphsp=1}
 
-if (hurt) {hurt=0 fall=6 fk=0}
-
 if (!collpos(sign(hitside)*10,8,1)) {
     //gap running
     if (y<coll.y-12) {y=coll.y-14 coll=noone exit}
@@ -1093,7 +1096,6 @@ if (downpiped) {
 shoot(x+8,y+4,psmoke,2,-1)
     downpiped=0
 }
-if (hurt) {fk=0 hsp=0 hurt=0}
            
 playsfx(name+"step")
 
