@@ -232,9 +232,6 @@ draw_sprite_part_ext(sheet,0,10+17*floor(exploframe/1.333333333),87,16,16,round(
 }
 
 
-#define effectsfront
-draw_skintext(floor(x),floor(y),finish)
-
 #define sprmanager
 frspd=1
 keepframebetween=0
