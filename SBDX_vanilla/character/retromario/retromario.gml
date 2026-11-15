@@ -373,6 +373,12 @@ if (h!=0 && !wallkick) {
             		currentaccel = walkfriction;
             	}
             	
+            	if (abs(hsp) > 1.56) {
+					frick = runfriction;
+				} else {
+					frick = walkfriction;
+				}
+            	
             	if (abs(hsp)) {
             		runvar=inch(runvar,run,0.05)
             	}
@@ -398,12 +404,6 @@ if (h!=0 && !wallkick) {
             }
             ///
         }
-        
-        if (abs(hsp) > 1.56) {
-			frick = runfriction;
-		} else {
-			frick = walkfriction;
-		}
     }
 }
 
