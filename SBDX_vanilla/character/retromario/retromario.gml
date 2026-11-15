@@ -49,6 +49,8 @@ fallgravity[0] = 0.438;
 fallgravity[1] = 0.375;
 fallgravity[2] = 0.563;
 
+gsp = hsp;
+
 frick = walkfriction;
 currentaccel = walkfriction;
 
@@ -373,20 +375,36 @@ if (h!=0 && !wallkick) {
             		currentaccel = walkfriction;
             	}
             	
+            	if (abs(hsp) > 1.56) {
+					frick = runfriction;
+				} else {
+					frick = walkfriction;
+				}
+            	
+            	if (abs(hsp)) {
+            		runvar=inch(runvar,run,0.05)
+            	}
+            	
                 hsp+=currentaccel*h
                 xsc=h
                 braking=0
+                
+                gsp = hsp;
                 ///
             }
         } else {
         	///MIDAIR ACCEL
-            if (water) {
-            	if (h!=sign(hsp)) hsp+=0.1*h else hsp+=0.0475*h
-            	
-            } else if (size==5) {
+            if (size==5) {
             	hsp+=0.085*wf*h
             } else {
-            	hsp+=(0.07+0.02*run)*wf*h
+            	var currentfric;
+            	currentfric = frick;
+            	if (hsp*xsc < 0) {
+            		//Mario gets pushed twice as fast when his speed goes lower than 0
+            		currentfric = frick*2;
+            	}
+            	
+            	hsp+=(currentfric*h)*wf
             }
             ///
         }
@@ -489,7 +507,7 @@ if (bbut) {
 
 if (bkey) {
     if (!jump) {
-    	run=1.5
+    	run=1;
     	runningtimer = 10;
     }
 } 
@@ -559,15 +577,6 @@ if (powerupfreeze) {
 
 if (auto) {hsp=1}
 
-if (!left && !right && !releasedinput) {
-	releasedinput = true;
-	if (run) {
-		frick = runfriction;
-	} else {
-		frick = walkfriction;
-	}
-}
-
 ///FRICTION
 if ((loose && !jump) || (down && !jump)) {
 	if (braking) xsc=brakedir
@@ -584,7 +593,11 @@ if (runningtimer) {
 }
 
 if !(underwater()) {
-	maxspd=1.5+(run)
+	if (jump) {
+		maxspd=1.5+(gsp >= 1.75)
+	} else {
+		maxspd=1.5+run
+	}
 } else {
 	maxspd=1;
 }
@@ -773,7 +786,6 @@ if (global.dustframe) {
 
 if (jump && size==7 && global.fastframe4 != ff4prev) {ff4prev = global.fastframe4 with instance_create(x, y, afterimagenoblend) {event_user(0) alphadecay=1 alarm[0] = 24 maxalarm = 24 maxalpha=0.8}}
 
-runvar=inch(runvar,run,0.05)
 stomplok=max(0,stomplok-1)
 wallkick=max(0,wallkick-1)
 watrlock=max(0,watrlock-1)
