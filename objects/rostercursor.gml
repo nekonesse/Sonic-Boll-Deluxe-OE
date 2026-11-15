@@ -136,7 +136,7 @@ if (abut) {
                     global.playerskin[mybox.p2]=0
                     if global.option[mybox.p2]!=selchar {global.topleftplayerskin[mybox.p2]=0 mybox.vertselect=0}
                     global.option[mybox.p2]=selchar
-                    for (i=0;i<4;i+=1) if (global.playerskin[mybox.p2]=global.playerskin[i] && mybox.p2!=i && global.option[mybox.p2]=global.option[i] && global.pskins[0,selchar]>1) global.playerskin[mybox.p2]=((global.playerskin[mybox.p2] + 1) mod global.pskins[0,selchar])
+                    for (i=0;i<4;i+=1) if (global.playerskin[mybox.p2]=global.playerskin[i] && mybox.p2!=i && global.option[mybox.p2]=global.option[i] && global.pskins[0,selchar]>1) global.playerskin[mybox.p2]=((global.playerskin[mybox.p2]) mod global.pskins[0,selchar])
                     if (selchar!=-1) {
                         if (global.charmod[selchar]) replaceplayerinfo(p2,globalmanager.moddir+"character\"+global.charname[selchar]+"\"+"player.txt")
                         else replaceplayerinfo(p2,global.pbase+global.charname[selchar]+"\"+"player.txt")
