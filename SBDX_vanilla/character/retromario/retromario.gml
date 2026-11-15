@@ -22,6 +22,7 @@ yflagfake=y
 auto=1
 
 #define start
+yflagfake=0
 releasedinput = false;
 powerupfreeze=0;
 jumpglitch=false;
@@ -231,6 +232,9 @@ draw_sprite_part_ext(sheet,0,10+17*floor(exploframe/1.333333333),87,16,16,round(
 }
 
 
+#define effectsfront
+draw_skintext(floor(x),floor(y),finish)
+
 #define sprmanager
 frspd=1
 keepframebetween=0
@@ -277,7 +281,7 @@ if (onvine)
 {
 sprite="climbing" frspd=sign(left+right+up+down)
 }
-else if (fall=6) {sprite="hurt"}
+else if (fall=6) {sprite="stand"}
 else if (water || size=3) {sprite="swim" if (swim) sprite="paddle"}
 else if (bonk) {sprite="bonk"} 
 else {sprite="jump" if (vsp>0) sprite="fall"}
@@ -789,7 +793,9 @@ else spinframe=0
 if (spinframe>=8) spinframe=0
 if (sprung) {triplexsc=0}
 
-
+if (auto && yflagfake!=0 && !jump && abs(flag.x-x)>16) {
+	if !finish finish=1
+}
 
 if (!jump && run && !bkey) run=0
 if (!collpos(xsc*16,0) || !jump) hang=0
