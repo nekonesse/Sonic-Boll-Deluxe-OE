@@ -49,8 +49,6 @@ fallgravity[0] = 0.438;
 fallgravity[1] = 0.375;
 fallgravity[2] = 0.563;
 
-gsp = hsp;
-
 frick = walkfriction;
 currentaccel = walkfriction;
 
@@ -388,8 +386,6 @@ if (h!=0 && !wallkick) {
                 hsp+=currentaccel*h
                 xsc=h
                 braking=0
-                
-                gsp = hsp;
                 ///
             }
         } else {
@@ -506,7 +502,7 @@ if (bbut) {
 }
 
 if (bkey) {
-    if (!jump) {
+    if (!jump) && (abs(hsp) != 0) {
     	run=1;
     	runningtimer = 10;
     }
@@ -593,11 +589,7 @@ if (runningtimer) {
 }
 
 if !(underwater()) {
-	if (jump) {
-		maxspd=1.5+(gsp >= 1.75)
-	} else {
-		maxspd=1.5+run
-	}
+	maxspd=1.5+run
 } else {
 	maxspd=1;
 }
