@@ -367,7 +367,7 @@ if (h!=0 && !wallkick) {
                 if (abs(hsp)<0.5625 || carry && !spin) xsc=h
             } else if !(down) {
             	///WALKING ACCEL
-            	if (run) {
+            	if (run || runningtimer) {
             		currentaccel = runaccel;
             	} else {
             		currentaccel = walkfriction;
@@ -584,7 +584,6 @@ if ((loose && !jump) || (down && !jump)) {
 
 //RUNNING
 if (runningtimer) {
-	run=1;
 	runningtimer=max(runningtimer-1,0);
 }
 
