@@ -60,7 +60,7 @@ if (!other.piped) {
         else other.hsp+=max(0,strength*(1-(other.x-x)/sprite_width))
     }
     if (dir=90) {
-        if (!other.jump) {other.jump=1 other.fall=1}
+        if (other.jump) {other.fall=1}
         other.vsp-=max(0,strength*(other.y-y)/sprite_height)
     }
     if (dir=180) {

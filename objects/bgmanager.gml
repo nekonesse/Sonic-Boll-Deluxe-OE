@@ -16,6 +16,8 @@ lowdetail=(settings("detail"))
 
 sb[0]=-1 sb[1]=-1 sb[2]=-1 sb[3]=-1
 sf[0]=-1 sf[1]=-1 sf[2]=-1 sf[3]=-1
+
+instance_create(0,0,fgmanager)
 #define Step_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
