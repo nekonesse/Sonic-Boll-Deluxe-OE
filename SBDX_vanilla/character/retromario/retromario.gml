@@ -500,6 +500,20 @@ if (bbut) {
         fired=8
         if (sprite="fire") frame=0
     }
+  else if (size=6 && count_projectiles()<2 && !crouch) {
+            p2 = 10;
+            with fire_projectile(x+8*xsc,y+2) {
+                hspeed=max((1 + (abs(other.hsp) / 2.2)),1.2) * xsc; //yaargh me formula
+                vspeed = -2.4;
+                visible = 0;
+            }
+            if (!jump) fired=firelength; //fired = 8;
+            if (sprite = "fire") frame = 0;
+            p2 = real(ss);
+
+            playsfx(name+"fireball");
+    }
+
 }
 
 if (bkey) {
