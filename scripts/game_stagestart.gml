@@ -46,11 +46,11 @@ repeat (999){
     i+=1
 }
 
-cleanupassets();
-makeassets();
-
 autotilehandler()
 liquidtilehandler()
+
+cleanupassets();
+makeassets();
 
 if (!global.lemontest) {
     var l;
