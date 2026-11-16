@@ -13,6 +13,9 @@ Retro Mario
 [a]: Jump
 [b]: Run / [flwr]: Fireball
 
+#define skininit
+smasblock=funnytruefalse(playerskindat(p2,string(name)+" smas brick physics"))
+
 #define grabflagpole
 grabflagpole=1
 hsp=0
@@ -1057,7 +1060,7 @@ with (blockcoll){
 if (stonebump || (owner.size=0 || owner.size=5) && insted!=1 && !owner.tempkill && (biggie || cracked=0 || (cracked=1 && owner.size=5))) {
     if (!goinup) {if (insted!=2) owner.vsp=1.5 sound("itemblockbump") tpos=1}
 } else if (stonebump || owner.size && owner.size!=5 && insted!=1 && !owner.tempkill && cracked=0 && biggie) { //break spiner
-    if (!goinup) {if (insted!=2) owner.vsp=1.5 sound("itemblockbump") tpos=1}
+    if (!goinup) {if (insted!=2) owner.vsp=1.5-3*owner.smasblock sound("itemblockbump") tpos=1}
     if (!stonebump){
     owner.vsp=1.5
     cracked=1
@@ -1071,12 +1074,35 @@ if (stonebump || (owner.size=0 || owner.size=5) && insted!=1 && !owner.tempkill 
     }
 }   
 else { 
-    com_breakblocks()
+if (!insted) {
+if owner.size == 7 {owner.vsp=-2.5}
+else owner.vsp=1.5
+}
+owner.blockc+=1
+upwardthrust()
+global.scor[owner.p2]+=10
+sound("itemblockbreak")
+hit=1
+if (skindat("bricd")) {
+    i=instance_create(x,y,bricd)
+    i.biome=biome
+    i.biggie=biggie
+    i.depth=depth
+}
+if (stoned="1") with (instance_create(x,y+8,stone)) phase=1
+i=instance_create(x+4,y+12+(16*biggie),part) i.type=(6*biggie) i.hspeed=-1 i.vspeed=-1+2*go
+i=instance_create(x+12+(16*biggie),y+12+(16*biggie),part) i.type=(6*biggie) i.hspeed=1 i.vspeed=-1+2*go
+i=instance_create(x+4,y+4,part) i.type=(6*biggie) i.hspeed=-1 i.vspeed=-3+2*go
+i=instance_create(x+12+(16*biggie),y+4,part) i.type=(6*biggie) i.hspeed=1 i.vspeed=-3+2*go
+
+with (turing) event_user(4)
+
+instance_destroy()
   }
  }
 } else if typeblockhit=1{
     if (blockcoll.cc!=0 && !blockcoll.hit)
-    	hititembox()
+    hititembox()
     if !(stoppounding) && place_meeting(x,y+max(4,vsp),blockcoll) {
         if (pound && !poundcancel && !piped) {
             playsfx(name+"stomp")         

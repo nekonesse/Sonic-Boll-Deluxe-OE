@@ -20,6 +20,7 @@ time until wait=600
 pipe squish=0
 midspin=false
 groundpound=false
+smas brick physics=true
 
 use paletting=true
 defaultspray 1=5
