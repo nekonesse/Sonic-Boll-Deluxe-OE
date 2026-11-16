@@ -1060,7 +1060,10 @@ if (stonebump || (owner.size=0 || owner.size=5) && insted!=1 && !owner.tempkill 
     }
 }   
 else { 
-if (!insted) {owner.vsp=1.5-3*owner.smasblock}
+if (!insted) {
+if owner.size == 7 {owner.vsp=-2.5}
+else owner.vsp=1.5
+}
 owner.blockc+=1
 upwardthrust()
 global.scor[owner.p2]+=10
