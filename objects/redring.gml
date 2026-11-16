@@ -33,7 +33,7 @@ if !global.lemontest {
         settings("rr" + redringid + global.levelfname + pack,1)
         stats("red rings collected",stats("red rings collected")+1)
 
-        if (stats("red rings collected") >= 80) {
+        if (stats("red rings collected") >= 20) {
             unlockchar("retromario");
         }
     }

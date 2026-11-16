@@ -164,7 +164,7 @@ if !setting_load {
 }
 stats("bootups",stats("bootups")+1)
 
-if (stats("red rings collected") >= 80) {
+if (stats("red rings collected") >= 20) {
     unlockchar("retromario");
 }
 
