@@ -21,6 +21,8 @@ pipe squish=0
 midspin=false
 groundpound=false
 
+smas brick physics=true
+
 use paletting=false
 defaultspray 1=5
 defaultspray 2=5
