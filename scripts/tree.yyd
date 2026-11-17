@@ -638,15 +638,15 @@
 	|loopThrough
 	|init_changechar
 	|activateTechnicals
-	|cleanupScripts
 	|indexExtensions
 	|indexScripts
-	|cleanupObjects
 	|indexCustomObjects
+	|cleanupScripts
+	|cleanupObjects
 	|cleanupCustomSprites
 	|add_custom_sprite
 	|delete_custom_sprite
 	|get_custom_sprite
 	|custom_sprite_exists
-	|lemon_get_lemoninfo
 	|create_custom_object
+	|lemon_get_lemoninfo

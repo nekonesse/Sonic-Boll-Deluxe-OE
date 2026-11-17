@@ -74,6 +74,7 @@ if (sureface_set_target("mode7")) {
     //
 
     //DRAW CLOUDS
+    texture_set_interpolation(0)
     texture_set_repeat(1)
     d3d_set_projection_ext(0,0,0,0,-10,3,0,0,-1,105,400/224,1,1000)
     draw_set_blend_mode(bm_add)
@@ -86,9 +87,8 @@ if (sureface_set_target("mode7")) {
     draw_set_blend_mode(0)
     //
 
-
-
     //DRAW BACKGROUND HILLS
+    texture_set_interpolation(1)
     texture_set_repeat(0)
     d3d_set_projection_ortho(0,0,400,224,0)
     d3d_transform_set_identity()

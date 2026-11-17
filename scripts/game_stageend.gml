@@ -16,6 +16,8 @@ with (gamemanager) {
     with (skullblock) restoreblock()
     with (skullbloff) restoreblock()
 
+    with (scriptblock) event_user(2)
+
     if global.lemontest {segafadeto(lemon) exit}
 
     if (global.playback && global.pos>=global.length && global.gamemode!="timeattack") {

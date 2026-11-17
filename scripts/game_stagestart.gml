@@ -8,6 +8,8 @@ screen_refresh()
 
 lemonrunner()
 
+with (scriptblock) event_user(1)
+
 with (pipeblock       ) {if (name!="") ds_map_add(m,name,id) if (nextlevel!="") warp=1}
 with (sidepipe        ) {if (name!="") ds_map_add(m,name,id) if (nextlevel!="") warp=1}
 with (theothersidepipe) {if (name!="") ds_map_add(m,name,id) if (nextlevel!="") warp=1}

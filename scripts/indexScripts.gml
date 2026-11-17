@@ -64,6 +64,8 @@ while(_file != "") {
             case "step":
             case "draw":
             case "trigger":
+            case "level_init":
+            case "level_end":
                 _codestr = loopThrough(_key, _filepath)
                 if (_codestr != "") {
                     _compiled = code_compile(_codestr)

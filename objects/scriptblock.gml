@@ -40,6 +40,28 @@ if (createevent != 0) {
 }
 
 channelid=unreal(channelid,0)
+#define Other_11
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+levelinitevent=ds_map_find_value(global.levelscripts,"level_init_"+scriptname)
+
+if (levelinitevent != 0) {
+    code_execute(levelinitevent)
+}
+#define Other_12
+/*"/*'/**//* YYD ACTION
+lib_id=1
+action_id=603
+applies_to=self
+*/
+levelendevent=ds_map_find_value(global.levelscripts,"level_end_"+scriptname)
+
+if (levelendevent != 0) {
+    code_execute(levelendevent)
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
