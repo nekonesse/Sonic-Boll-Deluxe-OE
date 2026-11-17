@@ -420,6 +420,7 @@ if !(akey) {
     	currentgravity = fallgravity[jumpindex];
     }
 	canstopjump=0
+	luijump=0
 }
 
 if ((abut || jumpbufferdo || jumpglitch) && !springin) {
@@ -623,7 +624,7 @@ if (!dead && !grabflagpole) {
 	
 	if (jump) {
 		if (water) vsp=min(1.5,vsp+0.04)
-		else {
+		else if fall!=69 && !luijump {
 			vsp=min(4,vsp+currentgravity);
 			
 			if (vsp > 0.1) {
