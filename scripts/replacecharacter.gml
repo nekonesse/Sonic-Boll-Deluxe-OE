@@ -75,6 +75,7 @@ if (what="more" || what="all") {
         global.spritelistsplitpoints[slot,NUKEEMALL]=0
         global.splitsize[slot,NUKEEMALL]=0
         global.singlesheetsplitwidth[slot,NUKEEMALL]=0
+        global.singlesheetsplitheight[slot,NUKEEMALL]=0
         global.animname[slot,NUKEEMALL]=0
         global.reroutedanims[slot,NUKEEMALL]=0
         global.animationstartX[slot,NUKEEMALL]=0
