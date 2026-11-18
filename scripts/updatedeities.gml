@@ -604,6 +604,13 @@ switch (obj) {
         if (data[2]="2") frame=2
     } break
 
+    case (event_enemy): {
+        var p;
+        p=string_pos(",",data[0])
+        srcx=unreal(string_copy(data[0],1,p-1),0)+x
+        srcy=unreal(string_delete(data[0],1,p),0)+y
+    } break
+
     case (bombenemy): {
         if (data[1]="0") frame=0
         if (data[1]="1") frame=1

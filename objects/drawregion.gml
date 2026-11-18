@@ -301,12 +301,15 @@ if (within(editcursor.x,editcursor.y,mmx+100-mmw/2,mmy+72-mmh/2,mmw,mmh)) {
         if (positionpicker) {
             if (editcursor.rightp) {
                 positionpicker=false;
-                /*UPDATE_THE_DEITIES=1*/
+                event_user(7);
             }
             if (editcursor.leftp) {
                 positionpickerinst.data[positionpickerdata]=string(curx-positionpickerinst.x)+","+string(cury-positionpickerinst.y)
                 positionpicker=false;
-                /*UPDATE_THE_DEITIES=1*/
+                with(positionpickerinst) {
+                    updatedeities()
+                }
+                event_user(7);
             }
 
         } else if (editcursor.leftp && curx=median(curx,-max(1,1/editzoom.level),-1) && cury=median(cury,lemongrab.h[region]-lemongrab.horizon[region],lemongrab.h[region]-lemongrab.horizon[region]+max(1,1/editzoom.level)-1)) {
@@ -997,6 +1000,7 @@ if (grabs) {//grab selection
     if current_layermode=1 with (deity) if (selected) {
         x=(other.curx-other.clicx)+grabx
         y=(other.cury-other.clicy)+graby
+        updatedeities()
     }
     if current_layermode=2 with (semicontainer) if (selected) {
         x=(other.curx-other.clicx)+grabx
@@ -1328,12 +1332,19 @@ with (deity) {
                 draw_set_color($ffffff)
             } break
 
-            case (obj=gobble): {
+            case (gobble): {
                 draw_sprite(spr_ireader,1,srcx*16,srcy*16)
                 draw_sprite(spr_ireader,1,srcx2*16,srcy2*16)
                 draw_set_color($ff) if (selected) draw_set_color($ffffff)
                 draw_arrow(x*16+8,y*16+8,srcx*16+8,srcy*16+8,8)
                 draw_arrow(x*16+8,y*16+8,srcx2*16+8,srcy2*16+8,8)
+                draw_set_color($ffffff)
+            } break
+
+            case (event_enemy): {
+                draw_sprite(spr_ireader,1,srcx*16,srcy*16)
+                draw_set_color($ff) if (selected) draw_set_color($ffffff)
+                draw_arrow(x*16+8,y*16+8,srcx*16+8,srcy*16+8,8)
                 draw_set_color($ffffff)
             } break
 

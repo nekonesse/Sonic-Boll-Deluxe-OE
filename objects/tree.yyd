@@ -445,7 +445,6 @@
 	|bigmuncher
 	|bobomb
 	|litbobomb
-	|pig
 +items
 	|redcoinring
 	|item
@@ -696,11 +695,13 @@
 		|guile
 	+technical
 		+logic entities
+			|logic_parent
 			|trigger_spawn
 			|logic_relay
 			|event_auto
 			|event_input
 			|event_enemy
+			|trigger_teleport
 		+modded objects
 			|customobject
 			|customobjectenemy

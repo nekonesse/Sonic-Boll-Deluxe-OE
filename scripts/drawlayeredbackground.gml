@@ -77,11 +77,12 @@ with (bgmanager) {
             }
             vertf=floor(vertf)
             bm=skindat("bm_"+name)
-            if (bm=1) draw_set_blend_mode(bm_add)
-            if (bm=2) draw_set_blend_mode(bm_subtract)
+            if (bm==1) draw_set_blend_mode(bm_add)
+            else if (bm==2) draw_set_blend_mode(bm_subtract)
+
             if attach==2 && abs(yv-horizon)<224 {of+=(224-abs(yv-horizon))}
             else if attach==1 && abs(yv-horizon)<224{
-            of+=(224-abs(yv-horizon))*0.75+((224-abs(yv-horizon))/224)*0.25/(max(0.01,fh-224)*2)
+                of+=(224-abs(yv-horizon))*0.75+((224-abs(yv-horizon))/224)*0.25/(max(0.01,fh-224)*2)
             }
 
 
@@ -189,10 +190,12 @@ with (bgmanager) {
 
                 bm=skindat("bm_"+name)
                 if (bm=1) draw_set_blend_mode(bm_add)
-                if (bm=2) draw_set_blend_mode(bm_subtract)
+                else if (bm==2) draw_set_blend_mode(bm_subtract)
+
                 if attach==2 && abs(yv-water)<224 && yv<=water {of+=(abs(yv-water))}
                 else if attach && abs(yv-water)<224 && yv<=water
                 of+=(abs(yv-water))*0.75+((abs(yv-water))/224)*0.25/(max(0.01,fh-224)*2)
+
                 if !(lowdetail && bm){
                     if vloop
                         vrepeats=(ceil(224/fh)+1) //it has to be at least 1 or else nothing is drawn!

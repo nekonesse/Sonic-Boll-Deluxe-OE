@@ -34,8 +34,8 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-
 if global.removebackgrounddrawing=1 exit
+
 if (lowdetail && !animkevin) {
     for (i=0;i<global.mplay;i+=1) {
         sb[i]=sureface("background"+string(i),400,224)

@@ -235,10 +235,7 @@ with (fireballshooter) event_user(0);
 with (spikecrusher) event_user(0);
 with (bubble) event_user(0);
 
-with(trigger_spawn) event_user(0);
-with(logic_relay) event_user(0);
-with(event_auto) event_user(0);
-with(event_input) event_user(0);
+with(logic_parent) event_user(0);
 
 var l,t,uu,vv,u,v,w,h,b,batmap,bat,i;
 

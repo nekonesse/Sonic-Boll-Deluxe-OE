@@ -8,7 +8,6 @@
 	|spr_remilia
 	|spr_omifont
 	|spr_sysfont
-	|spr_syslightlevel
 	|spr_gm82splash
 +textures
 	|tex_1x1

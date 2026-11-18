@@ -1,0 +1,7 @@
+sprite=spr_trigger_teleport
+visible=1
+solid=0
+persistent=0
+depth=0
+parent=logic_parent
+mask=

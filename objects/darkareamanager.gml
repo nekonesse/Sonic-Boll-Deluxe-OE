@@ -5,8 +5,12 @@ action_id=603
 applies_to=self
 */
 //dark area
-lightlevel=5
-global.overridelightlevel=-1
+var i;
+i=0;
+repeat(global.mplay) {
+    global.overridelightlevel[i]=-1
+    i+=1;
+}
 global.overridelight=0
 glowoff=0
 lalpha=1
@@ -20,11 +24,6 @@ applies_to=self
 ///Light Manager
 global.glowoff = wave_val(-5,5,2,0)
 
-if !(player.star)
-{
-    global.overridelight = -1
-}
-else global.overridelight = min(lightlevel,1)
 instance_activate_object(flag)
 
 with flag with player if (other.passed[p2] || finish) && (bigger_light<15) {
@@ -38,28 +37,47 @@ action_id=603
 applies_to=self
 */
 ///The Dark
-if global.mplay > 1 exit;
 
-//clear the surface at the beginning of each frame
-if !sureface_exists("lightsurface") {
-    global.lightsurface=sureface("lightsurface",400,224)
+var i,ii;
+i=0
+repeat(global.mplay) {
+    ii=string(i)
+    //clear the surface at the beginning of each frame
+    if !sureface_exists("lightsurface_"+ii) {
+        sureface("lightsurface_"+ii,view_wview[i],view_hview[i])
+    }
+
+    sureface_set_target("lightsurface_"+ii);
+    draw_clear_alpha(c_black,0);
+
+    var lightlevel,surfalpha;
+    lightlevel=0;
+
+    //the lighter the color, the darker the shade and vice-versa
+    //a 100% white pixel will draw 100% black for example since the blend mode is set to subtract
+    if (global.overridelightlevel == -1) { //why are there two variables for overriding the light level i dont get it
+        if !(gamemanager.players[i].star) {
+            global.overridelight[i] = -1;
+            lightlevel=(gamemanager.players[i]).region.lightlevel
+        } else {
+            global.overridelight[i] = min(lightlevel,1)
+        }
+    } else lightlevel=global.overridelightlevel
+
+    surfalpha = min(0.17*lightlevel,1);
+
+    if (lightlevel) {
+        if !(global.overridelight)
+        draw_sprite_ext(tex_1x1,0,0,0,view_wview[i],view_hview[i],0,c_white,lalpha*surfalpha);
+        else
+        draw_sprite_ext(tex_1x1,0,0,0,view_wview[i],view_hview[i],0,c_white,lalpha*surfalpha);
+    }
+
+
+    surface_reset_target();
+
+    i+=1
 }
-
-sureface_set_target("lightsurface");
-draw_clear_alpha(c_black,0);
-
-//the lighter the color, the darker the shade and vice-versa
-//a 100% white pixel will draw 100% black for example since the blend mode is set to subtract
-if (global.overridelightlevel == -1) { //why are there two variables for overriding the light level i dont get it
-    lightlevel=(gamemanager.players[0]).region.lightlevel
-} else lightlevel=global.overridelightlevel
-
-if !(global.overridelight)
-draw_sprite_ext(spr_syslightlevel,unreal(lightlevel,0),0,0,view_xview[0]+400,view_yview[0]+244,0,c_white,lalpha);
-else
-draw_sprite_ext(spr_syslightlevel,global.overridelight,0,0,view_xview[0]+400,view_yview[0]+224,0,c_white,lalpha);
-
-surface_reset_target();
 #define Step_2
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -67,30 +85,36 @@ action_id=603
 applies_to=self
 */
 ///Draw spotlights for objects.
-if global.mplay > 1 exit;
 
 //set blend mode
+
+var j,ii;
+j=0
+repeat(global.mplay) {
+ii = string(j)
+sureface_set_target("lightsurface_"+ii);
+
 draw_set_blend_mode(bm_subtract);
 
-for (i=0;i<global.mplay;i+=1) {
-sureface_set_target("lightsurface");
-
 //player glow
-for (j=0;j<global.mplay;j+=1) {
+var i;
+i=0;
+repeat(global.mplay) {
     camx = view_xview[j]
     camy = view_yview[j]
     if (bigger_light) radius=50*bigger_light
     else radius = 50
-    xx=gamemanager.players[j].x
-    yy=gamemanager.players[j].y
+    xx=gamemanager.players[i].x
+    yy=gamemanager.players[i].y
     draw_circle_color(xx-camx,yy-camy-8,radius+20+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(xx-camx,yy-camy-8,radius+10+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
     draw_circle_color(xx-camx,yy-camy-8,radius+global.glowoff,c_white,c_white,false);
+    i+=1;
 }
 
 with(charmdeath){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=50
     radius2=10
     draw_circle_color(x-camx,y-camy-8,radius+(radius2*2)+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
@@ -101,8 +125,8 @@ with(charmdeath){
 with(lightbulb){ //real shit
     if (channelid && global.channel[channelid]) || (!channelid) {
 
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     xx=8*image_xscale+x+8-camx
     yy=8*image_yscale+y-camy
     w=width*16
@@ -180,8 +204,8 @@ with(lightbulb){ //real shit
 }
 
 with(projectile){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     draw_circle_color(x-camx,y-camy-8,radius+(radius2*2)+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+radius2+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
     draw_circle_color(x-camx,y-camy-8,radius+global.glowoff,c_white,c_white,false);
@@ -189,8 +213,8 @@ with(projectile){
 
 with(podoboo){
     if visible {
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=30
     draw_circle_color(x-camx-8,y-camy-16,radius+10+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx-8,y-camy-16,radius+5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -199,8 +223,8 @@ with(podoboo){
 }
 
 with(lavablock){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=40
     draw_roundrect_color(x-(radius/3)-15-global.glowoff-camx,y-radius-15-global.glowoff-camy,x+(16*image_xscale)+(radius/3)+15+global.glowoff-camx,y+radius+15+global.glowoff-camy,make_color_rgb(245,245,245),c_dkgray,false);
     draw_roundrect_color(x-(radius/3)-10-global.glowoff-camx,y-radius-10-global.glowoff-camy,x+(16*image_xscale)+(radius/3)+10+global.glowoff-camx,y+radius+10+global.glowoff-camy,make_color_rgb(175,175,175),c_gray,false);
@@ -212,8 +236,8 @@ with(firebar){
     xx=x-4 yy=y-8
     repeat (length) {
         xx+=lengthdir_x(8,angle) yy+=lengthdir_y(8,angle)
-        camx = view_xview[other.i]
-        camy = view_yview[other.i]
+        camx = view_xview[j]
+        camy = view_yview[j]
         radius=15
         draw_circle_color(round(xx)-camx,round(yy)-camy,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
         draw_circle_color(round(xx)-camx,round(yy)-camy,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -222,8 +246,8 @@ with(firebar){
 }
 
 with(checkpoint){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=50
     draw_circle_color(x-camx+8,y-camy,radius+20+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx+8,y-camy,radius+10+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -231,8 +255,8 @@ with(checkpoint){
 }
 
 /*with(item){
-    camx = real(view_xview[other.i])
-    camy = real(view_yview[other.i])
+    camx = real(view_xview[j])
+    camy = real(view_yview[j])
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -240,8 +264,8 @@ with(checkpoint){
 }*/
 
 with(starman){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -249,8 +273,8 @@ with(starman){
 }
 
 with(fireball){
-    camx = real(view_xview[other.i])
-    camy = real(view_yview[other.i])
+    camx = real(view_xview[j])
+    camy = real(view_yview[j])
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -258,8 +282,8 @@ with(fireball){
 }
 
 with(orbifireball){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -267,8 +291,8 @@ with(orbifireball){
 }
 
 with(firemissile){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=20
     draw_circle_color(x-camx-4*xsc,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx-4*xsc,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -276,8 +300,8 @@ with(firemissile){
 }
 
 with(firemissilesmall){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=10
     draw_circle_color(x-camx+8,y-camy-4,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx+8,y-camy-4,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -285,8 +309,8 @@ with(firemissilesmall){
 }
 
 with(crabfireball){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -294,8 +318,8 @@ with(crabfireball){
 }
 
 with(newtronfireball){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -303,8 +327,8 @@ with(newtronfireball){
 }
 
 with(bombfireball){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -313,8 +337,8 @@ with(bombfireball){
 
 
 with(fireballplant){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=10
     draw_circle_color(x-camx,y-camy-8,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx,y-camy-8,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -322,8 +346,8 @@ with(fireballplant){
 }
 
 with(monitor){
-    camx = view_xview[other.i]
-    camy = view_yview[other.i]
+    camx = view_xview[j]
+    camy = view_yview[j]
     radius=15
     draw_circle_color(x-camx+8,y-camy,radius+5+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
     draw_circle_color(x-camx+8,y-camy,radius+2.5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -332,8 +356,8 @@ with(monitor){
 
 with(onoffscreen){
     if ((active) && real(type)==2) || real(type)!=2 {
-        camx = view_xview[other.i]
-        camy = view_yview[other.i]
+        camx = view_xview[j]
+        camy = view_yview[j]
         radius=40
         draw_circle_color(x-camx+8,y-camy,radius+10+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
         draw_circle_color(x-camx+8,y-camy,radius+5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -343,8 +367,8 @@ with(onoffscreen){
 
 with(timerblock){
     if (frm) {
-        camx = view_xview[other.i]
-        camy = view_yview[other.i]
+        camx = view_xview[j]
+        camy = view_yview[j]
         radius=20
         draw_circle_color(x-camx+8,y-camy,radius+10+global.glowoff,make_color_rgb(245,245,245),c_dkgray,false);
         draw_circle_color(x-camx+8,y-camy,radius+5+global.glowoff,make_color_rgb(175,175,175),c_gray,false);
@@ -354,16 +378,21 @@ with(timerblock){
 
 surface_reset_target();
 
-}
-
 draw_set_blend_mode(bm_normal);
+j+=1;
+}
 #define Other_5
 /*"/*'/**//* YYD ACTION
 lib_id=1
 action_id=603
 applies_to=self
 */
-sureface_free("lightsurface");
+var i,ii;
+i=0;
+repeat(global.mplay) {
+    ii=string(i)
+    sureface_free("lightsurface_"+ii);
+}
 #define Draw_0
 /*"/*'/**//* YYD ACTION
 lib_id=1
@@ -372,7 +401,7 @@ applies_to=self
 */
 ///Draw Dark Surface
 
-with gamemanager { //Generate replay thumbnail here because dark area manager keeps covering the world in darkness
+with (gamemanager) { //Generate replay thumbnail here because dark area manager keeps covering the world in darkness
     if theyremakingamovie {
         makemoviethumb() //secret hud on movies fix simply dont draw the hud yet its easy
         theyremakingamovie=0
@@ -380,15 +409,13 @@ with gamemanager { //Generate replay thumbnail here because dark area manager ke
     }
 }
 
-if global.mplay > 1 exit;
-
-
+ii=string(view_current);
 //draw the surface to the position of the camera
 draw_set_alpha(1)
 draw_set_blend_mode(bm_subtract);
 
-if sureface_exists("lightsurface") {
-    draw_surface(global.lightsurface,view_xview[0],view_yview[0])
+if sureface_exists("lightsurface_"+ii) {
+    draw_surface_ext(sureface_get("lightsurface_"+ii),view_xview[view_current],view_yview[view_current],1,1,0,c_white,1)
 }
 
 draw_set_blend_mode(bm_normal);

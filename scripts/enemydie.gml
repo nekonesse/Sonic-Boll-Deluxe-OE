@@ -73,6 +73,8 @@ with (argument[0]) {
         with (instance_create(x,y+4,deadkid)) {del=1 a=1 name="kid"}
     }
 
+    with(parent_event) event_user(1);
+
     if (object_index==lakitu) {respawned=1 y=-verybignumber alarm[0]=960} else if !did_you_think_killing_me_would_kill_me {//scoring
         with player {
             if (argument_count=2)

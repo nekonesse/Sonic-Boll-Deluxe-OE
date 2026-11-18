@@ -4,7 +4,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-
+parent_event = noone;
 xsc=1
 count=179
 owner=0
@@ -87,6 +87,8 @@ if (hp<=0 && !dead) {
     with (instance_create(x,y,deadfakebowser)) {xsc=other.xsc kil=1 sheet=other.sheet btype=other.btype}
     if (!btype) sound("enemybowserdown") else {sound("finalbowserfall")}
     if (owner) {global.scor[owner.p2]+=5000 owner.enemyc+=10 if (musiclock&&!global.finishmusic) {if !btype stagemusic(owner) else mus_stop()}}
+
+    with(parent_event) event_user(1);
     instance_destroy()
 }
 owner=0
@@ -153,6 +155,7 @@ if (coll && vspeed>=0 && !dead) {
         panic=1
         if (!btype) sound("enemybowserdown") else {sound("finalbowserfall")}
         global.scor[o.p2]+=5000
+        with(parent_event) event_user(1);
         o.enemyc+=10
     } else {
         vspeed=0
@@ -166,6 +169,7 @@ if (!dead && pitdeath()) {
     panic=1
     if (!btype) sound("enemybowserdown") else {sound("finalbowserfall")}
     global.scor[o.p2]+=5000
+    with(parent_event) event_user(1);
     o.enemyc+=10
 }
 

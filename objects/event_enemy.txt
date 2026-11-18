@@ -1,7 +1,7 @@
-sprite=
+sprite=spr_event_entity
 visible=1
 solid=0
 persistent=0
 depth=0
-parent=
+parent=logic_parent
 mask=

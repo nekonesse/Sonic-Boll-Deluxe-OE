@@ -242,7 +242,7 @@ if (coll /*|| y>yground*/) {
             if (vsp>=0 && !antigrav) || (vsp<=0 && antigrav) {com_landing()}
             else {
                 if (object_is_ancestor(coll.object_index,moving)) {
-                    vsp=min(coll.vsp-1.5,0,vsp)
+                    vsp=1.5+max(0,coll.vsp-1.5);
                     sound("itemblockbump")
                     stopsfx(jumpsnd)
                 } else if (coll) if (!hurt && bbox_bottom>coll.bbox_top) {

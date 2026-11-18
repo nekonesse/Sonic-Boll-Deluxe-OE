@@ -21,6 +21,7 @@ redturn=0
 active=0
 animated=0
 sdir="0"
+parent_event = noone;
 
 if (object_index!=piranha) {
     wait=instance_position(x+24,y,enemy)

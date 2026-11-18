@@ -1273,6 +1273,22 @@ switch (argument[0]) {
         }
     }
 
+    case event_enemy: {
+        if (type=0) {
+            with (drawregion) {
+                positionpicker=1;
+                positionpickerdata=other.type;
+                positionpickerinst=other.id;
+                grabx=-1
+            }
+            return argument[2]
+        }
+        if (type=1) return get_string("Output Channel ID (0-999):",argument[2])
+        if (type=2) return get_string("Output Channel ID 2 (0-999):",argument[2])
+        if (type=3) return get_string("Output Channel ID 3 (0-999):",argument[2])
+        if (type=4) return get_string("Output Channel ID 4 (0-999):",argument[2])
+    }
+
     case slopebox: {
         i=show_contextmenu("Slope type:|-|Left Slope|Right Slope|Left Smooth Slope|Right Smooth Slope|Left Ceiling Slope|Right Ceiling Slope|Left Smooth Ceiling Slope|Right Smooth Ceiling Slope|Left Semisolid Slope|Right Semisolid Slope|Left Smooth Semisolid Slope|Right Smooth Semisolid Slope",-1)
         if (i<=0) return argument[2]

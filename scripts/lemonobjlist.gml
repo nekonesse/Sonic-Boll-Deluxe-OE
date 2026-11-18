@@ -1139,9 +1139,14 @@ listobj(event_auto, 0,spr_event_auto         ,216,trigger_spawn)
     listdata("0","0","0","0")
 
 listobj(event_input, 0,spr_event_input         ,216,trigger_spawn)
-    listdoc("Event Input Entity","Outputs to a channel when the specificed player input button is pressed")
+    listdoc("Event Input Entity","Outputs to a channel when the specificed player input button is pressed.")
     listargs("checkfor","outputid","index","onpress")
     listdata("akey", "0", "0", "0")
+
+listobj(event_enemy, 0,spr_event_entity         ,216,trigger_spawn)
+    listdoc("Event Enemy Entity","Outputs up to 4 channels when a targeted enemy is killed.")
+    listargs("src","outputid","outputid2","outputid3","outputid4")
+    listdata("0,0","0","0","0","0")
 
 listobj(bluecoin         ,1,spr_bluecoin      ,237,coin)
     listdoc("Blue Coins","Blue coins only appear when affected by a P-Switch")

@@ -1209,7 +1209,7 @@ timesetter
 platboat
 
 slopebox
-pig
+
 lifemoon
 bollmine
 introslide2sqaur
@@ -1245,3 +1245,5 @@ powerupblock
 greendemon
 introbackgroundhill2
 fgmanager
+logic_parent
+trigger_teleport
