@@ -9,8 +9,8 @@ release,skid,spin,spindash,double,hammerland,drill,walhang,unspin,deflect
 #define movelist
 Mighty
 #
-[A][mush]: Hammer Drop
-[B]: Uncurl
+[a][mush]: Hammer Drop
+[b]: Uncurl
 Uncurl near wall: Wall Cling
 
 
