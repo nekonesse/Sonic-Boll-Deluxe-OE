@@ -84,8 +84,8 @@ fall frames=1
 runjump frames=1
 groundpound frames=8
 poundfall frames=2
-swim frames=2
-paddle frames=2
+swim frames=1
+paddle frames=3
 spinjump frames=4
 fire frames=1
 push frames=3
@@ -93,6 +93,8 @@ balancing frames=1
 climbing frames=2
 
 pose loop=2
+swim offset x=-2
+paddle offset x=-2
 
 stand speed=0.2
 standcarry speed=0.2
@@ -102,7 +104,7 @@ crouch speed=0.2
 lookupcarry speed=0.2
 crouchcarry speed=0.2
 brake speed=0.25
-pose speed=0.325
+pose speed=1
 dead speed=0.2
 deadup speed=0.2
 walk speed=0.4
@@ -141,6 +143,7 @@ crouchcarry frametimes=1,32,1,1
 dead frametimes=1.35,8,1.35,1,1,1,1
 dive frametimes=2,2,2,24,2
 bellyslide frametimes=32,1,1
+pose frametimes=13,1
 
 grind frames=1
 piping frames=1

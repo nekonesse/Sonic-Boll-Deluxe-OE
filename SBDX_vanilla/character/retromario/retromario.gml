@@ -14,7 +14,7 @@ Retro Mario
 [b]: Run / [flwr]: Fireball
 
 #define skininit
-smasblock=funnytruefalse(playerskindat(p2,string(name)+" smas brick physics"))
+//smasblock=funnytruefalse(playerskindat(p2,string(name)+" smas brick physics"))
 
 #define grabflagpole
 grabflagpole=1
@@ -1061,7 +1061,7 @@ with (blockcoll){
 if (stonebump || (owner.size=0 || owner.size=5) && insted!=1 && !owner.tempkill && (biggie || cracked=0 || (cracked=1 && owner.size=5))) {
     if (!goinup) {if (insted!=2) owner.vsp=1.5 sound("itemblockbump") tpos=1}
 } else if (stonebump || owner.size && owner.size!=5 && insted!=1 && !owner.tempkill && cracked=0 && biggie) { //break spiner
-    if (!goinup) {if (insted!=2) owner.vsp=1.5-3*owner.smasblock sound("itemblockbump") tpos=1}
+    if (!goinup) {if (insted!=2) owner.vsp=1.5 sound("itemblockbump") tpos=1} 			//-3*owner.smasblock
     if (!stonebump){
     owner.vsp=1.5
     cracked=1
