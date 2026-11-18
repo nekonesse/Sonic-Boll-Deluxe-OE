@@ -3,7 +3,18 @@ if !global.frameskipreal {
     if global.frameskip=0 {global.frameskip=global.frameskipreal  exit}
 }
 //wrap up rendering once the last view is done
-for (i=0;i<4;i+=1) if (view_visible[i]) view_last=i
+for (i=0;i<4;i+=1) {
+    if (view_current==i) {
+        //slam alpha
+        draw_set_blend_mode(bm_add)
+        rect(0,0,global.w,global.h,0,1)
+        draw_set_blend_mode(0)
+    }
+
+    if (view_visible[i]) {
+        view_last=i
+    }
+}
 
 if (view_current=view_last) {
     /*skipframe=!skipframe
@@ -12,10 +23,7 @@ if (view_current=view_last) {
     if instance_exists(specialectrl) exit
     //reset screenshake
     with (gamemanager) for (i=0;i<global.mplay;i+=1) view_yview[i]=memy[i]
-    //slam alpha
     d3d_set_projection_ortho(0,0,global.w,global.h,0)
-    draw_set_blend_mode(bm_add)
-    rect(0,0,global.w,global.h,0,1)
     draw_set_blend_mode(0)
     surface_reset_target()
 
