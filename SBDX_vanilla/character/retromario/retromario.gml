@@ -32,6 +32,10 @@ jumpglitch=false;
 walljumpglitch=false;
 runningtimer=0;
 
+__tempstore = 0;
+__temphsp = 0;
+__tempvsp = 0;
+
 savedposx = x;
 savedposy = y;
 
@@ -308,8 +312,11 @@ if (carry) sprite=sprite+"carry"
 com_inputstack()
 
 if (powerupfreeze) && !(piped) {
-	hsp=0;
-    vsp=0;
+    //i'm not sure why theres two of these but ok you can have it too
+    if (!__tempstore) {
+        __temphsp = hsp; __tempvsp = vsp; __tempstore = 1;
+    }
+    hsp = 0; vsp = 0;
     
     if (abut) && !(hurt) {
     	jumpglitch = true;
@@ -577,6 +584,12 @@ if (piped || move_lock) exit
 if (powerupfreeze) {
 	is_intangible = true;
 	powerupfreeze -= 1;
+
+    if (!__tempstore) {
+        __temphsp = hsp; __tempvsp = vsp; __tempstore = 1;
+    }
+    hsp = 0; vsp = 0;
+
 	if !(powerupfreeze) {
 		is_intangible = false;
 		if (hurt) {
@@ -584,9 +597,9 @@ if (powerupfreeze) {
 			fk=0;
 			hurt=0;
 		}
+		hsp = __temphsp; vsp = __tempvsp; __tempstore = 0;
+        currentgravity = fallgravity[jumpindex];
 	}
-	hsp=0;
-    vsp=0;
 	exit;
 }
 
