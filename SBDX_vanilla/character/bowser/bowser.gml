@@ -814,14 +814,14 @@ if (bbut) {
 					owner=other.id;
 					owner.kek+=1;
 				}
-				fired2=15
+				fired2=firelength
                 if (sprite="throw") frame=0
 				p2 = real(ss);
 				playsfx("bowserhammer")
 			} else {
             
             if (kek<2) {
-                fired2=15
+                fired2=firelength
                 if (sprite="throw") frame=0
                 playsfx("bowserhammer")
                 type="bowshammer"
@@ -855,8 +855,8 @@ if (bbut) {
             }
 			}
         } else {
-if (crouch) {/*firedc=30*/ firedc=firelength if (sprite="firedcrouch") frame=0}
-            else {/*fired=30*/ fired=firelength if (sprite="fired") frame=0}
+if (crouch) {firedc=30 if (sprite="firedcrouch") frame=0}
+            else {fired=30 if (sprite="fired") frame=0}
 
             playsfx("bowserfire")
             kek=0

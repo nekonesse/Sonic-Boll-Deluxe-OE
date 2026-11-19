@@ -34,7 +34,7 @@ single sheet=true
 singlesheet split width=8,8,8,8
 singlesheet split height=0,35,70,105
 
-custom sprite list=stand,crouch,dead,walk,brake,jump,swim,paddle,fire,climbing,growing
+custom sprite list=stand,crouch,dead,walk,brake,jump,swim,paddle,fire,climbing,growing,piping
 
 connect stand=true
 connect crouch=true
@@ -58,7 +58,7 @@ reroute bonk=jump
 reroute push=stand
 reroute balancing=stand
 reroute flagslide=climbing
-reroute piping=stand
+reroute piping=piping
 reroute pipingup=stand
 reroute sidepiping=walk
 reroute doorenter=stand
