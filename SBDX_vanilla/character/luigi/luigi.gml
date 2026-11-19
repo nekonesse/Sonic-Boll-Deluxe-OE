@@ -598,7 +598,7 @@ if (slipnslide) frick=0.01
 if !flight hsp=max(0,abs(hsp)-frick)*sign(hsp)
 }
 
-maxspd=(1.5+(runvar*(1.3 + (size==7 * 0.6)))+((size==7) * 0.2)+(_longjump*0.5)+water+(size==5)*0.55+slipnslide+!!spin)*(wf+((carry/2)*underwater()))
+maxspd = ((1.5 + runvar) * (1 + ((size == 7) * 0.6)) + (_longjump * 0.5) + water + (size==5)*0.55 + slipnslide + !!spin) * (wf + ((carry/2) * underwater()))
 if (abs(hsp)>maxspd) hsp=(abs(hsp)*2+maxspd)/3*sign(hsp)
 
 if (pound) {
