@@ -288,8 +288,14 @@ else if (jump) {
         else {sprite="stand"}
     } else {
         if (braking) sprite="brake"
-        else {sprite="walk" frspd=0.2+abs(hsp/4) 
-if fired {sprite="walkfired" keepframebetween=1 /*ypos=1*/} if (lookup) sprite="walkupfired" keepframebetween=1 /*ypos+=2*/}
+        else {
+			sprite="walk" frspd=0.2+abs(hsp/4) 
+			if (fired || lookup) {
+				if !lookup {sprite="walkfired" keepframebetween=1 /*ypos=1*/}
+				else if !fired {sprite="walkup" keepframebetween=1 /*ypos+=2*/}
+				else {sprite="walkupfired" keepframebetween=1}
+			}
+		}
     }
 }
 //lookup,lookupfired,walkup,walkupfired,jumpup,jumpupfired
