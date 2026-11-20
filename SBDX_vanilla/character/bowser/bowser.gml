@@ -60,7 +60,7 @@ landanim=0
 superlandanim=0
 spinspdmax=6
 vertbowser=1
-noflagpolegrab=1
+if (global.mplay>1) noflagpolegrab=0 else noflagpolegrab=1
 if (size=5) {mxsc=0.5 mysc=0.5} else {mxsc=1 mysc=1}
 /*
 was making a 1.9 bowser charm but not 1.9 anymore! -sani
