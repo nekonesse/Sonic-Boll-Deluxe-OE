@@ -567,3 +567,186 @@ savetext4=
 savetext5=
 savetext6=
 credits=
+
+[retromario]
+name=Wario
+
+sheetname=wariosadventure
+
+icon speed=4
+icon loop=yes
+animation speed=1.0
+center x=25
+center y=29
+box width=46
+box height=48
+pole center offset=3
+
+carry offset x=0
+carry offset y=-3
+fire duration=18
+victory duration=100
+time until wait=200
+pipe squish=20
+
+use paletting=true
+defaultspray 1=0
+defaultspray 2=0
+defaultspray 3=0
+defaultspray 4=0
+
+short small form=0.75
+
+size reroute big=basic
+size reroute feather=basic
+size reroute mini=basic
+size reroute beet=basic
+size reroute lui=basic
+
+max sizes=7
+
+fireball graphic x=265
+fireball graphic y=59
+
+custom sprite list=stand,wait,lookup,jump,pose,crouch,hurt,dead,walk,run,brake,tailidle,tailspin,bonk,grind,turn,ball,capeflight,slide,scuttle,spinjump,roll,climbing,groundpound,standcarry,lookupcarry,crouchcarry,walkcarry,brakecarry,jumpcarry,bonkcarry,throw,swim,fire,flagslide
+
+reroute crouchwalk=crouch
+reroute longjump=slide
+reroute fall=jump
+reroute runjump=jump
+reroute doublejump=jump
+reroute doublejumpbonk=bonk
+reroute doublejumpfall=jump
+reroute wallslide=jumpcarry
+reroute poundfall=groundpound
+reroute fallcarry=jumpcarry
+reroute scuttlecarry=scuttle
+reroute longjumpcarry=slide
+reroute doublejumpcarry=jumpcarry
+reroute airthrow=throw
+reroute paddle=swim
+reroute push=walkcarry
+reroute tspin=scuttle
+reroute galspinfall=scuttle
+reroute balancing=stand
+reroute piping=wait
+reroute pipingup=jump
+reroute sidepiping=slide
+reroute doorenter=stand
+reroute doorexit=wait
+reroute bonkbrick=bonk
+reroute growing=jump
+reroute shrinking=jump
+
+connect wait=true
+connect lookup=true
+connect jump=true
+connect crouch=true
+connect hurt=true
+connect run=true
+connect brake=true
+connect tailspin=true
+connect bonk=true
+connect grind=true
+connect ball=true
+connect capeflight=true
+connect slide=true
+connect spinjump=true
+connect climbing=true
+connect standcarry=true
+connect lookupcarry=true
+connect walkcarry=true
+connect brakecarry=true
+connect jumpcarry=true
+connect throw=true
+connect swim=true
+connect fire=true
+connect flagslide=true
+
+stand frames=2
+wait frames=4
+lookup frames=4
+pose frames=5
+crouch frames=1
+hurt frames=6
+dead frames=12
+walk frames=8
+run frames=2
+brake frames=1
+jump frames=2
+bonk frames=1
+grind frames=9
+turn frames=2
+ball frames=3
+capeflight frames=3
+slide frames=3
+scuttle frames=8
+spinjump frames=3
+roll frames=4
+climbing frames=2
+groundpound frames=6
+standcarry frames=2
+lookupcarry frames=4
+crouchcarry frames=1
+walkcarry frames=8
+brakecarry frames=1
+jumpcarry frames=2
+bonkcarry frames=1
+throw frames=3
+swim frames=4
+fire frames=3
+flagslide frames=1
+tailspin frames=1
+tailidle frames=1
+
+pose loop=2
+slide loop=3
+groundpound loop=4
+throw loop=3
+fire loop=3
+
+stand frametimes=2,5
+wait frametimes=2,5,2,5
+lookup frametimes=2,5,2,5
+pose frametimes=3.75,1,1,1,1
+standcarry frametimes=2,5
+waitcarry frametimes=2,5,2,5
+lookupcarry frametimes=2,5,2,5
+grind frametimes=1,0.5,0.5,1,1,0.5,0.5,0.5,0.5
+swim frametimes=6,6,6,6
+
+stand speed=0.375
+wait speed=0.375
+lookup speed=0.375
+pose speed=0.375
+hurt speed=0.5
+dead speed=0.375
+walk speed=0.5
+run speed=0.375
+jump speed=0.375
+grind speed=0.25
+turn speed=0.5
+ball speed=0.5
+capeflight speed=0.5
+slide speed=0.5
+scuttle speed=0.5
+spinjump speed=0.5
+roll speed=1
+climbing speed=0.25
+groundpound speed=1
+standcarry speed=0.375
+lookupcarry speed=0.375
+walkcarry speed=0.5
+jumpcarry speed=0.375
+fire speed=0.25
+throw speed=0.25
+swim speed=1
+
+boll top=#FFF7F7
+boll mid=#000000
+boll bot=#FFF7F7
+
+
+
+
+
