@@ -453,6 +453,7 @@ if (hsp>=3 || push) {
 com_inputstack()
 
 tempbrick=0
+luijump -= 1
 
 //situations in which it should skip controls entirely
 if (hurt || piped || move_lock) {
@@ -547,6 +548,7 @@ if ((abut || jumpbufferdo) && !springin) {
 			sprite_angle=0
 			
             jump=1
+		if (size==7) luijump=9
             fall=0
             braking=0
             spin=0
@@ -593,6 +595,7 @@ if (!akey) {
         vsp*=0.5
     }
     canstopjump=0
+	luijump=0
 }
 
 if (!akey) {
@@ -730,7 +733,7 @@ if fall!=69
                 xsc=esign(hsp,xsc)
             } else vsp=min(1,vsp+0.1)
         } else {
-            if fall!=69 {
+            if fall!=69 && !luijump {
             	vsp+=0.15*wf-(size=5 && vsp>-0.35 && !water)*0.075
         	} if (!hurt) vine_climbing()
         }}
@@ -875,6 +878,9 @@ if (global.dustframe) {
         if (speedwagon>60) shoot(x,y,psmoke,0,1)
     } else speedwagon=0
 }
+
+if (jump && size==7 && global.fastframe4 != ff4prev) {ff4prev = global.fastframe4 with instance_create(x, y, afterimagenoblend) {event_user(0) alphadecay=1 alarm[0] = 24 maxalarm = 24 maxalpha=0.8}}
+
 
 maxe=6*!!size-((size==5)*6)
 if (mcs>=20) {energy+=1 mcs=0}
@@ -1221,6 +1227,7 @@ bounce=0
 oldsize=size
 jumpbuffer=0
 hyperspeed=0
+luijump=0
 hp=0
 star=0
 
