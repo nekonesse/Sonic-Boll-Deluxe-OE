@@ -47,6 +47,7 @@ connect paddle=true
 connect fire=true
 connect climbing=true
 connect growing=true
+connect piping=true
 
 reroute wait=stand
 reroute pose=stand
@@ -58,8 +59,7 @@ reroute bonk=jump
 reroute push=stand
 reroute balancing=stand
 reroute flagslide=climbing
-reroute piping=piping
-reroute pipingup=stand
+reroute pipingup=piping
 reroute sidepiping=walk
 reroute doorenter=stand
 reroute doorexit=stand
