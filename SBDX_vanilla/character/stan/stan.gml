@@ -267,7 +267,7 @@ else if (jump) {
 	if (onvine) {sprite="climbing" frspd=sign(left+right+up+down)}
     else if (bonk) {sprite="bonk" if (jumpspd=99) {if triplejump>=1 sprite="triplejumpbonk" else if triplejump>=0.5 sprite="doublejumpbonk"}} 
 	else if fireddown {sprite="jumpdownfired" if fireddown<20 sprite="jumpdown"   fireddown-=1}
-	else if (lookup) {if fired sprite="jumpupfired" sprite="jumpup"}
+	else if (lookup) {if fired {if sprite="lookupfired" keepframebetween=1 sprite="jumpupfired"} else sprite="jumpup"}
 	else if fired {sprite="jumpfired"}
         else if (water) {sprite="swim" if (swim) sprite="paddle"}
 	else if (triplejump>=1) {sprite="triplejump" if vsp>0 sprite="triplejumpfall"}
@@ -282,13 +282,14 @@ else if (jump) {
     else if (hsp=0) {
         if (hang) {sprite="hang"}
         else if (pose) sprite="pose"
-	else if (fired) {if lookup sprite="lookupfired" else sprite="fired"}
+	else if (fired) {if lookup {if sprite="jumpupfired" keepframebetween=1 sprite="lookupfired"} else sprite="fired"}
         else if (lookup) {sprite="lookup"}
         else if (waittime>maxwait) {sprite="wait"}
         else {sprite="stand"}
     } else {
         if (braking) sprite="brake"
         else {
+			if (sprite="walkfired" || sprite="walkup" || sprite="walkupfired") keepframebetween=1
 			sprite="walk" frspd=0.2+abs(hsp/4) 
 			if (fired || lookup) {
 				if !lookup {sprite="walkfired" keepframebetween=1 /*ypos=1*/}
