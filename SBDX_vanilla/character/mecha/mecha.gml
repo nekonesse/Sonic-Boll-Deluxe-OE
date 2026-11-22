@@ -9,14 +9,12 @@ release,skid,spin,spindash,jet,splode,stomp,lookup,chain
 Mecha Sonic
 #
 [a]: Jet (air)
-[up] + [a]: Highjump
 [b]: Claw
 [c]: Charge Dash (hold)
 <fire>
 Mecha Sonic [flwr]
 #
 [a]: Jet (air)
-[up] + [a]: Highjump
 [b]: Spike Attack (air) / Claw (stand)
 [c]: Charge Dash (hold)
 <feather>
@@ -659,6 +657,7 @@ else sprite="armless"
 com_inputstack()
 
 tempbrick=0
+luijump -= 1
 
 //situations in which it should skip controls entirely
 if (hurt || piped || move_lock) {
@@ -735,7 +734,8 @@ if ((abut || jumpbufferdo) && !springin && !spindash) {
         } else {
             jumpsnd=playsfx(name+"jump",0,1+((size==5)/3))
             vsp=-4.20 //swagger
-            if (up) {energy=max(0,energy-2) playsfx(name+"step")  vsp-=2 instance_create(x,y+8,smoke) highjumpanim=1}
+            if (up && size=3) {energy=max(0,energy-2) playsfx(name+"step")  vsp-=2 instance_create(x,y+8,smoke) highjumpanim=1}
+	 if (size=7) {vsp-=2}
 			grabflagpole=0
             latchedtoflagpole=0
 
@@ -752,6 +752,7 @@ if sparkcharge{chargestored=1}
 			//if (spin) jumpedoutspin=1
 			spin=0
             jump=1
+		if (size==7) luijump=9
             fall=0+up-!!(size=3)
             braking=0
             canstopjump=1
@@ -787,10 +788,11 @@ if (!akey) {
     }
     if (jet) {jet=0 soundstop(name+"jet") fall=1 fallspr="stand"}
     canstopjump=0
+	luijump=0
 }
 
 //code for specifically the b button
-if (bbut ) {
+if (bbut) {
 if (jump && !fall && size=2 && !insted) {
             insted=1
             kek=0
@@ -811,10 +813,24 @@ spikin=0
                 instance_create(x+hsp+2*xsc,y,smoke)
 }
 }
-else {if (!count_projectiles()) && !(chain>0 && chain<11)
-if (!count_projectiles()) {fired=19 frame=0}
+else if size!=6 && (!count_projectiles()) && !(chain>0 && chain<11){
+if (!count_projectiles()) {fired=19 frame=0 playsfx(name+"chain");}
 chain=1 turning=0}
+else if (size=6 && count_projectiles()<2 && !grabflagpole) {
+            p2 = 10;
+            with fire_projectile(x+8*xsc,y+2) {
+                hspeed=max((1 + (abs(other.hsp) / 2.2)),1.2) * xsc; //yaargh me formula
+                vspeed = -2.4;
+                visible = 0;
+            }
+            if (!jump) fired=firelength; //fired = 8;
+            fired=19 frame=0
+            turning=0
+            p2 = real(ss);
+            playsfx(name+"chain")
+    }
 }
+
 
 if (cbut) {
 if chargestored{
@@ -928,7 +944,7 @@ if (!dead && !grabflagpole) {
         hang=0
         stamped=0
             if fall!=69 {
-
+	
 if (!hurt) vine_climbing()
 vsp+=0.15*wf-(size=5 && vsp>-0.35 && !water)*0.075
 } else{
@@ -1093,6 +1109,8 @@ if (global.dustframe) {
         if (speedwagon>60) shoot(x,y,psmoke,0,1)
     } else speedwagon=0
 }
+if (jump && size==7 && global.fastframe4 != ff4prev) {ff4prev = global.fastframe4 with instance_create(x, y, afterimagenoblend) {event_user(0) alphadecay=1 alarm[0] = 24 maxalarm = 24 maxalpha=0.8}}
+
 
 maxe=4+(!!size && size!=5)*2
 if (jet || chargestored || sparkcharge ) mcs=0
@@ -1408,6 +1426,7 @@ twirl=0
 oldsize=size
 jumpbuffer=0
 hyperspeed=0
+luijump=0
 hp=0
 star=0
 if (super) stopsuper()   

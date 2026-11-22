@@ -29,6 +29,8 @@ reroute sidepiping=walk
 reroute doorenter=stand
 reroute doorexit=stand
 
+size reroute beet=big
+size reroute lui=big
 
 stand frames=15
 wait frames=5
