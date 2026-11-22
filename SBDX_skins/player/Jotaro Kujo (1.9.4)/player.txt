@@ -21,10 +21,10 @@ glide animation=yes
 jump ball animation=yes
 
 use paletting=false
-defaultspray 1=5
-defaultspray 2=10
-defaultspray 3=5
-defaultspray 4=8
+size reroute feather=fire
+size reroute extra=fire
+size reroute beet=fire
+size reroute lui=fire
 
 custom sprite list=stand,lookup,pose,crouch,knock,dead,walk,run,brake,jump,bonk,fall,ball,spindash,push,hang,fire,upper,climb,glide,glideturn,slide,climbing
 reroute fall=fall
@@ -56,10 +56,6 @@ spindash dust graphic y=99
 spindash dust frames=1
 spindash dust speed=1
 
-size reroute extra=big
-size reroute feather=fire
-size reroute beet=big
-size reroute lui=big
 
 stand frametimes=180,3,3,3,120,3,3,3,180,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
 
