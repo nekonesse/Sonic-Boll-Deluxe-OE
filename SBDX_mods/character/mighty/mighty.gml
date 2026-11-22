@@ -175,6 +175,7 @@ else if (jump) {
 com_inputstack()
 
 tempbrick=0
+luijump -= 1
 
 //situations in which it should skip controls entirely
 if (hurt || piped || grabbedflagpole) {
@@ -282,6 +283,7 @@ if ((abut || jumpbufferdo) && (!springin)) {
 			sprite_angle=0
 			
             jump=1
+	  if (size==7) luijump=9
             fall=0
             braking=0
             spin=0
@@ -318,6 +320,7 @@ if (!akey) {
         vsp*=0.5
     }
     canstopjump=0
+luijump=0
 }
 
 //code for specifically the b button
@@ -405,7 +408,7 @@ vsp=min(7+downpiped,vsp)
 calcmoving()
 
 if (!dead  && !grabflagpole) {
-	if fall!=69
+	if fall!=69 
 		player_horstep()
 
     player_nslopforce()
@@ -421,8 +424,8 @@ if (!dead  && !grabflagpole) {
             vsp=7+drop*0.1
 			canpipejump=1
         } else {
-            if fall!=69 {
-				vsp+=0.15*wf
+            if fall!=69 && !luijump {
+            vsp+=(0.15 - (size == 5 && vsp > 0.5) * 0.03) *wf
 			} else{
 				hsp=h
 				vsp=(down-up)
@@ -728,7 +731,7 @@ if (global.dustframe) {
         if (speedwagon>60) shoot(x,y,psmoke,0,1)
     } else speedwagon=0
 }
-
+if (jump && size==7 && global.fastframe4 != ff4prev) {ff4prev = global.fastframe4 with instance_create(x, y, afterimagenoblend) {event_user(0) alphadecay=1 alarm[0] = 24 maxalarm = 24 maxalpha=0.8}}
 
 if (boost) {
     if (hurt && !super) boost=0
@@ -962,6 +965,7 @@ twirl=0
 oldsize=size
 jumpbuffer=0
 hyperspeed=0
+luijump=0
 hp=0
 star=0
 onvine=0
