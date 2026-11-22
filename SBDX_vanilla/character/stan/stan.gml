@@ -10,30 +10,21 @@ skid,swim,pound,stomp,smalljump,flip,spin,slide,kick,fireball,wallkick,smallwall
 Stanley
 #
 [a]: Puff Jump (air)
-[down]: Groundpound (air)
 [c]/[b]: Puff 
-Bump into trapped enemies for a powerful attack!
-Jump out of a Groundpound to reach higher places
 Use [b] or [x] to run
 <fire>
 Stanley [flwr]
 #
 [a]: Puff Jump (air)
-[down]: Groundpound (air) 
 [c]/[b]: Puff 
-Bump into trapped enemies for a powerful attack!
-Jump out of a Groundpound to reach higher places
 Use [b] or [x] to run
 <feather>
 Stanley [fthr]
-#
 #
 [a]: Puff Jump (air)
 [down]: Groundpound (air)
 [c]/[b]: Puff 
 [fthr] Hold A while mid-air to descend very slowly
-Bump into trapped enemies for a powerful attack!
-Jump out of a Groundpound to reach higher places
 Use [b] or [x] to run
 
 #define rosterorder
@@ -80,7 +71,6 @@ akey=(push || (jump && akey) || !collision(16,8))
 dance=!jump
 
 #define effectsfront
-
 if iaminsidemyself exit
 if gun_loaded{
 
@@ -260,43 +250,43 @@ cantslowanim=0
  keepframebetween=0
 if (grabflagpole) {sprite="flagslide"}
 else if (hurt) {sprite="knock"}
-else if dance {sprite="dance"}
+else if dance {sprite="dance" frspd=0.85+abs(hsp/1.45) }
 else if (pound) {sprite="groundpound" if (pound>12 || vsp>0) sprite="poundfall"}
 else if (slipnslide) {sprite="slide"}
 else if (jump) {
-	if (onvine) {sprite="climbing" frspd=sign(left+right+up+down)}
+if (onvine) {sprite="climbing" frspd=sign(left+right+up+down)}
     else if (bonk) {sprite="bonk" if (jumpspd=99) {if triplejump>=1 sprite="triplejumpbonk" else if triplejump>=0.5 sprite="doublejumpbonk"}} 
-	else if fireddown {sprite="jumpdownfired" if fireddown<20 sprite="jumpdown"   fireddown-=1}
-	else if (lookup) {if fired {if sprite="lookupfired" keepframebetween=1 sprite="jumpupfired"} else sprite="jumpup"}
-	else if fired {sprite="jumpfired"}
+else if fireddown {sprite="jumpdownfired" if fireddown<20 sprite="jumpdown"   fireddown-=1}
+else if (lookup) {if fired {if sprite="lookupfired" keepframebetween=1 sprite="jumpupfired"} else sprite="jumpup"}
+else if fired {sprite="jumpfired"}
         else if (water) {sprite="swim" if (swim) sprite="paddle"}
-	else if (triplejump>=1) {sprite="triplejump" if vsp>0 sprite="triplejumpfall"}
-	else if (triplejump>=0.5 && !water) {sprite="doublejump" if vsp>0 sprite="doublejumpfall"}
+else if (triplejump>=1) {sprite="triplejump" if vsp>0 sprite="triplejumpfall"}
+else if (triplejump>=0.5 && !water) {sprite="doublejump" if vsp>0 sprite="doublejumpfall"}
     else if (fall=6) {sprite="knock"}
     else {sprite="jump" if (vsp>0) sprite="fall"}
-	
+
 } else {
     if (spin) {sprite="ball" frspd=0.5+abs(hsp/3)}
     else if (push!=0) {sprite="push" frspd=1+abs(hsp/3)}
-	else if (gun_load) {sprite="suckin"}
+else if (gun_load) {sprite="suckin"}
     else if (hsp=0) {
         if (hang) {sprite="hang"}
         else if (pose) sprite="pose"
-	else if (fired) {if lookup {if sprite="jumpupfired" keepframebetween=1 sprite="lookupfired"} else sprite="fired"}
+else if (fired) {if lookup {if sprite="jumpupfired" keepframebetween=1 sprite="lookupfired"} else sprite="fired"}
         else if (lookup) {sprite="lookup"}
         else if (waittime>maxwait) {sprite="wait"}
         else {sprite="stand"}
     } else {
         if (braking) sprite="brake"
         else {
-			if (sprite="walkfired" || sprite="walkup" || sprite="walkupfired") keepframebetween=1
-			sprite="walk" frspd=0.2+abs(hsp/4) 
-			if (fired || lookup) {
-				if !lookup {sprite="walkfired" keepframebetween=1 /*ypos=1*/}
-				else if !fired {sprite="walkup" keepframebetween=1 /*ypos+=2*/}
-				else {sprite="walkupfired" keepframebetween=1}
-			}
-		}
+if (sprite="walkfired" || sprite="walkup" || sprite="walkupfired") keepframebetween=1
+sprite="walk" frspd=0.2+abs(hsp/4) 
+if (fired || lookup) {
+if !lookup {sprite="walkfired" keepframebetween=1 /*ypos=1*/}
+else if !fired {sprite="walkup" keepframebetween=1 /*ypos+=2*/}
+else {sprite="walkupfired" keepframebetween=1}
+}
+}
     }
 }
 //lookup,lookupfired,walkup,walkupfired,jumpup,jumpupfired
@@ -307,8 +297,6 @@ hsp=0
 vsp=0
 
 #define controls
-
-
 com_inputstack()
 luijump-=1
 if (finish && !dead) {
@@ -359,22 +347,22 @@ if (h!=0 && !wallkick) {
                 if (abs(hsp)>2 && !carry) {
                     braking=1
                     skidding=1
-                    playsfx("stanskid",1)
+                    playsfx("stanskid",5)
                     brakedir=h
                 }
-                hsp+=(0.44-0.175*!water+0.04*(abs(hsp)<1))*wf*h
+                hsp+=(0.35-0.175*!water+0.04*(abs(hsp)<1))*wf*h
                 if (abs(hsp)<0.5 || carry && !spin) xsc=h
             } else {
                 hsp+=(0.06+0.04*(abs(hsp)<0.5)-(0.02*(abs(hsp)<1.5)))*wf*h
                 xsc=h
                 braking=0
             }
-			if dance {hsp=h xsc=h}
-			
+if dance {hsp=h xsc=h}
+
         } else {
             if (water) {if (h!=sign(hsp)) hsp+=0.1*h else hsp+=0.0475*h}
             else if (dropkick) hsp+=0.1*wf*h
-			else if (size==5) hsp+=0.085*wf*h
+else if (size==5) hsp+=0.085*wf*h
             else hsp+=0.06*wf*h
             if (!hang && !wallkick && !twist && !spin) xsc=h
         }
@@ -389,12 +377,10 @@ if ((abut || jumpbufferdo) && !springin) {
     if (!jump || water ||fall=69||grabflagpole) {
         if (water) {if (!pound) {vsp=-1.5-up*0.75 swim=24 crouch=0 playsfx("stanswim") double=0}}
         else {
-            if ((abs(hsp)<=2.5 && triplejump) || triplejump>=1 || (triplexsc!=sign(hsp) && triplexsc!=0) || poundjump) {triplejump=0 triplexsc=0}
-            else if (jumptiming && (abs(hsp+hyperspeed)>2.5 || !triplejump)) {triplejump+=0.5 triplexsc=sign(hsp)}
             if (size==0 || size==5) jumpsnd=playsfx("stansmalljump",0,1+triplejump/2+(size==5)/3)
             else jumpsnd=playsfx("stanjump",0,1+triplejump/2)
             if (spin) {vsp=-1 instance_create(x,y+12,smoke)}
-            else {vsp=-(4.7+min(1,abs(hsp)/8)+!!poundjump+triplejump) hellothisisajump=1}
+            else {vsp=-(4.7+min(1,abs(hsp)/8))}
             if (water) vsp=-sqrt(sqr(vsp)*wf+2)
         }
         if (poundjump) {springsmoke(x,y+8) crouch=0}
@@ -413,17 +399,18 @@ if ((abut || jumpbufferdo) && !springin) {
         jumpspd=min(1,0.5+abs(hsp)/5)
     } else {
         
-		if (can_pound && count_projectiles()<3 && insted<3 && !coyote){
-			downer=1
-			vsp=-3
-			fire_projectile(x,y)
-			downer=0
-			
-			insted+=1
-			fireddown=30
-			playsfx("stanpuff")
-		}
-		
+if (can_pound && count_projectiles()<3 && insted<3 && !coyote && !dance){
+downer=1
+if size==3 vsp=-3.375
+else vsp=-3.05
+fire_projectile(x,y)
+downer=0
+
+insted+=1
+fireddown=30
+playsfx("stanpuff")
+}
+
         jumpbuffer=4*!jumpbufferdo
     }
 }
@@ -458,12 +445,12 @@ if ((bkey || xkey)) {
     }
 }
 
-if ((cbut || bbut) && can_pound) {
+if ((cbut || bbut) && !dance) {
     if (count_projectiles()<3 || (size=3 && count_projectiles()<9)){
-	
-		
-	
-		i=fire_projectile(x+4*(xsc>0),y+4-2*(!!size && size!=5) -gun_loaded)
+
+
+
+i=fire_projectile(x+4*(xsc>0),y+4-2*(!!size && size!=5) -gun_loaded)
 if lookup {i.hspeed=0 i.vspeed=-4 i.side=0}
 playsfx("stanpuff")
 if size=3  {
@@ -473,49 +460,29 @@ if lookup {i.hspeed=2 i.vspeed=-4 i.side=0}
 i=fire_projectile(x+4*(xsc>0),y+4-2*(!!size && size!=5) -gun_loaded)
 i.vspeed=2
 if lookup {i.hspeed=-2 i.vspeed=-4 i.side=0}
-		
-		}
-		//fired=15
-		fired=firelength
-		if (sprite="fired" || sprite="lookupfired" || sprite="jumpfired" || sprite="jumpupfired") frame=0
+
+}
+//fired=15
+fired=firelength
+if (sprite="fired" || sprite="lookupfired" || sprite="jumpfired" || sprite="jumpupfired") frame=0
 if (gun_load) gun_load=0
-	}
+}
 }
 
 
 
 //crouching
 if (down && !up) {
-	if can_pound{
-		if (jump) {
-			if (!carry && fall!=6 && !dive && !pound && !poundlok && fall!=69) {
-				pound=1
-				nocratebounce=1
-				if (water) seqcount=1
-				slidejump=0
-				dropkick=0
-				spinjump=0
-				playsfx("stanpound")
-			}
-		} else if (!braking) {
-			if (slobal!=0) {
-				slipnslide=1
-			} else {
-				 
-					dance=3
-				         
-			}
-		}
-		poundlok=1
-	} else {
-		crouch=1  
-		
-	}
+if (!braking){
+if !jump dance=3
+} else {
+crouch=1  
+}
     com_piping()
 } else {
     if (pound=-1) pound=0
     if (!jump) crouch=0
-	if (dance) dance-=1
+if (dance) dance-=1
     poundlok=0
 }
 
@@ -671,7 +638,6 @@ com_finishmove()
 
 
 #define actions
-
 com_warping()
 com_actions()
 
@@ -880,11 +846,6 @@ com_endactions()
 
 
 #define enemycoll
-
-
-
-
-
 if (coll) {
     if (!coll.damage_player_on_contact) {
         calcfall=fall
@@ -1137,8 +1098,7 @@ braking=0
 double=0
 flight=0
 insted=0
-if (hellothisisajump) jumptiming=6
-hellothisisajump=0
+fireddown=0
 if spin{spin=0}
 
 spinjump=0
@@ -1184,7 +1144,7 @@ if stoppounding=0 {pound=0}
         playsfx(name+"stomp")         
         shoot(x-8,y+4,psmoke,-2,-1)
         shoot(x+8,y+4,psmoke,2,-1)    
-		poundjump=16
+poundjump=16
     }
 }
  
