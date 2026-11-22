@@ -82,7 +82,6 @@ dive frames=5
 climbing frames=4
 capeflight frames=6
 
-size reroute beet=big
 size reroute lui=big
 
 wait loop=15
