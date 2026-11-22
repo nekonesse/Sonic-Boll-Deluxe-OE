@@ -35,7 +35,7 @@ claw graphic x4=265
 claw graphic y4=96
 
 single sheet=true
-singlesheet split width=8,242,476,710,242,8
+singlesheet split width=8,242,476,710,8,8,944,1178
 singlesheet split height=0,0,0,0,0,0
 
 custom sprite list=stand,crouch,lookup,turn,prerun,claw,knockstand,knockrun,jump,climbing,ball,fly,deadair,dead
