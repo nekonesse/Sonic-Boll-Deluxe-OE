@@ -26,7 +26,17 @@ single sheet=true
 singlesheet split width=8,200,456,712,200,8
 singlesheet spilt height=0,0,0,0,0,0
 
+use paletting=true
+defaultspray 1=0
+defaultspray 2=0
+defaultspray 3=0
+defaultspray 4=0
+total palettes=1
+
 custom sprite list=lookup,stand,pose,crouch,knock,dead,walk,run,brake,spring,climbing,ball,jump,spindash,teleport,push,balance,spacer1,bounce,dash
+
+size reroute beet=big
+size reroute lui=big
 
 connect stand=true
 connect lookup=true
@@ -178,7 +188,7 @@ credits=CyanideJam
 princess=our princess
 savetext1=Peace is Paved
 savetext2=With Kingdom Saved
-savetext3=Hurrah to %player%
+savetext3=Hurrah to Silver Sonic
 savetext4=Our Only Hero 
 savetext5=This Ends Your Trip
 savetext6=Of a Long Friendship

@@ -26,7 +26,12 @@ center y=13,19,19,19,19,13
 box width=24,32,32,32,32,24
 box height=32,40,40,40,40,32
 
-use paletting=false
+use paletting=true
+defaultspray 1=0
+defaultspray 2=0
+defaultspray 3=0
+defaultspray 4=0
+total palettes=1
 
 single sheet=true
 singlesheet split width=8,200,456,712,456,8
