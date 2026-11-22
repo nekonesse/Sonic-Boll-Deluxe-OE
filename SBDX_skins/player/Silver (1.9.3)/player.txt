@@ -34,6 +34,9 @@ defaultspray 2=6
 defaultspray 3=1
 defaultspray 4=7
 
+size reroute beet=big
+size reroute lui=big
+
 custom sprite list=stand,wait,pose,crouch,knock,dead,walk,run,brake,spring,spacer2,ball,jump,fall,spindash,teleport,push,hang,spacer1,bounce,dash
 
 connect stand=true
