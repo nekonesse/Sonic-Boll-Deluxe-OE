@@ -1,6 +1,5 @@
 ///charm_init()
 //updates the skin variables (and charm)
-var ss;
 
 ss=string(p2)
 
