@@ -751,7 +751,7 @@ if (diggity) {
         hsp=max(0,abs(hsp)-frick)*sign(hsp)
     }
 
-    maxspd=(3+!!size*0.75+spin+(size==5)*0.75)*wf
+    maxspd=(2.75+!!size*0.75+spin+(size==5)*0.75)*wf
 	
 	//There's an extra check in the hsp+= section of h!=0 to compensate!.
 	if (!glide && abs(hsp)>maxspd) {
@@ -1119,7 +1119,7 @@ if (spindash || spin) {
         if (!crouch) {
             if (name="sonic" && spindash>3) boost=1
             spin=1
-            hsp=xsc*6*(0.75+0.25*median(0,spindash-1,2)/2)
+            hsp=xsc*5*(0.75+0.075*median(0,spindash,2)) * (1 - (0.275 * underwater())) //wf is too strong
             spindash=0
             if (name="robo") {
                 hsp=3
