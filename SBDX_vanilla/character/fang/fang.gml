@@ -564,7 +564,7 @@ if (!jump) if (loose || spin || crouch) {
 }
 
 //speed cap rubberband formula
-maxspd=(3.5 + !!size*0.5 + (size==5)*0.55  + spin + (fall==10)*0.5)*wf
+maxspd=(2.7 + !!size*0.5 + (size==5)*0.55  + spin + (fall==10)*0.5)*wf
 if (abs(hsp)>maxspd) hsp=(abs(hsp)*2+maxspd)/3*sign(hsp)
 
 vsp=min(7+downpiped,vsp)
