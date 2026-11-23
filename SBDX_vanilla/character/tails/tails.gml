@@ -836,6 +836,7 @@ if ((abut || jumpbufferdo) && (!springin)) {
 					tired=(energy<1)
 					if tired fly=1
 					mc=0
+					boost=0
 					if (inst) {stopsfx(inst) inst=0}
 				}
 			}
@@ -1239,17 +1240,18 @@ if (jump && size==7 && global.fastframe4 != ff4prev) {ff4prev = global.fastframe
 
 maxe=2*(2+!!size)
 if (fly) {
-fly=max(1,fly-1)
-mc+=!water
-if (mc=90) {
-energy=max(0,energy-1)
-mc=0
-if (energy=0) { tired=1}
-}
+	fly=max(1,fly-1)
+	mc+=!water
+	if (abs(hsp)>2.75 && !tired) hsp=hsp*0.95
+	if (mc=90) {
+		energy=max(0,energy-1)
+		mc=0
+		if (energy=0) { tired=1}
+	}
 } else {
-tired=0
-mc=0
-if (inst) {stopsfx(inst) inst=0}
+	tired=0
+	mc=0
+	if (inst) {stopsfx(inst) inst=0}
 }
 
 if (sprite!="jump" && sprite!="ball" && sprite!="bonk" && sprite!="airwalk") 
