@@ -1293,7 +1293,7 @@ collmon=instance_position(x,y+22,monitor)
         if (!crouch) {
             
             spin=1
-            hsp=xsc*6*(0.75+0.25*median(0,spindash-1,2)/2)
+           hsp=xsc*5*(0.75+0.075*median(0,spindash,2)) * (1 - (0.275 * underwater())) //wf is too strong
             spindash=0
             soundstop(name+"spindash")
             playsfx(name+"release")
