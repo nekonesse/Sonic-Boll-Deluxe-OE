@@ -338,7 +338,7 @@ else if (upper||didupper) {if (size && size!=5) {sprite="upper" cantslowanim=1} 
 		}
 	}
     else if (climb) {if vsp<0{sprite="climb"} else if vsp>0 {sprite="climbdown"}else sprite="climbstill" frspd=1}
-    else if (sprung) {sprite="spring" if (vsp>=0) {sprung=0 fall=1}}
+    else if (sprung) {sprite="spring" if (vsp>=0) {fall=1}}
     else if (fall) {
         if (fall=1) sprite="walk"
         if (fall=2) sprite="run"
@@ -511,8 +511,8 @@ if (push!=h) push=0
 com_di()
 
 //code for specifically the a button
-if ((abut || jumpbufferdo) && (!springin)) {
-    if (!jump|| climb || fall=69 || grabflagpole) { //jump
+if ((abut || jumpbufferdo)) {
+    if ((!jump|| climb || fall=69 || grabflagpole) && (!springin)) { //jump
 
         if (hsp==0 && crouch && push==0 && fall!=69 && !grabbedflagpole) {
 			if (spindash) {
@@ -554,10 +554,11 @@ if ((abut || jumpbufferdo) && (!springin)) {
             jumpspd=min(1,0.5+abs(hsp)/5)
         }
     } else { //air jumps
-        if ((!fall || fall=5)&& !didupper) {
+        if ((!fall || fall=5 || sprung) && !didupper) {
             glide=1
 			hasgted=0
             fall=0
+			if (sprung && vsp<0) {vsp*=0.75}
           if (size=3) {if vsp>-1.5 vsp=-1.5}
             vsp-=0.5
             glidec=max(0,abs(hsp)-2)
@@ -575,16 +576,6 @@ springin=0
 
 if (akey) {
     if (jumpbuffer) jumpbuffer-=1
-    if (name="fang") {
-        if (down) {
-            bounce=1
-        }
-        if (!jump && bounce) {
-            vsp=-5
-            jump=1
-        }
-        //fall=0
-    }
 } else jumpbuffer=0
 
 if (!akey) {
@@ -991,7 +982,7 @@ else {
 if (glide) {
     glidev=max(0.25,glidev-0.1)
     vsp=min(glidev,vsp)
-    glidec=min(4+(size>0 && size!=5),glidec+0.005)
+    glidec=min(3+(size>0 && size!=5),glidec+0.0075)
     if (right && !left && gg!=1) {gg=1}
     if (left && !right && gg!=-1) {gg=-1}
     if (gg=0) gg=fixxsc
