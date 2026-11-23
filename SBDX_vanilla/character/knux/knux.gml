@@ -773,36 +773,34 @@ if fall!=69
 //if (yground!=verybignumber) yground-=14
 if !glide glidetimer=0
 if (jump) {
-            if (glide) {
-if (size=3) {
-glidetimer+=3
-                     vsp+=0.01
-     if vsp<-0.5 vsp=-0.5
-                      } else {vsp+=0.10}
-
-            } else {
-
-if (megadrill){
-vsp+=0.15*down-0.15*up
-} else {
-if fall!=69 && !luijump {
-//vsp+=(0.15-(size==5)*0.025)*wf
-vsp+=0.15*wf-(size=5 && vsp>-0.35 && !water)*0.075
-} 
-crouch=0 spindash=0
-}
-            }
-if (!hurt) vine_climbing()
-            braking=max(0,braking-1)
-            if (climb) {vsp=(down-up)*wf}
-            if (slide) slide=0
-            if (sprung && !fall) fall=1
-            push=0 spin=0
-            rise=0 risec=0
-            coyote=0
-osld=0
-player_vertstep()
-if (!jump) sld=point_direction(0,0,1,slobal)
+	if (glide) {
+		if (size=3) {
+			glidetimer+=3
+			vsp+=0.01
+			if vsp<-0.5 vsp=-0.5
+		} else {vsp+=0.10}
+	} else {
+		if (megadrill){
+			vsp+=0.15*down-0.15*up
+		} else {
+			if fall!=69 && !luijump {
+			//vsp+=(0.15-(size==5)*0.025)*wf
+			vsp+=0.15*wf-(size=5 && vsp>-0.35 && !water)*0.075
+		} 
+			crouch=0 spindash=0
+		}
+	}
+	if (!hurt) vine_climbing()
+				braking=max(0,braking-1)
+				if (climb) {vsp=(down-up)*wf}
+				if (slide) slide=0
+				if (sprung && !fall) fall=1
+				push=0 spin=0
+				rise=0 risec=0
+				coyote=0
+	osld=0
+	player_vertstep()
+	if (!jump) sld=point_direction(0,0,1,slobal)
 }
 
 sprite_angle=0
@@ -993,7 +991,7 @@ else {
 if (glide) {
     glidev=max(0.25,glidev-0.1)
     vsp=min(glidev,vsp)
-    glidec=min(1+(size>0 && size!=5),glidec+0.02)
+    glidec=min(4+(size>0 && size!=5),glidec+0.005)
     if (right && !left && gg!=1) {gg=1}
     if (left && !right && gg!=-1) {gg=-1}
     if (gg=0) gg=fixxsc
