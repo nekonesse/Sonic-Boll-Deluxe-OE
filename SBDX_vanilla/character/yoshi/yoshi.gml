@@ -181,13 +181,13 @@ if !up
 coll=knuxcanclimb(instance_place(x+3*xsc,y,collider)) 
 
 if (c>=56) || (c>56) mode=1
-if coll && coll.object_index!=brick  && !mode & !brickpull && capture=0 && coll.nslop=0 && ( owner.bkey && owner.jump ) if !instance_place(x+3*xsc,y,phaser)  mode=2
+if coll && coll.object_index!=brick  && !mode & !brickpull && capture=0 && coll.nslop=0 && owner.bkey if !instance_place(x+3*xsc,y,phaser)  mode=2
 if (mode) c=approach_val(c,0,6)  else c=approach_val(c,56,6) 
 while c>57
 c-=1
 
 
-if mode=2 && owner.jump //no longer grapples on the ground
+if mode=2
 {
 owner.toungecling=1
 owner.vsp=0
@@ -232,6 +232,7 @@ coll=instance_place(x,y,enemy)
 if !owner.anemyeat
 if coll && capture=0&& coll.object_index!=boo && coll.object_index!=urchin
 {
+mode=1
 capture=-1
 owner.anemyeat=coll.id
 if coll.object_index=shell
@@ -257,6 +258,7 @@ coll=instance_place(x,y,brick)
 
 if coll && !brickpull && capture=0
 {
+mode=1
 capture=1
 brickpull=1
 with coll instance_destroy()
@@ -511,7 +513,7 @@ sprite_angle=point_direction(0,0,hspeed,vspeed)
 
 eggthrowsmokecount+=1
 if eggthrowsmokecount=3 {
-	with owner shoot(other.x,other.y,psmoke)
+with owner shoot(other.x,other.y,psmoke)
     eggthrowsmokecount=0
 }
 
@@ -564,7 +566,7 @@ else if (coll.object_index=coin) with (coll) {instance_create(x,y,glitter) give_
 coll=instance_place(x,y,bowserboss)
 if (coll) {
     if (!coll.flash) {
-	    playsfx("yoshiegghit")
+    playsfx("yoshiegghit")
         coll.hp-=1
         coll.flash=64
         coll.owner=owner
@@ -683,66 +685,64 @@ vspeed=0
 
 
 if (event="draw") {
-	if (!tonge) {
-		if (eggtype=0 || eggtype=3)
-		draw_sprite_part_ext(sheet,0,10+17*floor(frame),104,16,16,round(x-8*xsc),round(y-8+offy),xsc,1,$ffffff,1)
+if (!tonge) {
+if (eggtype=0 || eggtype=3)
+draw_sprite_part_ext(sheet,0,10+17*floor(frame),104,16,16,round(x-8*xsc),round(y-8+offy),xsc,1,$ffffff,1)
 
-		if (eggtype=4)
-		draw_sprite_part_ext(owner.sheets[2*!global.singlesheet[p2]],0,190+21*floor(frame),100,20,20,round(x-10*xsc),round(y-10),xsc,1,$ffffff,1)
+if (eggtype=4)
+draw_sprite_part_ext(owner.sheets[2*!global.singlesheet[p2]],0,190+21*floor(frame),100,20,20,round(x-10*xsc),round(y-10),xsc,1,$ffffff,1)
 
-		if (eggtype=1) {
-			draw_sprite_general(
-			//  sprite, subimage    
-				owner.sheets[1*!global.singlesheet[p2]],0,
-			//  left, top    
-				10+17*floor(frame),87,
-			//  width, height    
-				16,16,
-			//  left top corner of the quad, accounting for rotation
-				round(x)+lengthdir_x((margin-12)*xsc,sprite_angle)+lengthdir_x(margin-(8),sprite_angle-90),
-				round(y)+lengthdir_y((margin-12)*xsc,sprite_angle)+lengthdir_y(margin-(8),sprite_angle-90),
-			//  scale and rotation
-				xsc,1,sprite_angle,
-			//  blending    
-				$ffffff,$ffffff,$ffffff,$ffffff,1
-			)
-		}
-		if (eggtype=2) {
-			getregion(x)
-			if (tile) tile_delete(tile)
-			tile=tile_dyn(global.master[biome],152,264,16,16,x-2,round(y-8),2)
-		}
+if (eggtype=1) {
+draw_sprite_general(
+//  sprite, subimage    
+owner.sheets[1*!global.singlesheet[p2]],0,
+//  left, top    
+10+17*floor(frame),87,
+//  width, height    
+16,16,
+//  left top corner of the quad, accounting for rotation
+round(x)+lengthdir_x((margin-12)*xsc,sprite_angle)+lengthdir_x(margin-(8),sprite_angle-90),
+round(y)+lengthdir_y((margin-12)*xsc,sprite_angle)+lengthdir_y(margin-(8),sprite_angle-90),
+//  scale and rotation
+xsc,1,sprite_angle,
+//  blending    
+$ffffff,$ffffff,$ffffff,$ffffff,1
+)
+}
+if (eggtype=2) {
+getregion(x)
+if (tile) tile_delete(tile)
+tile=tile_dyn(global.master[biome],152,264,16,16,x-2,round(y-8),2)
+}
 
-	}
-	if (tonge) {
-		if (global.debug) draw_omitext(owner.x,owner.y-16,string(c))
-		getregion(x)
-		if brickpull {
-			if (tile) tile_delete(tile)
-			
-			if (!up) tile=tile_dyn(global.master[biome],152,264,16,16,round(owner.x)+xx*0.8*xsc,round(owner.y-2),depth+2)
-			else tile=tile_dyn(global.master[biome],152,264,16,16,round(owner.x-8),round(owner.y-12-xx),depth+2)
-		}
+}
+if (tonge) {
+if (global.debug) draw_omitext(owner.x,owner.y-16,string(c))
+getregion(x)
+if brickpull {
+if (tile) tile_delete(tile)
 
-		xx=median(0,c,56) 
-		//if (!up) draw_sprite_part_ext(sheet,0,133+1-xx,102,xx,20,round(owner.x)+4*xsc,round(owner.y-8+(4*(owner.size==0 || owner.size==5))),xsc,1,$ffffff,1)
-		//else draw_sprite_part_ext(sheet,0,135,66,20,xx,round(owner.x-8*xsc),round(owner.y-9-xx+(7*(owner.size==0 || owner.size==5))),xsc,1,$ffffff,1)
-		
-		if (!up) draw_sprite_part_ext(sheet,0,133+1-xx,102,xx,20,
-		round(owner.x)+owner.tongue_offsetx[owner.size*owner.projcoordbysize]*xsc,
-		round(owner.y)+owner.tongue_offsety[owner.size*owner.projcoordbysize],xsc,1,$ffffff,1)
-		else draw_sprite_part_ext(sheet,0,135,66,20,xx,
-		round(owner.x+owner.tongueup_offsetx[owner.size*owner.projcoordbysize]*xsc),
-		round(owner.y+owner.tongueup_offsety[owner.size*owner.projcoordbysize]-xx),xsc,1,$ffffff,1)
+if (!up) tile=tile_dyn(global.master[biome],152,264,16,16,round(owner.x)+xx*0.8*xsc,round(owner.y-2),depth+2)
+else tile=tile_dyn(global.master[biome],152,264,16,16,round(owner.x-8),round(owner.y-12-xx),depth+2)
+}
 
-	}
+xx=median(0,c,56) 
+//if (!up) draw_sprite_part_ext(sheet,0,133+1-xx,102,xx,20,round(owner.x)+4*xsc,round(owner.y-8+(4*(owner.size==0 || owner.size==5))),xsc,1,$ffffff,1)
+//else draw_sprite_part_ext(sheet,0,135,66,20,xx,round(owner.x-8*xsc),round(owner.y-9-xx+(7*(owner.size==0 || owner.size==5))),xsc,1,$ffffff,1)
+
+if (!up) draw_sprite_part_ext(sheet,0,133+1-xx,102,xx,20,
+round(owner.x)+owner.tongue_offsetx[owner.size*owner.projcoordbysize]*xsc,
+round(owner.y)+owner.tongue_offsety[owner.size*owner.projcoordbysize],xsc,1,$ffffff,1)
+else draw_sprite_part_ext(sheet,0,135,66,20,xx,
+round(owner.x+owner.tongueup_offsetx[owner.size*owner.projcoordbysize]*xsc),
+round(owner.y+owner.tongueup_offsety[owner.size*owner.projcoordbysize]-xx),xsc,1,$ffffff,1)
+
+}
 }
 
 
 #define sprmanager
 frspd=1
-cantslowanim=0
-
 if (grabflagpole) {sprite="flagslide"}
 else if (fired) {sprite="fire"}
 else if (swallow) {sprite="swallow" cantslowanim=1}
@@ -867,22 +867,22 @@ if ((abut || jumpbufferdo) && (!springin)) {
             } else {
                 jumpsnd=playsfx(name+"jump",0,1+(size==5)/3)
                 //vsp=-5.2-0.2*super
-				vsp=-(4.7+min(1,abs(hsp)/8)+!!poundjump)
+vsp=-(4.7+min(1,abs(hsp)/8)+!!poundjump)
                 }
                 vinegrab=0
-				onvine=0
+onvine=0
                 toungecling=0
-				grabflagpole=0
+grabflagpole=0
     
                 if (water) vsp=-sqrt(sqr(vsp)*wf+2)
     
-	            /*
+            /*
                 //change jump angle in steep slopes
                 vd=point_direction(0,0,hsp,vsp)+point_direction(0,0,1,slobal/2)
                 vm=point_distance(0,0,hsp,vsp)
                 hsp=lengthdir_x(vm,vd)
                 vsp=lengthdir_y(vm,vd)
-				*/
+*/
     
                 sprite_angle=0
                 
@@ -890,7 +890,7 @@ if ((abut || jumpbufferdo) && (!springin)) {
                 jumptiming=0
                 onvine=0
                 jump=1
-				if (size==7) luijump=9
+if (size==7) luijump=9
                 fall=0
                 braking=0
                 spin=0
@@ -902,9 +902,8 @@ if ((abut || jumpbufferdo) && (!springin)) {
     } else { //air jumps
     
         if (!fluttered && !flutter && !pound && !fulbuff && fall!=69 &&!vinegrab && !water) {
-          vsp=0.5
           flutter=1
-		  crouch=0
+  crouch=0
         }
         
         //lemme try making it use the 1.9 flutter method since that felt better to use
@@ -917,26 +916,18 @@ springin=0
 
 if (akey) {
 
-
-/*if (flutter){
-    vsp-=0.3
-flutter+=1
-if vsp<-2 vsp=-2
-if flutter>50 flutter=0
-}*/
-
     if (jumpbuffer) jumpbuffer-=1
 
 
-} else {jumpbuffer=0 flutter=0}
+} else {jumpbuffer=0}
 
 if (!akey) {
-fluttered=0  superflutter=0 if (flutter) {if (flutter>=8) {soundstop("yoshiflutter") playsfx("yoshiflutterend")}  flutter=0 }
+superflutter=0 if (flutter) {if (flutter>=8) {soundstop("yoshiflutter") playsfx("yoshiflutterend")}  flutter=0 }
     if (canstopjump=1 && jump && vsp<-2 && !sprung) {
         vsp*=0.5
     }
     canstopjump=0
-	luijump=0
+luijump=0
 }
 
 
@@ -966,9 +957,9 @@ if (size!=2 && size!=6)
 spit=8
 playsfx("yoshispit")
 if holdind=koopa || holdind=redkoopa || holdind=yelkoopa || holdind=blukoopa || holdind=redhover || holdind=yelhover || holdind=hopkoopa
-with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.xsc*min(5,abs(other.hsp)+3)}
+with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.hsp+4*other.xsc}
 if holdind=shell
-with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.xsc*min(5,abs(other.hsp)+3)}
+with instance_create(x+12*xsc+hsp,y,shell) {enemy2=other.enemy2store stop=0 spd=max(3,abs(other.hsp)+1) coll.phase=other.id owner=other.id kicked=1 type=other.storedtype other.anemyeat=id vspeed=-1 hspeed=other.hsp+4*other.xsc}
 if holdind!=shell && holdind!=koopa && holdind!=redkoopa && holdind!=yelkoopa && holdind!=blukoopa && holdind!=redhover && holdind!=yelhover && holdind!=hopkoopa && holdind!=brick && holdind!=piranha && holdind!=redpiranha && holdind!=firepiranha
 with instance_create(x+12*xsc+hsp,y,holdind) {if other.bratstore {brat=1 sprite="goombrat"} enemy2=other.enemy2store owner=other.id gh=other.jeffstore other.anemyeat=id spitted=1 if object_index!=bulletbill && object_index!=cannonball && object_index!=redcannonball vspeed=-1 else xsc=sign(hspeed) hspeed=other.hsp+4*other.xsc}
 }
@@ -1009,7 +1000,7 @@ anemyeat=0
 holdind=0
 }
 
-if down && !jump && hold && holdind!=brick || (hold && (holdind=piranha || holdind=redpiranha || holdind=firepiranha))
+if down && hold && holdind!=brick || (hold && (holdind=piranha || holdind=redpiranha || holdind=firepiranha))
 {
 eggcount+=1
 if eggcount<=6
@@ -1185,7 +1176,7 @@ hsp=0
         else if (water) {vsp-=0.1*wf if (vsp<1.5) pound=0}
         else vsp+=0.375*wf
     } else if (vsp<-2 && !luijump) vsp+=0.15
-else if (flutter>8) if size=3 /*|| size=7*/ vsp=median(-3,vsp-max(0.4,vsp),1) else vsp=median(-1.2,vsp-max(0.2,vsp),2)
+else if (flutter>8) if size=3 /*|| size=7*/ vsp=median(-3.15,vsp-max(0.125,vsp),1) else vsp=median(-1.95,vsp-max(0.05,vsp),2)
 else if (water) vsp=min(1.5,vsp+0.04)
 else if toungecling=2 vsp=0
 else if fall!=69 && !luijump {vsp=min(4,vsp+0.28) if size==5 && vsp>-0.84 vsp-=0.196}
