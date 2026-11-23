@@ -12,4 +12,9 @@ energy=median(0,energy,maxe)
 updatecarry()
 if sign(gm8exspd)!=sign(hsp) gm8exspd=0
 if pollenated && global.dustframe {instance_create(x,y,pollen)}
-if ((settings("newaft") && global.newaftfr) || (!settings("newaft") && global.frame8flip)) if ((super || boost || dash || makeafterimages) && !dotkid) with (instance_create(x,y,afterimage)) event_user(0)
+if ((settings("newaft") && global.newaftfr) || (!settings("newaft") && global.frame8flip)) if ((super || boost || dash || makeafterimages) && !dotkid) {
+    with (instance_create(x,y,afterimage)) {
+        k=global.boosttrail
+        if (k>2 && global.newaftfr) event_user(0)
+        }
+    }

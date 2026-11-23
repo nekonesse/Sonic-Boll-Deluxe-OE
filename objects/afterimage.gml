@@ -39,7 +39,7 @@ lib_id=1
 action_id=603
 applies_to=self
 */
-k=global.boosttrail
+//k=global.boosttrail
 
 name=other.name
 p2=other.p2
