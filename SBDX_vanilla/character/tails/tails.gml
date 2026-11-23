@@ -1005,7 +1005,7 @@ if (((loose && !jump) || spin || (crouch && !jump))) {
 }
 
 //speed cap rubberband formula
-maxspd=(3.25 + !!size*0.75 + ((size==5)*0.55) + !!superdashspeedboost*0.75)*wf
+maxspd=(2.5 + !!size*0.75 + ((size==5)*0.55) + !!superdashspeedboost*0.75)*wf
 if (fly && vsp<0) {maxspd=min(3,maxspd)}
 
 
