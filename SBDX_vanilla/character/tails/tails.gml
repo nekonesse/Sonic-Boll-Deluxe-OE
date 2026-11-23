@@ -873,6 +873,7 @@ if (peelout && !up) {
 		boosted=1
 		boostvar=0.75
 		hyperspeed=(peelout/45)*sign(hsp)
+		gm8exspd=sign(hsp)*1.25
 		peelout=0
 	}
 	else if (peelout<45) {
