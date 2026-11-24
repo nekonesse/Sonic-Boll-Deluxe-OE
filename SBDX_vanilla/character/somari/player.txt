@@ -26,6 +26,9 @@ defaultspray 4=5
 
 roster size=0
 
+size reroute fire=basic
+size reroute big=basic
+
 hadouken graphic x=10
 hadouken graphic y=88
 

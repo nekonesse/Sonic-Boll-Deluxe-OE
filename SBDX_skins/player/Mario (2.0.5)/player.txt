@@ -25,6 +25,7 @@ pipe squish=20
 
 size reroute beet=big
 size reroute lui=big
+size reroute fire=fire
 
 use paletting=true
 defaultspray 1=5
