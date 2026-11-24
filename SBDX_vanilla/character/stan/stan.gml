@@ -1,5 +1,5 @@
 #define spritelist
-stand,wait,fired,lookup,lookupfired,pose,dance,knock,deadair,deadland,walk,walkfired,walkup,walkupfired,brake,jump,bonk,fall,jumpfired,jumpup,jumpupfired,jumpdown,jumpdownfired,suckin,groundpound,poundfall,slide,doublejump,doublejumpbonk,doublejumpfall,triplejump,triplejumpbonk,triplejumpfall,swim,paddle,climbing,flagslide,grind,piping,pipingup,sidepiping,doorenter,doorexit
+stand,wait,fired,lookup,lookupfired,pose,dance,knock,deadair,deadland,walk,walkfired,walkup,walkupfired,brake,jump,bonk,fall,jumpfired,jumpup,jumpupfired,jumpdown,jumpdownfired,suckin,swim,paddle,climbing,flagslide,grind,piping,pipingup,sidepiping,doorenter,doorexit
 
 
 #define soundlist

@@ -21,7 +21,10 @@ defaultspray 2=2
 defaultspray 3=5
 defaultspray 4=7
 
-custom sprite list=stand,wait,fired,lookup,lookupfired,pose,dance,knock,deadair,deadland,walk,walkfired,walkup,walkupfired,brake,jump,bonk,fall,jumpfired,jumpup,jumpupfired,jumpdown,jumpdownfired,suckin,groundpound,poundfall,slide,double,triple,climbing,flagslide,grind,piping,pipingup,sidepiping,doorenter,doorexit
+size reroute feather=big
+size reroute fire=big
+
+custom sprite list=stand,wait,fired,lookup,lookupfired,pose,dance,knock,deadair,deadland,walk,walkfired,walkup,walkupfired,brake,jump,bonk,fall,jumpfired,jumpup,jumpupfired,jumpdown,jumpdownfired,suckin,climbing,flagslide,grind,piping,pipingup,sidepiping,doorenter,doorexit
 reroute doublejump=double
 reroute doublejumpbonk=double
 reroute doublejumpfall=double
@@ -55,7 +58,7 @@ jumpup frames=1
 jumpupfired frames=2
 jumpdown frames=1
 jumpdownfired frames=2
-climbing frames=2
+climbing frames=4
 sliding frames=1
 dance frames=2
 suckin frames=6
@@ -99,6 +102,18 @@ deadair speed=0.1
 suckin frametimes= 20,2,18,5,5,69
 
 10,60,10,20,10,10,10,20,40,20,10,10,10,20,40
+
+piping frames=8
+pipingup frames=8
+sidepiping frames=8
+doorenter frames=4
+doorexit frames=1
+
+piping speed=0.5
+pipingup speed=0.5
+sidepiping speed=0.4
+doorenter speed=0.20
+doorexit speed=0.20
 
 stand frametimes=32,1,1
 wait loop=4
