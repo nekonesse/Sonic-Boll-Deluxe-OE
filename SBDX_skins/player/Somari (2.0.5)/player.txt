@@ -19,7 +19,8 @@ pole center offset=8
 
 size reroute beet=basic
 size reroute lui=basic
-
+size reroute fire=fire
+size reroute big=basic
 
 use paletting=true
 defaultspray 1=1

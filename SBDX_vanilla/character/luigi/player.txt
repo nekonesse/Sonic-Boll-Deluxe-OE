@@ -26,6 +26,8 @@ defaultspray 4=10
 fireball graphic x=10
 fireball graphic y=87
 
+size reroute fire=big
+
 custom sprite list=stand,wait,lookup,pose,crouch,crouchwalk,hurt,dead,walk,run,brake,jump,bonk,fall,scuttle,longjump,runjump,doublejump,doublejumpbonk,doublejumpfall,wallslide,groundpound,poundfall,standcarry,lookupcarry,crouchcarry,walkcarry,jumpcarry,bonkcarry,fallcarry,scuttlecarry,longjumpcarry,doublejumpcarry,throw,airthrow,roll,slide,swim,paddle,swimcarry,spinjump,fire,push,balancing,tspin,galspinfall,capeflight,climbing,flagslide,grind,piping,pipingup,sidepiping,doorenter,doorexit
 
 stand frames=3
