@@ -1188,7 +1188,16 @@ if (stonebump || owner.size=5) {
   }
  }
 } else if typeblockhit=1{
-hititembox()
+    if (blockcoll.cc!=0 && !blockcoll.hit)
+    	hititembox()
+    if !(stoppounding) && place_meeting(x,y+max(4,vsp),blockcoll) {
+        if (pound && !poundcancel && !piped) {
+            playsfx(name+"stomp")         
+            shoot(x-8,y+4,psmoke,-2,-1)
+            shoot(x+8,y+4,psmoke,2,-1)    
+            poundjump=16
+        }
+    }
 }
 
 
@@ -1243,25 +1252,29 @@ if (jumpbuffer) jumpbuffer=-1
 
 
 if (pound) {
-com_piping()
-with (itembox) if (instance_place(x,y-max(4,other.vsp),other.id)) {
-go=1    
-event_user(0)
-picked=0
-other.stoppounding=!hit
-other.jump=1
-other.vsp=-0.1
-} 
-if (stoppounding=1 && !down) {stoppounding=0}
-if stoppounding=0 {pound=0} 
-
-    
-    if (!poundcancel && !piped) {
+	com_piping()
+	if (!poundcancel && !piped) {
         playsfx(name+"stomp")         
         shoot(x-8,y+4,psmoke,-2,-1)
         shoot(x+8,y+4,psmoke,2,-1)    
-poundjump=10
+		poundjump=16
     }
+	with (itembox) if (instance_place(x,y-max(4,other.vsp),other.id)) {
+		go=1    
+		event_user(0)
+		picked=0
+		other.stoppounding=!hit
+		other.jump=1
+		other.vsp=-0.1
+	}
+	with (crate) if (instance_place(x,y-max(4,other.vsp),other.id)) {
+		event_user(0)
+		other.stoppounding=1
+		other.jump=1
+		other.vsp=-0.1
+	}
+	if (stoppounding=1 && !down) {stoppounding=0}
+	if stoppounding=0 {pound=0}     
 }
 
 //fall into spin
