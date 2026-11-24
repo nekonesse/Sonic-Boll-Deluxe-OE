@@ -32,6 +32,8 @@ Mecha Sonic [fthr]
 #define skininit
 var looper;
 
+clawovermecha=funnytruefalse(playerskindat(p2,string(name)+" draw claw over player"))
+
 //graphic offsets
 loopey=0
 looper=0
@@ -51,6 +53,8 @@ repeat((projcoordbysize*MAXIMUMSIZESARGH)+1) {
 	
 	claw_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" claw graphic x"+looper),112) 
 	claw_sheety[loopey]=nozerounreal(playerskindat(p2,name+" claw graphic y"+looper),96)
+	claw_offsetx[loopey]=unreal(playerskindat(p2,name+" claw offset x"+looper),0) 
+	claw_offsety[loopey]=unreal(playerskindat(p2,name+" claw offset y"+looper),0) 
 	
 	spike_sheetx[loopey]=nozerounreal(playerskindat(p2,name+" spike center graphic x"+looper),125) 
 	spike_sheety[loopey]=nozerounreal(playerskindat(p2,name+" spike center graphic y"+looper),68) 
@@ -589,9 +593,10 @@ if (event="draw") {
 if owner.usepalette scr_applyPaletteSegmentedAlpha(global.shaderPaletteSwapAlpha,global.palettesprites[owner.p2*100],global.pal_1[owner.p2]+1,global.pal_2[owner.p2]+1,global.pal_3[owner.p2]+1,global.pal_4[owner.p2]+1,owner.size,1,owner.totpal+1)
     
 depth=owner.depth+1
+if (owner.clawovermecha) depth=owner.depth-1
 if global.debug draw_self()
 w=8+(abs(x-owner.x))
-draw_sprite_part_ext(owner.sheets[owner.size* !global.singlesheet[p2]],0,(owner.claw_sheetx[owner.size*owner.projcoordbysize]+63)-(w),owner.claw_sheety[owner.size*owner.projcoordbysize],w,15,round(x-(w-8)*xsc),round(y-8),xsc,1,$ffffff,1)
+draw_sprite_part_ext(owner.sheets[owner.size* !global.singlesheet[p2]],0,(owner.claw_sheetx[owner.size*owner.projcoordbysize]+63)-(w),owner.claw_sheety[owner.size*owner.projcoordbysize],w,15,round(x-(w-8)*xsc)+owner.claw_offsetx[owner.size*owner.projcoordbysize],round(y-8)+owner.claw_offsety[owner.size*owner.projcoordbysize],xsc,1,$ffffff,1)
     
 if owner.usepalette shader_reset()
     
@@ -676,7 +681,7 @@ if (lookup && !taunted && (!position_meeting(x,y+8,door) || !position_meeting(x,
 	playsfx("mechalookup") 
 	taunted=1
 } 
-if (!lookup) {soundstop("mechalookup") taunted=0}
+if (!lookup || jump || fall>0 || abs(hsp)>0.5) {soundstop("mechalookup") taunted=0}
 
 maxturning=25+((20*wf)*water)
 middleturning=floor(mean(0,maxturning))
@@ -733,6 +738,7 @@ if ((abut || jumpbufferdo) && !springin && !spindash) {
             tempbrick=1
         } else {
             jumpsnd=playsfx(name+"jump",0,1+((size==5)/3))
+			soundstop("mechalookup")
             vsp=-4.20 //swagger
             if (up && size=3) {energy=max(0,energy-2) playsfx(name+"step")  vsp-=2 instance_create(x,y+8,smoke) highjumpanim=1}
 	 if (size=7) {vsp-=2}
@@ -753,7 +759,7 @@ if sparkcharge{chargestored=1}
 			spin=0
             jump=1
 		if (size==7) luijump=9
-            fall=0+up-!!(size=3)
+            fall=0+up-!(size==3)
             braking=0
             canstopjump=1
             if (mymoving) hsp+=avgmovingh
@@ -813,10 +819,10 @@ spikin=0
                 instance_create(x+hsp+2*xsc,y,smoke)
 }
 }
-else if size!=6 && (!count_projectiles()) && !(chain>0 && chain<11){
+else if size!=6 && !spin && !spindash && (!count_projectiles()) && !(chain>0 && chain<11){
 if (!count_projectiles()) {fired=19 frame=0 playsfx(name+"chain");}
 chain=1 turning=0}
-else if (size=6 && count_projectiles()<2 && !grabflagpole) {
+else if (size=6 && !spin && !spindash && count_projectiles()<2 && !grabflagpole) {
             p2 = 10;
             with fire_projectile(x+8*xsc,y+2) {
                 hspeed=max((1 + (abs(other.hsp) / 2.2)),1.2) * xsc; //yaargh me formula
@@ -1121,7 +1127,7 @@ if (jet) {
     if (water) with (instance_create(x+hsp+choose(0,8)*xsc,y+14,airbubble)) jet=4
     vsp=min(2,vsp-0.25*(vsp>-1.25))
     mc+=1
-    if (mc=60) {
+    if (mc>=36) {
         energy=max(0,energy-1)
         mc=0
         if (energy=0) {jet=0 soundstop(name+"jet") playsfx(name+"step") instance_create(x+hsp+2*xsc,y+16,smoke) jetdead=1}
@@ -1553,6 +1559,7 @@ shoot(x+8,y+4,psmoke,2,-1)
 if (vsp>5 && !stamped && size!=5) {with (mydamager) {event="create" event_user(p2)} playsfx(name+"stomp") screenshake(x,4) stomp=1 com_piping() stomp=0 stamped=1}
 
 playsfx(name+"step")
+soundstop(name+"jet")
 
 //jump buffering
 if (jumpbuffer) jumpbuffer=-1
