@@ -64,7 +64,7 @@ if (aim) aimframe+=0.5
 if (aimframe>1) aimframe=0
 
 //draw_skintext(x,y-32,string(goalenems))
-//draw_skintext(x,y-32,pound)
+draw_skintext(x,y-32,maxspd)
 
 #define grabflagpole
 grabflagpole=1
@@ -88,7 +88,7 @@ pound=0
 
 #define itemget
 if (type="jumprefresh") {
-	spinjump=0
+	fluttered=0
 	insted=0
     mc=0
     itemget=1
@@ -901,12 +901,10 @@ if (size==7) luijump=9
                 fallspd=min(1,0.5+abs(hsp)/5)
     } else { //air jumps
     
-        if (!fluttered && !flutter && !pound && !fulbuff && fall!=69 &&!vinegrab && !water) {
+        if (!fluttered && !flutter && !pound && !fulbuff && fall!=69 &&!vinegrab && !water && !watrlock) {
           flutter=1
   crouch=0
         }
-        
-        //lemme try making it use the 1.9 flutter method since that felt better to use
               
         jumpbuffer=4*!jumpbufferdo
     }
@@ -932,10 +930,11 @@ luijump=0
 
 
 
-if !lick
-xsctonge=xsc
-else
-xsc=xsctonge
+if (!lick) {
+	xsctonge=xsc
+} else {
+	xsc=xsctonge
+}
 
 if bbut && !lick && !hold && !anemyeat && fall!=69 &&!vinegrab && !pound
 {
@@ -1098,7 +1097,7 @@ spinjump=2
 //crouching
 if (down && !up) {
 if (jump) {
-if (fall!=6 && !pound && !carry && !pound && !poundlok && fall!=69 && !timing_proj && !timing_misfire) {
+if (fall!=6 && !pound && !hold && !swallow && !lick && !pound && !poundlok && fall!=69 && !timing_proj && !timing_misfire) {
 pound=1
 flutter=0
 greenmissile=0
@@ -1138,10 +1137,11 @@ if (braking) xsc=brakedir
 braking=0
 frick=0.06
 if (slipnslide) frick=0.03
+if (lick) frick=0.12
 hsp=max(0,abs(hsp)-frick)*sign(hsp)
 }
 
-maxspd=(3.1+water+(size==5)*0.55+slipnslide-!!flutter*1.2+!!spin)*wf
+maxspd=(3.1+water+(size==5)*0.55+slipnslide-!!flutter-(!!lick*1.1))*wf
 if (abs(hsp)>maxspd) hsp=(abs(hsp)*2+maxspd)/3*sign(hsp)
 
 if (pound) {
@@ -1356,7 +1356,7 @@ if (dive) {vsp+=2 hsp=max(0,abs(hsp)-2)*xsc dive=0}
 jumpspd=1
 dropkick=0
 }
-water=1 wf=0.45 eoll=0 dropkick=0 run=0
+water=1 wf=0.45 eoll=0 fluttered=0 run=0
 if (carry && carryid) {with (carryid) event_user(0) carryid=noone carry=0}
 } else {
 if (water) {
