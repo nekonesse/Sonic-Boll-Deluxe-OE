@@ -44,16 +44,16 @@ repeat((projcoordbysize*MAXIMUMSIZESARGH)+1) {
 
 #define effectsbehind
     if (aim) {
-		if aim<2 {
-			if (aimdirgo=0) aimdir=approach_val(aimdir,90,3)
-			else { 
-				if !(up && aimdir=90) aimdir=approach_val(aimdir,-45,3)
-				}
-			if (aimdir=90) && !up aimdirgo=1
-			if (aimdir=-45) aimdirgo=0
-		}
-			draw_sprite_part(sheets[1],0,156+floor(aimframe)*17,104,16,16,round(x+(lengthdir_x(64,aimdir)*aimxdir)-8),round(y+lengthdir_y(64,aimdir)-8))
-			with (hold) event_user(0)
+if aim<2 {
+if (aimdirgo=0) aimdir=approach_val(aimdir,90,2.5)
+else { 
+if !(up && aimdir=90) aimdir=approach_val(aimdir,-45,2.5)
+}
+if (aimdir=90) && !up aimdirgo=1
+if (aimdir=-45) aimdirgo=0
+}
+draw_sprite_part(sheets[1],0,156+floor(aimframe)*17,104,16,16,round(x+(lengthdir_x(64,aimdir)*aimxdir)-8),round(y+lengthdir_y(64,aimdir)-8))
+with (hold) event_user(0)
     }
     
 if (aim>1) aim+=1

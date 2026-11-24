@@ -13,7 +13,8 @@ carry offset x=0
 carry offset y=0
 fire duration=8
 victory duration=30
-time until wait=300
+time until wait=250
+temporary wait=yes
 pipe squish=20
 yoshis island death=yes
 tongue behind yoshi=no
@@ -50,7 +51,7 @@ reroute battlelose=knock
 reroute battledead=deadland
 
 stand frames=3
-wait frames=4
+wait frames=18
 lookup frames=1
 pose frames=1
 crouch frames=1
@@ -69,6 +70,7 @@ flutter frames=4
 slide frames=1
 standhold frames=1
 walkhold frames=6
+runhold frames=4
 jumphold frames=2
 bonkhold frames=1
 fallhold frames=3
@@ -92,21 +94,23 @@ fallcarry loop=3
 pound loop=8
 swallow loop=3
 fire loop=2
+wait loop=18
 
 size reroute beet=big
 size reroute lui=big
 
 stand speed=0.2
-wait speed=0.2
+wait speed=0.9
 dead speed=0.5
 deadland speed=0.5
 lookup speed=0.2
 crouch speed=0.2
-walk speed=0.5
-run speed=0.5
+walk speed=0.35
+run speed=0.4
 jump speed=0.1
 fall speed=0.1
 walkhold speed=0.5
+runhold speed=0.4
 jumphold speed=0.1
 fallhold speed=0.1
 twirl speed=0.5
@@ -118,6 +122,7 @@ climbing speed=0.125
 swallow speed=0.1
 
 stand frametimes=32,1,1
+wait frametimes=5,5.25,5,5.25,5,5.25,5,5,24,2,2,2,2,75,2,2,2,45
 
 
 grind frames=1
