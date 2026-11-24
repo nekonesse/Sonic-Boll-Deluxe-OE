@@ -37,7 +37,7 @@ defaultspray 4=7
 size reroute beet=big
 size reroute lui=big
 
-custom sprite list=stand,wait,pose,crouch,knock,dead,walk,run,brake,spring,spacer2,ball,jump,fall,spindash,teleport,push,hang,spacer1,bounce,dash
+custom sprite list=stand,wait,pose,crouch,knock,dead,walk,run,brake,spring,flagslide,ball,jump,fall,spindash,teleport,push,hang,spacer1,bounce,dash
 
 connect stand=true
 connect wait=true
@@ -47,7 +47,7 @@ connect knock=true
 connect dead=true
 connect brake=true
 connect spring=true
-connect spacer2=true
+connect flagslide=true
 connect fall=true
 connect hang=true
 connect bounce=true
@@ -59,7 +59,7 @@ reroute lookup=stand
 reroute maxrun=run
 reroute springfall=walk
 reroute bonk=jump
-reroute flagslide=spring
+
 reroute climbing=spring
 reroute piping=pose
 reroute pipingup=pose

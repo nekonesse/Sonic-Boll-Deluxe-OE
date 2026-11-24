@@ -227,6 +227,10 @@ doorexit speed=0.20
 doorenter loop=4
 doorenter framestimes=1,1,1,1
 
+boll top=#F73910
+boll mid=#F73910
+boll bot=#F73910
+
 [retromario]
 name=Mercedes Mario
 
