@@ -723,7 +723,7 @@ fall=1
 			}
         } else { //air jumps
             //"insted" is typically used to mark if you're used our air action
-            if (!insted && !controlfire && !water) {
+            if (!insted && !controlfire && !water && !superjumpanim && !pound) {
                 insted=1
                 vsp=-2.25 //-2
                 fall=0

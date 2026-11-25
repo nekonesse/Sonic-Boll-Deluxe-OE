@@ -840,7 +840,7 @@ boll top=#fc9838
 boll mid=#00a800
 boll bot=#fcfcfc
 
-[lang]
+[lang bowser]
 winspecial=Bowser got a Chaos Emerald
 allspecial=Bowser got all Chaos Emeralds
 princess=our Princess

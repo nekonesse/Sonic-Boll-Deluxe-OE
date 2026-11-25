@@ -257,7 +257,7 @@ if (powerupfreeze) {
 	} else {
 		sprite="stand"
 	}
-	
+	frspd=0
 	exit;
 } else {
 	dontflash = false;
@@ -269,7 +269,6 @@ if (grabflagpole) {
 	sprite="flagslide"
 	if yflagfake!=y {frspd=abs(y-yflagfake) yflagfake=y}
 	else if yflagfake=y && frspd!=0 {frspd=0}
-	//frspd=abs(vsp)
 }
 else if (hurt) {sprite="hurt"}
 else if (dive) {sprite="dive"}
@@ -508,7 +507,7 @@ springin=0
 if (bbut) {
     if (size=2 && count_projectiles()<2 && !crouch && !dive) {
         fire_projectile(x+8*xsc,y+2)
-        fired=8
+        fired=firelength
         if (sprite="fire") frame=0
     }
   else if (size=6 && count_projectiles()<2 && !crouch) {
