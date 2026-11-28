@@ -61,7 +61,7 @@ jumpdownfired frames=2
 climbing frames=4
 sliding frames=1
 dance frames=2
-suckin frames=6
+suckin frames=7
 groundpound frames=8
 slide frames=1
 double frames=1
@@ -99,7 +99,13 @@ dance speed=0.1
 groundpound speed=0.75
 groundpound loop=8
 deadair speed=0.1
-suckin frametimes= 20,2,18,5,5,69
+suckin speed=1
+suckin loop=7
+suckin frametimes=14,7,4,6,6,5,8
+
+9,8,7,6,6,7,8,9
+
+20,2,18,5,5,69
 
 10,60,10,20,10,10,10,20,40,20,10,10,10,20,40
 

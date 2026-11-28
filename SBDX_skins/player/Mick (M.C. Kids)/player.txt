@@ -1,0 +1,141 @@
+[retromario]
+name=Mick
+
+icon speed=4
+icon loop=yes
+animation speed=1.0
+center x=9
+center y=19
+box width=19
+box height=35
+pole center offset=8
+shield offset=-2
+bubble offset small x=6
+bubble offset small y=4
+bubble offset x=6
+bubble offset y=2
+fire duration=8
+victory duration=0
+time until wait=600
+pipe squish=0
+midspin=false
+groundpound=false
+
+use paletting=false
+defaultspray 1=0
+defaultspray 2=0
+defaultspray 3=0
+defaultspray 4=0
+
+fireball graphic x=10
+fireball graphic y=87
+
+single sheet=true
+singlesheet split width=8,8,8,8,8,8
+singlesheet split height=0,35,70,105,140,175
+
+custom sprite list=stand,crouch,dead,walk,jump,fall,swim,paddle,fire,climbing,growing
+
+connect stand=true
+connect crouch=true
+connect dead=true
+connect walk=true
+connect brake=true
+connect jump=true
+connect fall=true
+connect swim=true
+connect paddle=true
+connect fire=true
+connect climbing=true
+connect growing=true
+connect piping=true
+
+reroute wait=stand
+reroute pose=stand
+reroute run=walk
+reroute runjump=jump
+reroute brake=walk
+reroute lookup=stand
+reroute fall=fall
+reroute bonk=fall
+reroute push=stand
+reroute balancing=stand
+reroute flagslide=climbing
+reroute piping=stand
+reroute pipingup=stand
+reroute sidepiping=walk
+reroute doorenter=stand
+reroute doorexit=stand
+
+stand frames=3
+crouch frames=1,2,2,2,2,1,2
+dead frames=1
+walk frames=4,8,8,8,8,4,8
+jump frames=5
+fall frames=2
+reroute bonkbrick=jump
+swim frames=2
+paddle frames=2
+fire frames=1
+climbing frames=2
+
+stand loop=2
+crouch loop=2
+jump loop=5
+fall loop=2
+
+stand speed=1
+crouch speed=0.2
+dead speed=0.2
+walk speed=0.4
+jump speed=0.4
+fall speed=1
+swim speed=0.2
+paddle speed=0.375
+fire speed=0.3
+climbing speed=0.125
+
+stand frametimes=177,3,64
+wait frametimes=1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2
+run frametimes=1,1,1,1,1,1,1,1
+lookup frametimes=1,32,1,1
+standcarry frametimes=24,1,1
+lookupcarry frametimes=1,32,1,1
+crouchcarry frametimes=1,32,1,1
+dead frametimes=1.35,8,1.35,1,1,1,1
+jump frametimes=1,1,1,1,1
+fall frametimes=13,1
+dive frametimes=2,2,2,24,2
+bellyslide frametimes=32,1,1
+
+grind frames=1
+piping frames=8
+pipingup frames=8
+sidepiping frames=8
+doorenter frames=4
+doorexit frames=1
+
+piping speed=0.5
+pipingup speed=0.5
+sidepiping speed=0.4
+doorenter speed=0.20
+doorexit speed=0.20
+
+doorenter loop=4
+doorenter framestimes=1,1,1,1
+
+boll top=#2038ec
+boll mid=#f0bc3c
+boll bot=#000000
+
+[lang]
+winspecial=Mick got a Chaos Emerald
+allspecial=Mick got all Chaos Emeralds
+princess=our Princess
+savetext1=Peace is Paved
+savetext2=With Kingdom Saved
+savetext3=Hurrah to Mick
+savetext4=Our Only Hero 
+savetext5=This Ends Your Trip
+savetext6=Of a Long Friendship
+credits=SuperSani24

@@ -648,7 +648,7 @@ if (gun_load){
 	gun_load+=1
 	if gun_load=20 {gun_loaded=1}
 
-	if gun_load=60 {gun_load=0}
+	if gun_load=50 {gun_load=0}
 }
 
 if !(pound) {

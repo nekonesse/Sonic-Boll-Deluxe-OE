@@ -168,7 +168,7 @@ pikoball frametimes=0
 pikoball offset x=0
 pikoball offset y=14
 
-skip frames=1
+skip frames=2
 skip loop=1
 skip speed=0.25
 skip frametimes=0
